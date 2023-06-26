@@ -1,5 +1,6 @@
 package TrialAndError.ReadersAreInnovators.RESTService;
 
+import TrialAndError.ReadersAreInnovators.Models.Administration.WriterApplication;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Reader;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -41,6 +42,15 @@ public class ImpService
         
         webTarget = client.target(personURI);
         response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(reader)));
+        
+        return response.readEntity(String.class);
+    }
+    public String registerWriter(WriterApplication writerApplication)
+    {
+        String personURI = uri + "/registerWriter";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(writerApplication)));
         
         return response.readEntity(String.class);
     }

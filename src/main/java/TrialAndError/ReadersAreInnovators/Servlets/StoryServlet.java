@@ -35,7 +35,7 @@ import javax.imageio.ImageIO;
  */
 @WebServlet(name = "StoryServlet", urlPatterns = {"/StoryServlet"})
 public class StoryServlet extends HttpServlet {
-
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,58 +45,86 @@ public class StoryServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param authorId servlet request
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * 
-     * 
+     *
+     *
      */
     
-    
-    public Writer getChosenAuthor(Integer authorId){
-        List<Writer>writers=new ArrayList();
-                  
-                  
-                  Writer myWriter=null;
-                 
-                  for(Writer writer:writers){  
-                      if(authorId==writer.getUserID()){
-                          myWriter=writer;
-                          return myWriter;
-                      }
-                      
-                  }
-       return null;             
-    }
     public List<Writer> getWriters(){
         List<Writer>writers=new ArrayList();
-        
         writers.add(new Writer(5,"Natsuko", "Ishikawa"));
-        //writers.add(new Writer("John","Tron"));
-        
-        
+        writers.add(new Writer(2,"John","Tron"));
         return writers;
     }
-    public Story getChosenStory(HttpServletRequest request){
-                    BufferedImage img=null;
-                    
-              return null;
-     }
-    public List<Story>getAllStories(){
-                   BufferedImage img=null;
-        List<Story>storyList=new ArrayList();
-            List<Story>stories=new ArrayList();
+    public Writer getChosenAuthor(Integer authorId){
+        List<Writer>writers=getWriters();
+        Writer myWriter=null;
+        for(Writer writer:writers){
+            if(authorId==writer.getUserID()){
+                myWriter=writer;
+                return myWriter;
+            }
             
-            Integer count=0;
-            for(Story story:storyList){
-                       
-            } 
-              return stories;
+        }
+        return null;
+    }
+    public Story getChosenStory(HttpServletRequest request){
+        List<Story>stories=getAllStories();
+        
+        Integer count=0;
+        Story chosenStory;
+        for(Story story:stories){
+            story.setStoryID(++count);
+            if(story.getTitle().equalsIgnoreCase(request.getParameter("storyTitle"))){
+                chosenStory=story;
+                return chosenStory;
+            }
+            if(story.getStoryID()==(Integer.valueOf(request.getParameter("storyId")))){
+                chosenStory=story;
+                return chosenStory;
+            }
+        }
+        
+        return null;
+    }
+    public List<Story>getAllStories(){
+        
+        
+        List<Story>storyList=new ArrayList();
+        storyList.add(new Story());
+        
+        BufferedImage img = null;
+        BufferedImage img2= null;
+        try {
+            img=ImageIO.read(new File("C:\\Users\\user\\Documents\\NetBeansProjects\\RIP_system2\\web\\images\\ffxiv_06022022_151541_540.png"));
+            img2 = ImageIO.read(new File("C:\\Users\\user\\Documents\\NetBeansProjects\\RIP_system2\\web\\images\\ffxiv_05022022_223708_933.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(img, "png", output);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String imageAsBase64=Base64.getEncoder().encodeToString(output.toByteArray());
+        ByteArrayOutputStream output2 = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(img2, "png", output);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String imageAsBase64_2=Base64.getEncoder().encodeToString(output2.toByteArray());
+        List<Story>stories=new ArrayList();
+        stories.add(new Story("Past the far edge of fate",5,"In the beginning","Some crazy story",imageAsBase64,true));
+        stories.add(new Story("A Tale Of Loss And Faith",2,"In the beginning","Some crazy story",imageAsBase64_2,true));
+        return stories;
     }
     
     public List<Story>getAuthorsStories(Integer authorId){
@@ -107,9 +135,12 @@ public class StoryServlet extends HttpServlet {
                 authorStories.add(story);
             }
         }
-       return authorStories;
+        return authorStories;
     }
     public List<Comment> getEveryStoryComment(){
+        
+        
+        //Integer storyID, Integer userID, String name, String comment, String dateAdded
         List<Comment>comments=new ArrayList();
         comments.add(new Comment(1,1,3,"John","Hello there","2023-06-23"));
         comments.add(new Comment(2,1,2,"Peter","Hello there","2023-06-23"));
@@ -118,42 +149,43 @@ public class StoryServlet extends HttpServlet {
     }
     public List<Comment> getChosenStoryComments(HttpServletRequest request){
         
-                  List<Comment>comments=getEveryStoryComment();
-               
-                  List<Comment>chosenStoryComments=new ArrayList();
-                  
-                  for(Comment comment:comments){  ;
-                    if(comment.getStoryID()==(Integer.valueOf(request.getParameter("storyId")))){
-                            chosenStoryComments.add(comment);
-                            
-                            
-                  }
-                  }
-                  return chosenStoryComments;
+        List<Comment>comments=getEveryStoryComment();
+        
+        List<Comment>chosenStoryComments=new ArrayList();
+        
+        for(Comment comment:comments){  ;
+            if(comment.getStoryID()==(Integer.valueOf(request.getParameter("storyId")))){
+                chosenStoryComments.add(comment);
+                
+                
+            }
+        }
+        return chosenStoryComments;
     }
     
     public List<User>getUsers(){
-          List<User>users=new ArrayList();
-                 
-                  
-                  return users;
+        List<User>users=new ArrayList();
+        users.add(new User(2,"Bucky","Trucky"));
+        users.add(new User(3,"The Wild","One"));
+        
+        return users;
     }
     public Comment getComment(HttpServletRequest request){
         List<Comment>comments=getEveryStoryComment();
         String message="";
         for(Comment comment:comments){
-           if(comment.getCommentID()==(Integer.valueOf(request.getParameter("commentId")))) {
-             
-             return comment;
-           }
-          
+            if(comment.getCommentID()==(Integer.valueOf(request.getParameter("commentId")))) {
+                
+                return comment;
+            }
+            
         }
         
-     return null;   
+        return null;
     }
-
+    
     public String flagComment(HttpServletRequest request){
-       Comment comment=getComment(request);
+        Comment comment=getComment(request);
         if(comment!=null){
             comment.setFlagged(true);
             return "Comment reported";
@@ -161,106 +193,106 @@ public class StoryServlet extends HttpServlet {
         else{
             return "Comment not reported an error occured";
         }
-       
+        
     }
     public Writer getStoryAuthor(Story chosenStory){
-        List<Writer>writers=new ArrayList();
-                  
-                  Writer myWriter=null;
-                 
-                  for(Writer writer:writers){  
-                      if(chosenStory.getAuthorID()==writer.getUserID()){
-                          myWriter=writer;
-                          return myWriter;
-                      }
-                      
-                  }
-                    return null;
+        List<Writer>writers=getWriters();
+        
+        Writer myWriter=null;
+        
+        for(Writer writer:writers){
+            if(chosenStory.getAuthorID()==writer.getUserID()){
+                myWriter=writer;
+                return myWriter;
+            }
+            
+        }
+        return null;
     }
     public void fillStoryDetailsPage(HttpServletRequest request, HttpServletResponse response,String attributeName,Object value){
         Story chosenStory=getChosenStory(request);
-                  Writer myWriter=getStoryAuthor(chosenStory);
-             List<Comment>chosenStoryComments=getChosenStoryComments(request);
-                   List<User>users=getUsers();
-                 
-                 request.setAttribute("storyDetails", chosenStory);
-                 request.setAttribute("chosenWriter", myWriter);
-                 request.setAttribute("comments",chosenStoryComments);
-                 request.setAttribute("users", users);
-                 request.setAttribute(attributeName, value);
-                         
+        Writer myWriter=getStoryAuthor(chosenStory);
+        List<Comment>chosenStoryComments=getChosenStoryComments(request);
+        List<User>users=getUsers();
+        
+        request.setAttribute("storyDetails", chosenStory);
+        request.setAttribute("chosenWriter", myWriter);
+        request.setAttribute("comments",chosenStoryComments);
+        request.setAttribute("users", users);
+        request.setAttribute(attributeName, value);
+        
         var dispatcher=request.getRequestDispatcher("StoryDetails.jsp");
-      
+        
         try {
             dispatcher.forward(request,response);
-             
+            
         } catch (ServletException ex) {
             Logger.getLogger(StoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(StoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-                
+        
     }
     
     public String rateStory(HttpServletRequest request){
-       Story story=getChosenStory(request);
-       
-       story.setRatingAverage(Double.valueOf(request.getParameter("rating")));
-       return "Story rated";      
+        Story story=getChosenStory(request);
+        
+        story.setRatingAverage(Double.valueOf(request.getParameter("rating")));
+        return "Story rated";
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-             
-         switch(request.getParameter("submit")){
-           
-            case"storyDetails": 
-       
-                Story chosenStory=getChosenStory(request);
-                  Writer myWriter=getStoryAuthor(chosenStory);
-             List<Comment>chosenStoryComments=getChosenStoryComments(request);
-                   List<User>users=getUsers();
-                HttpSession session=request.getSession(true);
-                      session.setAttribute("currentUser", users.get(0)); 
-                 fillStoryDetailsPage(request,response,"", null);
-               break;
+        
+        switch(request.getParameter("submit")){
+            
+            case"storyDetails":
                 
-       
-
-         
-                 case "rateStoryPage":
-                    
-         request.setAttribute("storyId", request.getParameter("storyId"));
-                      var dispatcher=request.getRequestDispatcher("RateStory.jsp");
-             {
-                 try {
-                     dispatcher.forward(request,response);
-                 } catch (IOException ex) {
-                     Logger.getLogger(StoryServlet.class.getName()).log(Level.SEVERE, null, ex);
-                 }
-             }
-                     break;
-                 case "AuthorDetails":
-                      
-                     Writer chosenWriter=getChosenAuthor(Integer.valueOf(request.getParameter("writerId")));
-                     request.setAttribute("authorStories", getAuthorsStories(chosenWriter.getUserID()));
-                     request.setAttribute("chosenWriter", chosenWriter);
-                     dispatcher=request.getRequestDispatcher("AuthorDetails.jsp");
-                      dispatcher.forward(request,response);
-                      
-                     break;
-                 case "followAuthor":
-                     
-                     break;
-                 case "read":
-                    
-                     request.setAttribute("chosenStory", getChosenStory(request));
-                     dispatcher=request.getRequestDispatcher("StoryBody.jsp");
-                     dispatcher.forward(request, response);
-                     break;
-           }
-                  
-                  
+                Story chosenStory=getChosenStory(request);
+                Writer myWriter=getStoryAuthor(chosenStory);
+                List<Comment>chosenStoryComments=getChosenStoryComments(request);
+                List<User>users=getUsers();
+                HttpSession session=request.getSession(true);
+                session.setAttribute("currentUser", users.get(0));
+                fillStoryDetailsPage(request,response,"", null);
+                break;
+            
+            
+            
+            
+            case "rateStoryPage":
+                
+                request.setAttribute("storyId", request.getParameter("storyId"));
+                var dispatcher=request.getRequestDispatcher("RateStory.jsp");
+            {
+                try {
+                    dispatcher.forward(request,response);
+                } catch (IOException ex) {
+                    Logger.getLogger(StoryServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            break;
+            case "AuthorDetails":
+                
+                Writer chosenWriter=getChosenAuthor(Integer.valueOf(request.getParameter("writerId")));
+                request.setAttribute("authorStories", getAuthorsStories(chosenWriter.getUserID()));
+                request.setAttribute("chosenWriter", chosenWriter);
+                dispatcher=request.getRequestDispatcher("AuthorDetails.jsp");
+                dispatcher.forward(request,response);
+                
+                break;
+            case "followAuthor":
+                
+                break;
+            case "read":
+                
+                request.setAttribute("chosenStory", getChosenStory(request));
+                dispatcher=request.getRequestDispatcher("StoryBody.jsp");
+                dispatcher.forward(request, response);
+                break;
+        }
+        
+        
     }
     
     /**
@@ -274,66 +306,45 @@ public class StoryServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-       
-             switch(request.getParameter("submit")){
-                 
-                 case "comment":
-                        
-                         
-                         Calendar cal = Calendar.getInstance();
-        cal.clear();
-
-        cal.set(Calendar.YEAR, 2009);
-        cal.set(Calendar.MONTH, 4);
-        cal.set(Calendar.DATE, 15);
-        cal.set(Calendar.HOUR_OF_DAY,9);
-        Date date = cal.getTime();
-        
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-                  
-                  List<Comment>comments=getEveryStoryComment();
-                  
-                     
-                      HttpSession session=request.getSession(false);
-                      User user=(User)session.getAttribute("currentUser"); 
-                      Comment comment=new Comment();
-                      comment.setCommentID(comments.size()+1);
-                      comment.setUserID(user.getUserID());
-                      comment.setStoryID(Integer.valueOf(request.getParameter("storyId")));
-                      comment.setComment(request.getParameter("commentArea"));
-                      comment.setFlagged(false);
-                      comment.setDateAdded(String.valueOf(sqlDate));
-                      
-                      Story chosenStory=getChosenStory(request);
-                      Writer myWriter=getChosenAuthor(chosenStory.getAuthorID());
-                      List<Comment>chosenStoryComments=getChosenStoryComments(request);
-                       List<User>users=getUsers();
-                      request.setAttribute("newComment", comment);
-                        request.setAttribute("storyDetails", chosenStory);
-                         request.setAttribute("chosenWriter", myWriter);
-                          request.setAttribute("comments",chosenStoryComments);
-                          request.setAttribute("users", users);
-        var dispatcher=request.getRequestDispatcher("StoryDetails.jsp");
-         dispatcher.forward(request,response);
-         response.sendRedirect("StoryDetails.jsp");
-                     break;
-                     
-                 case"reportComment":
-                      String message=flagComment(request);
-                      fillStoryDetailsPage(request,response,"reportMessage",message);
-                         break;
-                 
-                 case"rateStory":
-                     
-                     System.out.println("HERE IN THE NOQ number 2"+request.getParameter("storyId"));
-                     
-           fillStoryDetailsPage(request,response,"rateMessage", rateStory(request));
-                     break;
-             }
+        switch(request.getParameter("submit")){
+            case "comment":
+                List<Comment>comments=getEveryStoryComment();
+                HttpSession session=request.getSession(false);
+                User user=(User)session.getAttribute("currentUser");
+                Comment comment=new Comment();
+                comment.setCommentID(comments.size()+1);
+                comment.setUserID(user.getUserID());
+                comment.setStoryID(Integer.valueOf(request.getParameter("storyId")));
+                comment.setComment(request.getParameter("commentArea"));
+                comment.setFlagged(false);
+                comment.setDateAdded("2023-06-20");
+                
+                Story chosenStory=getChosenStory(request);
+                Writer myWriter=getChosenAuthor(chosenStory.getAuthorID());
+                List<Comment>chosenStoryComments=getChosenStoryComments(request);
+                List<User>users=getUsers();
+                request.setAttribute("newComment", comment);
+                request.setAttribute("storyDetails", chosenStory);
+                request.setAttribute("chosenWriter", myWriter);
+                request.setAttribute("comments",chosenStoryComments);
+                request.setAttribute("users", users);
+                var dispatcher=request.getRequestDispatcher("StoryDetails.jsp");
+                dispatcher.forward(request,response);
+                response.sendRedirect("StoryDetails.jsp");
+                break;
+            
+            case"reportComment":
+                String message=flagComment(request);
+                fillStoryDetailsPage(request,response,"reportMessage",message);
+                break;
+            
+            case"rateStory":
+                System.out.println("HERE IN THE NOQ number 2"+request.getParameter("storyId"));
+                fillStoryDetailsPage(request,response,"rateMessage", rateStory(request));
+                break;
+        }
     }
-
+    
     /**
      * Returns a short description of the servlet.
      *
@@ -343,5 +354,5 @@ public class StoryServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    
 }

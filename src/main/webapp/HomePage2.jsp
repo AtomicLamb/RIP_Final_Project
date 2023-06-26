@@ -91,7 +91,7 @@
                     
                          
                     <h1 style="color: white;"><%=story.getTitle()%></h1>
-             <img src="data:image/png;base64,<%=story.getCoverImageAs64()%>" alt="<%story.getTitle();%>" style="width:400px;height:400px;" > 
+             <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%story.getTitle();%>" style="width:400px;height:400px;" > 
             </a>  
             <%}%>
                       
@@ -104,7 +104,7 @@
 	
 		<div class="container-fluid">
 			<div class="row">
-                           <h1 class="jobs_text"  style="text-align: center"">This weeks top picks</h1> 
+                           <h1 class="jobs_text"  style="text-align: center">This weeks top picks</h1> 
 				
        
         <div class="scrollmenu" style="margin: auto; width: 800px">
@@ -144,7 +144,7 @@
 	
 		<div class="container-fluid">
 			<div class="row">
-                            <h1 class="jobs_text" style="text-align: center"">Recommended books</h1> 
+                            <h1 class="jobs_text" style="text-align: center">Recommended books</h1> 
 				
        
         <div class="scrollmenu" style="margin: auto; width: 800px">
@@ -213,11 +213,11 @@
       <script src="js/owl.carousel.js"></script>
       <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
       <script>
-      $(document).ready(function(){
-      $(".fancybox").fancybox({
-         openEffect: "none",
-         closeEffect: "none"
-         });
+          $(document).ready(function(){
+          $(".fancybox").fancybox({
+              openEffect: "none",
+              closeEffect: "none"
+          });
          </script>
 
 

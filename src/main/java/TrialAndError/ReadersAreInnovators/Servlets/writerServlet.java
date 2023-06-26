@@ -3,6 +3,12 @@ package TrialAndError.ReadersAreInnovators.Servlets;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
+import TrialAndError.ReadersAreInnovators.DAOs.StoryDAOInterface;
+import TrialAndError.ReadersAreInnovators.DAOs.StoryImplementation;
+import TrialAndError.ReadersAreInnovators.DAOs.WriterDAOInterface;
+import TrialAndError.ReadersAreInnovators.DAOs.WriterImplementation;
+import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
+import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -37,6 +43,9 @@ public class writerServlet extends HttpServlet
                         dispacther.forward(request, response);
                break;
            case"VIEW STORIES":
+               Writer writer=new Writer(29);
+              StoryDAOInterface storyDAO=new StoryImplementation();
+                request.setAttribute("writersPublishedStories",storyDAO.getPublishedStories(writer));
                 dispacther =  request.getRequestDispatcher("ViewStories.jsp");
                         dispacther.forward(request, response);
                break;

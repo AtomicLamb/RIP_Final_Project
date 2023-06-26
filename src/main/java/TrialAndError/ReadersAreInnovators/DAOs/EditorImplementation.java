@@ -14,12 +14,14 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class EditorImplementation implements EditorDAOInterface{
     
     
-    //
+    //Trial and Error Certified.
     //TODO: Logger;
     
     
@@ -47,6 +49,7 @@ public class EditorImplementation implements EditorDAOInterface{
         try {
             
             query = "select * from pendingwriters pw order by pw.ApplicationDate asc";
+            
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
             
@@ -59,9 +62,7 @@ public class EditorImplementation implements EditorDAOInterface{
             
         } catch (SQLException e) {
             
-            System.out.println("Error retrieving pending writers.");
-            e.printStackTrace();
-            //Logger....
+            Logger.getLogger(AdminEditorImplementation.class.getName()).log(Level.FINE, "Error retrieving pending writers.", e);
             
         } finally {
             
@@ -137,10 +138,7 @@ public class EditorImplementation implements EditorDAOInterface{
             
         } catch (SQLException e) {
             
-            message = "Error approving writer application.";
-            System.out.println(message);
-            e.printStackTrace();
-            //logger....
+            Logger.getLogger(AdminEditorImplementation.class.getName()).log(Level.FINE, "Error approving writer application.", e);
             
         } finally {
             
@@ -197,7 +195,6 @@ public class EditorImplementation implements EditorDAOInterface{
         
         conn = DatabaseConnectionManager.getConnection();
         
-        
         try{
             
             query = "delete FROM pendingWriters pw WHERE pw.PendingWriterID = ?";
@@ -210,10 +207,7 @@ public class EditorImplementation implements EditorDAOInterface{
             
         }catch(SQLException e){
             
-            message = "Error denying writer application.";
-            System.out.println(message);
-            e.printStackTrace();
-            //Logger....
+            Logger.getLogger(AdminEditorImplementation.class.getName()).log(Level.FINE, "Error denying writer application.", e);
             
         } finally {
             
@@ -273,22 +267,20 @@ public class EditorImplementation implements EditorDAOInterface{
         
         try {
             
-            query = "select * from users where UserTypeID = 2";
+            query = "select u.Name, u.Surname, u.Email from users u  where u.UserTypeID = 2";
             
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
             
             while(rs.next()){
                 
-                allWriters.add(new Writer(rs.getString(2), rs.getString(3), rs.getString(6)));
+                allWriters.add(new Writer(rs.getString(1), rs.getString(2), rs.getString(3)));
                 
             }
             
         } catch (SQLException e) {
             
-            System.out.println("Error viewing all writers.");
-            e.printStackTrace();
-            //Logger....
+            Logger.getLogger(AdminEditorImplementation.class.getName()).log(Level.FINE, "Error viewing all writers.", e);
             
         } finally {
             
@@ -347,11 +339,6 @@ public class EditorImplementation implements EditorDAOInterface{
         
         try {
             
-            query = "delete from pendingstories ps where ps.PendingStoryID = ?";
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, pendingStory.getPendingStoryID());
-            ps.executeUpdate();
-            
             query = "insert into stories (Title, AuthorID, StoryBody, Synopsis, CoverImage, CommentsEnabled, EditedByID) values (?, ?, ?, ?, ?, ?, ?)";
             ps = conn.prepareStatement(query);
             ps.setString(1, pendingStory.getTitle());
@@ -371,10 +358,7 @@ public class EditorImplementation implements EditorDAOInterface{
             
         } catch (SQLException e) {
             
-            message = "Error approving pending Story.";
-            System.out.println("Error approving pending Story.");
-            e.printStackTrace();
-            //Logger....
+            Logger.getLogger(AdminEditorImplementation.class.getName()).log(Level.FINE, "Error approving pending Story.", e);
             
         } finally {
             
@@ -427,13 +411,13 @@ public class EditorImplementation implements EditorDAOInterface{
     }
     
     @Override       //Completed: Allows an editor to deny a pending Story.
-    public String denyPendingStory(StoryApplication pendingStory, Editor editor) {
+    public String removePendingStory(StoryApplication pendingStory) {
         
         conn = DatabaseConnectionManager.getConnection();
         
         try {
             
-            query = "delete from readers_are_innovators.pendingstories where pendingstoryid = ?";
+            query = "delete from pendingstories ps where ps.PendingStoryID = ?";
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, pendingStory.getPendingStoryID());
@@ -443,10 +427,7 @@ public class EditorImplementation implements EditorDAOInterface{
             
         } catch (SQLException e) {
             
-            message = "Error denying the pending Story.";
-            System.out.println("Error denying the pending Story.");
-            throw new RuntimeException(e);
-            //Logger....
+            Logger.getLogger(AdminEditorImplementation.class.getName()).log(Level.FINE, "Error denying the pending Story.", e);
             
         } finally {
             

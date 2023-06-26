@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
      <%@page import="java.util.List"%>
-    <%@page import="Models.StoryElements.Story"%>
-    <%@page import="Models.UserTypes.Writer"%>
-    <%@page import="Models.StoryElements.Comment"%>
-     <%@page import="Models.UserTypes.User"%>
+    <%@page import="TrialAndError.ReadersAreInnovators.Models.StoryElements.Story"%>
+    <%@page import="TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer"%>
+    <%@page import="TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment"%>
+     <%@page import="TrialAndError.ReadersAreInnovators.Models.UserTypes.User"%>
 <head>
 <!-- basic -->
 <meta charset="utf-8">
@@ -73,7 +73,7 @@
                         <%session=request.getSession(false);%>
                          <%User currentUser=(User)session.getAttribute("currentUser");%>
                         <h1 class="jobs_text">Author <%=writer.getName()%> <%=writer.getSurname()%></h1>
-                        <div class="image_1 padding_0"><h1><%=story.getTitle()%></h1><img src="data:image/png;base64,<%=story.getCoverImageAs64()%>" alt="<%story.getTitle();%>" style="height: 400px;width:300px; "><div style="float:right; margin-right: 700px;">
+                        <div class="image_1 padding_0"><h1><%=story.getTitle()%></h1><img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%story.getTitle();%>" style="height: 400px;width:300px; "><div style="float:right; margin-right: 700px;">
                                     
                                     <span><br>Views<i class="fa-sharp fa-solid fa-eye"></i><%=story.getViews()%></span><br><br>
                                     <span>Likes<i class="fa-solid fa-heart" style="color: #f42d1f;"></i><%=story.getLikes()%></span><br><br>

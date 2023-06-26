@@ -7,6 +7,7 @@ public class WriterApplication {
     private String surname;
     private String email;
     private String phoneNumber;
+    private String password;
     private String motivation;
     private String applicationDate;
     
@@ -14,26 +15,27 @@ public class WriterApplication {
         
     }
     
-    public WriterApplication(String name, String surname, String email, String phoneNumber, String motivation) {
+    public WriterApplication(String name, String surname, String email,String motivation, String applicationDate) {
         
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.motivation = motivation;
-        
-    }
-    
-    public WriterApplication(String name, String surname, String email, String phoneNumber, String motivation, String applicationDate) {
-        
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
         this.motivation = motivation;
         this.applicationDate = applicationDate;
         
     }
+    
+    public WriterApplication(String name, String surname, String email, String phoneNumber, String password,String motivation) {
+        
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.motivation = motivation;
+        
+    }
+    
     
     public String getName() {
         return name;
@@ -67,6 +69,14 @@ public class WriterApplication {
         this.phoneNumber = phoneNumber;
     }
     
+    public String getPassword() {
+        return password;
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
     public String getMotivation() {
         return motivation;
     }
@@ -93,7 +103,7 @@ public class WriterApplication {
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", motivation='" + motivation + '\'' +
-                ", applicationDate=" + applicationDate +
+                ", applicationDate='" + applicationDate + '\'' +
                 '}';
         
     }

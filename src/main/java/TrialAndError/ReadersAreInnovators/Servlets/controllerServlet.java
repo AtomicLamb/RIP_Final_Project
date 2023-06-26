@@ -3,6 +3,7 @@ package TrialAndError.ReadersAreInnovators.Servlets;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
+import TrialAndError.ReadersAreInnovators.Models.Administration.WriterApplication;
 import TrialAndError.ReadersAreInnovators.RESTService.ImpService;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Reader;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
@@ -92,8 +93,8 @@ public class controllerServlet extends HttpServlet {
             String password = request.getParameter("writerPassword");
             String motivation = request.getParameter("writerMotivation");
             
-            request.setAttribute("message", "The joke has been deleted");
-                        var dispacther =  request.getRequestDispatcher("index.html");
+            request.setAttribute("message", imp.registerWriter(new WriterApplication(firstName,surname,email,phoneNum,password,motivation)));
+                        var dispacther =  request.getRequestDispatcher("index.jsp");
                        try {
                            dispacther.forward(request, response);
                        } catch (ServletException | IOException ex) {

@@ -328,20 +328,21 @@ public class CommentImplementation implements CommentDAOInterface{
     public String unFlagComment(Comment comment) {
         
         conn = DatabaseConnectionManager.getConnection();
-        query = "update readers_are_innovators.comments set isFlagged = 0 where commentID = ?";
         
         try {
+            
+            query = "update comments c set c.IsFlagged = 0 where c.CommentID = ?";
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, comment.getCommentID());
             ps.executeUpdate();
+            
             message = "Comments successfully un-flagged.";
             
         } catch (SQLException e) {
             
             message = "Error un-flagging comments.";
-            System.out.println("Error un-flagging comments.");
-            e.printStackTrace();
+            Logger.getLogger(CommentImplementation.class.getName()).log(Level.FINE, "Error un-flagging comments.", e);
             
         } finally {
             
@@ -398,26 +399,25 @@ public class CommentImplementation implements CommentDAOInterface{
         
         conn = DatabaseConnectionManager.getConnection();
         ArrayList<Comment> flaggedComments = new ArrayList<>();
-        String name = null;
-        
-        query = "select c.CommentID, c.StoryID, c.UserID, c.Comment, concat_ws(\" \", u.Name, u.Surname) " +
-                "as FullName from comments c, users u where c.UserID = u.UserID and IsFlagged = 1;";
         
         try {
+            
+            query = "select c.CommentID, c.StoryID, c.UserID, c.Comment, concat_ws(\" \", u.Name, u.Surname) " +
+                    "as FullName from comments c, users u where c.UserID = u.UserID and IsFlagged = 1;";
             
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
             
             while(rs.next()) {
 
-                flaggedComments.add(new Comment(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(5), rs.getString(4)));
+                flaggedComments.add(new Comment(rs.getInt(1), rs.getInt(2), rs.getInt(3), 
+                        rs.getString(5), rs.getString(4)));
                 
             }
             
         } catch (SQLException e) {
             
-            System.out.println("Error getting flagged comments.");
-            e.printStackTrace();
+            Logger.getLogger(CommentImplementation.class.getName()).log(Level.FINE, "Error getting flagged comments.", e);
             
         } finally {
             
@@ -473,25 +473,22 @@ public class CommentImplementation implements CommentDAOInterface{
     public Integer getNumberOfComments(Story story) {
         
         conn = DatabaseConnectionManager.getConnection();
-        query = "select * from readers_are_innovators.comments where StoryID = ?";
-        Integer count = 1;
+        Integer numberOfComments = 0;
+        
         try {
+            
+            query = "select count(c.Comment) as NumberOfComments from comments c where c.StoryID = ?";
+            
             ps = conn.prepareStatement(query);
             ps.setInt(1, story.getStoryID());
             rs = ps.executeQuery();
+            rs.next();
             
-            if(rs.next() == false) {
-                return 0;
-            } else{
-                while(rs.next()){
-                    count++;
-                }
-            }
-            
+            numberOfComments = rs.getInt(1);
             
         } catch (SQLException e) {
-            System.out.println("Error retrieving story comments");
-            e.printStackTrace();
+            
+            Logger.getLogger(CommentImplementation.class.getName()).log(Level.FINE, "Error getting number of comments.", e);
             
         } finally {
             
@@ -539,11 +536,11 @@ public class CommentImplementation implements CommentDAOInterface{
             
         }
         
-        return count;
+        return numberOfComments;
         
     }
     
-    @Override   @Deprecated     //Finish
+    @Override   @Deprecated     //TODO: Neaten Up.
     public String clearComments(Story story) {
         
         conn = DatabaseConnectionManager.getConnection();

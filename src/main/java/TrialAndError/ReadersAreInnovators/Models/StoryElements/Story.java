@@ -29,6 +29,13 @@ public class Story {
         
     }
     
+    public Story(String title, String coverImage) {
+        
+        this.title = title;
+        this.coverImage = coverImage;
+        
+    }
+    
     public Story(Integer storyID, String title, Double data) {
         
         this.storyID = storyID;

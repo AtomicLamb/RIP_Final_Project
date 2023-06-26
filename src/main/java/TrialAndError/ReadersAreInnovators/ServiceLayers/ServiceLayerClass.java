@@ -152,10 +152,6 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
         return null;
     }
     
-    @Override
-    public String approveWriter(WriterApplication writer) {
-        return null;
-    }
     
     @Override
     public String denyWriter(Writer writer) {
@@ -177,15 +173,6 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
         return null;
     }
     
-    @Override
-    public StoryApplication reviewPendingStory(StoryApplication story) {
-        return null;
-    }
-    
-    @Override
-    public ArrayList<StoryApplication> viewPendingStories() {
-        return null;
-    }
     
     @Override
     public String addGenre(Genre genre) {
@@ -346,7 +333,11 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     
     @Override
     public String writerRegistration(WriterApplication writerApplication) {
-        return null;
+        
+        Reader reader = new Reader(writerApplication.getName(),writerApplication.getSurname(),writerApplication.getEmail(),
+                writerApplication.getPhoneNumber(),writerApplication.getPassword());
+        
+        return readerImp.registerReader(reader) + writerImp.writerRegistration(writerApplication);
     }
     
     @Override
@@ -354,10 +345,6 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
         return null;
     }
     
-    @Override
-    public ArrayList<Story> getAllDrafts(Writer writer) {
-        return null;
-    }
     
     @Override
     public String editDraft(Story story) {

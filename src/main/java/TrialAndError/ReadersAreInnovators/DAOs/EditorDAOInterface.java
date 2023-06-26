@@ -17,7 +17,7 @@ public interface EditorDAOInterface {
     String denyWriter(Writer writer);
     ArrayList<Writer> viewWriters();
     String approvePendingStory(StoryApplication story, Editor editor);
-    String denyPendingStory(StoryApplication story, Editor editor);
+    String removePendingStory(StoryApplication story);
     StoryApplication reviewPendingStory(StoryApplication story);
     ArrayList<StoryApplication> viewPendingStories();
     

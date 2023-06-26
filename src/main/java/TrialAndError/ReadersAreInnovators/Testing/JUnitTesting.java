@@ -181,7 +181,7 @@ public class JUnitTesting {
     @Test
     public void denyPendingStoryTest(){
         
-        System.out.println(editorImp.denyPendingStory(pendingStory, editor));
+        System.out.println(editorImp.removePendingStory(pendingStory));
         
     }
     

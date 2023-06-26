@@ -1,5 +1,6 @@
 package TrialAndError.ReadersAreInnovators.REST;
 
+import TrialAndError.ReadersAreInnovators.Models.Administration.WriterApplication;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Reader;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
@@ -35,7 +36,13 @@ public class RESTControllerRIP {
     {
         return Response.ok().entity(service.registerReader(reader)).build();
     }
-    
+    @Path("/registerWriter")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response registerWriter(WriterApplication writerApplication)
+    {
+        return Response.ok().entity(service.writerRegistration(writerApplication)).build();
+    }
     
     
 }
