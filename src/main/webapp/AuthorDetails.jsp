@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
      <%@page import="java.util.List"%>
-    <%@page import="Models.StoryElements.Story"%>
-    <%@page import="Models.UserTypes.Writer"%>
+    <%@page import="TrialAndError.ReadersAreInnovators.Models.StoryElements.Story"%>
+    <%@page import="TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer"%>
 <head>
 <!-- basic -->
 <meta charset="utf-8">
@@ -71,12 +71,12 @@
                         <h1 class="jobs_text"style="text-align: left;border-bottom-style: solid; border-width:0.5px;border-color: black;">Author <%=writer.getName()%> <%=writer.getSurname()%> <br><span><a href="StoryServlet?submit=followAuthor" 
                                                                               class="button buttonTextColor" style=" font-size: 15px; border: 2px solid black; border-radius: 12px">Follow Author</a></span></h1>
                                  <h1 class="jobs_text"style="text-align: left;">Authors Books</h1>
-                                             
-					      <div class="scrollmenu" style="  width: 800px; background-color: white;height: 550px"">
+                                             s
+					      <div class="scrollmenu" style="  width: 800px; background-color: white;height: 550px">
               <%for(Story story:stories){%> 
                 <a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>">
                   <h1 style="color: white;"><%=story.getTitle()%></h1>
-             <img src="data:image/png;base64,<%=story.getCoverImageAs64()%>" alt="<%story.getTitle();%>" style="width:400px;height:400px;" > 
+             <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" > 
             </a>  
             <%}%>
             

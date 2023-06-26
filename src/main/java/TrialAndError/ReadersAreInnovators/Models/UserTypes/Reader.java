@@ -41,14 +41,13 @@ public class Reader extends User {
         
     }
     
-    public Reader(String name, String surname, String email, String phoneNumber, String password, Boolean emailVerified) {
+    public Reader(String name, String surname, String email, String phoneNumber, String password) {
         
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.emailVerified = emailVerified;
         
     }
     

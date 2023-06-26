@@ -26,6 +26,14 @@ public class Writer extends Reader {
         
     }
     
+    public Writer(Integer userID, String name, String surname) {
+        
+        this.userID = userID;
+        this.name = name;
+        this.surname = surname;
+        
+    }
+    
     public Writer(String name, String surname, String email) {
         
         this.name = name;

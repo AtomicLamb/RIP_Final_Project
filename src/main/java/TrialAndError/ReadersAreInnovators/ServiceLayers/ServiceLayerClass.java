@@ -247,9 +247,11 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
         return null;
     }
     
-    @Override
+    @Override       //Done
     public String registerReader(Reader reader) {
-        return null;
+        
+        return readerImp.registerReader(reader);
+        
     }
     
     @Override

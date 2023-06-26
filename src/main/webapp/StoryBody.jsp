@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%@page import="Models.StoryElements.Story"%>
-<head>
+    <%@page import="TrialAndError.ReadersAreInnovators.Models.*"%>
+    <%@ page import = "TrialAndError.ReadersAreInnovators.Models.StoryElements.Story" %>
+    <head>
 <!-- basic -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -121,7 +122,7 @@
       $(".fancybox").fancybox({
          openEffect: "none",
          closeEffect: "none"
-         });
+         });})
          </script>
 
 

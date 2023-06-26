@@ -81,7 +81,33 @@ public class Story {
         
     }
     
-    public Story(String title, Integer authorID, Integer views, Integer likes, Double ratingAverage, String storyBody, String synopsis, String coverImage, Boolean isPrivate, Integer editorID, String datePublished) {
+    public Story(Integer storyID, String title, Integer authorID, String storyBody, String synopsis, String coverImage, Boolean commentsEnabled, String datePublished) {
+        
+        this.storyID = storyID;
+        this.title = title;
+        this.authorID = authorID;
+        this.storyBody = storyBody;
+        this.synopsis = synopsis;
+        this.coverImage = coverImage;
+        this.commentsEnabled = commentsEnabled;
+        this.datePublished = datePublished;
+        
+    }
+    
+    public Story(Integer storyID, String title, Integer authorID, String storyBody, String synopsis, String coverImage, Boolean commentsEnabled, Integer editorID) {
+        
+        this.storyID = storyID;
+        this.title = title;
+        this.authorID = authorID;
+        this.storyBody = storyBody;
+        this.synopsis = synopsis;
+        this.coverImage = coverImage;
+        this.commentsEnabled = commentsEnabled;
+        this.editorID = editorID;
+        
+    }
+    
+    public Story(String title, Integer authorID, Integer views, Integer likes, Double ratingAverage, String storyBody, String synopsis, String coverImage, Boolean isPrivate, String datePublished, Integer editorID) {
         
         this.title = title;
         this.authorID = authorID;
@@ -92,8 +118,25 @@ public class Story {
         this.synopsis = synopsis;
         this.coverImage = coverImage;
         this.isPrivate = isPrivate;
-        this.editorID = editorID;
         this.datePublished = datePublished;
+        this.editorID = editorID;
+        
+    }
+    
+    public Story(Integer storyID, String title, Integer authorID, Integer views, Integer likes, Double ratingAverage, String storyBody, String synopsis, String coverImage, Boolean commentsEnabled, String datePublished, Integer editorID) {
+        
+        this.storyID = storyID;
+        this.title = title;
+        this.authorID = authorID;
+        this.views = views;
+        this.likes = likes;
+        this.ratingAverage = ratingAverage;
+        this.storyBody = storyBody;
+        this.synopsis = synopsis;
+        this.coverImage = coverImage;
+        this.commentsEnabled = commentsEnabled;
+        this.datePublished = datePublished;
+        this.editorID = editorID;
         
     }
     

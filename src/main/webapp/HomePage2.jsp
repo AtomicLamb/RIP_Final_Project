@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <%@page import="java.util.List"%>
-    <%@page import="Models.StoryElements.Story"%>
-<head>
+    <%@ page import = "TrialAndError.ReadersAreInnovators.Models.StoryElements.Story" %>
+    <head>
 <!-- basic -->
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

@@ -5,6 +5,7 @@ package TrialAndError.ReadersAreInnovators.Servlets;/*
 
 import TrialAndError.ReadersAreInnovators.RESTService.ImpService;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Reader;
+import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,12 +21,12 @@ import java.util.logging.Logger;
  */
 @WebServlet(urlPatterns = {"/controllerServlet"})
 public class controllerServlet extends HttpServlet {
-
     
-
-    public controllerServlet() 
+    private ImpService imp;
+    
+    public controllerServlet()
     {
-        
+        imp = new ImpService();
     }
     
     @Override
@@ -58,7 +59,7 @@ public class controllerServlet extends HttpServlet {
                break;
            
            case"Confirm Reader":
-               addReader(request, response);
+               registerReader(request, response);
                break;
            case"Confirm Writer":
                addWriter(request,response);
@@ -66,20 +67,18 @@ public class controllerServlet extends HttpServlet {
        }
     }
     
-   public void addReader(HttpServletRequest request, HttpServletResponse response)
+   public void registerReader(HttpServletRequest request, HttpServletResponse response)
     {
             String firstName = request.getParameter("readerFirstName");
             String surname = request.getParameter("readerSurname");
             String email = request.getParameter("readerEmail");
             String phoneNum = request.getParameter("readerPhoneNum");
             String password = request.getParameter("readerPassword");
-            
-            Reader reader = new Reader(firstName, surname, email, phoneNum, password, false);
-
-                 
-                        var dispacther =  request.getRequestDispatcher("index.html");
+        
+        request.setAttribute("message", imp.registerReader(new Reader(firstName,surname,email,phoneNum,password)));
+                        var dispatcher =  request.getRequestDispatcher("index.jsp");
                        try {
-                           dispacther.forward(request, response);
+                           dispatcher.forward(request, response);
                        } catch (ServletException | IOException ex) {
                            Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
                        }

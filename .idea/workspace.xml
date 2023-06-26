@@ -9,187 +9,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="178285d8-becc-4c7f-b082-ee11f211687c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/AdminEditorDAOInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/AdminEditorImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/AnalyticsDAOInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/AnalyticsImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/CommentDAOInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/CommentImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/EditorDAOInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/EditorImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/GenresDAOInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/GenresImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/RatingDAOInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/RatingImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/ReaderDAOInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/ReaderImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/StoryDAOInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/StoryImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/UserDAOInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/UserImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/WriterDAOInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/WriterImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/Administration/StoryApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/Administration/WriterApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/AnalyticalData/Analytics.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/AnalyticalData/Rating.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/StoryElements/Comment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/StoryElements/Genre.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/StoryElements/Story.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/UserTypes/AdminEditor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/UserTypes/Editor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/UserTypes/Reader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/UserTypes/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/UserTypes/Writer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/REST/RESTApplicationRootPath.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/REST/RESTControllerRIP.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/RESTService/ImpService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/DatabaseConnectionManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/FunctionsClass.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/Functions_Interface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayerClass.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayer_Interface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/config.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/HelloServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/HomePageServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/StoryServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/adminEditorServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/analyticalServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/controllerServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/editPersonalInformationServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/editorServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/writerServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Testing/JUnitTesting.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Testing/TestingClass.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/beans.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/AddEditor.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/AddGenre.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/Admin-Editor.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/AnalyseData.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/AnalyticCharts.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/AnalyticChoice.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/AuthorDetails.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/CreateNewStory.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/EditDraft.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/Editors.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/HomePage.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/HomePage2.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/ManageGenres.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/MostRatedBooks.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/MostViewedBooks.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/PersonalData.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/RemoveEditor.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/RemoveGenre.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/ReviewComments.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/ReviewPendingStories.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/RevokeWriterPrivileges.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/StoryBody.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/StoryDetails.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/ViewDrafts.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/ViewStories.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WriterSign-Up.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/Writers.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/applyForWriter.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/charts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/animate.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-grid.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-grid.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-grid.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-grid.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-reboot.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-reboot.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-reboot.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-reboot.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/default-skin.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/font-awesome.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/icomoon.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/jquery-ui.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/jquery.fancybox.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/jquery.mCustomScrollbar.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/meanmenu.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/nice-select.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/normalize.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/owl.carousel.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/responsive.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/slick.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/editPersonalData.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/AddEditor.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/Admin-Editor.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/AnalyticChoice.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/Edit Personal Infomation.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/Editor.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/ManageGenres.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/Untitled-13.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/Untitled-13_1.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/Untitled-2.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/Untitled-2_1.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/addGenre.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/analyticalData.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/applyWriter.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/backImg.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/banner-bg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/banner-bg_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/books.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/createStoryBackground.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/etienne-girardet-EP6_VZhzXM8-unsplash.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/frontImg.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/img-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/img-1_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/img-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/img-2_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/img-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/img-3_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/img-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/img-4_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/lady.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/lightBook.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/logo-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/logo-2_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/logo_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/phoneLaptop.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/registerWriter.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/search_bg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/search_bg_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/writersPage.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/bootstrap.bundle.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/bootstrap.bundle.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/bootstrap.bundle.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/bootstrap.bundle.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/bootstrap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/bootstrap.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/bootstrap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/bootstrap.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/custom.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/jquery-3.0.0.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/jquery.mCustomScrollbar.concat.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/jquery.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/jquery.validate.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/modernizer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/plugin.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/popper.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/slider-setting.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/style.css" afterDir="false" />
+    <list default="true" id="178285d8-becc-4c7f-b082-ee11f211687c" name="Changes" comment="Initial Commit: No Error mostly ok.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/ReaderImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/ReaderImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/StoryImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/StoryImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/StoryElements/Story.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/StoryElements/Story.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/UserTypes/Reader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/UserTypes/Reader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/UserTypes/Writer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/UserTypes/Writer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/DatabaseConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/DatabaseConnectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayerClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayerClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/analyticalServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/analyticalServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Testing/JUnitTesting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Testing/JUnitTesting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/StoryBody.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/StoryBody.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+    </list>
+    <list id="2787905e-793b-4e17-a742-137bd793808e" name="Changes by matth" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/ReaderImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/ReaderImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/REST/RESTControllerRIP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/REST/RESTControllerRIP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/RESTService/ImpService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/RESTService/ImpService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/controllerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/controllerServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.html" beforeDir="false" />
+    </list>
+    <list id="813f8dc2-8590-4efc-b536-02bb56b7a003" name="Changes by user" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/HomePageServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/HomePageServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/StoryServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/StoryServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/AuthorDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/AuthorDetails.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/HomePage2.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/HomePage2.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,6 +43,16 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/ReaderImplementation.java">
+      <ranges>
+        <range start1="40" end1="40" start2="40" end2="41" changelist="2787905e-793b-4e17-a742-137bd793808e" />
+        <range start1="41" end1="42" start2="42" end2="42" changelist="2787905e-793b-4e17-a742-137bd793808e" />
+        <range start1="275" end1="276" start2="275" end2="275" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="350" end1="351" start2="349" end2="350" changelist="2787905e-793b-4e17-a742-137bd793808e" />
+      </ranges>
+    </file>
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -218,26 +73,28 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/TKS/IdeaProjects/Trial and Error - Readers are Innovators/src/main/webapp",
+    "deletionFromPopupRequiresConfirmation": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/TKS/Desktop/VZAP_2023/Software/JSON/json-simple-3.1.0.jar",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.13964844",
     "project.structure.side.proportion": "0.2125",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\java\TrialAndError\ReadersAreInnovators\ServiceLayers" />
       <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\webapp" />
       <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\java\TrialAndError\ReadersAreInnovators\Servlets" />
       <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main" />
       <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\java\TrialAndError\RIP\Testing" />
-      <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\java\TrialAndError\RIP\DAOs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\java\TrialAndError\ReadersAreInnovators\RESTService" />
@@ -266,6 +123,36 @@
       <RunnerSettings RunnerId="Debug">
         <option name="DEBUG_PORT" value="9009" />
       </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
@@ -304,6 +191,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="JUnitTesting.getUnreadFavoritesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Trial_and_Error_Readers_are_Innovators" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="TrialAndError.ReadersAreInnovators.Testing.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="TrialAndError.ReadersAreInnovators.Testing" />
+      <option name="MAIN_CLASS_NAME" value="TrialAndError.ReadersAreInnovators.Testing.JUnitTesting" />
+      <option name="METHOD_NAME" value="getUnreadFavoritesTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JUnitTesting.registerReaderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Trial_and_Error_Readers_are_Innovators" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="TrialAndError.ReadersAreInnovators.Testing.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="TrialAndError.ReadersAreInnovators.Testing" />
+      <option name="MAIN_CLASS_NAME" value="TrialAndError.ReadersAreInnovators.Testing.JUnitTesting" />
+      <option name="METHOD_NAME" value="registerReaderTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="JUnitTesting.removeEditorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Trial_and_Error_Readers_are_Innovators" />
       <extension name="coverage">
@@ -320,10 +239,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="JUnitTesting.searchTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Trial_and_Error_Readers_are_Innovators" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="TrialAndError.ReadersAreInnovators.Testing.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="TrialAndError.ReadersAreInnovators.Testing" />
+      <option name="MAIN_CLASS_NAME" value="TrialAndError.ReadersAreInnovators.Testing.JUnitTesting" />
+      <option name="METHOD_NAME" value="searchTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.JUnitTesting.addEditorTest" />
         <item itemvalue="JUnit.JUnitTesting.removeEditorTest" />
+        <item itemvalue="JUnit.JUnitTesting.addEditorTest" />
+        <item itemvalue="JUnit.JUnitTesting.registerReaderTest" />
+        <item itemvalue="JUnit.JUnitTesting.getUnreadFavoritesTest" />
+        <item itemvalue="JUnit.JUnitTesting.searchTest" />
       </list>
     </recent_temporary>
   </component>
@@ -335,11 +273,35 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1687762352603</updated>
-      <workItem from="1687762353639" duration="2600000" />
+      <workItem from="1687762353639" duration="4232000" />
+      <workItem from="1687767269108" duration="12107000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial Commit: No Error mostly ok.">
+      <created>1687765315546</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1687765315546</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial Commit: No Error mostly ok." />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial Commit: No Error mostly ok." />
   </component>
 </project>

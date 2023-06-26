@@ -26,6 +26,8 @@ public class StoryImplementation implements StoryDAOInterface {
     private ResultSet rs;
     private String query;
     private String message;
+    private byte[] decoder;
+    private InputStream inputStream;
     FunctionsClass functionsClass = new FunctionsClass();
     
     
@@ -38,40 +40,23 @@ public class StoryImplementation implements StoryDAOInterface {
     public String removeStory(Story story) {
         
         conn = DatabaseConnectionManager.getConnection();
-        query = "select * from readers_are_innovators.stories where StoryID = ?";
-        
-        try {
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, story.getStoryID());
-            rs = ps.executeQuery();
-            rs.next();
-            if(rs == null){
-                    message = "Story ID does not exist";
-                    return message;
-            }
-            
-        } catch (SQLException e) {
-            System.out.println("Cant find story");
-            e.printStackTrace();
-        }
-        
-        
-        query = "delete from readers_are_innovators.stories where StoryID = ?";
-        Integer deleted = 0;
         
         try {
             
+            query = "delete from stories s where s.StoryID = ?";
+            
             ps = conn.prepareStatement(query);
             ps.setInt(1, story.getStoryID());
-            deleted = ps.executeUpdate();
-            if(deleted == 0){
-                message = "Story ID does not exist";
-            } else {
-                message = deleted + " story removed";
-            }
-        } catch (SQLException e) {
-            System.out.println("Error removing story");
+            ps.executeUpdate();
+            
+            message = "Story successfully removed.";
+            
+        }catch (SQLException e){
+            
+            System.out.println("Story successfully removed.");
             e.printStackTrace();
+            //Logger....
+            
         } finally {
             
             if (rs!=null){
@@ -117,24 +102,33 @@ public class StoryImplementation implements StoryDAOInterface {
             }
             
         }
+        
         return message;
+        
     }
     
     @Override
     public String privatizeStory(Story story) {
+        
         conn = DatabaseConnectionManager.getConnection();
-        query = "update readers_are_innovators.stories set IsPrivate = ? where StoryID = ?";
+        
         try {
+            
+            query = "update stories s set s.IsPrivate = ? where s.StoryID = ?";
+            
             ps = conn.prepareStatement(query);
-            ps.setInt(1, functionsClass.booleanToInteger(story.getPrivate()));
+            ps.setInt(1, 1);
             ps.setInt(2, story.getStoryID());
-            int priv = ps.executeUpdate();
-            if(story.getPrivate() == true){
-            message = priv + " story privated";}
-            else{message = priv + " story unprivated";}
+            ps.executeUpdate();
+            
+            message = "Story successfully privatized.";
+            
         } catch (SQLException e) {
-            System.out.println("Error getting story information");
+            
+            System.out.println("Error privatizing story.");
             e.printStackTrace();
+            //Logger....
+            
         } finally {
             
             if (rs!=null){
@@ -182,34 +176,105 @@ public class StoryImplementation implements StoryDAOInterface {
         }
         
         return message;
+        
     }
     
     @Override
     public String publiciseStory(Story story) {
-        return null;
+        
+        conn = DatabaseConnectionManager.getConnection();
+        
+        try {
+            
+            query = "update stories s set s.IsPrivate = ? where s.StoryID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, 0);
+            ps.setInt(2, story.getStoryID());
+            ps.executeUpdate();
+            
+            message = "Story successfully publicised.";
+            
+        } catch (SQLException e) {
+            
+            System.out.println("Error publicising story.");
+            e.printStackTrace();
+            //Logger....
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return message;
+        
     }
     
     @Override
     public String submitStory(Story story) {
         
         conn = DatabaseConnectionManager.getConnection();
-        query = "insert into readers_are_innovators.pendingstories (Title, AuthorID, StoryBody, Synopsis, CoverImage) values (?,?,?,?,?) ";
         
         try {
+            
+            query = "insert into PendingStories (Title, AuthorID, StoryBody, Synopsis, CoverImage) values (?, ?, ?, ?, ?) ";
             
             ps = conn.prepareStatement(query);
             ps.setString(1, story.getTitle());
             ps.setInt(2, story.getAuthorID());
             ps.setString(3, story.getStoryBody());
             ps.setString(4, story.getSynopsis());
-            
             ps.executeUpdate();
+            
             message = "Story added.";
             
         } catch (SQLException e) {
             
+            message = "Error adding story to pending ";
             System.out.println("Error adding story to pending ");
             e.printStackTrace();
+            //Logger....
             
         } finally {
             

@@ -38,8 +38,8 @@ public class ReaderImplementation implements ReaderDAOInterface {
     @Override       //Completed: Allows a user to register to the RIP system.
     public String registerReader(Reader reader) {
         
-        conn = DatabaseConnectionManager.getConnection();
         
+        conn = DatabaseConnectionManager.getConnection();
         try {
             
             query = "insert into users (Name, Surname, UserTypeID, Email, PhoneNumber, Password) values (?, ?, ?, ?, ?, ?)";
@@ -273,7 +273,6 @@ public class ReaderImplementation implements ReaderDAOInterface {
     
     @Override       //Completed: Allows a user to follow an author.
     public String followAuthor(Writer writer, User user) {
-       
         
         conn = DatabaseConnectionManager.getConnection();
         
@@ -348,7 +347,7 @@ public class ReaderImplementation implements ReaderDAOInterface {
     @Override       //TODO
     public ArrayList<Story> getAllFavorites(User user) {
         
-        conn = DatabaseConnectionManager.getConnection();
+       // conn = DatabaseConnectionManager.getConnection();
         
         try {
             

@@ -99,21 +99,11 @@ public class StoryServlet extends HttpServlet {
        return authorStories;
     }
     public List<Comment> getEveryStoryComment(){
-                 Calendar cal = Calendar.getInstance();
-        cal.clear();
-
-        cal.set(Calendar.YEAR, 2009);
-        cal.set(Calendar.MONTH, 4);
-        cal.set(Calendar.DATE, 15);
-        cal.set(Calendar.HOUR_OF_DAY,9);
-        Date date = cal.getTime();
-        
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-                   
-                  
-                  List<Comment>comments=new ArrayList();
-                  
-          return comments;                                             
+        List<Comment>comments=new ArrayList();
+        comments.add(new Comment(1,1,3,"John","Hello there","2023-06-23"));
+        comments.add(new Comment(2,1,2,"Peter","Hello there","2023-06-23"));
+        comments.add(new Comment(3,2,2,"Jake","Not here","2023-06-23"));
+        return comments;
     }
     public List<Comment> getChosenStoryComments(HttpServletRequest request){
         

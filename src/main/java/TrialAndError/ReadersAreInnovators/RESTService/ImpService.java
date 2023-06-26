@@ -32,7 +32,8 @@ public class ImpService
      public ImpService(){
         client = ClientBuilder.newClient();
         mapper = new ObjectMapper();
-        uri = "http://192.168.0.105/TrialAndError/ReadersAreInnovators";
+        uri = "http://localhost:8080/Trial_and_Error_Readers_are_Innovators-1.0-SNAPSHOT/ReadersAreInnovators/TrialAndError";
+         
     }
      public String registerReader(Reader reader)
      {

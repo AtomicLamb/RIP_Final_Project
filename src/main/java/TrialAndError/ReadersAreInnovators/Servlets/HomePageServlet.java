@@ -65,28 +65,25 @@ public class HomePageServlet extends HttpServlet {
       
         switch(request.getParameter("submit")){
             case "HomePage":
-               BufferedImage img=null;
-        List<Story>storyList=new ArrayList();
-            storyList.add(new Story());
-            List<Story>stories=new ArrayList();
-            Integer count=0;
-            for(Story story:storyList){
+                BufferedImage img = null;
                 
-                ByteArrayOutputStream output = new ByteArrayOutputStream(); 
-     ImageIO.write(img, "png", output);
-     String imageAsBase64=Base64.getEncoder().encodeToString(output.toByteArray());
-    
-     
-            } 
+                List<Story>storyList=new ArrayList();
+                storyList.add(new Story());
                 
-                
-                
-                
-                
-                 request.setAttribute("stories", stories);
-        var dispatcher=request.getRequestDispatcher("HomePage2.jsp");
-         dispatcher.forward(request,response);
-        
+                img=ImageIO.read(new File("C:\\Users\\user\\Documents\\NetBeansProjects\\RIP_system2\\web\\images\\ffxiv_06022022_151541_540.png"));
+                BufferedImage img2=ImageIO.read(new File("C:\\Users\\user\\Documents\\NetBeansProjects\\RIP_system2\\web\\images\\ffxiv_05022022_223708_933.png"));
+                ByteArrayOutputStream output = new ByteArrayOutputStream();
+                ImageIO.write(img, "png", output);
+                String imageAsBase64=Base64.getEncoder().encodeToString(output.toByteArray());
+                ByteArrayOutputStream output2 = new ByteArrayOutputStream();
+                ImageIO.write(img2, "png", output);
+                String imageAsBase64_2=Base64.getEncoder().encodeToString(output2.toByteArray());
+                List<Story>stories=new ArrayList();
+                stories.add(new Story("Past the far edge of fate",5,"In the beginning","Some crazy story",imageAsBase64,true));
+                stories.add(new Story("A Tale Of Loss And Faith",6,"In the beginning","Some crazy story",imageAsBase64_2,true));
+                request.setAttribute("stories", stories);
+                var dispatcher=request.getRequestDispatcher("HomePage2.jsp");
+                dispatcher.forward(request,response);
                 
                 break;
         }
