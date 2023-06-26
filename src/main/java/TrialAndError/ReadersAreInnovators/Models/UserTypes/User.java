@@ -29,6 +29,14 @@ public class User {
         
     }
     
+    public User(Integer userID, String name, String surname) {
+        
+        this.userID = userID;
+        this.name = name;
+        this.surname = surname;
+        
+    }
+    
     public User(String name, String surname, String email, String phoneNumber, String password, Integer userTypeID) {
         
         this.name = name;

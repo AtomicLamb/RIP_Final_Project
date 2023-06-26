@@ -56,6 +56,8 @@ public class StoryServlet extends HttpServlet {
      * 
      * 
      */
+    
+    
     public Writer getChosenAuthor(Integer authorId){
         List<Writer>writers=new ArrayList();
                   
@@ -70,7 +72,16 @@ public class StoryServlet extends HttpServlet {
                       
                   }
        return null;             
-    } 
+    }
+    public List<Writer> getWriters(){
+        List<Writer>writers=new ArrayList();
+        
+        writers.add(new Writer(5,"Natsuko", "Ishikawa"));
+        //writers.add(new Writer("John","Tron"));
+        
+        
+        return writers;
+    }
     public Story getChosenStory(HttpServletRequest request){
                     BufferedImage img=null;
                     

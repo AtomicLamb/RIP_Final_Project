@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class CommentImplementation implements CommentDAOInterface{
@@ -25,7 +27,7 @@ public class CommentImplementation implements CommentDAOInterface{
     
     
     //Trial and Error Certified.
-    //TODO Logger, Deprecated Method;
+    //TODO: Deprecated Method;
     
     
     public CommentImplementation() {
@@ -53,8 +55,7 @@ public class CommentImplementation implements CommentDAOInterface{
         } catch (SQLException e) {
             
             message = "Comment could not be added.";
-            System.out.println("Comment could not be added.");
-            e.printStackTrace();
+            Logger.getLogger(CommentImplementation.class.getName()).log(Level.FINE, "Error adding a comment.", e);
             
         } finally {
             
@@ -112,10 +113,10 @@ public class CommentImplementation implements CommentDAOInterface{
         conn = DatabaseConnectionManager.getConnection();
         ArrayList<Comment> allComments = new ArrayList<>();
         
-        query = "select c.CommentID, c.StoryID, c.UserID, c.Comment, concat_ws(\" \", u.Name, u.Surname) " +
-                "as FullName, c.DateAdded from comments c, users u where c.StoryID = ? and c.UserID = u.UserID and IsFlagged = 0;";
-        
         try {
+            
+            query = "select c.CommentID, c.StoryID, c.UserID, c.Comment, concat_ws(\" \", u.Name, u.Surname) " +
+                    "as FullName, c.DateAdded from comments c, users u where c.StoryID = ? and c.UserID = u.UserID and IsFlagged = 0";
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, story.getStoryID());
@@ -123,14 +124,15 @@ public class CommentImplementation implements CommentDAOInterface{
             
             while(rs.next()) {
                 
-                allComments.add(new Comment(rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5), functionsClass.dateToString(rs.getDate(6))));
+                allComments.add(new Comment(rs.getInt(2), rs.getInt(3), rs.getString(4), 
+                        rs.getString(5), functionsClass.dateToString(rs.getDate(6))));
                 
             }
             
         } catch (SQLException e) {
             
-            System.out.println("Error getting all story comments.");
-            e.printStackTrace();
+            System.out.println("Error getting the stories comments.");
+            Logger.getLogger(CommentImplementation.class.getName()).log(Level.FINE, "Error getting the stories comments.", e);
             
         } finally {
             
@@ -186,20 +188,21 @@ public class CommentImplementation implements CommentDAOInterface{
     public String reportComment(Comment comment) {
         
         conn = DatabaseConnectionManager.getConnection();
-        query = "update readers_are_innovators.comments set isFlagged = 1 where commentID = ?";
         
         try {
+            
+            query = "update comments c set c.IsFlagged = 1 where c.CommentID = ?";
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, comment.getCommentID());
             ps.executeUpdate();
+            
             message = "Comments successfully reported.";
             
         } catch (SQLException e) {
             
-            message = "Error reporting comments.";
-            System.out.println("Error reporting comments.");
-            e.printStackTrace();
+            message = "Error reporting the comment.";
+            Logger.getLogger(CommentImplementation.class.getName()).log(Level.FINE, "Error reporting the comment.", e);
             
         } finally {
             
@@ -255,20 +258,21 @@ public class CommentImplementation implements CommentDAOInterface{
     public String deleteComment(Comment comment) {
         
         conn = DatabaseConnectionManager.getConnection();
-        query = "delete from readers_are_innovators.comments where commentID = ?";
         
         try {
+            
+            query = "delete from comments c where c.CommentID = ?";
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, comment.getCommentID());
             ps.executeUpdate();
+            
             message = "Comments successfully removed.";
             
         } catch (SQLException e) {
             
             message = "Error removing comments.";
-            System.out.println("Error removing comments.");
-            e.printStackTrace();
+            Logger.getLogger(CommentImplementation.class.getName()).log(Level.FINE, "Error removing a comment.", e);
             
         } finally {
             

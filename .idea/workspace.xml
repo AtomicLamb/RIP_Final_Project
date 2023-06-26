@@ -11,30 +11,17 @@
   <component name="ChangeListManager">
     <list default="true" id="178285d8-becc-4c7f-b082-ee11f211687c" name="Changes" comment="Initial Commit: No Error mostly ok.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/ReaderImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/ReaderImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/StoryImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/StoryImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/StoryElements/Story.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/StoryElements/Story.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/UserTypes/Reader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/UserTypes/Reader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/UserTypes/Writer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/UserTypes/Writer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/DatabaseConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/DatabaseConnectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayerClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayerClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/analyticalServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/analyticalServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Testing/JUnitTesting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Testing/JUnitTesting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/StoryBody.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/StoryBody.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/AdminEditorImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/AdminEditorImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/CommentImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/CommentImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/UserTypes/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/UserTypes/User.java" afterDir="false" />
     </list>
     <list id="2787905e-793b-4e17-a742-137bd793808e" name="Changes by matth" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/ReaderImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/ReaderImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/AdminEditorImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/AdminEditorImplementation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/REST/RESTControllerRIP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/REST/RESTControllerRIP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/RESTService/ImpService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/RESTService/ImpService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/controllerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/controllerServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.html" beforeDir="false" />
     </list>
     <list id="813f8dc2-8590-4efc-b536-02bb56b7a003" name="Changes by user" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/HomePageServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/HomePageServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/StoryServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/StoryServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/AuthorDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/AuthorDetails.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/HomePage2.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/HomePage2.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,12 +32,13 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/ReaderImplementation.java">
+    <file path="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/AdminEditorImplementation.java">
       <ranges>
-        <range start1="40" end1="40" start2="40" end2="41" changelist="2787905e-793b-4e17-a742-137bd793808e" />
-        <range start1="41" end1="42" start2="42" end2="42" changelist="2787905e-793b-4e17-a742-137bd793808e" />
-        <range start1="275" end1="276" start2="275" end2="275" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="350" end1="351" start2="349" end2="350" changelist="2787905e-793b-4e17-a742-137bd793808e" />
+        <range start1="6" end1="6" start2="6" end2="7" changelist="2787905e-793b-4e17-a742-137bd793808e" />
+        <range start1="11" end1="11" start2="12" end2="13" changelist="2787905e-793b-4e17-a742-137bd793808e" />
+        <range start1="17" end1="19" start2="19" end2="21" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="53" end1="55" start2="55" end2="56" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="129" end1="132" start2="130" end2="131" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
       </ranges>
     </file>
   </component>
@@ -103,7 +91,7 @@
       <recent name="TrialAndError.RIP.Servlets" />
     </key>
   </component>
-  <component name="RunManager" selected="GlassFish Server.GlassFish 7.0.4">
+  <component name="RunManager" selected="JUnit.JUnitTesting.addEditorTest">
     <configuration name="GlassFish 7.0.4" type="GlassfishConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="GlassFish 7.0.4" ALTERNATIVE_JRE_ENABLED="false">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/Trial_and_Error_Readers_are_Innovators-1.0-SNAPSHOT" />
       <deployment>
@@ -257,8 +245,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.JUnitTesting.removeEditorTest" />
         <item itemvalue="JUnit.JUnitTesting.addEditorTest" />
+        <item itemvalue="JUnit.JUnitTesting.removeEditorTest" />
         <item itemvalue="JUnit.JUnitTesting.registerReaderTest" />
         <item itemvalue="JUnit.JUnitTesting.getUnreadFavoritesTest" />
         <item itemvalue="JUnit.JUnitTesting.searchTest" />
@@ -274,7 +262,7 @@
       <option name="presentableId" value="Default" />
       <updated>1687762352603</updated>
       <workItem from="1687762353639" duration="4232000" />
-      <workItem from="1687767269108" duration="12107000" />
+      <workItem from="1687767269108" duration="14155000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit: No Error mostly ok.">
       <created>1687765315546</created>

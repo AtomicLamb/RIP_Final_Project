@@ -36,14 +36,14 @@ public class controllerServlet extends HttpServlet {
        switch(request.getParameter("submit"))
        {
            case"Writer":
-               var dispacther =  request.getRequestDispatcher("WriterSign-Up.jsp");
-                        dispacther.forward(request, response);
+               var dispatcher =  request.getRequestDispatcher("WriterSign-Up.jsp");
+                        dispatcher.forward(request, response);
                 break;
                case"Continue to homescreen":
                    Integer num = 2;
                    request.setAttribute("message", num);
-                   dispacther =  request.getRequestDispatcher("HomePage.jsp");
-                        dispacther.forward(request, response);
+                   dispatcher =  request.getRequestDispatcher("HomePage.jsp");
+                        dispatcher.forward(request, response);
                break;
        }
     }

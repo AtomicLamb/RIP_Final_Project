@@ -4,19 +4,21 @@ package TrialAndError.ReadersAreInnovators.DAOs;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
+import TrialAndError.ReadersAreInnovators.Servlets.controllerServlet;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
 public class AdminEditorImplementation implements AdminEditorDAOInterface{
     
     
-    //Trial and Error Certified.
-    //TODO: Logger;
+    //Trial and Error Certified:
+    
     
     
     private static Logger logger;
@@ -51,8 +53,7 @@ public class AdminEditorImplementation implements AdminEditorDAOInterface{
         } catch (SQLException e) {
             
             message = "Error removing editor.";
-            e.printStackTrace();
-            //logger....
+            Logger.getLogger(AdminEditorImplementation.class.getName()).log(Level.FINE, "Error removing editor.", e);
             
         } finally {
             
@@ -127,9 +128,7 @@ public class AdminEditorImplementation implements AdminEditorDAOInterface{
         } catch (SQLException e) {
             
             message = "Error adding editor, the email or phone number is already in use.";
-            System.out.println("Error adding editor, the email or phone number is already in use.");
-            e.printStackTrace();
-            //logger
+            Logger.getLogger(AdminEditorImplementation.class.getName()).log(Level.FINE, "Error adding editor, the email or phone number is already in use.", e);
             
         } finally {
             
