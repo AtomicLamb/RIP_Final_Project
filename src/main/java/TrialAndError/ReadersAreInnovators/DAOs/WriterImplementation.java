@@ -240,14 +240,15 @@ public class WriterImplementation implements WriterDAOInterface{
         
         try {
             
-            query = "insert into pendingwriters (Name, Surname, Email, PhoneNumber, writersMotivation) values (?, ?, ?, ?, ?)";
+            query = "insert into pendingwriters (Name, Surname, Email, PhoneNumber, password, writersMotivation) values (?, ?, ?, ?, ?, ?)";
             
             ps = conn.prepareStatement(query);
             ps.setString(1,writerApplication.getName());
             ps.setString(2, writerApplication.getSurname());
             ps.setString(3,writerApplication.getEmail());
             ps.setString(4, writerApplication.getPhoneNumber());
-            ps.setString(5, writerApplication.getMotivation());
+            ps.setString(5, writerApplication.getPassword());
+            ps.setString(6, writerApplication.getMotivation());
             ps.executeUpdate();
             
             message = "Application successfully submitted.";

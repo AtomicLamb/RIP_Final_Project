@@ -51,7 +51,7 @@ public class StoryImplementation implements StoryDAOInterface {
             
             message = "Story successfully removed.";
             
-        }catch (SQLException e){
+        } catch (SQLException e){
             
             System.out.println("Story successfully removed.");
             e.printStackTrace();
