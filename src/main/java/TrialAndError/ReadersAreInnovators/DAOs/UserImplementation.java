@@ -1,8 +1,10 @@
 package TrialAndError.ReadersAreInnovators.DAOs;
 
+import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,16 +16,17 @@ import java.util.logging.Logger;
 public class UserImplementation implements UserDAOInterface {
     
     
+    //TODO: @Author, JUnit Test.
+    
+    
     private Connection conn;
     private PreparedStatement ps;
     private ResultSet rs;
     private String query;
     private String message;
+    private byte[] decoder;
+    private InputStream inputStream;
     FunctionsClass functionsClass = new FunctionsClass();
-    
-    
-    //Trial and Error Certified.
-    //TODO: Logger;
     
     
     public UserImplementation() {
@@ -137,5 +140,232 @@ public class UserImplementation implements UserDAOInterface {
         
     }
     
+    @Override       //Completed: Allows a user to log into their account.
+    public User login(User user) {
+        
+        conn = DatabaseConnectionManager.getConnection();
+        User loggedInUser = null;
+        
+        try {
+            
+            query = "select * from users u, userTypes t where u.userTypeID = t.userTypeID and u.Email = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, user.getEmail());
+            rs = ps.executeQuery();
+            
+            rs.next();
+            
+            loggedInUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(6),
+                    rs.getString(7), rs.getString(8), rs.getInt(4), rs.getString(12),
+                    functionsClass.integerToBoolean(rs.getInt(5)), functionsClass.integerToBoolean(rs.getInt(9)), rs.getInt(10));
+            
+            query = "update users u set u.TimesLoggedIn = ? where u.UserID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, (loggedInUser.getTimesLoggedIn() + 1));
+            ps.setInt(2, loggedInUser.getUserID());
+            ps.executeUpdate();
+            
+        } catch (SQLException e) {
+            
+            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error logging into user account.", e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return loggedInUser;
+        
+    }
+    
+    @Override       //Completed: Allows a user to edit their personal details.
+    public String editPersonalInfo(User user) {
+        
+        conn = DatabaseConnectionManager.getConnection();
+        
+        try {
+            
+            query = "update users u set u.Name = ?, u.Surname = ?, u.Email = ?, u.PhoneNumber = ?, u.Password = ? where u.UserID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, user.getName() );
+            ps.setString(2, user.getSurname());
+            ps.setString(3, user.getEmail());
+            ps.setString(4, user.getPhoneNumber());
+            ps.setString(5, user.getPassword());
+            ps.setInt(6, user.getUserID());
+            ps.executeUpdate();
+            
+            message = "Information updated.";
+            
+        } catch (SQLException e) {
+            
+            message = "Error editing personal information.";
+            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error editing personal information.", e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return message;
+        
+    }
+    
+    @Override       //TODO: Neaten Up.
+    public User getUser(User user) {
+        
+        conn = DatabaseConnectionManager.getConnection();
+        User userSend = null;
+        
+        try {
+            
+            query = "select Name, Surname, Email, PhoneNumber, Password from users where UserID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, user.getUserID());
+            rs = ps.executeQuery();
+            while (rs.next())
+            {
+                userSend = new User(rs.getString(2),rs.getString(3),rs.getString(6),rs.getString(7),rs.getString(8));
+            }
+            
+        } catch (SQLException e) {
+            
+            message = "Error getting users information.";
+            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error getting users information.", e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return userSend;
+    }
     
 }

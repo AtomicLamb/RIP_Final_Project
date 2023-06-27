@@ -5,6 +5,7 @@ package TrialAndError.ReadersAreInnovators.Servlets;/*
 
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
+import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
 import TrialAndError.ReadersAreInnovators.RESTService.ImpService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -76,7 +77,7 @@ public class adminEditorServlet extends HttpServlet {
                break;
                
            case"Add Editor":
-                   
+               addEditor(request,response);    
                break;
            case"REMOVE GENRE":
                removeGenre(request,response);
@@ -116,11 +117,29 @@ public class adminEditorServlet extends HttpServlet {
             Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    //getGenres
     public void getGenres(HttpServletRequest request, HttpServletResponse response)
     {
         request.setAttribute("getGenre", imp.getGenres());
         var dispatcher =  request.getRequestDispatcher("RemoveGenre.jsp");
+        try
+        {
+            dispatcher.forward(request, response);
+        }
+        catch (ServletException | IOException ex)
+        {
+            Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void addEditor(HttpServletRequest request, HttpServletResponse response)
+    {
+        String firstName = request.getParameter("editorFirstName");
+        String surname = request.getParameter("editorSurname");
+        String email = request.getParameter("editorPhoneNum");
+        String phoneNum = request.getParameter("editorEmail");
+        String password = "password";
+        
+        request.setAttribute("message", imp.addEditor(new Editor(firstName,surname,email,phoneNum,password)));
+        var dispatcher =  request.getRequestDispatcher("Admin-Editor.jsp");
         try
         {
             dispatcher.forward(request, response);

@@ -6,6 +6,7 @@ import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManage
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
 import TrialAndError.ReadersAreInnovators.Servlets.controllerServlet;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,16 +23,13 @@ import java.util.logging.Logger;
 public class AdminEditorImplementation implements AdminEditorDAOInterface{
     
     
-    //Trial and Error Certified:
-    
-    
-    
-    private static Logger logger;
     private Connection conn;
     private PreparedStatement ps;
     private ResultSet rs;
     private String query;
     private String message;
+    private byte[] decoder;
+    private InputStream inputStream;
     FunctionsClass functionsClass = new FunctionsClass();
     
     
@@ -122,7 +120,7 @@ public class AdminEditorImplementation implements AdminEditorDAOInterface{
             ps = conn.prepareStatement(query);
             ps.setString(1,editor.getName());
             ps.setString(2, editor.getSurname());
-            ps.setInt(3, editor.getUserTypeID());
+            ps.setInt(3, 3);
             ps.setString(4,editor.getEmail());
             ps.setString(5, editor.getPhoneNumber());
             ps.setString(6, editor.getPassword());

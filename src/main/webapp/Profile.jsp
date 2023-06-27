@@ -51,7 +51,9 @@
                 <li class="nav-item">
                    <a class="nav-link" href="HomePage.jsp">HOME</a>
                 <li class="nav-item">
-                   <a class="nav-link" href="editPersonalData.jsp">Edit PERSONAL INFORMATION PAGE</a>
+                    <form action="editPersonalInformationServlet" method="get">
+                        <input class="nav-link" type="submit" name="submit" value="EDIT PERSONAL INFORMATION">
+                    </form>
                 </li>
             </ul>
         </div>

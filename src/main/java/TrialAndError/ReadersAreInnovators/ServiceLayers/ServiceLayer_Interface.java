@@ -18,6 +18,7 @@ import java.util.List;
 
 public interface ServiceLayer_Interface {
     
+    User getUser(User user);
     
     String removeEditor(Editor editor);
     

@@ -49,13 +49,19 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     }
     
     @Override
+    public User getUser(User user)
+    {
+        return userImp.getUser(user);    
+    }
+    
+    @Override
     public String removeEditor(Editor editor) {
         return null;
     }
     
     @Override
     public String addEditor(Editor editor) {
-        return null;
+        return adminImp.addEditor(editor);
     }
     
     @Override
@@ -253,7 +259,7 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     
     @Override
     public String editPersonalInfo(User user) {
-        return null;
+        return userImp.editPersonalInfo(user);
     }
     
     @Override

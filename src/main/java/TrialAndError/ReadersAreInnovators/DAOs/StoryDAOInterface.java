@@ -18,7 +18,7 @@ public interface StoryDAOInterface {
     String readStory(Story story, User user);
     ArrayList<Story> getPublishedStories(Writer writer);
     Story displayStoryDetails(Story story);
-    String createStory(Story story);
+    String saveAsDraft(Story story);
     Story getPendingStory(Story story);
     String likeStory(Story story, User user);
     String unlikeStory(Story story, User user);

@@ -6,6 +6,7 @@ import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,16 +20,17 @@ import java.util.logging.Logger;
 public class CommentImplementation implements CommentDAOInterface{
     
     
+    //TODO: Deprecated Method, @Author.
+    
+    
     private Connection conn;
     private PreparedStatement ps;
     private ResultSet rs;
     private String query;
     private String message;
+    private byte[] decoder;
+    private InputStream inputStream;
     FunctionsClass functionsClass = new FunctionsClass();
-    
-    
-    //Trial and Error Certified.
-    //TODO: Deprecated Method;
     
     
     public CommentImplementation() {
@@ -541,7 +543,8 @@ public class CommentImplementation implements CommentDAOInterface{
         
     }
     
-    @Override   @Deprecated     //TODO: Neaten Up, Logger.
+    @Deprecated
+    @Override
     public String clearComments(Story story) {
         
         conn = DatabaseConnectionManager.getConnection();

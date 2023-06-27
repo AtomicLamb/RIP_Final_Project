@@ -20,5 +20,4 @@ public interface WriterDAOInterface {
     Writer getAuthor(Writer writer);
     
     
-    
 }

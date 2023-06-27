@@ -6,6 +6,7 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,16 +19,16 @@ import java.util.logging.Logger;
 public class GenresImplementation implements GenresDAOInterface{
     
     
-    //Trial and Error Certified.
-    //TODO: Logger, Deprecated Method;
+    //TODO: @Author, Deprecated Method.
     
     
-    private static Logger logger;
     private Connection conn;
     private PreparedStatement ps;
     private ResultSet rs;
     private String query;
     private String message;
+    private byte[] decoder;
+    private InputStream inputStream;
     FunctionsClass functionsClass = new FunctionsClass();
     
     
@@ -467,7 +468,8 @@ public class GenresImplementation implements GenresDAOInterface{
         
     }
     
-    @Override       @Deprecated     //TODO Neaten Up.
+    @Deprecated
+    @Override
     public String clearGenres(Story story) {
         
         conn = DatabaseConnectionManager.getConnection();

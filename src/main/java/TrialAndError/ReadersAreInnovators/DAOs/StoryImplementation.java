@@ -6,11 +6,9 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
 
+import javax.sql.rowset.serial.SerialBlob;
 import java.io.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.logging.Level;
@@ -19,8 +17,7 @@ import java.util.logging.Logger;
 public class StoryImplementation implements StoryDAOInterface {
     
     
-    //
-    //TODO: JUnit, Logger, @Author....
+    //TODO: JUnit Test, @Author, 2 Methods.
     
     
     private Connection conn;
@@ -38,7 +35,7 @@ public class StoryImplementation implements StoryDAOInterface {
     }
     
     
-    @Override
+    @Override       //Completed: Allows an Editor to remove a Story.
     public String removeStory(Story story) {
         
         conn = DatabaseConnectionManager.getConnection();
@@ -108,7 +105,7 @@ public class StoryImplementation implements StoryDAOInterface {
         
     }
     
-    @Override
+    @Override       //Completed: Allows a Writer to make their published story private.
     public String privatizeStory(Story story) {
         
         conn = DatabaseConnectionManager.getConnection();
@@ -179,7 +176,7 @@ public class StoryImplementation implements StoryDAOInterface {
         
     }
     
-    @Override
+    @Override       //Completed: Allows a Writer to make their published story public.
     public String publiciseStory(Story story) {
         
         conn = DatabaseConnectionManager.getConnection();
@@ -250,7 +247,7 @@ public class StoryImplementation implements StoryDAOInterface {
         
     }
     
-    @Override
+    @Override       //Completed: Allows a user to submit a story for editing and approval.
     public String submitStory(Story story) {
         
         conn = DatabaseConnectionManager.getConnection();
@@ -398,68 +395,15 @@ public class StoryImplementation implements StoryDAOInterface {
         
     }
     
-    @Override       //TODO From Here....
+    @Override       //Completed: Allows a Writer to see all their published stories.
     public ArrayList<Story> getPublishedStories(Writer writer) {
-        File img = new File("C:\\Users\\TKS\\Desktop\\VZAP Project\\Images", "StupidFileNameBitch");
-        FileOutputStream fs = null;
-        
-            try {
-                fs = new FileOutputStream(img);
-            } catch (FileNotFoundException e) {
-                System.out.println("Error creating image");
-                e.printStackTrace();
-            } finally {
-                
-                if (conn!=null){
-                    
-                    try {
-                        
-                        conn.close();
-                        
-                    } catch (SQLException e) {
-                        
-                        throw new RuntimeException(e);
-                        
-                    }
-                    
-                }
-                
-                if (ps!=null){
-                    
-                    try {
-                        
-                        ps.close();
-                        
-                    } catch (SQLException e) {
-                        
-                        throw new RuntimeException(e);
-                        
-                    }
-                    
-                }
-                
-                if (rs!=null){
-                    
-                    try {
-                        
-                        rs.close();
-                        
-                    } catch (SQLException e) {
-                        
-                        throw new RuntimeException(e);
-                        
-                    }
-                    
-                }
-                
-            }
-        
-        ArrayList<Story> publishedStories = new ArrayList<>();
         
         conn = DatabaseConnectionManager.getConnection();
-        query = "select * from readers_are_innovators.stories where AuthorID = ?";
+        ArrayList<Story> publishedStories = new ArrayList<>();
         
         try {
+            
+            query = "select s.Title, s.CoverImage from stories s where s.AuthorID = ?";
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, writer.getUserID());
@@ -467,119 +411,27 @@ public class StoryImplementation implements StoryDAOInterface {
             
             while (rs.next()) {
                 
+                InputStream inputStream = rs.getBinaryStream(2);
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int bytesRead = -1;
                 
-                byte[] buffer = new byte[1];
-                
-                InputStream is = rs.getBinaryStream(9);
-                while (is.read(buffer) > 0) {
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
                     
-                    fs.write(buffer);
+                    outputStream.write(buffer, 0, bytesRead);
                     
                 }
                 
-                publishedStories.add(new Story(rs.getString(2), rs.getInt(3), null));
+                byte[] imageBytes = outputStream.toByteArray();
+                String image = Base64.getEncoder().encodeToString(imageBytes);
                 
-            }
-            if(publishedStories.size() == 0){
-                
-                publishedStories = null;
-                return publishedStories;
+                publishedStories.add(new Story(rs.getString(1), image));
                 
             }
             
         } catch (SQLException e) {
             
-            System.out.println("Error getting writers published stories.");
-            e.printStackTrace();
-            
-        } catch (FileNotFoundException e) {
-            
-            System.out.println("Error getting image because Blobs are rubbish.");
-            e.printStackTrace();
-            
-        } catch (IOException e) {
-            
-            
-            e.printStackTrace();
-            
-        } finally {
-            
-            if (rs!=null){
-                
-                try {
-                    
-                    rs.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-            if (ps!=null){
-                
-                try {
-                    
-                    ps.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-            if (conn!=null){
-                
-                try {
-                    
-                    conn.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-        }
-        
-        return publishedStories;
-        
-    }
-    
-    @Override       //TODO
-    public Story displayStoryDetails(Story story) {
-        
-        Story s = null;
-        
-        conn = DatabaseConnectionManager.getConnection();
-        query = "select * from readers_are_innovators.stories where StoryID = ?";
-        try {
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, story.getStoryID());
-            
-            rs = ps.executeQuery();
-            rs.next();
-            
-            byte[] buffer = new byte[1];
-            
-            InputStream is = rs.getBinaryStream(9);
-            while (is.read(buffer) > 0) {
-                
-                
-                
-            }
-            s = new Story(rs.getString(2), rs.getInt(3), rs.getInt(4),
-                    rs.getInt(5), rs.getDouble(6), rs.getString(8), null, " ");
-            
-        } catch (SQLException e) {
-            
-            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error privatizing story.", e);
+            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error getting a list of published Stories.", e);
             
         } catch (IOException e) {
             
@@ -631,55 +483,19 @@ public class StoryImplementation implements StoryDAOInterface {
             
         }
         
-        return s;
+        return publishedStories;
+        
     }
     
-    @Override
-    public String createStory(Story story) {
+    @Override       //TODO: Create story from Result Set.
+    public Story displayStoryDetails(Story story) {
         
         conn = DatabaseConnectionManager.getConnection();
-        query = "insert into readers_are_innovators.drafts(Title, AuthorID, StoryBody, Synopsis, CoverImage) values(?,?,?,?,?)";
-        
-        InputStream inputStream;
+        Story storyToView = null;
         
         try {
             
-            
-            ps = conn.prepareStatement(query);
-            ps.setString(1, story.getTitle());
-            ps.setInt(2, story.getAuthorID());
-            ps.setString(3, story.getStoryBody());
-            ps.setString(4, story.getSynopsis());
-            
-            int update = ps.executeUpdate();
-            message = update + " story created";
-            
-        } catch (SQLException e) {
-            System.out.println("Error creating story");
-            e.printStackTrace();
-        
-        } finally{
-            if(conn!= null){
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    System.out.println("error closing connection");
-                    e.printStackTrace();
-                }
-            }
-        }
-        
-        return message;
-    }
-    
-    @Override
-    public Story getPendingStory(Story story) {
-        Story s = new Story();
-        
-        conn = DatabaseConnectionManager.getConnection();
-        query = "select * from readers_are_innovators.pendingstories where PendingStoryID = ?";
-        
-        try {
+            query = "select * from stories s where s.StoryID = ?";
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, story.getStoryID());
@@ -687,21 +503,11 @@ public class StoryImplementation implements StoryDAOInterface {
             rs = ps.executeQuery();
             rs.next();
             
-            byte[] buffer = new byte[1];
-            
-            Base64 image = null;
-            
-            
-            s.setTitle(rs.getString(2));
-            s.setAuthorID(rs.getInt(3));
-            s.setStoryBody(rs.getString(4));
-            s.setSynopsis(rs.getString(5));
-            
+            storyToView = new Story();      //TODO
             
         } catch (SQLException e) {
             
-            System.out.println("Error getting pending story");
-            e.printStackTrace();
+            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error displaying story details.", e);
             
         } finally {
             
@@ -749,7 +555,177 @@ public class StoryImplementation implements StoryDAOInterface {
             
         }
         
-        return s;
+        return storyToView;
+        
+    }
+    
+    @Override       //Completed: Allows a Writer to save their draft.
+    public String saveAsDraft(Story story) {
+        
+        conn = DatabaseConnectionManager.getConnection();
+        
+        try {
+            
+            query = "insert into drafts (Title, AuthorID, StoryBody, Synopsis, CoverImage, CommentsEnabled) values (?, ?, ?, ?, ?, ?)";
+            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, story.getTitle());
+            ps.setInt(2, story.getAuthorID());
+            ps.setString(3, story.getStoryBody());
+            ps.setString(4, story.getSynopsis());
+            
+            decoder = Base64.getDecoder().decode(story.getCoverImage());
+            Blob blob = new SerialBlob(decoder);
+            
+            ps.setBlob(5, blob);
+            ps.setInt(6, functionsClass.booleanToInteger(story.getCommentsEnabled()));
+            
+            ps.executeUpdate();
+            
+            message = "Draft successfully saved.";
+            
+        } catch (SQLException e) {
+            
+            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error saving draft.", e);
+        
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return message;
+        
+    }
+    
+    @Override       //TODO: Create story from Result Set.
+    public Story getPendingStory(Story story) {
+        
+        conn = DatabaseConnectionManager.getConnection();
+        Story pendingStory = null;
+        
+        try {
+            
+            query = "select * from pendingstories ps where ps.PendingStoryID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, story.getStoryID());
+            
+            rs = ps.executeQuery();
+            rs.next();
+            
+            InputStream inputStream = rs.getBinaryStream(6);
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            byte[] buffer = new byte[4096];
+            int bytesRead = -1;
+            
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                
+                outputStream.write(buffer, 0, bytesRead);
+                
+            }
+            
+            byte[] imageBytes = outputStream.toByteArray();
+            String image = Base64.getEncoder().encodeToString(imageBytes);
+            
+            pendingStory = new Story(); //TODO
+            
+            
+        } catch (SQLException e) {
+            
+            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error getting pending Story.", e);
+            
+        } catch (IOException e) {
+            
+            throw new RuntimeException(e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return null;
     }
     
     @Override       //Completed: Allows the user to like the story adding it to their list of favorites and increasing the like count of the story by one.
@@ -760,14 +736,10 @@ public class StoryImplementation implements StoryDAOInterface {
         try {
             
             query = "insert into userfavorites (userID, storyID) values (?, ?)";
+            
             ps = conn.prepareStatement(query);
             ps.setInt(1, user.getUserID());
             ps.setInt(2, story.getStoryID());
-            ps.executeUpdate();
-            
-            query = "update stories s SET s.Likes = s.Likes + 1 where s.StoryID = ?";
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, story.getStoryID());
             ps.executeUpdate();
             
             message = "Story has been liked.";
@@ -775,8 +747,7 @@ public class StoryImplementation implements StoryDAOInterface {
         } catch (SQLException e) {
             
             message = "Error liking the story.";
-            System.out.println("Error liking the story.");
-            e.printStackTrace();
+            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error liking the story.", e);
             
         } finally {
             
@@ -851,8 +822,7 @@ public class StoryImplementation implements StoryDAOInterface {
         } catch (SQLException e) {
             
             message = "Error unliking the story.";
-            System.out.println("Error unliking the story.");
-            e.printStackTrace();
+            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error saving draft.", e);
             
         } finally {
             

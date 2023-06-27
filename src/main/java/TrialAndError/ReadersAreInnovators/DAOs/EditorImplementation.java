@@ -22,8 +22,7 @@ import java.util.logging.Logger;
 public class EditorImplementation implements EditorDAOInterface{
     
     
-    //Trial and Error Certified.
-    //TODO: Logger;
+    //TODO: @Author.
     
     
     private Connection conn;

@@ -5,6 +5,7 @@ import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,8 +16,7 @@ import java.util.logging.Logger;
 public class RatingImplementation implements RatingDAOInterface{
     
     
-    //Trial and Error Certified.
-    //TODO: Logger, Deprecated Method.
+    //TODO: @Author, Deprecated Method.
     
     
     private Connection conn;
@@ -24,6 +24,8 @@ public class RatingImplementation implements RatingDAOInterface{
     private ResultSet rs;
     private String query;
     private String message;
+    private byte[] decoder;
+    private InputStream inputStream;
     FunctionsClass functionsClass = new FunctionsClass();
     
     
@@ -318,7 +320,8 @@ public class RatingImplementation implements RatingDAOInterface{
         
     }
     
-    @Override       @Deprecated     //TODO Finish.
+    @Deprecated
+    @Override
     public String clearRating(Story story) {
         
         conn = DatabaseConnectionManager.getConnection();

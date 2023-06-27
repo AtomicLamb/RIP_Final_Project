@@ -19,8 +19,8 @@ import java.util.logging.Logger;
 public class WriterImplementation implements WriterDAOInterface{
     
     
-    //Trial and Error Certified.
-    //TODO: Logger, Tests, 
+    //TODO:  @Author, JUnit Test.
+    
     
     private Connection conn;
     private PreparedStatement ps;

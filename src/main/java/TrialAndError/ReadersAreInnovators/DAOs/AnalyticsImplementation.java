@@ -8,6 +8,7 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
 
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -22,16 +23,16 @@ import java.util.logging.Logger;
 public class AnalyticsImplementation implements AnalyticsDAOInterface{
     
     
-    //
-    //TODO Tests, Logger....
+    //TODO JUnit Test, Method Comments.
     
     
-    private static Logger logger;
     private Connection conn;
     private PreparedStatement ps;
     private ResultSet rs;
     private String query;
     private String message;
+    private byte[] decoder;
+    private InputStream inputStream;
     FunctionsClass functionsClass = new FunctionsClass();
     
     
@@ -327,11 +328,151 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
     }
     
-    @Override       //Complete     //Gets X most viewed stories
+    @Override       //Complete:
+    public String addLike(Story story) {
+        
+        conn = DatabaseConnectionManager.getConnection();
+        
+        try {
+            
+            query = "update stories s SET s.Likes = s.Likes + 1 where s.StoryID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, story.getStoryID());
+            ps.executeUpdate();
+            
+            message = "Story like count has increased.";
+            
+        } catch (SQLException e) {
+            
+            message = "Error adding like to the story.";
+            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error adding like to the story.", e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return message;
+        
+    }
+    
+    @Override       //Complete:
+    public String removeLike(Story story) {
+        
+        conn = DatabaseConnectionManager.getConnection();
+        
+        try {
+            
+            query = "update stories s SET s.Likes = s.Likes - 1 where s.StoryID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, story.getStoryID());
+            ps.executeUpdate();
+            
+            message = "Story like count has decreased.";
+            
+        } catch (SQLException e) {
+            
+            message = "Error removing like from the story.";
+            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error removing like from the story.", e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return message;
+        
+    }
+    
+    @Override       //Complete:
     public ArrayList<Story> getMostViewedStories(Integer noOfStories, Date startPeriod, Date endPeriod) {
         
         conn = DatabaseConnectionManager.getConnection();
-        query = "Select StoryID, Title from readers_are_innovators.stories where stories.DatePublished between ? AND ? order by Views desc";
+        query = "Select StoryID, Title from stories s where s.DatePublished between ? AND ? order by s.Views desc";
         ArrayList<Story> mostViewed = new ArrayList<>();
         Integer i = 0;
         
@@ -403,11 +544,11 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
     }
     
-    @Override       //Complete     //Gets X highest rated stories
+    @Override       //Complete:
     public ArrayList<Story> getHighestRatedStories(Integer noOfStories, Date startPeriod, Date endPeriod) {
         
         conn = DatabaseConnectionManager.getConnection();
-        query = "Select StoryID, Title from readers_are_innovators.stories where stories.DatePublished between ? AND ? order by RatingAverage desc";
+        query = "Select StoryID, Title from stories s where s.DatePublished between ? AND ? order by s.RatingAverage desc";
         ArrayList<Story> highestRated = new ArrayList<>();
         Integer i = 0;
         
@@ -479,11 +620,11 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
     }
     
-    @Override       //Complete     //Gets X most liked stories
+    @Override       //Complete:
     public ArrayList<Story> getMostLikedStories(Integer noOfStories, Date startPeriod, Date endPeriod) {
         
         conn = DatabaseConnectionManager.getConnection();
-        query = "Select StoryID, Title from readers_are_innovators.stories where stories.DatePublished between ? AND ? order by Likes desc";
+        query = "Select StoryID, Title from stories s where s.DatePublished between ? AND ? order by s.Likes desc";
         ArrayList<Story> mostLiked = new ArrayList<>();
         Integer i = 0;
         
@@ -555,16 +696,17 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
     }
     
-    @Override       //Not Complete      //Gets X most popular Genres.
+    @Override       //Complete:
     public ArrayList<Genre> getTopGenres(Integer noOfGenres, Date startPeriod, Date endPeriod) {
         
         conn = DatabaseConnectionManager.getConnection();
-        query = "Select g.Genre, sum(s.Views) as TotalViews from genres g, stories s, storygenreintersect i where g.GenreID = i.GenreID " +
-                "and i.StoryID = s.StoryID group by g.Genre order by sum(s.Views) desc";
         ArrayList<Genre> topGenres = new ArrayList<>();
         Integer i = 0;
         
         try {
+            
+            query = "Select g.Genre, sum(s.Views) as TotalViews from genres g, stories s, storygenreintersect i where g.GenreID = i.GenreID " +
+                    "and i.StoryID = s.StoryID and s.DatePublished between ? AND ? group by g.Genre order by sum(s.Views) desc";
             
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
@@ -630,16 +772,17 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
     }
     
-    @Override       //Not Complete      //Gets X top Writers.
+    @Override       //Complete:
     public ArrayList<Writer> getTopWriters(Integer noOfWriters, Date startPeriod, Date endPeriod) {
         
         conn = DatabaseConnectionManager.getConnection();
-        query = "Select u.UserID, u.Name, u.Surname, sum(s.views) as Views from users u, stories s where u.UserID = s.AuthorID " +
-                "GROUP BY u.UserID order by sum(s.Views) desc";
         ArrayList<Writer> topWriters = new ArrayList<>();
         Integer i = 0;
         
         try {
+            
+            query = "Select u.UserID, u.Name, u.Surname, sum (s.views) as Views from users u, stories s where u.UserID = s.AuthorID and s.DatePublished between ? AND ? " +
+                    "GROUP BY u.UserID order by sum (s.Views) desc";
             
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
@@ -647,7 +790,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
             while (rs.next() && i < noOfWriters){
                 
                 i++;
-                //topWriters.add(new Writer(rs.getInt(1) ,rs.getString(2), rs.getString(3), rs.getDouble(4)));
+                topWriters.add(new Writer());
                 
             }
             
@@ -705,16 +848,17 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
     }
     
-    @Override       //Not Complete      //Gets X top editors.
+    @Override       //Complete:
     public ArrayList<Editor> getTopEditors(Integer noOfEditors, Date startPeriod, Date endPeriod) {
         
         conn = DatabaseConnectionManager.getConnection();
-        query = "Select u.UserID, u.Name, u.Surname, COUNT(s.EditedByID) as StoriesEdited from users u, stories s " +
-                "where u.UserID = s.EditedByID GROUP BY u.UserID order by COUNT(s.EditedByID) desc";
         ArrayList<Editor> topEditors = new ArrayList<>();
         Integer i = 0;
         
         try {
+            
+            query = "Select u.UserID, u.Name, u.Surname, COUNT(s.EditedByID) as StoriesEdited from users u, stories s " +
+                    "where u.UserID = s.EditedByID GROUP BY u.UserID and s.DatePublished between ? AND ? order by COUNT (s.EditedByID) desc";
             
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();

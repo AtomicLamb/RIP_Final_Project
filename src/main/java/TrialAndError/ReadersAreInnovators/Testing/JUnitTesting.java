@@ -313,20 +313,6 @@ public class JUnitTesting {
     }
     
     @Test
-    public void loginTest(){
-        
-        System.out.println(readerImp.login(user));
-        
-    }
-    
-    @Test
-    public void editPersonalInfoTest(){
-        
-        System.out.println(readerImp.editPersonalInfo(reader));
-        
-    }
-    
-    @Test
     public void followAuthorTest(){
         
         System.out.println(readerImp.followAuthor(writer, reader));
@@ -456,6 +442,20 @@ public class JUnitTesting {
             System.out.println(s);
             
         }
+        
+    }
+    
+    @Test
+    public void loginTest(){
+        
+        System.out.println(userImp.login(user));
+        
+    }
+    
+    @Test
+    public void editPersonalInfoTest(){
+        
+        System.out.println(userImp.editPersonalInfo(reader));
         
     }
     

@@ -25,24 +25,36 @@
         </div>
       </div>
     </div>
-    <div class="forms">
-        <div class="form-content">
-        <div class="signup-form">
-          <div class="title">Add Editor Page</div>
-          <form action="adminEditorServlet" method="post">
-              <div class="input-boxes">
-                 <div class="input-box">
-                <i class="fas fa-envelope"></i>
-                <input type="email" placeholder="Enter the users email" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" name="userEmail" required>
-              </div>
-                  <div class="button input-box">
-                    <input type="submit" name="submit" value="Add Editor">
-                  </div>
-              </div>
-          </form>
-    </div>
-    </div>
-    </div>
+            <div class="forms">
+                <div class="form-content">
+                    <div class="signup-form">
+                        <div class="title">Add editor page</div>
+                        <form action="controllerServlet" method="post">
+                            <div class="input-boxes">
+                                <div class="input-box">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" placeholder="Enter your first name" name="editorFirstName" required>
+                                </div>
+                                <div class="input-box">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" placeholder="Enter your surname" name="editorSurname" required>
+                                </div>
+                                <div class="input-box">
+                                    <i class="fas fa-phone"></i>
+                                    <input type="tel" placeholder="Enter your phone number" pattern="[0-9]{10}" name="editorPhoneNum" required>
+                                </div>
+                                <div class="input-box">
+                                    <i class="fas fa-envelope"></i>
+                                    <input type="email" placeholder="Enter your email" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" name="editorEmail" required>
+                                </div>
+                                <div class="button input-box" style="top:10px">
+                                    <input type="submit" name="submit" value="ADD EDITOR">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
     </div>
     </body>
 </html>

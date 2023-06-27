@@ -3,7 +3,9 @@ package TrialAndError.ReadersAreInnovators.RESTService;
 import TrialAndError.ReadersAreInnovators.Models.Administration.WriterApplication;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
+import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Reader;
+import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -156,4 +158,23 @@ public class ImpService
             throw new RuntimeException(e);
         }
     }
+    public String addEditor(Editor editor)
+    {
+        String personURI = uri + "/addEditor";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(editor)));
+        
+        return response.readEntity(String.class);
+    }
+    public String editPersonalInfo(User user)
+    {
+        String personURI = uri + "/editPersonalInfo";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(user)));
+        
+        return response.readEntity(String.class);
+    }
+    //getUsers
 }
