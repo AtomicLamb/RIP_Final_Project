@@ -9,9 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="178285d8-becc-4c7f-b082-ee11f211687c" name="Changes" comment="Initial Commit: No Error mostly ok." />
-    <list id="2787905e-793b-4e17-a742-137bd793808e" name="Changes by matth" comment="">
+    <list default="true" id="178285d8-becc-4c7f-b082-ee11f211687c" name="Changes" comment="Initial Commit: No Error mostly ok.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    </list>
+    <list id="2787905e-793b-4e17-a742-137bd793808e" name="Changes by matth" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/WriterDAOInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/WriterDAOInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/WriterImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/WriterImplementation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +46,7 @@
     "WebServerToolWindowFactoryState": "false",
     "deletionFromPopupRequiresConfirmation": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/TKS/Desktop/VZAP_2023/Software/Servers/MySQL/mysql-connector-java-8.0.11.jar",
+    "last_opened_file_path": "C:/Users/TKS/Desktop/VZAP_2023/Software/JUnit/junit-4.10.jar",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -242,7 +246,8 @@
       <updated>1687762352603</updated>
       <workItem from="1687762353639" duration="4232000" />
       <workItem from="1687767269108" duration="18330000" />
-      <workItem from="1687789765027" duration="4043000" />
+      <workItem from="1687789765027" duration="4212000" />
+      <workItem from="1687807224419" duration="2677000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit: No Error mostly ok.">
       <created>1687765315546</created>

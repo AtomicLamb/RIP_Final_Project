@@ -7,6 +7,7 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.Reader;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public interface WriterDAOInterface {
@@ -17,6 +18,7 @@ public interface WriterDAOInterface {
     ArrayList<Story> getAllDrafts(Writer writer);
     String editDraft(Story story);
     Writer getAuthor(Writer writer);
+    
     
     
 }
