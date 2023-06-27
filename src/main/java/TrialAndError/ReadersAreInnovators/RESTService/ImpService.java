@@ -1,7 +1,10 @@
 package TrialAndError.ReadersAreInnovators.RESTService;
 
 import TrialAndError.ReadersAreInnovators.Models.Administration.WriterApplication;
+import TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment;
+import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Reader;
+import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.ws.rs.client.Client;
@@ -10,6 +13,11 @@ import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,6 +62,41 @@ public class ImpService
         
         return response.readEntity(String.class);
     }
+    public List<Writer> viewWriters()
+        {
+            String personURI = uri + "/viewWriters";
+            
+            webTarget = client.target(personURI);
+           response = webTarget.request().get();
+            
+            try {
+                return Arrays.asList(mapper.readValue(webTarget.request().accept(MediaType.APPLICATION_JSON).get(String.class),Writer[].class));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+     public String revokeWriterPrivileges(Writer writer)
+         {
+            String personURI = uri + "/revokeWriterPrivileges";
+            
+            webTarget = client.target(personURI);
+            response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(writer)));
+            
+            return response.readEntity(String.class);
+        }
+        public List<Comment> viewFlaggedComments()
+                {
+                    String personURI = uri + "/viewFlaggedComments";
+                    
+                    webTarget = client.target(personURI);
+                   response = webTarget.request().get();
+                    
+                    try {
+                        return Arrays.asList(mapper.readValue(webTarget.request().accept(MediaType.APPLICATION_JSON).get(String.class), Comment[].class));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
       private String toJsonString(Object o)
     {
         try 
@@ -63,5 +106,54 @@ public class ImpService
             Logger.getLogger(ImpService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    public String deleteComment(Comment comment)
+    {
+        String personURI = uri + "/deleteComment";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(comment)));
+        
+        return response.readEntity(String.class);
+    }
+    public String unFlagComment(Comment comment)
+    {
+        String personURI = uri + "/unFlagComment";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(comment)));
+        
+        return response.readEntity(String.class);
+    }
+    public String addGenre(Genre genre)
+    {
+        String personURI = uri + "/addGenre";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(genre)));
+        
+        return response.readEntity(String.class);
+    }
+    public String removeGenre(Genre genre)
+    {
+        String personURI = uri + "/removeGenre";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(genre)));
+        
+        return response.readEntity(String.class);
+    }
+    public List<Genre> getGenres()
+    {
+        String personURI = uri + "/getGenres";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request().get();
+        
+        try {
+            return Arrays.asList(mapper.readValue(webTarget.request().accept(MediaType.APPLICATION_JSON).get(String.class), Genre[].class));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -29,8 +29,7 @@
                     <h1 style="color: white;"><%=story.getTitle()%></h1>
                     <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" >
                 </a>
-                <%}%>
-
+                <%}%> 
             </div>
         </div>
     </body>

@@ -13,6 +13,13 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
+
+/**
+ * @desctripion:    Class made for JUnit testing of DOA methods.
+ * @author:         Tyler Schwegler.
+ * @Version:        v.1.0.0
+ */
 
 public class JUnitTesting {
     
@@ -30,10 +37,10 @@ public class JUnitTesting {
     
     
     Base64 image = null;
-    String searchTopic = "Matt";
+    String searchTopic = "Cat";
     
     
-    User user = new User(50, "User", "Test", "user.test@gmail.com", "011555000", "User1", 0, "User", false, false, 0);
+    User user = new User(32, "User", "Test", "user.test@gmail.com", "011555000", "User1", 0, "User", false, false, 0);
     Reader reader = new Reader(56, "Reader", "Test", "reader.test@gmail.com", "0115550000", "Reader1", 1, "Reader", false, false);
     Writer writer = new Writer(52, "Writer", "Test", "writer.test@gmail.com", "0116660000", "Writer1", 2, "Writer", false, false);
     WriterApplication writerApplication = new WriterApplication("Test", "Application", "writerapp.test@gmail.com", "0117770000", "Test", "2023-06-23");
@@ -73,7 +80,7 @@ public class JUnitTesting {
     
     
     
-    //Analytics Tests:  //TODO
+    //Analytics Tests: TODO
     
     
     
@@ -162,7 +169,7 @@ public class JUnitTesting {
     @Test
     public void viewWritersTest(){
         
-        ArrayList<Writer> allWriters = editorImp.viewWriters();
+        List<Writer> allWriters = editorImp.viewWriters();
         for (Writer w: allWriters) {
             
             System.out.println(w);
@@ -199,6 +206,13 @@ public class JUnitTesting {
         
     }
     
+    @Test
+    public void revokeWriterPrivilegesTest(){
+        
+        System.out.println(editorImp.revokeWriterPrivileges(writer));
+        
+    }
+    
     
     
     //Genres Tests: Done.
@@ -206,7 +220,6 @@ public class JUnitTesting {
     @Test
     public void addGenreTest(){
         
-        Genre genre = new Genre("Documentary");
         System.out.println(genresImp.addGenre(genre));
         
     }
@@ -214,7 +227,6 @@ public class JUnitTesting {
     @Test
     public void removeGenreTest(){
         
-        Genre genre = new Genre("Documentary");
         System.out.println(genresImp.removeGenre(genre));
         
     }
@@ -236,7 +248,7 @@ public class JUnitTesting {
     @Test
     public void getGenresTest(){
         
-        ArrayList<Genre> allGenres = genresImp.getGenres();
+        List<Genre> allGenres = genresImp.getGenres();
         for (Genre g:allGenres) {
             
             System.out.println(g);
@@ -291,7 +303,7 @@ public class JUnitTesting {
     
     
     
-    //Readers Tests: Almost Done.
+    //Readers Tests: Done.
     
     @Test
     public void registerReaderTest(){
@@ -359,7 +371,7 @@ public class JUnitTesting {
     
     
     
-    //Story Tests:
+    //Story Tests: TODO
     
     @Test
     public void removeStoryTest(){
@@ -449,7 +461,7 @@ public class JUnitTesting {
     
     
     
-    //Writer Tests: 
+    //Writer Tests: Done.
     
     @Test
     public void getDraftTest(){

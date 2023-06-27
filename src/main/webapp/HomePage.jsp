@@ -77,7 +77,7 @@
                 </li>
                 <%}%>
                 <li class="nav-item">
-                   <a class="nav-link" href="PersonalData.jsp">PERSONAL INFORMATION PAGE</a>
+                   <a class="nav-link" href="Profile.jsp">PERSONAL INFORMATION PAGE</a>
                 </li>
                 <li class="nav-item">
                     <div class="dropdown">

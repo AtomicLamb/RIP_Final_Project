@@ -38,7 +38,11 @@
 
 </head>
 <body>
-	<!-- header section start-->
+    <%String message=(String)request.getAttribute("message");%>
+    <%if(message!=null){%>
+    <p><%=message%></p>
+    <%}%>
+    <!-- header section start-->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed; width: 100%; z-index:99;">
         <a class="logo" href="#"><img src="images/logo.png"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,7 +82,7 @@
                                     <span><br>Views<i class="fa-sharp fa-solid fa-eye"></i><%=story.getViews()%></span><br><br>
                                     <span>Likes<i class="fa-solid fa-heart" style="color: #f42d1f;"></i><%=story.getLikes()%></span><br><br>
                                     <span>Rating<i class="fa-sharp fa-solid fa-star" style="color: #fff93d;"></i><%=story.getRatingAverage()%></span><br><br>
-                                    <span><a href="StoryServlet?submit=AuthorDetails&writerId=<%=writer.getUserID()%>" method="get" style="text-decoration:none">Author <%=writer.getName()%> <%=writer.getSurname()%></a></span>
+                                    <span><a href="StoryServlet?submit=AuthorDetails&authorId=<%=writer.getUserID()%>" method="get" style="text-decoration:none">Author <%=writer.getName()%> <%=writer.getSurname()%></a></span>
                                     <div id="openButton" class="apply_bt"><button onclick="openForm()">Rate Story</button></div>
                                                                  
                                                                                                  <div id="radioStar" style="display:none">
@@ -100,7 +104,6 @@
                                             </div>
                                             </div></div>
 				  <%List<Comment>comments=(List<Comment>)request.getAttribute("comments");%>
-                        <%List<User>users=(List<User>)request.getAttribute("users");%>
                         <%Comment newComment=(Comment)request.getAttribute("newComment");%>
 				<div class="col-md-6">
 					<div class="job_section_2">
@@ -129,13 +132,11 @@
                                                                  
                                                                   <%}%>
                                                                <%for(Comment comment:comments){%> 
-                                                                 <%for(User user:users){%>
-                                                                  <%if(comment.getUserID()==user.getUserID()){%>
-                                                                 <p>posted by<%=user.getName()%> <%=user.getSurname()%> on <%=comment.getDateAdded()%><br><%=comment.getComment()%></p>
+                                                                   <p>posted by<%=comment.getName()%> on <%=comment.getDateAdded()%><br><%=comment.getComment()%></p>
                                                                   <span id="reportButton" ><a href="StoryServlet?submit=reportComment">Report comment</a></span>
                                                                           <%}%>
-                                                                 <%}%>
-                                                                 <%}%>
+                                                                 
+                                                                 
                         
 					</div>
                                                                  

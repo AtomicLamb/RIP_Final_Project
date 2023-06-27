@@ -10,17 +10,23 @@ import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Author:         Tyler Schwegler.
+ * @Version:        v.1.0.0
+ */
 
 public class AnalyticsImplementation implements AnalyticsDAOInterface{
     
     
     //
-    //TODO Tests
+    //TODO Tests, Logger....
     
     
-    private static Logger logger;   //TODO Make Logger then swap runtime Exceptions with logger.
+    private static Logger logger;
     private Connection conn;
     private PreparedStatement ps;
     private ResultSet rs;
@@ -39,7 +45,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
         conn = DatabaseConnectionManager.getConnection();
         query = "select s.Likes from stories s where s.StoryID = ?";
-        Integer likes = 0;
+        Integer likes = null;
         
         try {
             
@@ -51,8 +57,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
             
         } catch (SQLException e) {
             
-            System.out.println("Error retrieving number of likes.");
-            e.printStackTrace();
+            Logger.getLogger(AnalyticsImplementation.class.getName()).log(Level.FINE, "Error getting number of story likes.", e);
             
         } finally {
             
@@ -121,8 +126,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
             
         } catch (SQLException e) {
             
-            System.out.println("Error retrieving number of views.");
-            e.printStackTrace();
+            Logger.getLogger(AnalyticsImplementation.class.getName()).log(Level.FINE, "Error getting number of Story views.", e);
             
         } finally {
             
@@ -192,8 +196,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
             
         } catch(SQLException e) {
             
-            System.out.println("Error retrieving number of followers.");
-            e.printStackTrace();
+            Logger.getLogger(AnalyticsImplementation.class.getName()).log(Level.FINE, "Error getting number of Author Followers.", e);
             
         } finally {
                 
@@ -245,7 +248,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
     }
     
-    @Override       //Complete      //Adds a view to a read story.
+    @Override       //Complete: Adds a view to a read story.
     public String addView(Story story) {
         
         conn = DatabaseConnectionManager.getConnection();
@@ -271,8 +274,8 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
             
         } catch (SQLException e) {
             
-            System.out.println("Error viewing story.");
-            e.printStackTrace();
+            message = "Error adding story's views.";
+            Logger.getLogger(AnalyticsImplementation.class.getName()).log(Level.FINE, "Error adding a story's views.", e);
             
         } finally {
             
@@ -348,8 +351,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
             
         } catch (SQLException e) {
             
-            System.out.println("Could not get most viewed stories.");
-            e.printStackTrace();
+            Logger.getLogger(AnalyticsImplementation.class.getName()).log(Level.FINE, "Error getting most viewed stories.", e);
             
         } finally {
             
@@ -425,8 +427,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
             
         } catch (SQLException e) {
             
-            System.out.println("Could not get highest rated stories.");
-            e.printStackTrace();
+            Logger.getLogger(AnalyticsImplementation.class.getName()).log(Level.FINE, "Error getting highest rated stories.", e);
             
         } finally {
             
@@ -502,8 +503,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
             
         } catch (SQLException e) {
             
-            System.out.println("Could not get most liked stories.");
-            e.printStackTrace();
+            Logger.getLogger(AnalyticsImplementation.class.getName()).log(Level.FINE, "Error getting most liked stories.", e);
             
         } finally {
             
@@ -578,8 +578,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
             
         } catch (SQLException e) {
             
-            System.out.println("Could not get top genres.");
-            e.printStackTrace();
+            Logger.getLogger(AnalyticsImplementation.class.getName()).log(Level.FINE, "Error getting most viewed genres.", e);
             
         } finally {
             
@@ -654,8 +653,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
             
         } catch (SQLException e) {
             
-            System.out.println("Could not get top writers.");
-            e.printStackTrace();
+            Logger.getLogger(AnalyticsImplementation.class.getName()).log(Level.FINE, "Error getting most viewed writers.", e);
             
         } finally {
             
@@ -730,8 +728,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
             
         } catch (SQLException e) {
             
-            System.out.println("Could not get top Editors.");
-            e.printStackTrace();
+            Logger.getLogger(AnalyticsImplementation.class.getName()).log(Level.FINE, "Error getting top editors.", e);
             
         } finally {
             

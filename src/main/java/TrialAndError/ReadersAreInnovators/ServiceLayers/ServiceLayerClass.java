@@ -15,6 +15,7 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceLayerClass implements ServiceLayer_Interface{
     
@@ -113,7 +114,8 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     }
     
     @Override
-    public ArrayList<Comment> getComments(Story story) {
+    public List<Comment> getComments(Story story) 
+    {
         return null;
     }
     
@@ -124,17 +126,18 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     
     @Override
     public String deleteComment(Comment comment) {
-        return null;
+        return commentImp.deleteComment(comment);
     }
     
     @Override
     public String unFlagComment(Comment comment) {
-        return null;
+        return commentImp.unFlagComment(comment);
     }
     
     @Override
-    public ArrayList<Comment> viewFlaggedComments() {
-        return null;
+    public List<Comment> viewFlaggedComments() 
+    {
+        return commentImp.viewFlaggedComments();
     }
     
     @Override
@@ -159,8 +162,8 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     }
     
     @Override
-    public ArrayList<Writer> viewWriters() {
-        return null;
+    public List<Writer> viewWriters() {
+        return editorImp.viewWriters();
     }
     
     @Override
@@ -175,13 +178,14 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     
     
     @Override
-    public String addGenre(Genre genre) {
-        return null;
+    public String addGenre(Genre genre) 
+    {
+        return genresImp.addGenre(genre);   
     }
     
     @Override
     public String removeGenre(Genre genre) {
-        return null;
+        return genresImp.removeGenre(genre);
     }
     
     @Override
@@ -195,8 +199,9 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     }
     
     @Override
-    public ArrayList<Genre> getGenres() {
-        return null;
+    public List<Genre> getGenres() 
+    {
+        return genresImp.getGenres();
     }
     
     @Override
@@ -253,7 +258,7 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     
     @Override
     public String followAuthor(Writer writer, User user) {
-        return null;
+        return readerImp.followAuthor(writer, user);
     }
     
     @Override
@@ -353,6 +358,11 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     
     @Override
     public Writer getAuthor(Writer writer) {
-        return null;
+        return writerImp.getAuthor(writer);
+    }
+    @Override 
+    public String revokeWriterPrivileges(Writer writer)
+    {
+        return editorImp.revokeWriterPrivileges(writer);
     }
 }

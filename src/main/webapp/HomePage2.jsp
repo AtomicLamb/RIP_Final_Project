@@ -87,7 +87,7 @@
             <%for(Story story:stories){%> 
             <%Story storySelected=story;%>
             
-                <a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>">
+                <a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>%authorId=<%=story.getAuthorID()%>">
                     
                          
                     <h1 style="color: white;"><%=story.getTitle()%></h1>

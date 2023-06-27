@@ -7,10 +7,13 @@ package TrialAndError.ReadersAreInnovators.Servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import TrialAndError.ReadersAreInnovators.Models.AnalyticalData.Rating;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.*;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
+import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
+import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayer_Interface;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -56,123 +59,29 @@ public class StoryServlet extends HttpServlet {
      *
      */
     
-    public List<Writer> getWriters(){
-        List<Writer>writers=new ArrayList();
-        writers.add(new Writer(5,"Natsuko", "Ishikawa"));
-        writers.add(new Writer(2,"John","Tron"));
-        return writers;
-    }
-    public Writer getChosenAuthor(Integer authorId){
-        List<Writer>writers=getWriters();
-        Writer myWriter=null;
-        for(Writer writer:writers){
-            if(authorId==writer.getUserID()){
-                myWriter=writer;
-                return myWriter;
-            }
-            
-        }
-        return null;
-    }
+    
+   
     public Story getChosenStory(HttpServletRequest request){
-        List<Story>stories=getAllStories();
-        
-        Integer count=0;
-        Story chosenStory;
-        for(Story story:stories){
-            story.setStoryID(++count);
-            if(story.getTitle().equalsIgnoreCase(request.getParameter("storyTitle"))){
-                chosenStory=story;
-                return chosenStory;
-            }
-            if(story.getStoryID()==(Integer.valueOf(request.getParameter("storyId")))){
-                chosenStory=story;
-                return chosenStory;
-            }
-        }
-        
-        return null;
-    }
-    public List<Story>getAllStories(){
-        
-        
-        List<Story>storyList=new ArrayList();
-        storyList.add(new Story());
-        
-        BufferedImage img = null;
-        BufferedImage img2= null;
-        try {
-            img=ImageIO.read(new File("C:\\Users\\user\\Documents\\NetBeansProjects\\RIP_system2\\web\\images\\ffxiv_06022022_151541_540.png"));
-            img2 = ImageIO.read(new File("C:\\Users\\user\\Documents\\NetBeansProjects\\RIP_system2\\web\\images\\ffxiv_05022022_223708_933.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        try {
-            ImageIO.write(img, "png", output);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String imageAsBase64=Base64.getEncoder().encodeToString(output.toByteArray());
-        ByteArrayOutputStream output2 = new ByteArrayOutputStream();
-        try {
-            ImageIO.write(img2, "png", output);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String imageAsBase64_2=Base64.getEncoder().encodeToString(output2.toByteArray());
-        List<Story>stories=new ArrayList();
-        stories.add(new Story("Past the far edge of fate",5,"In the beginning","Some crazy story",imageAsBase64,true));
-        stories.add(new Story("A Tale Of Loss And Faith",2,"In the beginning","Some crazy story",imageAsBase64_2,true));
-        return stories;
-    }
-    
-    public List<Story>getAuthorsStories(Integer authorId){
-        List<Story>storyList=getAllStories();
-        List<Story>authorStories=new ArrayList();
-        for(Story story:storyList){
-            if(story.getAuthorID()==authorId){
-                authorStories.add(story);
-            }
-        }
-        return authorStories;
-    }
-    public List<Comment> getEveryStoryComment(){
-        
-        
-        //Integer storyID, Integer userID, String name, String comment, String dateAdded
-        List<Comment>comments=new ArrayList();
-        comments.add(new Comment(1,1,3,"John","Hello there","2023-06-23"));
-        comments.add(new Comment(2,1,2,"Peter","Hello there","2023-06-23"));
-        comments.add(new Comment(3,2,2,"Jake","Not here","2023-06-23"));
-        return comments;
-    }
-    public List<Comment> getChosenStoryComments(HttpServletRequest request){
-        
-        List<Comment>comments=getEveryStoryComment();
-        
-        List<Comment>chosenStoryComments=new ArrayList();
-        
-        for(Comment comment:comments){  ;
-            if(comment.getStoryID()==(Integer.valueOf(request.getParameter("storyId")))){
-                chosenStoryComments.add(comment);
-                
-                
-            }
-        }
-        return chosenStoryComments;
-    }
-    
+         
+        ServiceLayer_Interface service=new ServiceLayerClass();
+        Story chosenStory=new Story();
+                chosenStory.setStoryID(Integer.valueOf(request.getParameter("storyId")));
+                return service.displayStoryDetails(chosenStory);
+   }
     public List<User>getUsers(){
         List<User>users=new ArrayList();
         users.add(new User(2,"Bucky","Trucky"));
         users.add(new User(3,"The Wild","One"));
-        
-        return users;
+       return users;
     }
     public Comment getComment(HttpServletRequest request){
-        List<Comment>comments=getEveryStoryComment();
-        String message="";
+        
+        ServiceLayer_Interface service=new ServiceLayerClass();
+        Story story=new Story();
+        story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
+        service.getComments(service.displayStoryDetails(story));
+         
+        List<Comment>comments=service.getComments(service.displayStoryDetails(story));
         for(Comment comment:comments){
             if(comment.getCommentID()==(Integer.valueOf(request.getParameter("commentId")))) {
                 
@@ -191,34 +100,18 @@ public class StoryServlet extends HttpServlet {
             return "Comment reported";
         }
         else{
-            return "Comment not reported an error occured";
+            return "Comment not reported an error occurred";
         }
         
     }
-    public Writer getStoryAuthor(Story chosenStory){
-        List<Writer>writers=getWriters();
-        
-        Writer myWriter=null;
-        
-        for(Writer writer:writers){
-            if(chosenStory.getAuthorID()==writer.getUserID()){
-                myWriter=writer;
-                return myWriter;
-            }
-            
-        }
-        return null;
-    }
+     
     public void fillStoryDetailsPage(HttpServletRequest request, HttpServletResponse response,String attributeName,Object value){
+         ServiceLayer_Interface service=new ServiceLayerClass();
         Story chosenStory=getChosenStory(request);
-        Writer myWriter=getStoryAuthor(chosenStory);
-        List<Comment>chosenStoryComments=getChosenStoryComments(request);
-        List<User>users=getUsers();
-        
+          Writer writer=new Writer(Integer.valueOf(request.getParameter("authorId")));
         request.setAttribute("storyDetails", chosenStory);
-        request.setAttribute("chosenWriter", myWriter);
-        request.setAttribute("comments",chosenStoryComments);
-        request.setAttribute("users", users);
+        request.setAttribute("chosenWriter", service.getAuthor(writer));
+        request.setAttribute("comments",service.getComments(chosenStory));
         request.setAttribute(attributeName, value);
         
         var dispatcher=request.getRequestDispatcher("StoryDetails.jsp");
@@ -233,13 +126,48 @@ public class StoryServlet extends HttpServlet {
         }
         
     }
-    
+    public User getUserSession(HttpServletRequest request){
+        HttpSession session= request.getSession(false);
+        User user=(User)session.getAttribute("currentUser");
+        return user;
+    }
     public String rateStory(HttpServletRequest request){
         Story story=getChosenStory(request);
-        
+        ServiceLayer_Interface service= new ServiceLayerClass();
         story.setRatingAverage(Double.valueOf(request.getParameter("rating")));
-        return "Story rated";
+         
+       return service.rateStory(new Rating(getUserSession(request).getUserID(),Integer.valueOf(request.getParameter("storyId")),Integer.valueOf(request.getParameter("rating"))));
+           
     }
+    public String addComment(HttpServletRequest request){
+        ServiceLayer_Interface serviceLayer=new ServiceLayerClass();
+        
+          HttpSession session=request.getSession(false);
+        User user=(User)session.getAttribute("currentUser");
+           Comment comment=new Comment();
+         
+        comment.setName(user.getName());
+        comment.setUserID(user.getUserID());
+        comment.setStoryID(Integer.valueOf(request.getParameter("storyId")));
+        comment.setComment(request.getParameter("commentArea"));
+        comment.setFlagged(false);
+        return serviceLayer.addComment(comment);
+    }
+    public Comment getNewComment(HttpServletRequest request){
+        
+       ServiceLayer_Interface service=new ServiceLayerClass();
+        Story story=new Story();
+        story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
+        List<Comment>comments=service.getComments(service.displayStoryDetails(story));
+         return comments.get(comments.size()-1);
+    }
+    public String followAuthor(HttpServletRequest request){
+        ServiceLayer_Interface serviceLayer=new ServiceLayerClass();
+        HttpSession session= request.getSession(false);
+        User user=(User)session.getAttribute("currentUser");
+         return serviceLayer.followAuthor(serviceLayer.getAuthor(new Writer(request.getParameter("authorId"))),user);
+         
+     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -247,45 +175,23 @@ public class StoryServlet extends HttpServlet {
         switch(request.getParameter("submit")){
             
             case"storyDetails":
-                
-                Story chosenStory=getChosenStory(request);
-                Writer myWriter=getStoryAuthor(chosenStory);
-                List<Comment>chosenStoryComments=getChosenStoryComments(request);
                 List<User>users=getUsers();
                 HttpSession session=request.getSession(true);
                 session.setAttribute("currentUser", users.get(0));
                 fillStoryDetailsPage(request,response,"", null);
                 break;
-            
-            
-            
-            
-            case "rateStoryPage":
-                
-                request.setAttribute("storyId", request.getParameter("storyId"));
-                var dispatcher=request.getRequestDispatcher("RateStory.jsp");
-            {
-                try {
-                    dispatcher.forward(request,response);
-                } catch (IOException ex) {
-                    Logger.getLogger(StoryServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            break;
+           
             case "AuthorDetails":
-                
-                Writer chosenWriter=getChosenAuthor(Integer.valueOf(request.getParameter("writerId")));
-                request.setAttribute("authorStories", getAuthorsStories(chosenWriter.getUserID()));
-                request.setAttribute("chosenWriter", chosenWriter);
-                dispatcher=request.getRequestDispatcher("AuthorDetails.jsp");
+                Writer writer=new Writer();
+                writer.setUserID(Integer.valueOf(request.getParameter("authorId")));
+                ServiceLayerClass service=new ServiceLayerClass();
+                request.setAttribute("authorStories", service.getPublishedStories(writer));
+                request.setAttribute("chosenWriter",service.getAuthor(writer));
+               var dispatcher=request.getRequestDispatcher("AuthorDetails.jsp");
                 dispatcher.forward(request,response);
-                
-                break;
-            case "followAuthor":
-                
-                break;
+                 break;
+            
             case "read":
-                
                 request.setAttribute("chosenStory", getChosenStory(request));
                 dispatcher=request.getRequestDispatcher("StoryBody.jsp");
                 dispatcher.forward(request, response);
@@ -308,39 +214,20 @@ public class StoryServlet extends HttpServlet {
             throws ServletException, IOException {
         switch(request.getParameter("submit")){
             case "comment":
-                List<Comment>comments=getEveryStoryComment();
-                HttpSession session=request.getSession(false);
-                User user=(User)session.getAttribute("currentUser");
-                Comment comment=new Comment();
-                comment.setCommentID(comments.size()+1);
-                comment.setUserID(user.getUserID());
-                comment.setStoryID(Integer.valueOf(request.getParameter("storyId")));
-                comment.setComment(request.getParameter("commentArea"));
-                comment.setFlagged(false);
-                comment.setDateAdded("2023-06-20");
-                
-                Story chosenStory=getChosenStory(request);
-                Writer myWriter=getChosenAuthor(chosenStory.getAuthorID());
-                List<Comment>chosenStoryComments=getChosenStoryComments(request);
-                List<User>users=getUsers();
-                request.setAttribute("newComment", comment);
-                request.setAttribute("storyDetails", chosenStory);
-                request.setAttribute("chosenWriter", myWriter);
-                request.setAttribute("comments",chosenStoryComments);
-                request.setAttribute("users", users);
-                var dispatcher=request.getRequestDispatcher("StoryDetails.jsp");
-                dispatcher.forward(request,response);
-                response.sendRedirect("StoryDetails.jsp");
+                response.sendRedirect("postResultServlet?submit=comment&storyId="+request.getParameter("storyId")+"&newComment="+getNewComment(request)+
+                        "&addCommentMessage="+addComment(request));
                 break;
             
             case"reportComment":
-                String message=flagComment(request);
-                fillStoryDetailsPage(request,response,"reportMessage",message);
+               response.sendRedirect("postResultServlet?submit=reportComment&storyId="+request.getParameter("storyId")+"&reportMessage="+flagComment(request));
                 break;
-            
-            case"rateStory":
-                System.out.println("HERE IN THE NOQ number 2"+request.getParameter("storyId"));
-                fillStoryDetailsPage(request,response,"rateMessage", rateStory(request));
+                
+              case"rateStory":
+                response.sendRedirect("postResultServlet?submit=rateStory&storyId="+request.getParameter("storyId")+"&rateMessage="+rateStory(request));
+                break;
+                
+            case "followAuthor":
+                response.sendRedirect("postResultServlet?submit=followAuthor&storyId="+request.getParameter("storyId")+"&followMessage="+followAuthor(request));
                 break;
         }
     }

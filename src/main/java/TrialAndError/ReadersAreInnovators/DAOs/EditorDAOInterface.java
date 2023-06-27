@@ -7,6 +7,7 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public interface EditorDAOInterface {
@@ -15,11 +16,12 @@ public interface EditorDAOInterface {
     ArrayList<WriterApplication> viewWriterApplications();
     String approveWriter(WriterApplication writer); //Approve by email
     String denyWriter(Writer writer);
-    ArrayList<Writer> viewWriters();
+    List<Writer> viewWriters();
     String approvePendingStory(StoryApplication story, Editor editor);
     String removePendingStory(StoryApplication story);
     StoryApplication reviewPendingStory(StoryApplication story);
     ArrayList<StoryApplication> viewPendingStories();
+    String revokeWriterPrivileges(Writer writer);
     
     
 }

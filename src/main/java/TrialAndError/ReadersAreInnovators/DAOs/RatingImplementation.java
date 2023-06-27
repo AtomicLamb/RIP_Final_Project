@@ -9,12 +9,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RatingImplementation implements RatingDAOInterface{
     
     
-    //
-    //TODO Logger, ;
+    //Trial and Error Certified.
+    //TODO: Logger, Deprecated Method.
+    
     
     private Connection conn;
     private PreparedStatement ps;
@@ -22,10 +25,6 @@ public class RatingImplementation implements RatingDAOInterface{
     private String query;
     private String message;
     FunctionsClass functionsClass = new FunctionsClass();
-    
-    
-    //Trial and Error Certified.
-    //TODO: Logger, Deprecated Method.
     
     
     public RatingImplementation() {
@@ -52,10 +51,7 @@ public class RatingImplementation implements RatingDAOInterface{
             
         } catch (SQLException e) {
             
-            System.out.println("Error getting story rating.");
-            e.printStackTrace();
-            
-            //logger....
+            Logger.getLogger(RatingImplementation.class.getName()).log(Level.FINE, "Error getting the story's rating.", e);
             
         } finally {
             
@@ -127,9 +123,7 @@ public class RatingImplementation implements RatingDAOInterface{
         } catch (SQLException e) {
             
             message = "Error rating this story.";
-            System.out.println("Error rating this story.");
-            e.printStackTrace();
-            //logger....
+            Logger.getLogger(RatingImplementation.class.getName()).log(Level.FINE, "Error rating the story.", e);
             
         } finally {
             
@@ -196,14 +190,12 @@ public class RatingImplementation implements RatingDAOInterface{
             ps.setInt(3, rating.getStoryID());
             ps.executeUpdate();
             
-            message = "Rating successfully added.";
+            message = "Rating successfully changed.";
             
         } catch (SQLException e) {
             
-            message = "Error rating this story.";
-            System.out.println("Error rating this story.");
-            e.printStackTrace();
-            //logger....
+            message = "Error changing the story's rating.";
+            Logger.getLogger(RatingImplementation.class.getName()).log(Level.FINE, "Error changing the story's rating.", e);
             
         } finally {
             
@@ -273,11 +265,8 @@ public class RatingImplementation implements RatingDAOInterface{
             
         } catch (SQLException e) {
             
-            message = "Error removing rating.";
-            System.out.println("Error removing rating.");
-            e.printStackTrace();
-            
-            //logger....
+            message = "Error removing your rating.";
+            Logger.getLogger(RatingImplementation.class.getName()).log(Level.FINE, "Error removing your rating.", e);
             
         } finally {
             
@@ -329,41 +318,24 @@ public class RatingImplementation implements RatingDAOInterface{
         
     }
     
-    @Override       @Deprecated     //Finish
+    @Override       @Deprecated     //TODO Finish.
     public String clearRating(Story story) {
         
         conn = DatabaseConnectionManager.getConnection();
         
-        query = "select * from readers_are_innovators.stories where StoryID = ?";
-        
-        Integer deleted = 0;
-        
-        
         try {
             
+            query = "select * from readers_are_innovators.stories where StoryID = ?";
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, story.getStoryID());
             rs = ps.executeQuery();
             
-            if(rs.next() != false) {
-                
-                
-                
-            }
         } catch (SQLException e) {
-            System.out.println("Error finding story");
-            e.printStackTrace();
-        }
+            
+            message = "Error clearing the story's ratings.";
+            Logger.getLogger(RatingImplementation.class.getName()).log(Level.FINE, "Error clearing the story's ratings.", e);
         
-        query = "delete from readers_are_innovators.rating where StoryID = ?";
-        try {
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, story.getStoryID());
-            deleted = ps.executeUpdate();
-            message = deleted + " ratings removed";
-        } catch (SQLException e) {
-            System.out.println("Error removing ratings from " + story);
         } finally {
             
             if (rs!=null){

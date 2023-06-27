@@ -3,6 +3,9 @@ package TrialAndError.ReadersAreInnovators.Servlets;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
+import TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment;
+import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
+import TrialAndError.ReadersAreInnovators.RESTService.ImpService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,6 +14,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,7 +23,13 @@ import java.util.List;
  */
 @WebServlet(urlPatterns = {"/adminEditorServlet"})
 public class adminEditorServlet extends HttpServlet {
-
+    
+    private ImpService imp;
+    
+    public adminEditorServlet()
+    {
+        imp = new ImpService();
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -49,9 +60,7 @@ public class adminEditorServlet extends HttpServlet {
                         dispacther.forward(request, response);
               break;
           case"REMOVE GENRE":
-              
-                dispacther =  request.getRequestDispatcher("RemoveGenre.jsp");
-                        dispacther.forward(request, response);
+              getGenres(request,response);
               break;
        }
     }
@@ -63,19 +72,62 @@ public class adminEditorServlet extends HttpServlet {
        switch(request.getParameter("submit"))
        {
            case"Add Genre":
-               
+               addGenre(request,response);
                break;
                
            case"Add Editor":
                    
                break;
            case"REMOVE GENRE":
-               
+               removeGenre(request,response);
                break;
            case"REMOVE EDITOR":
                
                break;
        }
     }
-
+    public void addGenre(HttpServletRequest request, HttpServletResponse response)
+    {
+        String genreName =request.getParameter("genreName");
+        
+        request.setAttribute("message", imp.addGenre(new Genre(genreName)));
+        var dispatcher =  request.getRequestDispatcher("Admin-Editor.jsp");
+        try
+        {
+            dispatcher.forward(request, response);
+        }
+        catch (ServletException | IOException ex)
+        {
+            Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void removeGenre(HttpServletRequest request, HttpServletResponse response)
+    {
+        Integer genreID = Integer.valueOf(request.getParameter("removeGenreID"));
+        
+        request.setAttribute("message", imp.removeGenre(new Genre(genreID)));
+        var dispatcher =  request.getRequestDispatcher("Admin-Editor.jsp");
+        try
+        {
+            dispatcher.forward(request, response);
+        }
+        catch (ServletException | IOException ex)
+        {
+            Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //getGenres
+    public void getGenres(HttpServletRequest request, HttpServletResponse response)
+    {
+        request.setAttribute("getGenre", imp.getGenres());
+        var dispatcher =  request.getRequestDispatcher("RemoveGenre.jsp");
+        try
+        {
+            dispatcher.forward(request, response);
+        }
+        catch (ServletException | IOException ex)
+        {
+            Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

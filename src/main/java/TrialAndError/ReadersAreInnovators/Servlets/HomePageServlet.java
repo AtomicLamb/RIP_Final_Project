@@ -7,6 +7,8 @@ package TrialAndError.ReadersAreInnovators.Servlets;
 
 
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
+import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
+import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayer_Interface;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -69,6 +71,8 @@ public class HomePageServlet extends HttpServlet {
                 
                 List<Story>storyList=new ArrayList();
                 storyList.add(new Story());
+                ServiceLayer_Interface service=new ServiceLayerClass();
+                
                 
                 img=ImageIO.read(new File("C:\\Users\\user\\Documents\\NetBeansProjects\\RIP_system2\\web\\images\\ffxiv_06022022_151541_540.png"));
                 BufferedImage img2=ImageIO.read(new File("C:\\Users\\user\\Documents\\NetBeansProjects\\RIP_system2\\web\\images\\ffxiv_05022022_223708_933.png"));

@@ -6,6 +6,7 @@ public class Story {
     private Integer storyID;
     private String title;
     private Integer authorID;
+    private String authorName;
     private Integer views;
     private Integer likes;
     private Double ratingAverage;
@@ -32,6 +33,14 @@ public class Story {
     public Story(String title, String coverImage) {
         
         this.title = title;
+        this.coverImage = coverImage;
+        
+    }
+    
+    public Story(String title, String authorName, String coverImage) {
+        
+        this.title = title;
+        this.authorName = authorName;
         this.coverImage = coverImage;
         
     }
@@ -187,6 +196,14 @@ public class Story {
     
     public void setAuthorID(Integer authorID) {
         this.authorID = authorID;
+    }
+    
+    public String getAuthorName() {
+        return authorName;
+    }
+    
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
     
     public Integer getViews() {

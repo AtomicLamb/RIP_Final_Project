@@ -41,7 +41,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             <div class="input-boxes">
                                 <div class="input-box">
                                     <i class="fas fa-envelope"></i>
-                                    <input type="email" placeholder="Enter your email" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" name="loginEmail" required>
+                                    <input type="email" placeholder="Enter your email" name="loginEmail" required>
                                 </div>
                                 <div class="input-box">
                                     <i class="fas fa-lock"></i>
@@ -55,10 +55,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         </form>
                         <form action="controllerServlet" method="get">
                             <div class="button input-box">
-                                <input type="submit" name="submit" value="Continue to homescreen" formnovalidate>
+                                <input type="submit" name="submit" value="Continue to Homepage" formnovalidate>
                             </div>
                         </form>
-                        <div class="text sign-up-text">Don't have an account? <label for="flip">Sigup now</label></div>
+                        <div class="text sign-up-text">Don't have an account? <label for="flip">Sign-Up now</label></div>
                         <%
                             String message = (String) request.getAttribute("message");
                             if(message!=null){
@@ -84,7 +84,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 </div>
                                 <div class="input-box">
                                     <i class="fas fa-envelope"></i>
-                                    <input type="email" placeholder="Enter your email" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" name="readerEmail" required>
+                                    <input type="email" placeholder="Enter your email" name="readerEmail" required>
                                 </div>
                                 <div class="input-box">
                                     <i class="fas fa-lock"></i>

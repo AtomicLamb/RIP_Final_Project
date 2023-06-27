@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -261,7 +262,7 @@ public class CommentImplementation implements CommentDAOInterface{
         
         try {
             
-            query = "delete from comments c where c.CommentID = ?";
+            query = "delete from comments c where c.CommentID = ? and c.IsFlagged = 1";
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, comment.getCommentID());
@@ -395,7 +396,7 @@ public class CommentImplementation implements CommentDAOInterface{
     }
     
     @Override       //Completed: Allows an editor to view all the reported comments.
-    public ArrayList<Comment> viewFlaggedComments() {
+    public List<Comment> viewFlaggedComments() {
         
         conn = DatabaseConnectionManager.getConnection();
         ArrayList<Comment> flaggedComments = new ArrayList<>();
@@ -540,7 +541,7 @@ public class CommentImplementation implements CommentDAOInterface{
         
     }
     
-    @Override   @Deprecated     //TODO: Neaten Up.
+    @Override   @Deprecated     //TODO: Neaten Up, Logger.
     public String clearComments(Story story) {
         
         conn = DatabaseConnectionManager.getConnection();

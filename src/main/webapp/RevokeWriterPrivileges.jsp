@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import = "java.util.ArrayList"%>
 <%@page import = "java.util.List"%>
-<%@page import = "Model.Person"%>
+<%@ page import = "TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,21 +23,19 @@
               <div class="scrollableList">
                 <ul type="disc">
             <%
-            List<Person> names = (List<Person>) request.getAttribute("message");
-            if(names!=null){
-             for(Person name: names)
-            {
+           List<Writer> writers = (List<Writer>) request.getAttribute("writerList");
+                for (Writer w: writers) 
+                {        
             %>
-            <li> <strong style= "color:black;"><%=name%></strong></li>
-         <%}
-          }%>
+            <li> <strong style= "color:black; width: 1000px"><%=w.getName()%> <%=w.getSurname()%> [<%=w.getEmail()%>]</strong></li>
+         <%}%>
         </ul>
             </div>
             <div class="forms">
                 <div class="form-content">
                     <form action="editorServlet" method="post">
                         <div class="button input-box">
-                            <input style="color: white; background-color: black;" type="number" placeholder="Enter the id num of the writer to revoke their writer privileges." name="revokeWriterPrivilegesID" min="1" max="<%=names.size() %>" required>
+                             <input style="color: white; background-color: black;" type="email" placeholder="Enter the email of the person you want to remove" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" name="removeWriterPrivileges" required>                                        
                         </div>
                         <div class="button input-box">
                         <input style="color: white; background-color: black;" type="submit" name="submit" value="REVOKE WRITER PRIVILEGE">

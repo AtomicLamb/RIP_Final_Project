@@ -16,6 +16,10 @@ public class Comment {
     public Comment(){
         
     }
+    public Comment(Integer commentID)
+    {
+        this.commentID = commentID;    
+    }
     
     public Comment(Integer commentID, Double data) {
         

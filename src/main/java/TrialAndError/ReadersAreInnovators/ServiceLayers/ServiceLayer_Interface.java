@@ -14,6 +14,7 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface ServiceLayer_Interface {
     
@@ -56,7 +57,7 @@ public interface ServiceLayer_Interface {
     String addComment(Comment comment);
     
     
-    ArrayList<Comment> getComments(Story story);
+    List<Comment> getComments(Story story);
     
     
     String reportComment(Comment comment);
@@ -66,7 +67,7 @@ public interface ServiceLayer_Interface {
     
     String unFlagComment(Comment comment);
     
-    ArrayList<Comment> viewFlaggedComments();
+    List<Comment> viewFlaggedComments();
     
     Integer getNumberOfComments(Story story);
     
@@ -79,7 +80,7 @@ public interface ServiceLayer_Interface {
     String denyWriter(Writer writer);
     
     
-    ArrayList<Writer> viewWriters();
+    List<Writer> viewWriters();
     
     String writerRegistration(WriterApplication writerApplication);
     
@@ -102,7 +103,7 @@ public interface ServiceLayer_Interface {
     String deselectGenre(User user, Genre genre);
     
     
-    ArrayList<Genre> getGenres();
+    List<Genre> getGenres();
     
     
     ArrayList<Genre> getUserGenres(User user);
@@ -190,4 +191,5 @@ public interface ServiceLayer_Interface {
     
     
     Writer getAuthor(Writer writer);
+    String revokeWriterPrivileges(Writer writer);
 }

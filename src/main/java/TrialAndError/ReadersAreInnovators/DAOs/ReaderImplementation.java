@@ -8,27 +8,34 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class ReaderImplementation implements ReaderDAOInterface {
     
     
-    //
-    //
+    //Trial and Error Certified.
+    //TODO @Author
     
     
     private Connection conn;
-    FunctionsClass functionsClass = new FunctionsClass();
     private PreparedStatement ps;
     private ResultSet rs;
     private String query;
     private String message;
-    
+    private byte[] decoder;
+    private InputStream inputStream;
+    FunctionsClass functionsClass = new FunctionsClass();
     
     public ReaderImplementation(){
         
@@ -38,8 +45,8 @@ public class ReaderImplementation implements ReaderDAOInterface {
     @Override       //Completed: Allows a user to register to the RIP system.
     public String registerReader(Reader reader) {
         
-        
         conn = DatabaseConnectionManager.getConnection();
+        
         try {
             
             query = "insert into users (Name, Surname, UserTypeID, Email, PhoneNumber, Password) values (?, ?, ?, ?, ?, ?)";
@@ -58,9 +65,7 @@ public class ReaderImplementation implements ReaderDAOInterface {
         } catch (SQLException e) {
             
             message = "Registration Unsuccessful.";
-            System.out.println("Registration Unsuccessful.");
-            e.printStackTrace();
-            //Logger....
+            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Registration Unsuccessful.", e);
             
         } finally {
             
@@ -140,9 +145,7 @@ public class ReaderImplementation implements ReaderDAOInterface {
             
         } catch (SQLException e) {
             
-            System.out.println("Error logging in.");
-            e.printStackTrace();
-            //Logger....
+            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error logging into user account.", e);
             
         } finally {
             
@@ -216,10 +219,8 @@ public class ReaderImplementation implements ReaderDAOInterface {
             
         } catch (SQLException e) {
             
-            message = "Error editing information.";
-            System.out.println("Error editing information.");
-            e.printStackTrace();
-            //Logger....
+            message = "Error editing personal information.";
+            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error editing personal information.", e);
             
         } finally {
             
@@ -289,10 +290,8 @@ public class ReaderImplementation implements ReaderDAOInterface {
             
         } catch (SQLException e) {
             
-            message = "Error following Author.";
-            System.out.println("Error following Author.");
-            e.printStackTrace();
-            //Logger....
+            message = "Error following the selected Author.";
+            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error following the selected Author.", e);
             
         } finally {
             
@@ -344,27 +343,49 @@ public class ReaderImplementation implements ReaderDAOInterface {
         
     }
     
-    @Override       //TODO
+    @Override       //Completed: Allows a user to see all their favorite books.
     public ArrayList<Story> getAllFavorites(User user) {
         
-       // conn = DatabaseConnectionManager.getConnection();
-        
+       conn = DatabaseConnectionManager.getConnection();
+       ArrayList<Story> favoriteStories = new ArrayList<>();
+       
         try {
             
-            query = "";
+            query = "select s.Title, s.CoverImage, concat_ws(\" \", u.Name, u.Surname) as AuthorName from stories s, users u, userfavorites f " +
+                    "where f.StoryID = s.StoryID and s.AuthorID = u.UserID and f.UserID = ?";
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, user.getUserID());
-            ps.executeUpdate();
             
-            message = "Author successfully followed.";
+            rs = ps.executeQuery();
+            
+            while (rs.next()){
+                
+                InputStream inputStream = rs.getBinaryStream(2);
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int bytesRead = -1;
+                
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    
+                    outputStream.write(buffer, 0, bytesRead);
+                    
+                }
+                
+                byte[] imageBytes = outputStream.toByteArray();
+                String image = Base64.getEncoder().encodeToString(imageBytes);
+                
+                favoriteStories.add(new Story(rs.getString(1), rs.getString(3), image));
+                
+            }
             
         } catch (SQLException e) {
             
-            message = "Error following Author.";
-            System.out.println("Error following Author.");
-            e.printStackTrace();
-            //Logger....
+            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error getting all Favorites.", e);
+            
+        } catch (IOException e) {
+            
+            throw new RuntimeException(e);
             
         } finally {
             
@@ -412,30 +433,53 @@ public class ReaderImplementation implements ReaderDAOInterface {
             
         }
         
-        return null;
+        return favoriteStories;
         
     }
     
-    @Override       //TODO
+    @Override       //Completed: Allows a user to see all their favorite books that they have read.
     public ArrayList<Story> getReadFavorites(User user) {
         
         conn = DatabaseConnectionManager.getConnection();
+        ArrayList<Story> readFavoriteStories = new ArrayList<>();
         
         try {
             
-            query = "";
+            query = "select s.Title, s.CoverImage, concat_ws(\" \", u.Name, u.Surname) as Name from stories s, users u, userfavorites f, userread r " +
+                            "where f.StoryID = s.StoryID and s.AuthorID = u.UserID and s.StoryID = r.StoryID and r.IsRead = 1 and  f.UserID = ?";
             
             ps = conn.prepareStatement(query);
-            ps.executeUpdate();
+            ps.setInt(1, user.getUserID());
             
-            message = "Author successfully followed.";
+            rs = ps.executeQuery();
+            
+            while (rs.next()){
+                
+                InputStream inputStream = rs.getBinaryStream(2);
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int bytesRead = -1;
+                
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    
+                    outputStream.write(buffer, 0, bytesRead);
+                    
+                }
+                
+                byte[] imageBytes = outputStream.toByteArray();
+                String image = Base64.getEncoder().encodeToString(imageBytes);
+                
+                readFavoriteStories.add(new Story(rs.getString(1), rs.getString(3), image));
+                
+            }
             
         } catch (SQLException e) {
             
-            message = "Error following Author.";
-            System.out.println("Error following Author.");
-            e.printStackTrace();
-            //Logger....
+            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error getting all read Favorites.", e);
+            
+        } catch (IOException e) {
+            
+            throw new RuntimeException(e);
             
         } finally {
             
@@ -483,30 +527,53 @@ public class ReaderImplementation implements ReaderDAOInterface {
             
         }
         
-        return null;
+        return readFavoriteStories;
         
     }
     
-    @Override       //TODO
+    @Override       //Completed: Allows a user to see all their favorite books that they have not read.
     public ArrayList<Story> getUnreadFavorites(User user) {
         
         conn = DatabaseConnectionManager.getConnection();
+        ArrayList<Story> unreadFavoriteStories = new ArrayList<>();
         
         try {
             
-            query = "insert into";
+            query = "select s.Title, s.CoverImage, concat_ws(\" \", u.Name, u.Surname) as Name from stories s, users u, userfavorites f, userread r " +
+                    "where f.StoryID = s.StoryID and s.AuthorID = u.UserID and s.StoryID = r.StoryID and r.IsRead = 0 and  f.UserID = ?";
             
             ps = conn.prepareStatement(query);
-            ps.executeUpdate();
+            ps.setInt(1, user.getUserID());
             
-            message = "Author successfully followed.";
+            rs = ps.executeQuery();
+            
+            while (rs.next()){
+                
+                InputStream inputStream = rs.getBinaryStream(2);
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int bytesRead = -1;
+                
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    
+                    outputStream.write(buffer, 0, bytesRead);
+                    
+                }
+                
+                byte[] imageBytes = outputStream.toByteArray();
+                String image = Base64.getEncoder().encodeToString(imageBytes);
+                
+                unreadFavoriteStories.add(new Story(rs.getString(1), rs.getString(3), image));
+                
+            }
             
         } catch (SQLException e) {
             
-            message = "Error following Author.";
-            System.out.println("Error following Author.");
-            e.printStackTrace();
-            //Logger....
+            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error getting all unread Favorites.", e);
+            
+        } catch (IOException e) {
+            
+            throw new RuntimeException(e);
             
         } finally {
             
@@ -554,7 +621,7 @@ public class ReaderImplementation implements ReaderDAOInterface {
             
         }
         
-        return null;
+        return unreadFavoriteStories;
         
     }
     

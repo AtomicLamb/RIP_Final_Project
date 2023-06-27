@@ -13,12 +13,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class StoryImplementation implements StoryDAOInterface {
     
     
     //
-    //
+    //TODO: JUnit, Logger, @Author....
     
     
     private Connection conn;
@@ -53,9 +55,8 @@ public class StoryImplementation implements StoryDAOInterface {
             
         } catch (SQLException e){
             
-            System.out.println("Story successfully removed.");
-            e.printStackTrace();
-            //Logger....
+            message = "Error removing Story";
+            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error removing story.", e);
             
         } finally {
             
@@ -125,9 +126,8 @@ public class StoryImplementation implements StoryDAOInterface {
             
         } catch (SQLException e) {
             
-            System.out.println("Error privatizing story.");
-            e.printStackTrace();
-            //Logger....
+            message = "Error privatizing story";
+            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error privatizing story.", e);
             
         } finally {
             
@@ -197,9 +197,8 @@ public class StoryImplementation implements StoryDAOInterface {
             
         } catch (SQLException e) {
             
-            System.out.println("Error publicising story.");
-            e.printStackTrace();
-            //Logger....
+            message = "Error publicising story.";
+            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error publicising story.", e);
             
         } finally {
             
@@ -271,10 +270,8 @@ public class StoryImplementation implements StoryDAOInterface {
             
         } catch (SQLException e) {
             
-            message = "Error adding story to pending ";
-            System.out.println("Error adding story to pending ");
-            e.printStackTrace();
-            //Logger....
+            message = "Error adding story.";
+            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error adding story.", e);
             
         } finally {
             
@@ -349,8 +346,7 @@ public class StoryImplementation implements StoryDAOInterface {
         } catch (SQLException e) {
             
             message = "Error reading the story.";
-            System.out.println("Error reading the story.");
-            e.printStackTrace();
+            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error reading the story.", e);
             
         } finally {
             
@@ -402,7 +398,7 @@ public class StoryImplementation implements StoryDAOInterface {
         
     }
     
-    @Override
+    @Override       //TODO From Here....
     public ArrayList<Story> getPublishedStories(Writer writer) {
         File img = new File("C:\\Users\\TKS\\Desktop\\VZAP Project\\Images", "StupidFileNameBitch");
         FileOutputStream fs = null;
@@ -556,7 +552,7 @@ public class StoryImplementation implements StoryDAOInterface {
         
     }
     
-    @Override
+    @Override       //TODO
     public Story displayStoryDetails(Story story) {
         
         Story s = null;
@@ -582,11 +578,13 @@ public class StoryImplementation implements StoryDAOInterface {
                     rs.getInt(5), rs.getDouble(6), rs.getString(8), null, " ");
             
         } catch (SQLException e) {
-            System.out.println("Error displaying story details");
-            e.printStackTrace();
+            
+            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error privatizing story.", e);
+            
         } catch (IOException e) {
-            System.out.println("IO Exception on line 220");
-            e.printStackTrace();
+            
+            throw new RuntimeException(e);
+            
         } finally {
             
             if (rs!=null){

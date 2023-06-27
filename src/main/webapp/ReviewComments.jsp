@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import = "java.util.ArrayList"%>
 <%@page import = "java.util.List"%>
-<%@page import = "Model.Person"%>
+<%@ page import = "TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,25 +22,23 @@
             <h1 style="font-size:50px;text-align:center;">Review Comments</h1><br><br>
             <div class="scrollableList">
                 <ul type="disc">
-            <%
-            List<Person> names = (List<Person>) request.getAttribute("message");
-            if(names!=null){
-             for(Person name: names)
-            {
-            %>
-            <li> <strong style= "color:black;"><%=name%></strong></li>
-         <%}
-          }%>
+             <%
+                       List<Comment> comments = (List<Comment>) request.getAttribute("flaggedCommentsList");
+                            for (Comment c: comments) 
+                            {        
+                        %>
+                        <li> <strong style= "color:black;">[<%=c.getCommentID()%>] <%=c.getName()%>, "<%=c.getComment()%>"</strong></li><br>
+                     <%}%>
         </ul>
             </div>
             <div class="forms">
                 <div class="form-content">
                     <form action="editorServlet" method="post">
                         <div class="button input-box">
-                            <input style="color: white; background-color: black;" type="number" placeholder="Enter the id num of the comment you would like to remove or ignore." name="reviewCommentID" min="1" max="<%=names.size() %>" required>
+                            <input style="color: white; background-color: black;" type="number" placeholder="Enter the id num of the comment you would like to remove or ignore." name="reviewCommentID" min="1" required>
                         </div>
                         <div class="button input-box">
-                            <input style="color: white; background-color: black;" type="submit" name="submit" value="IGNORE">
+                            <input style="color: white; background-color: black;" type="submit" name="submit" value="UNFLAG COMMENT">
                         </div> 
                         <div class="button input-box">
                             <input style="color: white; background-color: black;" type="submit" name="submit" value="REMOVE COMMENT">

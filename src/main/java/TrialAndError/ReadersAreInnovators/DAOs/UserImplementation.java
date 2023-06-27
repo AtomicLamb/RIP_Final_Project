@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UserImplementation implements UserDAOInterface {
     
@@ -83,8 +85,7 @@ public class UserImplementation implements UserDAOInterface {
             
         } catch (SQLException e) {
             
-            System.out.println("Error getting searched stories.");
-            e.printStackTrace();
+            Logger.getLogger(UserImplementation.class.getName()).log(Level.FINE, "Error getting Search Results.", e);
             
         } finally {
             

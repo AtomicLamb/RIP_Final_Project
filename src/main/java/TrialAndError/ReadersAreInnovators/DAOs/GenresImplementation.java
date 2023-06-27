@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GenresImplementation implements GenresDAOInterface{
@@ -51,10 +53,8 @@ public class GenresImplementation implements GenresDAOInterface{
             
         } catch (SQLException e) {
             
-            message = "Error adding new genre, the genre already exists.";
-            System.out.println(message);
-            e.printStackTrace();
-            //logger
+            message = "Error adding new genre.";
+            Logger.getLogger(GenresImplementation.class.getName()).log(Level.FINE, "Error adding genre.", e);
             
         } finally {
             
@@ -113,20 +113,18 @@ public class GenresImplementation implements GenresDAOInterface{
         
         try {
             
-            query = "delete from genres g where (g.Genre = ?)";
+            query = "delete from genres g where g.GenreID = ?";
             
             ps = conn.prepareStatement(query);
-            ps.setString(1, genre.getGenre());
+            ps.setInt(1, genre.getGenreID());
             ps.executeUpdate();
             
             message = "Genre successfully deleted.";
             
         } catch (SQLException e) {
             
-            message = "Error removing genre, the genre does not exist.";
-            System.out.println(message);
-            e.printStackTrace();
-            //logger
+            message = "Error removing genre.";
+            Logger.getLogger(GenresImplementation.class.getName()).log(Level.FINE, "Error removing genre.", e);
             
         } finally {
             
@@ -197,9 +195,8 @@ public class GenresImplementation implements GenresDAOInterface{
         } catch (SQLException e) {
             
             message = "Error adding Genre to list of your Genres.";
-            System.out.println("Error selecting genre.");
-            e.printStackTrace();
-            //logger...
+            Logger.getLogger(GenresImplementation.class.getName()).log(Level.FINE, "Error adding genre to your list of genres.", e);
+            
             
         } finally {
             
@@ -256,7 +253,6 @@ public class GenresImplementation implements GenresDAOInterface{
         
         conn = DatabaseConnectionManager.getConnection();
         
-        
         try {
             
             query = "delete from usergenreintersect i where UserID = ? and GenreID = ?";
@@ -271,9 +267,8 @@ public class GenresImplementation implements GenresDAOInterface{
         } catch (SQLException e) {
             
             message = "Error removing Genre from your list of Genres.";
-            System.out.println("Error removing Genre from your list of Genres.");
-            e.printStackTrace();
-            //logger....
+            Logger.getLogger(GenresImplementation.class.getName()).log(Level.FINE, "Error removing genre from your list of genres.", e);
+            
             
         } finally {
             
@@ -326,7 +321,7 @@ public class GenresImplementation implements GenresDAOInterface{
     }
     
     @Override       //Completed: Allows a user to see all available Genres.
-    public ArrayList<Genre> getGenres() {
+    public List<Genre> getGenres() {
         
         conn = DatabaseConnectionManager.getConnection();
         ArrayList<Genre> allGenres = new ArrayList<>();
@@ -346,8 +341,7 @@ public class GenresImplementation implements GenresDAOInterface{
             
         } catch (SQLException e) {
             
-            System.out.println("Error retrieving genres.");
-            e.printStackTrace();
+            Logger.getLogger(GenresImplementation.class.getName()).log(Level.FINE, "Error getting all genres.", e);
             
         } finally {
             
@@ -421,8 +415,7 @@ public class GenresImplementation implements GenresDAOInterface{
             
         } catch (SQLException e) {
             
-            System.out.println("Error getting the User's Genres.");
-            e.printStackTrace();
+            Logger.getLogger(GenresImplementation.class.getName()).log(Level.FINE, "Error getting user genres.", e);
             
         } finally {
             
@@ -474,7 +467,7 @@ public class GenresImplementation implements GenresDAOInterface{
         
     }
     
-    @Override       @Deprecated     //Finish
+    @Override       @Deprecated     //TODO Neaten Up.
     public String clearGenres(Story story) {
         
         conn = DatabaseConnectionManager.getConnection();
@@ -500,8 +493,7 @@ public class GenresImplementation implements GenresDAOInterface{
         } catch (SQLException e) {
             
             message = "Error clearing genres.";
-            System.out.println("Error clearing genres.");
-            e.printStackTrace();
+            Logger.getLogger(GenresImplementation.class.getName()).log(Level.FINE, "Error clearing genres.", e);
             
         } finally {
             

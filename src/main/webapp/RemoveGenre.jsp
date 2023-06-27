@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import = "java.util.ArrayList"%>
 <%@page import = "java.util.List"%>
-<%@page import = "Model.Person"%>
+<%@ page import = "TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,15 +23,13 @@
            <div class="scrollableList">
                 <div class="scrollableList">
                 <ul type="disc">
-            <%
-            List<Person> names = (List<Person>) request.getAttribute("message");
-            if(names!=null){
-             for(Person name: names)
-            {
-            %>
-            <li> <strong style= "color:black;"><%=name%></strong></li>
-         <%}
-          }%>
+                    <%
+                        List<Genre> genres = (List<Genre>) request.getAttribute("getGenre");
+                        for (Genre g: genres)
+                        {
+                    %>
+                    <li> <strong style= "color:black;">[<%=g.getGenreID()%>] <%=g.getGenre()%></strong></li><br>
+                    <%}%>
         </ul>
             </div>
             </div>
@@ -39,10 +37,10 @@
                 <div class="form-content">
                     <form action="editorServlet" method="post">
                         <div class="button input-box">
-                            <input style="color: white; background-color: black;" type="number" placeholder="Enter the id num of the genre you want to remove." name="removeGenreID" min="1" max="<%=names.size() %>" required>
+                            <input style="color: white; background-color: black;" type="number" placeholder="Enter the id num of the genre you want to remove." name="removeGenreID" min="1" required>
                         </div>
                         <div class="button input-box">
-                        <input style="color: white; background-color: black;" type="submit" name="submit" value="REMOVE EDITOR">
+                        <input style="color: white; background-color: black;" type="submit" name="submit" value="REMOVE GENRE">
                         </div> 
                     </form>
                 </div>

@@ -10,20 +10,145 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="178285d8-becc-4c7f-b082-ee11f211687c" name="Changes" comment="Initial Commit: No Error mostly ok.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/postResultServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/horizontal_scrollBar.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/AdminEditorDAOInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/AdminEditorDAOInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/AdminEditorImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/AdminEditorImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/AnalyticsDAOInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/AnalyticsDAOInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/AnalyticsImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/AnalyticsImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/CommentDAOInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/CommentDAOInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/CommentImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/CommentImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/EditorDAOInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/EditorDAOInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/EditorImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/EditorImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/GenresImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/GenresImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/RatingImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/RatingImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/ReaderImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/ReaderImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/StoryImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/StoryImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/UserImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/UserImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/WriterImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/WriterImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/StoryElements/Story.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/StoryElements/Story.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayerClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayerClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Testing/JUnitTesting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Testing/JUnitTesting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
     </list>
     <list id="2787905e-793b-4e17-a742-137bd793808e" name="Changes by matth" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/WriterDAOInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/WriterDAOInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/WriterImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/WriterImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/EditorDAOInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/EditorDAOInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/EditorImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/EditorImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/GenresDAOInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/GenresDAOInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/GenresImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/GenresImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/StoryElements/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/StoryElements/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/StoryElements/Genre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/StoryElements/Genre.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/UserTypes/Writer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Models/UserTypes/Writer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/REST/RESTControllerRIP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/REST/RESTControllerRIP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/RESTService/ImpService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/RESTService/ImpService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayerClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayerClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayer_Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayer_Interface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/adminEditorServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/adminEditorServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/controllerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/controllerServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/editorServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/editorServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Testing/JUnitTesting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Testing/JUnitTesting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin-Editor.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin-Editor.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Editors.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Editors.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/RemoveGenre.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/RemoveGenre.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/ReviewComments.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/ReviewComments.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/RevokeWriterPrivileges.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/RevokeWriterPrivileges.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style.css" afterDir="false" />
+    </list>
+    <list id="f47485f4-6c1f-4d9b-a600-1833559edd0e" name="Changes by user" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/HomePageServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/HomePageServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/StoryServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/StoryServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/HomePage2.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/HomePage2.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/StoryDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/StoryDetails.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/ViewStories.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/ViewStories.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/EditorImplementation.java">
+      <ranges>
+        <range start1="16" end1="16" start2="16" end2="17" changelist="2787905e-793b-4e17-a742-137bd793808e" />
+        <range start1="64" end1="65" start2="65" end2="66" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="140" end1="141" start2="141" end2="143" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="209" end1="210" start2="211" end2="213" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="262" end1="263" start2="265" end2="266" changelist="2787905e-793b-4e17-a742-137bd793808e" />
+        <range start1="265" end1="266" start2="268" end2="269" changelist="2787905e-793b-4e17-a742-137bd793808e" />
+        <range start1="282" end1="283" start2="285" end2="286" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="360" end1="361" start2="363" end2="364" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="429" end1="430" start2="432" end2="433" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="517" end1="520" start2="520" end2="521" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="610" end1="613" start2="611" end2="612" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="668" end1="668" start2="667" end2="737" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/EditorDAOInterface.java">
+      <ranges>
+        <range start1="9" end1="9" start2="9" end2="10" changelist="2787905e-793b-4e17-a742-137bd793808e" />
+        <range start1="17" end1="18" start2="18" end2="19" changelist="2787905e-793b-4e17-a742-137bd793808e" />
+        <range start1="22" end1="22" start2="23" end2="24" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayerClass.java">
+      <ranges>
+        <range start1="17" end1="17" start2="17" end2="18" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="115" end1="116" start2="116" end2="118" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="126" end1="127" start2="128" end2="129" changelist="2787905e-793b-4e17-a742-137bd793808e" />
+        <range start1="131" end1="132" start2="133" end2="134" changelist="2787905e-793b-4e17-a742-137bd793808e" />
+        <range start1="135" end1="137" start2="137" end2="140" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="161" end1="163" start2="164" end2="166" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="177" end1="179" start2="180" end2="183" changelist="2787905e-793b-4e17-a742-137bd793808e" />
+        <range start1="183" end1="184" start2="187" end2="188" changelist="2787905e-793b-4e17-a742-137bd793808e" />
+        <range start1="197" end1="199" start2="201" end2="204" changelist="2787905e-793b-4e17-a742-137bd793808e" />
+        <range start1="255" end1="256" start2="260" end2="261" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="355" end1="356" start2="360" end2="366" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/GenresImplementation.java">
+      <ranges>
+        <range start1="13" end1="13" start2="13" end2="15" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="53" end1="57" start2="55" end2="57" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="115" end1="116" start2="115" end2="116" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="118" end1="119" start2="118" end2="119" changelist="2787905e-793b-4e17-a742-137bd793808e" />
+        <range start1="125" end1="129" start2="125" end2="127" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="199" end1="202" start2="197" end2="199" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="258" end1="259" start2="255" end2="255" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="273" end1="276" start2="269" end2="271" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="328" end1="329" start2="323" end2="324" changelist="2787905e-793b-4e17-a742-137bd793808e" />
+        <range start1="348" end1="350" start2="343" end2="344" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="423" end1="425" start2="417" end2="418" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="476" end1="477" start2="469" end2="470" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="502" end1="504" start2="495" end2="496" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Testing/JUnitTesting.java">
+      <ranges>
+        <range start1="15" end1="15" start2="15" end2="22" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="32" end1="33" start2="39" end2="40" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="35" end1="36" start2="42" end2="43" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="75" end1="76" start2="82" end2="83" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="164" end1="165" start2="171" end2="172" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="201" end1="201" start2="208" end2="215" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="208" end1="209" start2="222" end2="222" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="216" end1="217" start2="229" end2="229" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="238" end1="239" start2="250" end2="251" changelist="2787905e-793b-4e17-a742-137bd793808e" />
+        <range start1="293" end1="294" start2="305" end2="306" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="361" end1="362" start2="373" end2="374" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+        <range start1="451" end1="452" start2="463" end2="464" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
+      </ranges>
+    </file>
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -38,27 +163,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "deletionFromPopupRequiresConfirmation": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/TKS/Desktop/VZAP_2023/Software/JUnit/junit-4.10.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.13964844",
-    "project.structure.side.proportion": "0.2125",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;deletionFromPopupRequiresConfirmation&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/TKS/Desktop/VZAP_2023/Software/JUnit/junit-4.10.jar&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.13964844&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2125&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\java\TrialAndError\ReadersAreInnovators\ServiceLayers" />
@@ -68,13 +193,15 @@
       <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\java\TrialAndError\RIP\Testing" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\java\TrialAndError\ReadersAreInnovators\Servlets" />
+      <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\webapp\css" />
       <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\java\TrialAndError\ReadersAreInnovators\RESTService" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="TrialAndError.RIP.Servlets" />
     </key>
   </component>
-  <component name="RunManager" selected="GlassFish Server.GlassFish 7.0.4">
+  <component name="RunManager" selected="JUnit.JUnitTesting.removeGenreTest">
     <configuration name="GlassFish 7.0.4" type="GlassfishConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="GlassFish 7.0.4" ALTERNATIVE_JRE_ENABLED="false">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/Trial_and_Error_Readers_are_Innovators-1.0-SNAPSHOT" />
       <deployment>
@@ -146,7 +273,7 @@
         </option>
       </method>
     </configuration>
-    <configuration name="JUnitTesting.addEditorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JUnitTesting.editDraftTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Trial_and_Error_Readers_are_Innovators" />
       <extension name="coverage">
         <pattern>
@@ -156,13 +283,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="TrialAndError.ReadersAreInnovators.Testing" />
       <option name="MAIN_CLASS_NAME" value="TrialAndError.ReadersAreInnovators.Testing.JUnitTesting" />
-      <option name="METHOD_NAME" value="addEditorTest" />
+      <option name="METHOD_NAME" value="editDraftTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JUnitTesting.getUnreadFavoritesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JUnitTesting.getAllDraftsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Trial_and_Error_Readers_are_Innovators" />
       <extension name="coverage">
         <pattern>
@@ -172,13 +299,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="TrialAndError.ReadersAreInnovators.Testing" />
       <option name="MAIN_CLASS_NAME" value="TrialAndError.ReadersAreInnovators.Testing.JUnitTesting" />
-      <option name="METHOD_NAME" value="getUnreadFavoritesTest" />
+      <option name="METHOD_NAME" value="getAllDraftsTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JUnitTesting.registerReaderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JUnitTesting.getAuthorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Trial_and_Error_Readers_are_Innovators" />
       <extension name="coverage">
         <pattern>
@@ -188,13 +315,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="TrialAndError.ReadersAreInnovators.Testing" />
       <option name="MAIN_CLASS_NAME" value="TrialAndError.ReadersAreInnovators.Testing.JUnitTesting" />
-      <option name="METHOD_NAME" value="registerReaderTest" />
+      <option name="METHOD_NAME" value="getAuthorTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JUnitTesting.removeEditorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JUnitTesting.removeGenreTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Trial_and_Error_Readers_are_Innovators" />
       <extension name="coverage">
         <pattern>
@@ -204,13 +331,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="TrialAndError.ReadersAreInnovators.Testing" />
       <option name="MAIN_CLASS_NAME" value="TrialAndError.ReadersAreInnovators.Testing.JUnitTesting" />
-      <option name="METHOD_NAME" value="removeEditorTest" />
+      <option name="METHOD_NAME" value="removeGenreTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JUnitTesting.searchTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JUnitTesting.writerRegistrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Trial_and_Error_Readers_are_Innovators" />
       <extension name="coverage">
         <pattern>
@@ -220,7 +347,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="TrialAndError.ReadersAreInnovators.Testing" />
       <option name="MAIN_CLASS_NAME" value="TrialAndError.ReadersAreInnovators.Testing.JUnitTesting" />
-      <option name="METHOD_NAME" value="searchTest" />
+      <option name="METHOD_NAME" value="writerRegistrationTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -228,11 +355,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.JUnitTesting.addEditorTest" />
-        <item itemvalue="JUnit.JUnitTesting.removeEditorTest" />
-        <item itemvalue="JUnit.JUnitTesting.registerReaderTest" />
-        <item itemvalue="JUnit.JUnitTesting.getUnreadFavoritesTest" />
-        <item itemvalue="JUnit.JUnitTesting.searchTest" />
+        <item itemvalue="JUnit.JUnitTesting.removeGenreTest" />
+        <item itemvalue="JUnit.JUnitTesting.getAuthorTest" />
+        <item itemvalue="JUnit.JUnitTesting.editDraftTest" />
+        <item itemvalue="JUnit.JUnitTesting.writerRegistrationTest" />
+        <item itemvalue="JUnit.JUnitTesting.getAllDraftsTest" />
       </list>
     </recent_temporary>
   </component>
@@ -247,7 +374,8 @@
       <workItem from="1687762353639" duration="4232000" />
       <workItem from="1687767269108" duration="18330000" />
       <workItem from="1687789765027" duration="4212000" />
-      <workItem from="1687807224419" duration="2677000" />
+      <workItem from="1687807224419" duration="11162000" />
+      <workItem from="1687857856816" duration="11142000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit: No Error mostly ok.">
       <created>1687765315546</created>

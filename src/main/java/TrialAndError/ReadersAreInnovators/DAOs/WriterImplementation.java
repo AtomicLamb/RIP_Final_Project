@@ -13,11 +13,13 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class WriterImplementation implements WriterDAOInterface{
     
     
-    //Trial andError Certified.
+    //Trial and Error Certified.
     //TODO: Logger, Tests, 
     
     private Connection conn;
@@ -70,7 +72,7 @@ public class WriterImplementation implements WriterDAOInterface{
             
         } catch (SQLException e) {
             
-            throw new RuntimeException(e);
+            Logger.getLogger(WriterImplementation.class.getName()).log(Level.FINE, "Error getting the selected Draft.", e);
             
         } catch (IOException e) {
             
@@ -163,7 +165,7 @@ public class WriterImplementation implements WriterDAOInterface{
             
         } catch (SQLException e) {
             
-            throw new RuntimeException(e);
+            Logger.getLogger(WriterImplementation.class.getName()).log(Level.FINE, "Error getting a list of all Drafts.", e);
             
         } catch (IOException e) {
             
@@ -256,9 +258,7 @@ public class WriterImplementation implements WriterDAOInterface{
         } catch (SQLException e) {
             
             message = "Error submitting writer application.";
-            System.out.println("Error adding reader.");
-            e.printStackTrace();
-            //Logger....
+            Logger.getLogger(WriterImplementation.class.getName()).log(Level.FINE, "Error submitting writer application.", e);
             
         } finally {
             
@@ -337,9 +337,7 @@ public class WriterImplementation implements WriterDAOInterface{
         } catch (SQLException e) {
             
             message = "Error editing draft.";
-            System.out.println("Error editing draft.");
-            e.printStackTrace();
-            //Logger....
+            Logger.getLogger(WriterImplementation.class.getName()).log(Level.FINE, "Error error editing draft.", e);
             
         } finally {
             
@@ -411,9 +409,7 @@ public class WriterImplementation implements WriterDAOInterface{
         
         } catch (SQLException e) {
             
-            System.out.println("Error adding reader.");
-            e.printStackTrace();
-            //Logger....
+            Logger.getLogger(WriterImplementation.class.getName()).log(Level.FINE, "Error getting the selected Author.", e);
             
         } finally {
             

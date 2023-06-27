@@ -17,6 +17,11 @@ public class Genre {
         this.genre = genre;
         
     }
+    public Genre(Integer genreID) {
+        
+        this.genreID = genreID;
+        
+    }
     
     public Genre(Integer genreID, Double data) {
         

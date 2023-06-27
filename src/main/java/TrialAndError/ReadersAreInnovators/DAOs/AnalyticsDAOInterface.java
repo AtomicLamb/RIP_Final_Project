@@ -9,6 +9,11 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import java.sql.Date;
 import java.util.ArrayList;
 
+/**
+ * @Desctripion:    The Analytics DAO Interface.
+ * @Author:         Tyler Schwegler.
+ * @Version:        v.1.0.0
+ */
 
 public interface AnalyticsDAOInterface{
     

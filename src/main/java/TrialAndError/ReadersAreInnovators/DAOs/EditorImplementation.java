@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,7 +63,7 @@ public class EditorImplementation implements EditorDAOInterface{
             
         } catch (SQLException e) {
             
-            Logger.getLogger(AdminEditorImplementation.class.getName()).log(Level.FINE, "Error retrieving pending writers.", e);
+            Logger.getLogger(EditorImplementation.class.getName()).log(Level.FINE, "Error retrieving pending writers.", e);
             
         } finally {
             
@@ -138,7 +139,8 @@ public class EditorImplementation implements EditorDAOInterface{
             
         } catch (SQLException e) {
             
-            Logger.getLogger(AdminEditorImplementation.class.getName()).log(Level.FINE, "Error approving writer application.", e);
+            message = "Error approving writer application.";
+            Logger.getLogger(EditorImplementation.class.getName()).log(Level.FINE, "Error approving writer application.", e);
             
         } finally {
             
@@ -207,7 +209,8 @@ public class EditorImplementation implements EditorDAOInterface{
             
         }catch(SQLException e){
             
-            Logger.getLogger(AdminEditorImplementation.class.getName()).log(Level.FINE, "Error denying writer application.", e);
+            message = "Error denying writer application.";
+            Logger.getLogger(EditorImplementation.class.getName()).log(Level.FINE, "Error denying writer application.", e);
             
         } finally {
             
@@ -260,10 +263,10 @@ public class EditorImplementation implements EditorDAOInterface{
     }
     
     @Override       //Completed: Allows a User to view a list of all Writers.
-    public ArrayList<Writer> viewWriters() {
+    public List<Writer> viewWriters() {
         
         conn = DatabaseConnectionManager.getConnection();
-        ArrayList<Writer> allWriters = new ArrayList<>();
+        List<Writer> allWriters = new ArrayList<>();
         
         try {
             
@@ -280,7 +283,7 @@ public class EditorImplementation implements EditorDAOInterface{
             
         } catch (SQLException e) {
             
-            Logger.getLogger(AdminEditorImplementation.class.getName()).log(Level.FINE, "Error viewing all writers.", e);
+            Logger.getLogger(EditorImplementation.class.getName()).log(Level.FINE, "Error viewing all writers.", e);
             
         } finally {
             
@@ -358,7 +361,7 @@ public class EditorImplementation implements EditorDAOInterface{
             
         } catch (SQLException e) {
             
-            Logger.getLogger(AdminEditorImplementation.class.getName()).log(Level.FINE, "Error approving pending Story.", e);
+            Logger.getLogger(EditorImplementation.class.getName()).log(Level.FINE, "Error approving pending Story.", e);
             
         } finally {
             
@@ -427,7 +430,7 @@ public class EditorImplementation implements EditorDAOInterface{
             
         } catch (SQLException e) {
             
-            Logger.getLogger(AdminEditorImplementation.class.getName()).log(Level.FINE, "Error denying the pending Story.", e);
+            Logger.getLogger(EditorImplementation.class.getName()).log(Level.FINE, "Error denying the pending Story.", e);
             
         } finally {
             
@@ -515,9 +518,7 @@ public class EditorImplementation implements EditorDAOInterface{
             
         } catch (SQLException e) {
             
-            System.out.println("Error reviewing the pending Story.");
-            throw new RuntimeException(e);
-            //Logger....
+            Logger.getLogger(EditorImplementation.class.getName()).log(Level.FINE, "Error reviewing the pending Story.", e);
             
         } catch (IOException e) {
             
@@ -608,9 +609,7 @@ public class EditorImplementation implements EditorDAOInterface{
             
         } catch (SQLException e) {
             
-            System.out.println("Error viewing qll pending Stories.");
-            throw new RuntimeException(e);
-            //Logger....
+            Logger.getLogger(EditorImplementation.class.getName()).log(Level.FINE, "Error viewing qll pending Stories.", e);
             
         } catch (IOException e) {
             
@@ -663,6 +662,76 @@ public class EditorImplementation implements EditorDAOInterface{
         }
         
         return storyApplications;
+        
+    }
+    
+    @Override       //Completed: Allows an editor to revoke a Writer's writing privilege.
+    public String revokeWriterPrivileges(Writer writer) {
+        
+        conn = DatabaseConnectionManager.getConnection();
+        
+        try{
+            
+            query = "update users u set u.UserTypeID = 1 where u.Email = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, writer.getEmail());
+            ps.executeUpdate();
+            
+            message = "Writer privileges successfully revoked.";
+            
+        }catch(SQLException e){
+            
+            message = "Error revoking writer privileges.";
+            Logger.getLogger(EditorImplementation.class.getName()).log(Level.FINE, "Error revoking writer privileges.", e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return message;
         
     }
     

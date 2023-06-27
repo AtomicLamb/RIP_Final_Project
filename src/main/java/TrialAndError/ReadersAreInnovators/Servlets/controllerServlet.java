@@ -40,8 +40,8 @@ public class controllerServlet extends HttpServlet {
                var dispatcher =  request.getRequestDispatcher("WriterSign-Up.jsp");
                         dispatcher.forward(request, response);
                 break;
-               case"Continue to homescreen":
-                   Integer num = 2;
+               case"Continue to Homepage":
+                   Integer num = 4;
                    request.setAttribute("message", num);
                    dispatcher =  request.getRequestDispatcher("HomePage.jsp");
                         dispatcher.forward(request, response);
