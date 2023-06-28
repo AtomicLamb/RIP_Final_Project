@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface ServiceLayer_Interface {
+    String removePendingStory(StoryApplication pendingStory);
     ArrayList<StoryApplication> viewPendingStories();
     
     List<Writer> getFollowedAuthors(User user);
@@ -24,7 +25,7 @@ public interface ServiceLayer_Interface {
     User getUser(User user);
     
     String removeEditor(Editor editor);
-    
+    ArrayList<Story> getAllDrafts(Writer writer);
     
     String addEditor(Editor editor);
     
@@ -78,7 +79,7 @@ public interface ServiceLayer_Interface {
     String clearComments(Story story);
     
     
-    ArrayList<WriterApplication> viewWriterApplications();
+    List<WriterApplication> viewWriterApplications();
     
     
     String denyWriter(Writer writer);
@@ -198,4 +199,6 @@ public interface ServiceLayer_Interface {
     List<Editor> viewEditors();
     
     String applyForWriter(WriterApplication writerApplication);
+    
+    String approveWriter(WriterApplication writerApplication);
 }

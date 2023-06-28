@@ -43,7 +43,7 @@ import javax.mail.internet.MimeMultipart;
  */
 @WebServlet(urlPatterns = {"/controllerServlet"})
 public class controllerServlet extends HttpServlet {
-    
+    public Email emailImp = new Email();
     private ImpService imp;
     private HttpSession session;
     private ServiceLayerClass service;
@@ -58,7 +58,7 @@ public class controllerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-       switch(request.getParameter("submit"))
+       switch(request.getParameter("submit"))       //Here
        {
            case"Writer":
                var dispatcher =  request.getRequestDispatcher("WriterSign-Up.jsp");
@@ -99,18 +99,19 @@ public class controllerServlet extends HttpServlet {
             String email = request.getParameter("readerEmail");
             String phoneNum = request.getParameter("readerPhoneNum");
             String password = request.getParameter("readerPassword");
+            
         
         request.setAttribute("message", imp.registerReader(new Reader(firstName,surname,email,phoneNum,password)));
                         var dispatcher =  request.getRequestDispatcher("index.jsp");
                        try {
                            dispatcher.forward(request, response);
+                           emailImp.sendEmail(email);
                        } catch (ServletException | IOException ex) {
                            Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
                        }
                        
                        //TODO email stuff
-                       String mail = (String) session.getAttribute("Email");
-                       String smtp = "smtp.gmail.com";
+        
                        
                        
     }

@@ -465,11 +465,12 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
     public ArrayList<Story> getMostViewedStories(Analytics analytics) {
         
         conn = DatabaseConnectionManager.getConnection();
-        query = "Select StoryID, Title from stories s where s.DatePublished between ? AND ? order by s.Views desc";
         ArrayList<Story> mostViewed = new ArrayList<>();
         Integer i = 0;
         
         try {
+            
+            query = "Select s.StoryID, s.Title, s.Views from stories s where s.DatePublished between ? AND ? order by s.Views desc";
             
             ps = conn.prepareStatement(query);
             ps.setDate(1, functionsClass.stringToDate(analytics.getStartDate()));
@@ -479,7 +480,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
             while (rs.next() && i < analytics.getNumberOfAnalytics()){
                 
                 i++;
-                mostViewed.add(new Story(rs.getInt(1), rs.getString(2)));
+                mostViewed.add(new Story(rs.getInt(1), rs.getString(2), (double) rs.getInt(3)));
                 
             }
             
@@ -541,11 +542,13 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
     public ArrayList<Story> getHighestRatedStories(Analytics analytics) {
         
         conn = DatabaseConnectionManager.getConnection();
-        query = "Select StoryID, Title from stories s where s.DatePublished between ? AND ? order by s.RatingAverage desc";
         ArrayList<Story> highestRated = new ArrayList<>();
         Integer i = 0;
         
         try {
+            
+            query = "Select s.StoryID, s.Title, avg(r.RatingScore) from stories s, rating r where s.StoryID = r.StoryID and " +
+                    "s.DatePublished between ? AND ? group by s.StoryID order by avg(r.RatingScore) desc;";
             
             ps = conn.prepareStatement(query);
             ps.setDate(1, functionsClass.stringToDate(analytics.getStartDate()));
@@ -555,7 +558,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
             while (rs.next() && i < analytics.getNumberOfAnalytics()){
                 
                 i++;
-                highestRated.add(new Story(rs.getInt(1), rs.getString(2)));
+                highestRated.add(new Story(rs.getInt(1), rs.getString(2), rs.getDouble(3)));
                 
             }
             
@@ -617,7 +620,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
     public ArrayList<Story> getMostLikedStories(Analytics analytics) {
         
         conn = DatabaseConnectionManager.getConnection();
-        query = "Select StoryID, Title from stories s where s.DatePublished between ? AND ? order by s.Likes desc";
+        query = "Select s.StoryID, s.Title, s.Likes from stories s where s.DatePublished between ? AND ? order by s.Likes desc";
         ArrayList<Story> mostLiked = new ArrayList<>();
         Integer i = 0;
         
@@ -631,7 +634,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
             while (rs.next() && i < analytics.getNumberOfAnalytics()){
                 
                 i++;
-                mostLiked.add(new Story(rs.getInt(1), rs.getString(2)));
+                mostLiked.add(new Story(rs.getInt(1), rs.getString(2), (double) rs.getInt(3)));
                 
             }
             
@@ -776,8 +779,8 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
         try {
             
-            query = "Select u.UserID, u.Name, u.Surname, sum (s.views) as Views from users u, stories s where u.UserID = s.AuthorID and s.DatePublished between ? AND ? " +
-                    "GROUP BY u.UserID order by sum (s.Views) desc";
+            query = "Select u.UserID, u.Name, u.Surname, sum(s.views) as Views from users u, stories s where u.UserID = s.AuthorID " +
+                    "and s.DatePublished between ? AND ? GROUP BY u.UserID order by sum(s.Views) desc";
             
             ps = conn.prepareStatement(query);
             ps.setDate(1, functionsClass.stringToDate(analytics.getStartDate()));
@@ -787,7 +790,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
             while (rs.next() && i < analytics.getNumberOfAnalytics()){
                 
                 i++;
-                topWriters.add(new Writer());
+                topWriters.add(new Writer(rs.getInt(1), rs.getString(2), rs.getString(3), (double) rs.getInt(4)));
                 
             }
             
@@ -854,8 +857,8 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
         try {
             
-            query = "Select u.UserID, u.Name, u.Surname, COUNT(s.EditedByID) as StoriesEdited from users u, stories s " +
-                    "where u.UserID = s.EditedByID GROUP BY u.UserID and s.DatePublished between ? AND ? order by COUNT (s.EditedByID) desc";
+            query = "Select u.UserID, u.Name, u.Surname, COUNT(s.EditedByID) as StoriesEdited from users u, stories s where u.UserID = s.EditedByID and " +
+                    "s.DatePublished between ? AND ? GROUP BY u.UserID order by COUNT(s.EditedByID) desc";
             
             ps = conn.prepareStatement(query);
             ps.setDate(1, functionsClass.stringToDate(analytics.getStartDate()));
@@ -865,7 +868,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
             while (rs.next() && i < analytics.getNumberOfAnalytics()){
                 
                 i++;
-                topEditors.add(new Editor(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4)));
+                topEditors.add(new Editor(rs.getInt(1), rs.getString(2), rs.getString(3), (double) rs.getInt(4)));
                 
             }
             

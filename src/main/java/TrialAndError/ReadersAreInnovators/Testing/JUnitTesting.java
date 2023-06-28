@@ -125,45 +125,81 @@ public class JUnitTesting {
         
     }
     
-    @Test       //no
+    @Test
     public void getMostViewedStoriesTest(){
         
-        System.out.println(analyticsImp.getMostViewedStories(analytics));
+        ArrayList<Story> mostViewed = analyticsImp.getMostViewedStories(analytics);
+        
+        for (Story s: mostViewed) {
+            
+            System.out.println(s);
+            
+        }
         
     }
     
     @Test
     public void getHighestRatedStoriesTest(){
         
-        System.out.println(analyticsImp.getHighestRatedStories(analytics));
+        ArrayList<Story> highestRated = analyticsImp.getHighestRatedStories(analytics);
+        
+        for (Story s: highestRated) {
+            
+            System.out.println(s);
+            
+        }
         
     }
     
     @Test
     public void getMostLikedStoriesTest(){
         
-        System.out.println(analyticsImp.getMostLikedStories(analytics));
+        ArrayList<Story> mostLiked = analyticsImp.getMostLikedStories(analytics);
+        
+        for (Story s: mostLiked) {
+            
+            System.out.println(s);
+            
+        }
         
     }
     
     @Test
     public void getTopGenresTest(){
         
-        System.out.println(analyticsImp.getTopGenres(analytics));
+        ArrayList<Genre> topGenres = analyticsImp.getTopGenres(analytics);
+        
+        for (Genre g: topGenres) {
+            
+            System.out.println(g);
+            
+        }
         
     }
     
     @Test
     public void getTopWritersTest(){
         
-        System.out.println(analyticsImp.getTopWriters(analytics));
+        ArrayList<Writer> topWriters = analyticsImp.getTopWriters(analytics);
+        
+        for (Writer w: topWriters) {
+            
+            System.out.println(w);
+            
+        }
         
     }
     
     @Test
     public void getTopEditorsTest(){
         
-        System.out.println(analyticsImp.getTopEditors(analytics));
+        ArrayList<Editor> topEditors = analyticsImp.getTopEditors(analytics);
+        
+        for (Editor e: topEditors) {
+            
+            System.out.println(e);
+            
+        }
         
     }
     
@@ -225,7 +261,7 @@ public class JUnitTesting {
     @Test
     public void viewWriterApplicationsTest(){
         
-        ArrayList<WriterApplication> pendingWriters = editorImp.viewWriterApplications();
+        List<WriterApplication> pendingWriters = editorImp.viewWriterApplications();
         for (WriterApplication wa: pendingWriters) {
             
             System.out.println(wa);
@@ -397,7 +433,26 @@ public class JUnitTesting {
     @Test
     public void followAuthorTest(){
         
-        System.out.println(readerImp.followAuthor(writer, reader));
+        System.out.println(readerImp.followAuthor(writer, user));
+        
+    }
+    
+    @Test
+    public void unfollowAuthorTest(){
+        
+        System.out.println(readerImp.unfollowAuthor(writer, user));
+        
+    }
+    
+    @Test
+    public void getFollowedAuthorsTest(){
+        
+        ArrayList<Writer> followedWriters = readerImp.getFollowedAuthors(user);
+        for (Writer w: followedWriters) {
+            
+            System.out.println(w);
+            
+        }
         
     }
     
@@ -465,7 +520,7 @@ public class JUnitTesting {
     @Test
     public void submitStoryTest(){
         
-        //TODO
+        
         
     }
     

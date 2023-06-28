@@ -5,7 +5,10 @@ package TrialAndError.ReadersAreInnovators.Servlets;/*
 
 
 import TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication;
+import TrialAndError.ReadersAreInnovators.Models.Administration.WriterApplication;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment;
+import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
+import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import TrialAndError.ReadersAreInnovators.RESTService.ImpService;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
@@ -31,6 +34,7 @@ public class editorServlet extends HttpServlet {
 
 private ImpService imp;
 private ServiceLayerClass slc;
+
     HttpSession session;
     
     public editorServlet()
@@ -66,7 +70,14 @@ private ServiceLayerClass slc;
               viewWriters(request,response);
                 break;
             case"reviewPendingStory":
-                
+               Story story=new Story();
+               story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
+               request.setAttribute("pendingStory",slc.getPendingStory(story));
+               dispacther= request.getRequestDispatcher("reviewPendingStory.jsp");
+               dispacther.forward(request,response);
+                break;
+            case"REVIEW PENDING WRITERS":
+                viewWriterApplications(request,response);
                 break;
                 
         }
@@ -93,11 +104,24 @@ private ServiceLayerClass slc;
                         dispacther.forward(request, response);  
                  break;
              case"Accept":
-                 
+                response.sendRedirect("postResultServlet?submit=Accept&storyTitle="
+                        +request.getParameter("storyTitle")
+                        +"&storyBody="+request.getParameter("storyBody")
+                        +"&authorId="+request.getParameter("authorId")
+                        +"&storySynopsis="+request.getParameter("storySynopsis")
+                        +"&storyCover="+request.getParameter("storyCover")
+                        +"&storyCommentsEnabled"+request.getParameter("storyCommentsEnabled"));
                  break;
              case"Deny":
-                 
+                 response.sendRedirect("postResultServlet?submit=Deny&storyId="
+                         +request.getParameter("storyId"));
                  break;
+             case"Approve Writer":
+                 approveWriter(request,response);
+                 break;
+             case"Deny Writer":
+                 denyWriter(request,response);
+                 break;    
          }
     }
      public void viewWriters(HttpServletRequest request, HttpServletResponse response)
@@ -155,6 +179,52 @@ private ServiceLayerClass slc;
         Integer commentID = Integer.valueOf(request.getParameter("reviewCommentID"));
         
         request.setAttribute("message", imp.unFlagComment(new Comment(commentID)));
+        var dispatcher =  request.getRequestDispatcher("Editors.jsp");
+        try
+        {
+            dispatcher.forward(request, response);
+        }
+        catch (ServletException | IOException ex)
+        {
+            Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void approveWriter(HttpServletRequest request, HttpServletResponse response)
+    {
+        String email = request.getParameter("writerEmail");
+        
+        request.setAttribute("message", imp.approveWriter(new WriterApplication(email)));
+        var dispatcher =  request.getRequestDispatcher("Editors.jsp");
+        try
+        {
+            dispatcher.forward(request, response);
+        }
+        catch (ServletException | IOException ex)
+        {
+            Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //
+    public void viewWriterApplications(HttpServletRequest request, HttpServletResponse response)
+    {
+        
+        request.setAttribute("pendingWritersList", imp.viewWriterApplications());
+        var dispatcher =  request.getRequestDispatcher("ReviewPendingWriters.jsp");
+        try
+        {
+            dispatcher.forward(request, response);
+        }
+        catch (ServletException | IOException ex)
+        {
+            Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //
+    public void denyWriter(HttpServletRequest request, HttpServletResponse response)
+    {
+        String email = request.getParameter("writerEmail");
+        
+        request.setAttribute("message", imp.denyWriter(new Writer(email)));
         var dispatcher =  request.getRequestDispatcher("Editors.jsp");
         try
         {

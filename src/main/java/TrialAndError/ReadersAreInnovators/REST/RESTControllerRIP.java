@@ -149,4 +149,34 @@ public class RESTControllerRIP {
     {
         return Response.ok().entity(service.viewEditors()).build();
     }
+    
+    @Path("/applyForWriter")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response applyForWriter(WriterApplication writerApplication)
+    {
+        return Response.ok().entity(service.applyForWriter(writerApplication)).build();
+    }
+    @Path("/approveWriter")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response approveWriter(WriterApplication writerApplication)
+    {
+        return Response.ok().entity(service.approveWriter(writerApplication)).build();
+    }
+    @Path("/viewWriterApplications")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response viewWriterApplications()
+    {
+        return Response.ok().entity(service.viewWriterApplications()).build();
+    }
+    
+    @Path("/denyWriter")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response denyWriter(Writer writer)
+    {
+        return Response.ok().entity(service.denyWriter(writer)).build();
+    }
 }

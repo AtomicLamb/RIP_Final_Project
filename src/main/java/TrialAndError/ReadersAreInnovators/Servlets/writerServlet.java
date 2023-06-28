@@ -7,8 +7,10 @@ import TrialAndError.ReadersAreInnovators.DAOs.StoryDAOInterface;
 import TrialAndError.ReadersAreInnovators.DAOs.StoryImplementation;
 import TrialAndError.ReadersAreInnovators.DAOs.WriterDAOInterface;
 import TrialAndError.ReadersAreInnovators.DAOs.WriterImplementation;
+import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
+import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayer_Interface;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,6 +19,7 @@ import jakarta.servlet.http.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,9 +31,9 @@ import java.util.logging.Logger;
 @MultipartConfig
 public class writerServlet extends HttpServlet 
 {
-    HttpSession session;
-
-   
+    private HttpSession session;
+    private Writer writer;
+      private final ServiceLayer_Interface slc=new ServiceLayerClass();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
@@ -42,9 +45,10 @@ public class writerServlet extends HttpServlet
                         dispacther.forward(request, response);
                break;
            case"VIEW STORIES":
-               Writer writer=new Writer(29);
-              StoryDAOInterface storyDAO=new StoryImplementation();
-                request.setAttribute("writersPublishedStories",storyDAO.getPublishedStories(writer));
+               session= request.getSession(false);
+               writer=new Writer((Integer) session.getAttribute("UserID"));
+              List<Story> publishedStories=slc.getPublishedStories(writer);
+                request.setAttribute("writersPublishedStories",publishedStories);
                 dispacther =  request.getRequestDispatcher("ViewStories.jsp");
                         dispacther.forward(request, response);
                break;
@@ -53,8 +57,20 @@ public class writerServlet extends HttpServlet
                         dispacther.forward(request, response);
                break;
            case"VIEW DRAFTS":
+               session= request.getSession(false);
+               writer=new Writer((Integer) session.getAttribute("UserID"));
+               List<Story>drafts=slc.getAllDrafts(writer);
+               request.setAttribute("drafts",drafts);
                 dispacther =  request.getRequestDispatcher("ViewDrafts.jsp");
                         dispacther.forward(request, response);
+               break;
+               
+           case"editDraft":
+               Story story=new Story();
+                story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
+                  request.setAttribute("draft",slc.getDraft(story));
+               dispacther =  request.getRequestDispatcher("EditDraft.jsp");
+               dispacther.forward(request, response);
                break;
                    
        }
@@ -75,7 +91,7 @@ public class writerServlet extends HttpServlet
                
                 break;
             case"Save Draft":
-                 
+                
                 break;
         }
     }

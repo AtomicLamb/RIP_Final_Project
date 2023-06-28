@@ -13,7 +13,7 @@ import java.util.List;
 public interface WriterDAOInterface {
     
     
-    public String writerRegistration(WriterApplication writerApplication);
+    String writerRegistration(WriterApplication writerApplication);
     Story getDraft(Story story);
     ArrayList<Story> getAllDrafts(Writer writer);
     String editDraft(Story story);

@@ -46,6 +46,9 @@
                   <div class="button input-box">
                     <input type="submit" name="submit" value="REVOKE WRITER PRIVILEGES">
                   </div>
+                  <div class="button input-box">
+                      <input type="submit" name="submit" value="REVIEW PENDING WRITERS">
+                  </div>
               </div>
           </form>
           <%

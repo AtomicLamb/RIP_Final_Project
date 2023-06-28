@@ -5,6 +5,10 @@
 package TrialAndError.ReadersAreInnovators.Servlets;
 
 
+import TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication;
+import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
+import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
+import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayer_Interface;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,6 +18,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 
 /**
@@ -22,6 +27,9 @@ import java.io.PrintWriter;
  */
 @WebServlet(name = "postResultServlet", urlPatterns = {"/postResultServlet"})
 public class postResultServlet extends HttpServlet {
+    StoryApplication story;
+    private final ServiceLayer_Interface slc=new ServiceLayerClass(); 
+    private final List<StoryApplication> pendingStories=slc.viewPendingStories();
     private final StoryServlet storyServlet=new StoryServlet();
     HttpSession session;
     /**
@@ -59,6 +67,31 @@ public class postResultServlet extends HttpServlet {
                 break;
             case"followAuthor":
                 storyServlet.fillStoryDetailsPage(request,response,"followMessage",request.getParameter("followMessage"));
+                break;
+            case"Accept":
+                story=new StoryApplication();
+                story.setTitle(request.getParameter("storyTitle"));
+                story.setStoryBody(request.getParameter("storyBody"));
+                story.setAuthorID(Integer.valueOf(request.getParameter("authorId")));
+                story.setSynopsis(request.getParameter("storySynopsis"));
+                story.setCoverImage(request.getParameter("storyCover"));
+                story.setCommentsEnabled(Boolean.parseBoolean(request.getParameter("storyCommentsEnabled")));
+                session= request.getSession(false);
+                Editor editor=new Editor();
+                
+                editor.setUserID((Integer)session.getAttribute("UserID"));
+                 request.setAttribute("approveMessage",slc.approvePendingStory(story,editor));
+                  request.setAttribute("pendingStories",pendingStories);
+                  var dispatcher=request.getRequestDispatcher("ReviewPendingStories");
+                  dispatcher.forward(request,response);
+                break;
+            case "Deny":
+                story=new StoryApplication();
+                story.setPendingStoryID(Integer.valueOf(request.getParameter("storyId")));
+                request.setAttribute("approveMessage",slc.removePendingStory(story));
+                request.setAttribute("pendingStories",pendingStories);
+                dispatcher=request.getRequestDispatcher("ReviewPendingStories");
+                dispatcher.forward(request,response);
                 break;
             
         }

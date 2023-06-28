@@ -13,7 +13,7 @@ import java.util.List;
 public interface EditorDAOInterface {
     
     
-    ArrayList<WriterApplication> viewWriterApplications();
+    List<WriterApplication> viewWriterApplications();
     String approveWriter(WriterApplication writer); //Approve by email
     String denyWriter(Writer writer);
     List<Writer> viewWriters();

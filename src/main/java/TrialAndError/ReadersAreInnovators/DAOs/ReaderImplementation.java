@@ -187,10 +187,149 @@ public class ReaderImplementation implements ReaderDAOInterface {
         
     }
     
-    @Override       //TODO: 
+    @Override
+    public String unfollowAuthor(Writer writer, User user) {
+        
+        conn = DatabaseConnectionManager.getConnection();
+        
+        try {
+            
+            query = "delete from followedAuthors f where f.UserID = ? and f.AuthorID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, user.getUserID());
+            ps.setInt(2, writer.getUserID());
+            ps.executeUpdate();
+            
+            message = "Author successfully unfollowed.";
+            
+        } catch (SQLException e) {
+            
+            message = "Error unfollowing the selected Author.";
+            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error unfollowing the selected Author.", e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return message;
+        
+    }
+    
+    @Override       //Completed: Allows a user to see which authors they follow.
     public ArrayList<Writer> getFollowedAuthors(User user){
         
-        return null;
+        conn = DatabaseConnectionManager.getConnection();
+        ArrayList<Writer> followedAuthors = new ArrayList<>();
+        
+        try {
+            
+            query = "select u.UserID, u.Name, u.Surname from users u, followedauthors f where u.UserID = f.AuthorID and f.UserID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, user.getUserID());
+            
+            rs = ps.executeQuery();
+            
+            while (rs.next()){
+                
+                followedAuthors.add(new Writer(rs.getInt(1), rs.getString(2), rs.getString(3)));
+                
+            }
+            
+        } catch (SQLException e) {
+            
+            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error getting followed Authors.", e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return followedAuthors;
         
     }
     

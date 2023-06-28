@@ -468,6 +468,7 @@ public class GenresImplementation implements GenresDAOInterface{
         
     }
     
+    //TODO
     @Deprecated
     @Override
     public String clearGenres(Story story) {

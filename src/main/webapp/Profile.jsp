@@ -71,51 +71,59 @@
         <div class="banner_section layout_padding">
             <div class="container">
                     <h1 class="best_taital" style="color:black">WELCOME TO YOUR PERSONAL PAGE</h1>
-                
-                
-                   <h1>Followed Authors</h1>
-                <%if(followedAuthors!=null){%>
-                <% for(Writer writer:followedAuthors){%>
-                <p><%=writer.getName()%> <%=writer.getSurname()%></p>
+                <%
+                    String message = (String) request.getAttribute("message");
+                    if(message!=null){
+                %>
+                <p><strong style ="color:red;"><%=message %></strong></p>
                 <%}%>
-                <%}%>
-                <%if(followedAuthors==null){%>
-                <p>No Authors Currently Being Followed</p>
-                  <%}%>
+                      
                 
-                
-                    <h1>Favourite unread books</h1>
-               <% if(unreads!=null){%>
-                <% for(Story story:unreads){%>
-                  <p><%=story.getTitle()%></p>
-                    <%}%>
-                <%}%>
-                <%if(unreads==null){%>
-                  <p>No unread favourite books</p>
-                <%}%>
-               
-                
-                <h1>Favourite read books</h1> 
-                <%if(reads!=null){%>
-                 <% for(Story story:reads){%>
-                <p><%=story.getTitle()%></p>
-                 <%}%>
-                   <%}%>
-                <%if(reads==null){%>
-                <p>No read favourite books</p>
-                 <%}%>
-                
-                
-                <h1>Selected genres</h1>
-                <%if(genres!=null){%>
-                  <% for(Genre genre:genres){%>
-                   <p><%=genre.getGenre()%></p>
-                <%}%>
-                <%}%>
-                <%if(genres==null){%>
-                <p>No selected genres</p>
-                <%}%>
 		</div>
 	</div>
+        <div>              <h1>Followed Authors</h1>
+                             <%if(followedAuthors!=null){%>
+                             <% for(Writer writer:followedAuthors){%>
+                             <p><%=writer.getName()%> <%=writer.getSurname()%></p>
+                             <%}%>
+                             <%}%>
+                             <%if(followedAuthors==null){%>
+                             <p>No Authors Currently Being Followed</p>
+                               <%}%>
+                             
+                             
+                                 <h1>Favourite unread books</h1>
+                            <% if(unreads!=null){%>
+                             <% for(Story story:unreads){%>
+                               <p><%=story.getTitle()%></p>
+                                 <%}%>
+                             <%}%>
+                             <%if(unreads==null){%>
+                               <p>No unread favourite books</p>
+                             <%}%>
+                            
+                             
+                             <h1>Favourite read books</h1> 
+                             <%if(reads!=null){%>
+                              <% for(Story story:reads){%>
+                             <p><%=story.getTitle()%></p>
+                              <%}%>
+                                <%}%>
+                             <%if(reads==null){%>
+                             <p>No read favourite books</p>
+                              <%}%>
+                             
+                             
+                             <h1>Selected genres</h1>
+                             <%if(genres!=null){%>
+                               <% for(Genre genre:genres){%>
+                                <p><%=genre.getGenre()%></p>
+                             <%}%>
+                             <%}%>
+                             <%if(genres==null){%>
+                             <p>No selected genres</p>
+                             <%}%> 
+        </div>
+                   
     </body>
 </html>

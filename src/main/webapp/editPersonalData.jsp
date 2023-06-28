@@ -64,11 +64,22 @@
               </div>    
               </div>
           </form>
+            <% if(user.getUserTypeID() == 1)
+            {
+            %>
+            
           <form action="editPersonalInformationServlet" method="get">
               <div class="button input-box">
                  <input type="submit" name="submit" value="Apply for writer">
               </div>    
           </form>
+           <%}%>
+            <%
+                String message = (String) request.getAttribute("message");
+                if(message!=null){
+            %>
+            <p><strong style ="color:red;"><%=message %></strong></p>
+            <%}%>
     </div>
     </div>
     </div>

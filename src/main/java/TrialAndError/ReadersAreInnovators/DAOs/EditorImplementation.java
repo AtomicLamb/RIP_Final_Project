@@ -41,7 +41,7 @@ public class EditorImplementation implements EditorDAOInterface{
     
     
     @Override       //Completed: Allows an Editor to see all Writer Applications.
-    public ArrayList<WriterApplication> viewWriterApplications() {
+    public List<WriterApplication> viewWriterApplications() {
         
         conn = DatabaseConnectionManager.getConnection();
         ArrayList<WriterApplication> pendingWriters = new ArrayList<>();
@@ -56,7 +56,7 @@ public class EditorImplementation implements EditorDAOInterface{
             while(rs.next()){
                         
                 pendingWriters.add(new WriterApplication(rs.getString(2), rs.getString(3), rs.getString(4),
-                        rs.getString(5), rs.getString(6), functionsClass.dateToString(rs.getDate(7))));
+                        rs.getString(5), rs.getString(6), rs.getString(7), functionsClass.dateToString(rs.getDate(8))));
                 
             }
             
@@ -198,10 +198,10 @@ public class EditorImplementation implements EditorDAOInterface{
         
         try{
             
-            query = "delete FROM pendingWriters pw WHERE pw.PendingWriterID = ?";
+            query = "delete FROM pendingWriters pw WHERE pw.Email = ?";
             
             ps = conn.prepareStatement(query);
-            ps.setInt(1, writer.getUserID());
+            ps.setString(1, writer.getEmail());
             ps.executeUpdate();
             
             message = "Writer application successfully denied.";
