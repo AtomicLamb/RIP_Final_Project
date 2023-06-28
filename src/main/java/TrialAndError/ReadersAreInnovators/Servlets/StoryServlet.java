@@ -128,7 +128,7 @@ public class StoryServlet extends HttpServlet {
         
     }
     public User getUserSession(HttpServletRequest request){
-        HttpSession session= request.getSession(false);
+        session= request.getSession(false);
         User user=(User)session.getAttribute("currentUser");
         return user;
     }
@@ -143,7 +143,7 @@ public class StoryServlet extends HttpServlet {
     public String addComment(HttpServletRequest request){
         ServiceLayer_Interface serviceLayer=new ServiceLayerClass();
         
-          HttpSession session=request.getSession(false);
+          session=request.getSession(false);
         User user=(User)session.getAttribute("currentUser");
            Comment comment=new Comment();
          
@@ -164,7 +164,7 @@ public class StoryServlet extends HttpServlet {
     }
     public String followAuthor(HttpServletRequest request){
         ServiceLayer_Interface serviceLayer=new ServiceLayerClass();
-        HttpSession session= request.getSession(false);
+        session= request.getSession(false);
         User user=(User)session.getAttribute("currentUser");
          return serviceLayer.followAuthor(serviceLayer.getAuthor(new Writer(request.getParameter("authorId"))),user);
          

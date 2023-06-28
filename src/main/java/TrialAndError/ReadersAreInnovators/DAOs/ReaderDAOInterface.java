@@ -14,6 +14,7 @@ public interface ReaderDAOInterface {
     
     String registerReader(Reader reader);
     String followAuthor(Writer writer, User user);
+    String unfollowAuthor(Writer writer, User user);
     ArrayList<Writer> getFollowedAuthors(User user);
     ArrayList<Story> getAllFavorites(User user);
     ArrayList<Story> getReadFavorites(User user);

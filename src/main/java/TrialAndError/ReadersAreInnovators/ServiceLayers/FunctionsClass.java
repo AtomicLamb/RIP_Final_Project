@@ -170,7 +170,7 @@ public class FunctionsClass implements Functions_Interface{
         
         try {
             
-            date = format.parse("2000-09-26");
+            date = format.parse(string);
             
         } catch (ParseException e) {
             

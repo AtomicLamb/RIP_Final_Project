@@ -211,6 +211,47 @@ public class ImpService
             throw new RuntimeException(e);
         }
     }
+    public String applyForWriter(WriterApplication writerApplication)
+    {
+        String personURI = uri + "/applyForWriter";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(writerApplication)));
+        
+        return response.readEntity(String.class);
+    }
+    public String approveWriter(WriterApplication writerApplication)
+    {
+        String personURI = uri + "/approveWriter";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(writerApplication)));
+        
+        return response.readEntity(String.class);
+    }
+    public List<WriterApplication> viewWriterApplications()
+    {
+        String personURI = uri + "/viewWriterApplications";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request().get();
+        
+        try {
+            return Arrays.asList(mapper.readValue(webTarget.request().accept(MediaType.APPLICATION_JSON).get(String.class), WriterApplication[].class));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    //
+    public String denyWriter(Writer writer)
+    {
+        String personURI = uri + "/denyWriter";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(writer)));
+        
+        return response.readEntity(String.class);
+    }
     private String toJsonString(Object o)
     {
         try
@@ -221,4 +262,6 @@ public class ImpService
         }
         return null;
     }
+    //
+   
 }

@@ -17,12 +17,12 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     </head>
     <body>
-        <%Story story=(Story)request.getAttribute("story");%>
+        <%Story story=(Story)request.getAttribute("pendingStory");%>
         <div class="myContainer" >
             <h1 style="font-size:50px;text-align:center;">Review Pending Story</h1><br><br>
             <form action="editorServlet" method="post">
                 <div class="input-box" style="font-size:20px;text-align:center;">
-                    <h2> The Book Title here</h2>
+                    <h2> The Book Title here can be edited</h2>
                     <input style="width: 20%" type="text" placeholder="<%=story.getTitle()%>>" name="storyTitle" required><br><br>
                 </div>
                 <div class="input-box" style="font-size:20px;text-align:center;">
@@ -30,13 +30,19 @@
                     <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" >
                   </div>
                 <div class="input-box" style="font-size:20px;text-align:center;">
-                    <h2>The Synopsis</h2>
+                    <h2>The Synopsis can be edited</h2>
                     <textarea type="text" name="storySynopsis" maxlength="1000" rows="4" cols="55" required><%=story.getSynopsis()%>></textarea><br><br>
                 </div>
                 <div class="input-box" style="font-size:20px;text-align:center;">
-                    <h2>The Story</h2>
+                    <h2>The Story can be edited</h2>
                     <textarea type="text" name="storyBody" maxlength="1000" rows="10" cols="100" required><%=story.getStoryBody()%>>.</textarea><br><br>
                 </div>
+                <input type="hidden" name="storyTitle" value="<%=story.getTitle()%>">
+                <input type="hidden" name="storySynopsis" value="<%=story.getSynopsis()%>">
+                <input type="hidden" name="storyBody" value="<%=story.getStoryBody()%>">
+                <input type="hidden" name="storyCover" value="<%=story.getCoverImage()%>">
+                <input type="hidden" name="storyCommentsEnabled" value="<%=story.getCommentsEnabled()%>">
+                <input type="hidden" name="authorId" value="<%=story.getAuthorID()%>">
                 <button class="block" type="submit" name="submit" value="Accept">Deny Story</button><br><br>
                 <button class="block" type="submit" name="submit" value="Deny">Accept Story</button><br><br>
             </form>

@@ -304,7 +304,7 @@ public class UserImplementation implements UserDAOInterface {
         
         try {
             
-            query = "select Name, Surname, Email, PhoneNumber, Password from users where UserID = ?";
+            query = "select Name, Surname, Email, PhoneNumber, Password, UserTypeID from users where UserID = ?";
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, user.getUserID());
@@ -312,7 +312,7 @@ public class UserImplementation implements UserDAOInterface {
             
             while (rs.next()) {
                 
-                myUser = new User(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5));
+                myUser = new User(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5), rs.getInt(6));
                 
             }
             

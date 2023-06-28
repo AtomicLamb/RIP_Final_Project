@@ -25,9 +25,11 @@ public class Writer extends Reader {
         this.userID = userID;
         
     }
-    public Writer(String email)
-    {
+    
+    public Writer(String email) {
+        
         this.email = email;
+        
     }
     
     public Writer(Integer userID, String name, String surname) {
@@ -43,6 +45,15 @@ public class Writer extends Reader {
         this.name = name;
         this.surname = surname;
         this.email = email;
+        
+    }
+    
+    public Writer(Integer userID, String name, String surname, Double data) {
+        
+        this.userID = userID;
+        this.name = name;
+        this.surname = surname;
+        this.data = data;
         
     }
     

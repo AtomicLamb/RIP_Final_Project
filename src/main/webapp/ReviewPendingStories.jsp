@@ -1,5 +1,6 @@
 <%@ page import = "TrialAndError.ReadersAreInnovators.Models.StoryElements.Story" %>
-<%@ page import = "java.util.List" %><%-- 
+<%@ page import = "java.util.List" %>
+<%@ page import = "TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication" %><%-- 
     Document   : ReviewPendingStories
     Created on : 18 Jun 2023, 21:05:24
     Author     : matth
@@ -17,15 +18,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     </head>
     <body>
-        <%List<Story> pendingStories=(List<Story>)request.getAttribute("pendingStories");%>
+        <%List<StoryApplication> pendingStories=(List<StoryApplication>)request.getAttribute("pendingStories");%>
+        <%String message=(String)request.getAttribute("approveMessage");%>
+           <%if(message!=null){%>
+          <h1 style="color: blue"> <%=message%></h1>
+        <%}%>
+        
         <div class="Container" >
             <h1 style="font-size:50px;text-align:center;">Review Pending Stories</h1><br><br>
             <div class="scrollmenu" style="margin: auto; width: 800px;">
-                <%for(Story story:pendingStories){%>
-                <a href="StoryServlet?submit=storyDetails&storyId=<%=story.getStoryID()%>%authorId=<%=story.getAuthorID()%>">
+                <%if(pendingStories!=null){%>
+                <%for(StoryApplication story:pendingStories){%>
+                <a href="editorServlet?submit=reviewPendingStory&storyId=<%=story.getPendingStoryID()%>%authorId=<%=story.getAuthorID()%>">
                    <h1 style="color: white;"><%=story.getTitle()%></h1>
                     <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" >
                 </a>
+                <%}%>
+                <%}%>
+                <%if(pendingStories==null){%>
+                <p>No pending stories currently available</p>
                 <%}%>
               </div>
         </div>

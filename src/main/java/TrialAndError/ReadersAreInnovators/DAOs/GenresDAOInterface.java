@@ -14,7 +14,7 @@ public interface GenresDAOInterface {
     String addGenre(Genre genre);
     String removeGenre(Genre genre);
     String selectGenre(User user, Genre genre);
-    public String deselectGenre(User user, Genre genre);
+    String deselectGenre(User user, Genre genre);
     List<Genre> getGenres();
     ArrayList<Genre> getUserGenres(User user);
     String clearGenres(Story story);

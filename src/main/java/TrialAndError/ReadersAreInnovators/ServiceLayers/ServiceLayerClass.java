@@ -49,14 +49,19 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
         this.userImp = new UserImplementation();
         
     }
-    
+    @Override
+    public String removePendingStory(StoryApplication pendingStory){
+         return editorImp.removePendingStory(pendingStory);
+    }
     @Override
     public ArrayList<StoryApplication> viewPendingStories(){
      
         return editorImp.viewPendingStories();
         
     }
-    
+    public ArrayList<Story> getAllDrafts(Writer writer){
+        return writerImp.getAllDrafts(writer);
+    }
     @Override
     public List<Writer> getFollowedAuthors(User user) {
         
@@ -205,7 +210,7 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     }
     
     @Override
-    public ArrayList<WriterApplication> viewWriterApplications() {
+    public List<WriterApplication> viewWriterApplications() {
         
         return editorImp.viewWriterApplications();
         
@@ -491,6 +496,10 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     
     @Override
     public String applyForWriter(WriterApplication writerApplication) {
-        return null;
+        return writerImp.writerRegistration(writerApplication);
+    }
+    @Override
+    public String approveWriter(WriterApplication writerApplication) {
+        return editorImp.approveWriter(writerApplication);
     }
 }

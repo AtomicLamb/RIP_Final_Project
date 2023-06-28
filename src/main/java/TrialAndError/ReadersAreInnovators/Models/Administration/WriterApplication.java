@@ -15,6 +15,12 @@ public class WriterApplication {
         
     }
     
+    public WriterApplication(String email) {
+        
+        this.email = email;
+        
+    }
+    
     public WriterApplication(String name, String surname, String email,String motivation, String applicationDate) {
         
         this.name = name;
@@ -36,6 +42,17 @@ public class WriterApplication {
         
     }
     
+    public WriterApplication(String name, String surname, String email, String phoneNumber, String password, String motivation, String applicationDate) {
+        
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.motivation = motivation;
+        this.applicationDate = applicationDate;
+        
+    }
     
     public String getName() {
         return name;

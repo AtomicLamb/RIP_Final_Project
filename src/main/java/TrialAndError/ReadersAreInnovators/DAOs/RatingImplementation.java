@@ -320,6 +320,7 @@ public class RatingImplementation implements RatingDAOInterface{
         
     }
     
+    //TODO
     @Deprecated
     @Override
     public String clearRating(Story story) {

@@ -13,8 +13,8 @@ public class Email {
     
     public static void sendEmail(String to)
     {
-        final String username = "luaanrobinson@gmail.com";
-        final String password = "exfmlsfesafgmnqq";
+        final String username = "trialanderror.moderator@gmail.com";
+        final String password = "yzpetiurliaxpqrn";
         
         Properties props = new Properties();
         
@@ -41,12 +41,13 @@ public class Email {
             message.setFrom(new InternetAddress("localhost"));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(to));
-            message.setSubject("Readers are innovators may have an official email");
-            message.setText("Ligma balls");
+            message.setSubject("Readers are innovators Welcome you");
+            message.setText("Welcome to readers are innovators. We hope you have a wonderful time on our platform. Please click the link below to verify your email \n" +
+                    "fakelink.jsp");
             
-            Transport.send(message);
+            Transport.send(message);        //Error happened here....
             
-            System.out.println("Done");
+            System.out.println("Email sent?");
             
         }
         
@@ -62,6 +63,9 @@ public class Email {
     public static void main(String[] args)
     {
         String to = "tksrex@gmail.com";
-        sendEmail(to);
+        String email = "totoroseefort25@gmail.com";
+        String email2 = "luaanrobinson@gmail.com";
+        String email3 = "cosmosjoker56@gmail.com";
+        sendEmail(email3);
     }
 }
