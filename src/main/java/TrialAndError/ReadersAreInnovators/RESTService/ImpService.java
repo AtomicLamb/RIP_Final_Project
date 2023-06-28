@@ -46,6 +46,16 @@ public class ImpService
         uri = "http://localhost:8080/Trial_and_Error_Readers_are_Innovators-1.0-SNAPSHOT/ReadersAreInnovators/TrialAndError";
          
     }
+    public User login(User user)
+    {
+        String personURI = uri + "/login";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(user)));
+        
+        return response.readEntity(User.class);
+    }
+    
      public String registerReader(Reader reader)
      {
         String personURI = uri + "/registerReader";
@@ -99,16 +109,6 @@ public class ImpService
                         throw new RuntimeException(e);
                     }
                 }
-      private String toJsonString(Object o)
-    {
-        try 
-        {
-            return mapper.writeValueAsString(o);
-        } catch (JsonProcessingException ex) {
-            Logger.getLogger(ImpService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
     public String deleteComment(Comment comment)
     {
         String personURI = uri + "/deleteComment";
@@ -176,5 +176,49 @@ public class ImpService
         
         return response.readEntity(String.class);
     }
-    //getUsers
+    public String removeEditor(Editor editor)
+    {
+        String personURI = uri + "/removeEditor";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(editor)));
+        
+        return response.readEntity(String.class);
+    }
+    public User getUser(User user)
+    {
+        String personURI = uri + "/getUser";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request().post(Entity.json(user));
+        
+        try {
+            return mapper.readValue(webTarget.request().accept(MediaType.APPLICATION_JSON).get(String.class), User.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public List<Editor> viewEditors()
+    {
+        String personURI = uri + "/viewEditors";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request().get();
+        
+        try {
+            return Arrays.asList(mapper.readValue(webTarget.request().accept(MediaType.APPLICATION_JSON).get(String.class), Editor[].class));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private String toJsonString(Object o)
+    {
+        try
+        {
+            return mapper.writeValueAsString(o);
+        } catch (JsonProcessingException ex) {
+            Logger.getLogger(ImpService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

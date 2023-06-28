@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import = "java.util.ArrayList"%>
 <%@page import = "java.util.List"%>
-<%@page import = "Model.Person"%>
+<%@ page import = "TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,26 +21,24 @@
         <div class="Container" >
             <h1 style="font-size:50px;text-align:center;">Remove Editor</h1><br><br>
            <div class="scrollableList">
-                <ul type="disc">
-            <%
-            List<Person> names = (List<Person>) request.getAttribute("message");
-            if(names!=null){
-             for(Person name: names)
-            {
-            %>
-            <li> <strong style= "color:black;"><%=name%></strong></li>
-         <%}
-          }%>
-        </ul>
+               <ul type="disc">
+                   <%
+                       List<Editor> editors = (List<Editor>) request.getAttribute("getEditor");
+                       for (Editor e: editors)
+                       {
+                   %>
+                   <li> <strong style= "color:black;"><%=e.getName()%> <%=e.getSurname()%> [<%=e.getEmail()%>]</strong></li><br>
+                   <%}%>
+               </ul>
             </div>
             <div class="forms">
                 <div class="form-content">
-                    <form action="editorServlet" method="post">
+                    <form action="adminEditorServlet" method="post">
                         <div class="button input-box">
-                            <input style="color: white; background-color: black;" type="number" placeholder="Enter the id num of the editor you want to remove." name="removeEditorID" min="1" max="<%=names.size() %>" required>
+                            <input style="color: white; background-color: black;" type="email" placeholder="Enter the editors email to remove them." name="removeEditorEmail" required>
                         </div>
                         <div class="button input-box">
-                            <input style="color: white; background-color: black;" type="submit" name="submit" value="REMOVE EDITOR">
+                            <input style="color: white; background-color: black;" type="submit" name="submit" value="Remove Editor">
                         </div> 
                     </form>
                 </div>

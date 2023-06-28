@@ -25,13 +25,9 @@ public class RESTControllerRIP {
     @Path("/login")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public User login(User user) {
-        
-        
-        
-        return null;
-        
+    public Response login(User user) 
+    {
+        return Response.ok().entity(service.login(user)).build();
     }
     
     @Path("/registerReader")
@@ -129,11 +125,28 @@ public class RESTControllerRIP {
         return Response.ok().entity(service.editPersonalInfo(user)).build();
     }
     
-    @Path("/getUsers")
+    @Path("/getUser")
     @GET
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUsers(User user)
+    public Response getUser(User user)
     {
         return Response.ok().entity(service.getUser(user)).build();
+    }
+    
+    @Path("/removeEditor")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response removeEditor(Editor editor)
+    {
+        return Response.ok().entity(service.removeEditor(editor)).build();
+    }
+    
+    @Path("/viewEditors")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response viewEditors()
+    {
+        return Response.ok().entity(service.viewEditors()).build();
     }
 }

@@ -4,7 +4,12 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class FunctionsClass implements Functions_Interface{
     
@@ -152,6 +157,30 @@ public class FunctionsClass implements Functions_Interface{
     public String dateToString(Date date) {
         
         return date.toString();
+        
+    }
+    
+    @Override
+    public Date stringToDate(String string) {
+        
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        format.setTimeZone(TimeZone.getTimeZone("UTC"));
+        
+        java.util.Date date = null;
+        
+        try {
+            
+            date = format.parse("2000-09-26");
+            
+        } catch (ParseException e) {
+            
+            throw new RuntimeException(e);
+            
+        }
+        
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        
+        return sqlDate;
         
     }
     

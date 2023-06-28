@@ -2,6 +2,8 @@ package TrialAndError.ReadersAreInnovators.DAOs;
 
 
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
+import java.util.List;
+
 
 /**
  * @Desctripion:    The Admin-Editor DAO Interface.
@@ -9,9 +11,11 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
  * @Version:        v.1.0.0
  */
 
+
 public interface AdminEditorDAOInterface {
     
     
+    List<Editor> viewEditors();
     String removeEditor(Editor editor);
     String addEditor(Editor editor);
     

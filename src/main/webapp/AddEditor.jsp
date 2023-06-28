@@ -29,7 +29,7 @@
                 <div class="form-content">
                     <div class="signup-form">
                         <div class="title">Add editor page</div>
-                        <form action="controllerServlet" method="post">
+                        <form action="adminEditorServlet" method="post">
                             <div class="input-boxes">
                                 <div class="input-box">
                                     <i class="fas fa-user"></i>
@@ -45,10 +45,10 @@
                                 </div>
                                 <div class="input-box">
                                     <i class="fas fa-envelope"></i>
-                                    <input type="email" placeholder="Enter your email" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" name="editorEmail" required>
+                                    <input type="email" placeholder="Enter your email" name="editorEmail" required>
                                 </div>
                                 <div class="button input-box" style="top:10px">
-                                    <input type="submit" name="submit" value="ADD EDITOR">
+                                    <input type="submit" name="submit" value="Add Editor">
                                 </div>
                             </div>
                         </form>

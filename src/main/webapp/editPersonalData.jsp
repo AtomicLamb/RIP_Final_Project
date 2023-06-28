@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import = "java.util.List"%>
+<%@ page import = "TrialAndError.ReadersAreInnovators.Models.UserTypes.User" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,27 +30,30 @@
         <div class="form-content">
         <div class="signup-form">
           <div class="title">Edit Personal Information</div>
+            <%
+                User user = (User) request.getAttribute("personalInfo");
+            %>
          <form action="editPersonalInformationServlet" method="post">
               <div class="input-boxes">
               <div class="input-box">
                 <i class="fas fa-user"></i>
-                <input type="text" placeholder="Enter your first name" name="editFirstName" required>
+                <input type="text" value="<%=user.getName() %>" name="editFirstName" required>
               </div>
                 <div class="input-box">
                 <i class="fas fa-user"></i>
-                <input type="text" placeholder="Enter your surname" name="editSurname" required>
+                <input type="text" value="<%=user.getSurname() %>" name="editSurname" required>
               </div>
                 <div class="input-box">
                 <i class="fas fa-phone"></i>
-               <input type="tel" placeholder="Enter phone num" pattern="[0-9]{10}" name="editPhoneNum" required>
+               <input type="tel" value="<%=user.getPhoneNumber() %>" pattern="[0-9]{10}" name="editPhoneNum" required>
               </div>
               <div class="input-box">
                 <i class="fas fa-envelope"></i>
-                <input type="email" placeholder="Enter your email" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" name="editEmail" required>
+                <input type="email" value="<%=user.getEmail() %>" name="editEmail" required>
               </div>
               <div class="input-box">
                 <i class="fas fa-lock"></i>
-                <input id="password" type="password" placeholder="Enter your password" name="editPassword" required>
+                <input id="password" type="password" value="<%=user.getPassword() %>" name="editPassword" required>
               </div>
              <div class="input-box">
                 <i class="fas fa-lock"></i>

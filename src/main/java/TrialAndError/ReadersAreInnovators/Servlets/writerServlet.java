@@ -12,10 +12,8 @@ import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
+import jakarta.servlet.http.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,6 +28,7 @@ import java.util.logging.Logger;
 @MultipartConfig
 public class writerServlet extends HttpServlet 
 {
+    HttpSession session;
 
    
     @Override

@@ -1,4 +1,7 @@
-<%-- 
+<%@ page import = "TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre" %>
+<%@ page import = "TrialAndError.ReadersAreInnovators.Models.StoryElements.Story" %>
+<%@ page import = "TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer" %>
+<%@ page import = "java.util.List" %><%-- 
     Document   : PersonalData
     Created on : 14 Jun 2023, 08:54:03
     Author     : matth
@@ -41,6 +44,10 @@
     </head>
     <body>
         <!-- header section start-->
+        <%List<Story> unreads=(List<Story>) request.getAttribute("unreadFavourites");%>
+        <%List<Story>reads=(List<Story>) request.getAttribute("readFavourites");%>
+        <%List<Genre> genres=(List<Genre>) request.getAttribute("userGenres");%>
+        <%List<Writer> followedAuthors=(List<Writer>) request.getAttribute("followedAuthors");%>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -57,13 +64,57 @@
                 </li>
             </ul>
         </div>
-         <div class="login_text"><a href="index.html">LOGIN HERE</a></div>
+         <div class="login_text"><a href="index.jsp">LOGIN HERE</a></div>
     </nav>
 	<!-- header section start-->
 	<!-- banner section start-->
         <div class="banner_section layout_padding">
             <div class="container">
                     <h1 class="best_taital" style="color:black">WELCOME TO YOUR PERSONAL PAGE</h1>
+                
+                
+                   <h1>Followed Authors</h1>
+                <%if(followedAuthors!=null){%>
+                <% for(Writer writer:followedAuthors){%>
+                <p><%=writer.getName()%> <%=writer.getSurname()%></p>
+                <%}%>
+                <%}%>
+                <%if(followedAuthors==null){%>
+                <p>No Authors Currently Being Followed</p>
+                  <%}%>
+                
+                
+                    <h1>Favourite unread books</h1>
+               <% if(unreads!=null){%>
+                <% for(Story story:unreads){%>
+                  <p><%=story.getTitle()%></p>
+                    <%}%>
+                <%}%>
+                <%if(unreads==null){%>
+                  <p>No unread favourite books</p>
+                <%}%>
+               
+                
+                <h1>Favourite read books</h1> 
+                <%if(reads!=null){%>
+                 <% for(Story story:reads){%>
+                <p><%=story.getTitle()%></p>
+                 <%}%>
+                   <%}%>
+                <%if(reads==null){%>
+                <p>No read favourite books</p>
+                 <%}%>
+                
+                
+                <h1>Selected genres</h1>
+                <%if(genres!=null){%>
+                  <% for(Genre genre:genres){%>
+                   <p><%=genre.getGenre()%></p>
+                <%}%>
+                <%}%>
+                <%if(genres==null){%>
+                <p>No selected genres</p>
+                <%}%>
 		</div>
 	</div>
     </body>

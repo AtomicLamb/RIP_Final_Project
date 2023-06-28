@@ -1,6 +1,7 @@
 package TrialAndError.ReadersAreInnovators.DAOs;
 
 
+import TrialAndError.ReadersAreInnovators.Models.AnalyticalData.Analytics;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
@@ -25,12 +26,12 @@ public interface AnalyticsDAOInterface{
     String addView(Story story);
     String addLike(Story story);
     String removeLike(Story story);
-    ArrayList<Story> getMostViewedStories(Integer noOfStories, Date startPeriod, Date endPeriod);
-    ArrayList<Story> getHighestRatedStories(Integer noOfStories, Date startPeriod, Date endPeriod);
-    ArrayList<Story> getMostLikedStories(Integer noOfStories, Date startPeriod, Date endPeriod);
-    ArrayList<Genre> getTopGenres(Integer noOfGenres, Date startPeriod, Date endPeriod);
-    ArrayList<Writer> getTopWriters(Integer noOfWriters, Date startPeriod, Date endPeriod);
-    ArrayList<Editor> getTopEditors(Integer noOfEditors, Date startPeriod, Date endPeriod);
+    ArrayList<Story> getMostViewedStories(Analytics analytics);
+    ArrayList<Story> getHighestRatedStories(Analytics analytics);
+    ArrayList<Story> getMostLikedStories(Analytics analytics);
+    ArrayList<Genre> getTopGenres(Analytics analytics);
+    ArrayList<Writer> getTopWriters(Analytics analytics);
+    ArrayList<Editor> getTopEditors(Analytics analytics);
     
     
 }

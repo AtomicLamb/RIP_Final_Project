@@ -21,6 +21,10 @@ public class User {
     public User() {
         
     }
+    public User(Integer userID) 
+    {
+        this.userID = userID;
+    }
     
     public User(String email, String password) {
         
@@ -38,6 +42,16 @@ public class User {
     }
     public User(String name, String surname, String email, String phoneNumber, String password) {
         
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        
+    }
+    public User(Integer userID, String name, String surname, String email, String phoneNumber, String password) {
+        
+        this.userID = userID;
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -99,7 +113,7 @@ public class User {
         this.isBanned = isBanned;
         this.emailVerified = emailVerified;
         this.data = data;
-        
+       
     }
     
     public Integer getUserID() {

@@ -4,15 +4,16 @@ package TrialAndError.ReadersAreInnovators.DAOs;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
-import TrialAndError.ReadersAreInnovators.Servlets.controllerServlet;
-
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 /**
  * @desctripion:    The concrete implementation of the AdminEditorDAO.
@@ -38,7 +39,7 @@ public class AdminEditorImplementation implements AdminEditorDAOInterface{
     }
     
     
-    @Override   //Completed: Removes an editor from the database.
+    @Override       //Completed: Removes an editor from the database.
     public String removeEditor(Editor editor) {
         
         conn = DatabaseConnectionManager.getConnection();
@@ -108,7 +109,7 @@ public class AdminEditorImplementation implements AdminEditorDAOInterface{
         
     }
     
-    @Override   //Completed: Adds an editor to the database.
+    @Override       //Completed: Adds an editor to the database.
     public String addEditor(Editor editor) {
         
         conn = DatabaseConnectionManager.getConnection();
@@ -180,6 +181,79 @@ public class AdminEditorImplementation implements AdminEditorDAOInterface{
         }
         
         return message;
+        
+    }
+    
+    @Override       //Completed: Allows the Admin-Editors to view a list of all Editors.
+    public List<Editor> viewEditors() {
+        
+        conn = DatabaseConnectionManager.getConnection();
+        List<Editor> allEditors = new ArrayList<>();
+        
+        try {
+            
+            query = "select u.Name, u.Surname, u.Email from users u  where u.UserTypeID = 2";
+            
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                
+                allEditors.add(new Editor(rs.getString(1), rs.getString(2), rs.getString(3)));
+                
+            }
+            
+        } catch (SQLException e) {
+            
+            Logger.getLogger(EditorImplementation.class.getName()).log(Level.FINE, "Error viewing all writers.", e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return allEditors;
         
     }
     

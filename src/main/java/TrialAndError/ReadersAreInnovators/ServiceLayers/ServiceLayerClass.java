@@ -4,6 +4,7 @@ package TrialAndError.ReadersAreInnovators.ServiceLayers;
 import TrialAndError.ReadersAreInnovators.DAOs.*;
 import TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication;
 import TrialAndError.ReadersAreInnovators.Models.Administration.WriterApplication;
+import TrialAndError.ReadersAreInnovators.Models.AnalyticalData.Analytics;
 import TrialAndError.ReadersAreInnovators.Models.AnalyticalData.Rating;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
@@ -30,6 +31,7 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     StoryImplementation storyImp;
     WriterImplementation writerImp;
     UserImplementation userImp;
+    FunctionsClass functionsClass = new FunctionsClass();
     
     
     public ServiceLayerClass() {
@@ -49,14 +51,31 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     }
     
     @Override
-    public User getUser(User user)
-    {
+    public ArrayList<StoryApplication> viewPendingStories(){
+     
+        return editorImp.viewPendingStories();
+        
+    }
+    
+    @Override
+    public List<Writer> getFollowedAuthors(User user) {
+        
+        return readerImp.getFollowedAuthors(user);
+        
+    }
+    
+    @Override
+    public User getUser(User user) {
+        
         return userImp.getUser(user);    
+        
     }
     
     @Override
     public String removeEditor(Editor editor) {
-        return null;
+        
+        return adminImp.removeEditor(editor);
+        
     }
     
     @Override
@@ -66,68 +85,93 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     
     @Override
     public Integer getLikes(Story story) {
-        return null;
+        
+        return analyticsImp.getLikes(story);
+        
     }
     
     @Override
     public Integer getViews(Story story) {
-        return null;
+        
+        return analyticsImp.getViews(story);
+        
     }
     
     @Override
     public Integer getAuthorFollowCount(Writer writer) {
-        return null;
+        
+        return analyticsImp.getAuthorFollowCount(writer);
+        
     }
     
     @Override
     public String addView(Story story) {
-        return null;
+        
+        return analyticsImp.addView(story);
+        
     }
     
     @Override
-    public ArrayList<Story> getMostViewedStories(Integer noOfStories, Date startPeriod, Date endPeriod) {
-        return null;
+    public ArrayList<Story> getMostViewedStories(Analytics analytics) {
+        
+       return analyticsImp.getMostViewedStories(analytics);
+        
     }
     
     @Override
-    public ArrayList<Story> getHighestRatedStories(Integer noOfStories, Date startPeriod, Date endPeriod) {
-        return null;
+    public ArrayList<Story> getHighestRatedStories(Analytics analytics) {
+        
+        return analyticsImp.getHighestRatedStories(analytics);
+        
     }
     
     @Override
-    public ArrayList<Story> getMostLikedStories(Integer noOfStories, Date startPeriod, Date endPeriod) {
-        return null;
+    public ArrayList<Story> getMostLikedStories(Analytics analytics) {
+        
+        return analyticsImp.getMostLikedStories(analytics);
+        
     }
     
     @Override
-    public ArrayList<Genre> getTopGenres(Integer noOfGenres, Date startPeriod, Date endPeriod) {
-        return null;
+    public ArrayList<Genre> getTopGenres(Analytics analytics) {
+        
+        return analyticsImp.getTopGenres(analytics);
+        
     }
     
     @Override
-    public ArrayList<Writer> getTopWriters(Integer noOfWriters, Date startPeriod, Date endPeriod) {
-        return null;
+    public ArrayList<Writer> getTopWriters(Analytics analytics) {
+        
+        return analyticsImp.getTopWriters(analytics);
+        
     }
     
     @Override
-    public ArrayList<Editor> getTopEditors(Integer noOfEditors, Date startPeriod, Date endPeriod) {
-        return null;
+    public ArrayList<Editor> getTopEditors(Analytics analytics) {
+        
+        return analyticsImp.getTopEditors(analytics);
+        
     }
     
     @Override
     public String addComment(Comment comment) {
-        return null;
+        
+        return commentImp.addComment(comment);
+        
     }
     
     @Override
     public List<Comment> getComments(Story story) 
     {
-        return null;
+        return commentImp.getComments(story);
+        
     }
     
     @Override
     public String reportComment(Comment comment) {
-        return null;
+        
+        return commentImp.reportComment(comment);
+        
     }
     
     @Override
@@ -148,23 +192,31 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     
     @Override
     public Integer getNumberOfComments(Story story) {
-        return null;
+        
+        return commentImp.getNumberOfComments(story);
+        
     }
     
     @Override
     public String clearComments(Story story) {
-        return null;
+        
+        return commentImp.clearComments(story);
+        
     }
     
     @Override
     public ArrayList<WriterApplication> viewWriterApplications() {
-        return null;
+        
+        return editorImp.viewWriterApplications();
+        
     }
     
     
     @Override
     public String denyWriter(Writer writer) {
-        return null;
+        
+        return editorImp.denyWriter(writer);
+        
     }
     
     @Override
@@ -174,12 +226,16 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     
     @Override
     public String approvePendingStory(StoryApplication story, Editor editor) {
-        return null;
+        
+        return editorImp.approvePendingStory(story, editor);
+        
     }
     
     @Override
     public String denyPendingStory(StoryApplication story, Editor editor) {
-        return null;
+        
+        return editorImp.removePendingStory(story);
+        
     }
     
     
@@ -196,12 +252,16 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     
     @Override
     public String selectGenre(User user, Genre genre) {
-        return null;
+        
+        return genresImp.selectGenre(user, genre);
+        
     }
     
     @Override
     public String deselectGenre(User user, Genre genre) {
-        return null;
+        
+        return genresImp.deselectGenre(user, genre);
+        
     }
     
     @Override
@@ -212,37 +272,51 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     
     @Override
     public ArrayList<Genre> getUserGenres(User user) {
-        return null;
+        
+        return genresImp.getUserGenres(user);
+        
     }
     
     @Override
     public String clearGenres(Story story) {
-        return null;
+        
+        return genresImp.clearGenres(story);
+        
     }
     
     @Override
     public Double getStoryRating(Story story) {
-        return null;
+        
+        return ratingImp.getStoryRating(story);
+        
     }
     
     @Override
     public String rateStory(Rating rating) {
-        return null;
+        
+        return ratingImp.rateStory(rating);
+        
     }
     
     @Override
     public String changeRating(Rating rating) {
-        return null;
+        
+        return ratingImp.changeRating(rating);
+        
     }
     
     @Override
     public String removeRating(Rating rating) {
-        return null;
+        
+        return ratingImp.removeRating(rating);
+        
     }
     
     @Override
     public String clearRating(Story story) {
-        return null;
+        
+        return ratingImp.clearRating(story);
+        
     }
     
     @Override       //Done
@@ -253,8 +327,16 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     }
     
     @Override
-    public Reader login(User user) {
+    public User login(User user) {
+        
+        if (functionsClass.verifyLoginDetails(userImp.login(user).getPassword(), user.getPassword())){
+            
+            return userImp.login(user);
+            
+        }
+        
         return null;
+        
     }
     
     @Override
@@ -269,77 +351,100 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     
     @Override
     public ArrayList<Story> getAllFavorites(User user) {
-        return null;
+        
+        return readerImp.getAllFavorites(user);
+    
     }
     
     @Override
     public ArrayList<Story> getReadFavorites(User user) {
-        return null;
+        
+        return readerImp.getReadFavorites(user);
+        
     }
     
     @Override
     public ArrayList<Story> getUnreadFavorites(User user) {
-        return null;
+        
+        return readerImp.getUnreadFavorites(user);
+        
     }
     
     @Override
     public String removeStory(Story story) {
-        return null;
+        
+        return storyImp.removeStory(story);
+        
     }
     
     @Override
     public String privatizeStory(Story story) {
-        return null;
+        
+        return storyImp.privatizeStory(story);
+        
     }
     
     @Override
     public String publiciseStory(Story story) {
-        return null;
+        
+        return storyImp.publiciseStory(story);
+        
     }
     
     @Override
     public String submitStory(Story story) {
-        return null;
+        
+        return storyImp.submitStory(story);
+        
     }
     
     @Override
     public String readStory(Story story, User user) {
-        return null;
+        
+        return storyImp.readStory(story, user);
+        
     }
     
     @Override
     public ArrayList<Story> getPublishedStories(Writer writer) {
-        return null;
+        
+        return storyImp.getPublishedStories(writer);
+        
     }
     
     @Override
     public Story displayStoryDetails(Story story) {
-        return null;
-    }
-    
-    @Override
-    public String createStory(Story story) {
-        return null;
+        
+        return storyImp.displayStoryDetails(story);
+        
     }
     
     @Override
     public Story getPendingStory(Story story) {
-        return null;
+        
+        return storyImp.getPendingStory(story);
+        
     }
     
     @Override
     public String likeStory(Story story, User user) {
-        return null;
+        
+        return storyImp.likeStory(story, user);
+        
     }
     
     @Override
     public String unlikeStory(Story story, User user) {
-        return null;
+        
+        return storyImp.unlikeStory(story, user);
+        
     }
     
     @Override
     public ArrayList<String> search(String topic) {
-        return null;
+        
+        return userImp.search(topic);
+        
     }
     
     @Override
@@ -353,22 +458,39 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     
     @Override
     public Story getDraft(Story story) {
-        return null;
+        
+        return writerImp.getDraft(story);
+        
     }
     
     
     @Override
     public String editDraft(Story story) {
-        return null;
+        
+        return writerImp.editDraft(story);
+        
     }
     
     @Override
     public Writer getAuthor(Writer writer) {
         return writerImp.getAuthor(writer);
     }
+    
     @Override 
     public String revokeWriterPrivileges(Writer writer)
     {
         return editorImp.revokeWriterPrivileges(writer);
+    }
+    
+    @Override
+    public List<Editor> viewEditors() {
+        
+        return adminImp.viewEditors();
+        
+    }
+    
+    @Override
+    public String applyForWriter(WriterApplication writerApplication) {
+        return null;
     }
 }

@@ -187,6 +187,13 @@ public class ReaderImplementation implements ReaderDAOInterface {
         
     }
     
+    @Override       //TODO: 
+    public ArrayList<Writer> getFollowedAuthors(User user){
+        
+        return null;
+        
+    }
+    
     @Override       //Completed: Allows a user to see all their favorite books.
     public ArrayList<Story> getAllFavorites(User user) {
         

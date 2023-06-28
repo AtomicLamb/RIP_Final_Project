@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public interface Functions_Interface {
    
+   
    Boolean verifyLoginDetails(String password, String pw);
    Boolean isNumber(String value);
    Boolean phoneNumberVerification(String phoneNum);
@@ -15,5 +16,7 @@ public interface Functions_Interface {
    Integer booleanToInteger(Boolean bool);
    Double getAverage(ArrayList<Integer> ratings);
    String dateToString(Date date);
+   Date stringToDate(String string);
+   
  
 }

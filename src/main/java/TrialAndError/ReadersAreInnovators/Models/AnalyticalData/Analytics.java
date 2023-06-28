@@ -3,84 +3,54 @@ package TrialAndError.ReadersAreInnovators.Models.AnalyticalData;
 public class Analytics {
     
     
-    private Integer analyticsID;
-    private Integer views;
-    private Integer likes;
-    private Double ratingAverage;
-    private Double data;
+    private Integer numberOfAnalytics;
+    private String startDate;
+    private String endDate;
     
-
     public Analytics(){
         
     }
     
-    public Analytics(Integer analyticsID, Double data) {
-        
-        this.analyticsID = analyticsID;
-        this.data = data;
-        
-    }
     
-    public Analytics(Integer analyticsID, Integer views, Integer likes, Double ratingAverage, Double data) {
+    public Analytics(Integer numberOfAnalytics, String startDate, String endDate) {
         
-        this.analyticsID = analyticsID;
-        this.views = views;
-        this.likes = likes;
-        this.ratingAverage = ratingAverage;
-        this.data = data;
+        this.numberOfAnalytics = numberOfAnalytics;
+        this.startDate = startDate;
+        this.endDate = endDate;
         
     }
     
-    public Integer getAnalyticsID() {
-        return analyticsID;
+    public Integer getNumberOfAnalytics() {
+        return numberOfAnalytics;
     }
     
-    public void setAnalyticsID(Integer analyticsID) {
-        this.analyticsID = analyticsID;
+    public void setNumberOfAnalytics(Integer numberOfAnalytics) {
+        this.numberOfAnalytics = numberOfAnalytics;
     }
     
-    public Integer getViews() {
-        return views;
+    public String getStartDate() {
+        return startDate;
     }
     
-    public void setViews(Integer views) {
-        this.views = views;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
     
-    public Integer getLikes() {
-        return likes;
+    public String getEndDate() {
+        return endDate;
     }
     
-    public void setLikes(Integer likes) {
-        this.likes = likes;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
-    
-    public Double getRatingAverage() {
-        return ratingAverage;
-    }
-    
-    public void setRatingAverage(Double ratingAverage) {
-        this.ratingAverage = ratingAverage;
-    }
-    
-    public Double getData() {
-        return data;
-    }
-    
-    public void setData(Double data) {
-        this.data = data;
-    }
-    
     
     @Override
     public String toString() {
         
         return "Analytics{" +
-                "analyticsID=" + analyticsID +
-                ", views=" + views +
-                ", likes=" + likes +
-                ", ratingAverage=" + ratingAverage +
-                ", data=" + data +
+                "numberOfAnalytics=" + numberOfAnalytics +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
                 '}';
         
     }

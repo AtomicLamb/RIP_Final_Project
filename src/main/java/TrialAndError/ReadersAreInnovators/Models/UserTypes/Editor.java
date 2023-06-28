@@ -17,6 +17,17 @@ public class Editor extends Reader {
     public Editor(){
         
     }
+    public Editor(String email) {
+        
+        this.email = email;
+    }
+    public Editor(String name, String surname, String email) {
+        
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        
+    }
     
     public Editor(Integer userID, String name, String surname, Double data) {
         

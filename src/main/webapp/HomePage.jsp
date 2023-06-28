@@ -77,7 +77,9 @@
                 </li>
                 <%}%>
                 <li class="nav-item">
-                   <a class="nav-link" href="Profile.jsp">PERSONAL INFORMATION PAGE</a>
+					<form action="editPersonalInformationServlet" method="get">
+						<input class="nav-link" type="submit" name="submit" value="Profile">
+					</form>
                 </li>
                 <li class="nav-item">
                     <div class="dropdown">
@@ -89,13 +91,18 @@
                 </li>
             </ul>
         </div>
-         <div class="login_text"><a href="index.html">LOGIN HERE</a></div>
+         <div class="login_text"><a href="index.jsp">LOGIN HERE</a></div>
     </nav>
 	<!-- header section start-->
 	<!-- banner section start-->
 	<div class="banner_section layout_padding">
 		<div class="container">
-                    <h1 class="best_taital" style="color:black">Welcome to the RIP Home Page</h1>
+			<%
+				String name = (String) session.getAttribute("Name");
+				String surname = (String) session.getAttribute("Surname");
+			%>
+                    <h1 class="best_taital" style="color:black">Welcome: <%= name%> <%= surname%></h1>
+			
 			<div class="box_main">
 			    <input type="" class="email_bt" placeholder="Search" name="">
 				<button class="subscribe_bt"><a href="#">Search</a></button>
@@ -220,7 +227,7 @@
       $(".fancybox").fancybox({
          openEffect: "none",
          closeEffect: "none"
-         });
+         });})
 
          </script>   
 </body>

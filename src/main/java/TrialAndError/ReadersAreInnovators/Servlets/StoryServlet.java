@@ -38,6 +38,7 @@ import javax.imageio.ImageIO;
  */
 @WebServlet(name = "StoryServlet", urlPatterns = {"/StoryServlet"})
 public class StoryServlet extends HttpServlet {
+    HttpSession session;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -195,6 +196,7 @@ public class StoryServlet extends HttpServlet {
                 request.setAttribute("chosenStory", getChosenStory(request));
                 dispatcher=request.getRequestDispatcher("StoryBody.jsp");
                 dispatcher.forward(request, response);
+                
                 break;
         }
         

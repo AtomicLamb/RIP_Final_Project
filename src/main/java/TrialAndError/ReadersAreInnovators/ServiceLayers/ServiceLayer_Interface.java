@@ -1,8 +1,8 @@
 package TrialAndError.ReadersAreInnovators.ServiceLayers;
 
-import TrialAndError.ReadersAreInnovators.DAOs.*;
 import TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication;
 import TrialAndError.ReadersAreInnovators.Models.Administration.WriterApplication;
+import TrialAndError.ReadersAreInnovators.Models.AnalyticalData.Analytics;
 import TrialAndError.ReadersAreInnovators.Models.AnalyticalData.Rating;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface ServiceLayer_Interface {
+    ArrayList<StoryApplication> viewPendingStories();
+    
+    List<Writer> getFollowedAuthors(User user);
     
     User getUser(User user);
     
@@ -38,21 +41,21 @@ public interface ServiceLayer_Interface {
     String addView(Story story);
     
     
-    ArrayList<Story> getMostViewedStories(Integer noOfStories, Date startPeriod, Date endPeriod);
+    ArrayList<Story> getMostViewedStories(Analytics analytics);
     
     
-    ArrayList<Story> getHighestRatedStories(Integer noOfStories, Date startPeriod, Date endPeriod);
+    ArrayList<Story> getHighestRatedStories(Analytics analytics);
     
     
-    ArrayList<Story> getMostLikedStories(Integer noOfStories, Date startPeriod, Date endPeriod);
+    ArrayList<Story> getMostLikedStories(Analytics analytics);
     
     
-    ArrayList<Genre> getTopGenres(Integer noOfGenres, Date startPeriod, Date endPeriod);
+    ArrayList<Genre> getTopGenres(Analytics analytics);
     
-    ArrayList<Writer> getTopWriters(Integer noOfWriters, Date startPeriod, Date endPeriod);
+    ArrayList<Writer> getTopWriters(Analytics analytics);
     
     
-    ArrayList<Editor> getTopEditors(Integer noOfEditors, Date startPeriod, Date endPeriod);
+    ArrayList<Editor> getTopEditors(Analytics analytics);
     
     
     String addComment(Comment comment);
@@ -131,7 +134,7 @@ public interface ServiceLayer_Interface {
     String registerReader(Reader reader);
     
     
-    Reader login(User user);
+    User login(User user);
     
     
     String editPersonalInfo(User user);
@@ -170,9 +173,6 @@ public interface ServiceLayer_Interface {
     Story displayStoryDetails(Story story);
     
     
-    String createStory(Story story);
-    
-    
     Story getPendingStory(Story story);
     
     
@@ -192,5 +192,10 @@ public interface ServiceLayer_Interface {
     
     
     Writer getAuthor(Writer writer);
+    
     String revokeWriterPrivileges(Writer writer);
+    
+    List<Editor> viewEditors();
+    
+    String applyForWriter(WriterApplication writerApplication);
 }

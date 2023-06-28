@@ -4,6 +4,7 @@ package TrialAndError.ReadersAreInnovators.Servlets;/*
  */
 
 
+import TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import TrialAndError.ReadersAreInnovators.RESTService.ImpService;
@@ -13,6 +14,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,7 @@ public class editorServlet extends HttpServlet {
 
 private ImpService imp;
 private ServiceLayerClass slc;
+    HttpSession session;
     
     public editorServlet()
     {
@@ -53,11 +57,16 @@ private ServiceLayerClass slc;
               viewFlaggedComments(request,response); 
                 break;
             case"REVIEW PENDING STORIES":
-                 dispacther =  request.getRequestDispatcher("ReviewPendingStories.jsp");
+                 List<StoryApplication>pendingStories=slc.viewPendingStories();
+                request.setAttribute("pendingStories",pendingStories);
+                  dispacther =  request.getRequestDispatcher("ReviewPendingStories.jsp");
                         dispacther.forward(request, response);   
                 break;
             case"REVOKE WRITER PRIVILEGES":
               viewWriters(request,response);
+                break;
+            case"reviewPendingStory":
+                
                 break;
                 
         }
@@ -82,6 +91,12 @@ private ServiceLayerClass slc;
              case"Submit Analytic Choice":
                  var dispacther =  request.getRequestDispatcher("AnalyseData.jsp");
                         dispacther.forward(request, response);  
+                 break;
+             case"Accept":
+                 
+                 break;
+             case"Deny":
+                 
                  break;
          }
     }

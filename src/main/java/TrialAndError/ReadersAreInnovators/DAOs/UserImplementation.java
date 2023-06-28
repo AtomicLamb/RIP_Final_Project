@@ -296,11 +296,11 @@ public class UserImplementation implements UserDAOInterface {
         
     }
     
-    @Override       //TODO: Neaten Up.
+    @Override       //Completed: Gets all users personal information to allow them to update it.
     public User getUser(User user) {
         
         conn = DatabaseConnectionManager.getConnection();
-        User userSend = null;
+        User myUser = null;
         
         try {
             
@@ -309,9 +309,11 @@ public class UserImplementation implements UserDAOInterface {
             ps = conn.prepareStatement(query);
             ps.setInt(1, user.getUserID());
             rs = ps.executeQuery();
-            while (rs.next())
-            {
-                userSend = new User(rs.getString(2),rs.getString(3),rs.getString(6),rs.getString(7),rs.getString(8));
+            
+            while (rs.next()) {
+                
+                myUser = new User(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5));
+                
             }
             
         } catch (SQLException e) {
@@ -365,7 +367,9 @@ public class UserImplementation implements UserDAOInterface {
             
         }
         
-        return userSend;
+        return myUser;
+        
     }
+    
     
 }

@@ -1,18 +1,19 @@
 package TrialAndError.ReadersAreInnovators.DAOs;
 
 
+import TrialAndError.ReadersAreInnovators.Models.AnalyticalData.Analytics;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
-
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 /**
  * @Desctripion:    The concrete implementation of the AnalyticsDAO.
@@ -20,10 +21,11 @@ import java.util.logging.Logger;
  * @Version:        v.1.0.0
  */
 
+
 public class AnalyticsImplementation implements AnalyticsDAOInterface{
     
     
-    //TODO JUnit Test, Method Comments.
+    //TODO: JUnit Test.
     
     
     private Connection conn;
@@ -123,7 +125,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
             ps.setInt(1, story.getStoryID());
             rs = ps.executeQuery();
             rs.next();
-            views = rs.getInt(4);
+            views = rs.getInt(1);
             
         } catch (SQLException e) {
             
@@ -253,30 +255,21 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
     public String addView(Story story) {
         
         conn = DatabaseConnectionManager.getConnection();
-        query = "select views from readers_are_innovators.stories where StoryID = ?";
-        Integer views;
         
         try {
             
+            query = "update stories s SET s.Views = s.Views + 1 where s.StoryID = ?";
+            
             ps = conn.prepareStatement(query);
             ps.setInt(1, story.getStoryID());
-            rs = ps.executeQuery();
-            rs.next();
-            views = rs.getInt(1);
-            views++;
+            ps.executeUpdate();
             
-            query = "update stories set views = ? where StoryID = ?";
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, views);
-            ps.setInt(2, story.getStoryID());
-            int update = ps.executeUpdate();
-            
-            message = update + "Story has been viewed.";
+            message = "Story view count has increased.";
             
         } catch (SQLException e) {
             
-            message = "Error adding story's views.";
-            Logger.getLogger(AnalyticsImplementation.class.getName()).log(Level.FINE, "Error adding a story's views.", e);
+            message = "Error adding like to the story.";
+            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error adding like to the story.", e);
             
         } finally {
             
@@ -328,7 +321,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
     }
     
-    @Override       //Complete:
+    @Override       //Complete: Increments the like count of a story when liked by a user.
     public String addLike(Story story) {
         
         conn = DatabaseConnectionManager.getConnection();
@@ -398,7 +391,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
     }
     
-    @Override       //Complete:
+    @Override       //Complete: Decrements the like count of a story when unliked by a user.
     public String removeLike(Story story) {
         
         conn = DatabaseConnectionManager.getConnection();
@@ -468,8 +461,8 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
     }
     
-    @Override       //Complete:
-    public ArrayList<Story> getMostViewedStories(Integer noOfStories, Date startPeriod, Date endPeriod) {
+    @Override       //Complete: Gets X most viewed stories in selected time period.
+    public ArrayList<Story> getMostViewedStories(Analytics analytics) {
         
         conn = DatabaseConnectionManager.getConnection();
         query = "Select StoryID, Title from stories s where s.DatePublished between ? AND ? order by s.Views desc";
@@ -479,11 +472,11 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         try {
             
             ps = conn.prepareStatement(query);
-            ps.setDate(1, startPeriod);
-            ps.setDate(2, endPeriod);
+            ps.setDate(1, functionsClass.stringToDate(analytics.getStartDate()));
+            ps.setDate(2, functionsClass.stringToDate(analytics.getEndDate()));
             rs = ps.executeQuery();
             
-            while (rs.next() && i < noOfStories){
+            while (rs.next() && i < analytics.getNumberOfAnalytics()){
                 
                 i++;
                 mostViewed.add(new Story(rs.getInt(1), rs.getString(2)));
@@ -544,8 +537,8 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
     }
     
-    @Override       //Complete:
-    public ArrayList<Story> getHighestRatedStories(Integer noOfStories, Date startPeriod, Date endPeriod) {
+    @Override       //Complete: Gets X highest rated stories in selected time period.
+    public ArrayList<Story> getHighestRatedStories(Analytics analytics) {
         
         conn = DatabaseConnectionManager.getConnection();
         query = "Select StoryID, Title from stories s where s.DatePublished between ? AND ? order by s.RatingAverage desc";
@@ -555,11 +548,11 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         try {
             
             ps = conn.prepareStatement(query);
-            ps.setDate(1, startPeriod);
-            ps.setDate(2, endPeriod);
+            ps.setDate(1, functionsClass.stringToDate(analytics.getStartDate()));
+            ps.setDate(2, functionsClass.stringToDate(analytics.getEndDate()));
             rs = ps.executeQuery();
             
-            while (rs.next() && i < noOfStories){
+            while (rs.next() && i < analytics.getNumberOfAnalytics()){
                 
                 i++;
                 highestRated.add(new Story(rs.getInt(1), rs.getString(2)));
@@ -620,8 +613,8 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
     }
     
-    @Override       //Complete:
-    public ArrayList<Story> getMostLikedStories(Integer noOfStories, Date startPeriod, Date endPeriod) {
+    @Override       //Complete: Gets X most liked stories in selected time period.
+    public ArrayList<Story> getMostLikedStories(Analytics analytics) {
         
         conn = DatabaseConnectionManager.getConnection();
         query = "Select StoryID, Title from stories s where s.DatePublished between ? AND ? order by s.Likes desc";
@@ -631,11 +624,11 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         try {
             
             ps = conn.prepareStatement(query);
-            ps.setDate(1, startPeriod);
-            ps.setDate(2, endPeriod);
+            ps.setDate(1, functionsClass.stringToDate(analytics.getStartDate()));
+            ps.setDate(2, functionsClass.stringToDate(analytics.getEndDate()));
             rs = ps.executeQuery();
             
-            while (rs.next() && i < noOfStories){
+            while (rs.next() && i < analytics.getNumberOfAnalytics()){
                 
                 i++;
                 mostLiked.add(new Story(rs.getInt(1), rs.getString(2)));
@@ -696,8 +689,8 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
     }
     
-    @Override       //Complete:
-    public ArrayList<Genre> getTopGenres(Integer noOfGenres, Date startPeriod, Date endPeriod) {
+    @Override       //Complete: Gets X most viewed genres in selected time period.
+    public ArrayList<Genre> getTopGenres(Analytics analytics) {
         
         conn = DatabaseConnectionManager.getConnection();
         ArrayList<Genre> topGenres = new ArrayList<>();
@@ -709,9 +702,11 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
                     "and i.StoryID = s.StoryID and s.DatePublished between ? AND ? group by g.Genre order by sum(s.Views) desc";
             
             ps = conn.prepareStatement(query);
+            ps.setDate(1, functionsClass.stringToDate(analytics.getStartDate()));
+            ps.setDate(2, functionsClass.stringToDate(analytics.getEndDate()));
             rs = ps.executeQuery();
             
-            while (rs.next() && i < noOfGenres){
+            while (rs.next() && i < analytics.getNumberOfAnalytics()){
                 
                 i++;
                 topGenres.add(new Genre(rs.getString(1)));
@@ -772,8 +767,8 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
     }
     
-    @Override       //Complete:
-    public ArrayList<Writer> getTopWriters(Integer noOfWriters, Date startPeriod, Date endPeriod) {
+    @Override       //Complete: Gets X most viewed writers in selected time period.
+    public ArrayList<Writer> getTopWriters(Analytics analytics) {
         
         conn = DatabaseConnectionManager.getConnection();
         ArrayList<Writer> topWriters = new ArrayList<>();
@@ -785,9 +780,11 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
                     "GROUP BY u.UserID order by sum (s.Views) desc";
             
             ps = conn.prepareStatement(query);
+            ps.setDate(1, functionsClass.stringToDate(analytics.getStartDate()));
+            ps.setDate(2, functionsClass.stringToDate(analytics.getEndDate()));
             rs = ps.executeQuery();
             
-            while (rs.next() && i < noOfWriters){
+            while (rs.next() && i < analytics.getNumberOfAnalytics()){
                 
                 i++;
                 topWriters.add(new Writer());
@@ -848,8 +845,8 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
     }
     
-    @Override       //Complete:
-    public ArrayList<Editor> getTopEditors(Integer noOfEditors, Date startPeriod, Date endPeriod) {
+    @Override       //Complete: Gets X most approving editors in selected time period.
+    public ArrayList<Editor> getTopEditors(Analytics analytics) {
         
         conn = DatabaseConnectionManager.getConnection();
         ArrayList<Editor> topEditors = new ArrayList<>();
@@ -861,9 +858,11 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
                     "where u.UserID = s.EditedByID GROUP BY u.UserID and s.DatePublished between ? AND ? order by COUNT (s.EditedByID) desc";
             
             ps = conn.prepareStatement(query);
+            ps.setDate(1, functionsClass.stringToDate(analytics.getStartDate()));
+            ps.setDate(2, functionsClass.stringToDate(analytics.getEndDate()));
             rs = ps.executeQuery();
             
-            while (rs.next() && i < noOfEditors){
+            while (rs.next() && i < analytics.getNumberOfAnalytics()){
                 
                 i++;
                 topEditors.add(new Editor(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4)));
