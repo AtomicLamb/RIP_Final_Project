@@ -1,18 +1,20 @@
-package TrialAndError.ReadersAreInnovators.Servlets;
+package TrialAndError.ReadersAreInnovators.Models.Administration;
+
+import TrialAndError.ReadersAreInnovators.DAOs.StoryImplementation;
+import jakarta.mail.Message;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import java.util.Properties;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Email {
     
-    
-    public static void sendEmail(String to)
-    {
+    public void sendEmail(String email, String subject, String text) {
+        
         final String username = "trialanderror.moderator@gmail.com";
         final String password = "yzpetiurliaxpqrn";
         
@@ -29,7 +31,7 @@ public class Email {
         
         
         Session session = Session.getInstance(props,
-                new javax.mail.Authenticator() {
+                new jakarta.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication(username, password);
                     }
@@ -40,32 +42,33 @@ public class Email {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("localhost"));
             message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(to));
-            message.setSubject("Readers are innovators Welcome you");
-            message.setText("Welcome to readers are innovators. We hope you have a wonderful time on our platform. Please click the link below to verify your email \n" +
-                    "fakelink.jsp");
+                    InternetAddress.parse(email));
+            message.setSubject(subject);
+            message.setText(text);
             
             Transport.send(message);        //Error happened here....
             
-            System.out.println("Email sent?");
+            System.out.println("Email sent");
             
         }
         
-        catch (MessagingException e)
+        catch (Exception e)
         {
             // throw new RuntimeException(e);
             System.out.println("Username or Password are incorrect ... exiting !");
-            e.printStackTrace();
+            Logger.getLogger(Email.class.getName()).log(Level.SEVERE, "Error getting pending Story.", e);
+        
         }
     }
     
     
-    public static void main(String[] args)
-    {
-        String to = "tksrex@gmail.com";
-        String email = "totoroseefort25@gmail.com";
-        String email2 = "luaanrobinson@gmail.com";
-        String email3 = "cosmosjoker56@gmail.com";
-        sendEmail(email3);
-    }
+//    public static void main(String[] args)
+//    {
+//        String to = "tksrex@gmail.com";
+//        String email = "totoroseefort25@gmail.com";
+//        String email2 = "luaanrobinson@gmail.com";
+//        String email3 = "cosmosjoker56@gmail.com";
+//        String email4 = "jontymileham@gmail.com";
+//        sendEmail(email4, "Juicy get over here", "You better come and sign up to our RIP program");
+//    }
 }

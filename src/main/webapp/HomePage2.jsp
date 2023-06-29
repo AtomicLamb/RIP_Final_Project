@@ -77,20 +77,17 @@
 			<div class="row">
 				 
        
-        <h1 class="jobs_text"  style="text-align: center">Books from favourite categories</h1> 
+        <h1 class="jobs_text"  style="text-align: center">Books from favourite Genres</h1> 
 				 
        
                   <div class="scrollmenu" style="margin: auto; width: 800px;">
                        
-            <%List<Story>stories=(List<Story>)request.getAttribute("stories");%>
+            <%List<Story>storiesFromFavouriteGenres=(List<Story>)request.getAttribute("stories");%>
             
-            <%for(Story story:stories){%> 
-            <%Story storySelected=story;%>
-            
-                <a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>%authorId=<%=story.getAuthorID()%>">
-                
-                    <h1 style="color: white;"><%=story.getTitle()%></h1>
-             <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%story.getTitle();%>" style="width:400px;height:400px;" > 
+            <%for(Story story:storiesFromFavouriteGenres){%> 
+               <a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>%authorId=<%=story.getAuthorID()%>">
+                   <h1 style="color: white;"><%=story.getTitle()%></h1>
+             <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" > 
             </a>  
             <%}%>
                       

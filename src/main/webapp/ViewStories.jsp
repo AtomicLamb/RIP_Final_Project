@@ -20,7 +20,10 @@
     </head>  
     <body>
         <%ArrayList<Story>stories=(ArrayList<Story>)request.getAttribute("writersPublishedStories");%>
-        
+        <%String message=(String) request.getAttribute("message");%>
+        <%if(message!=null){%>
+        <h1><%=message%></h1>
+        <%}%>
         <div class="Container" >
             <h1 style="font-size:50px;text-align:center;">View Stories</h1><br><br>
             <div class="scrollmenu" style=" margin: auto; width: 800px;height: 550px">
@@ -29,6 +32,11 @@
                     <h1 style="color: white;"><%=story.getTitle()%></h1>
                     <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" >
                 </a>
+                 <form action="writerServlet" method="post">
+                     <input type="hidden" name="storyId" value="<%=story.getStoryID()%>"><br>
+                     <input type="submit" name="submit" value="Private book"><br>
+                     <input type="submit" name="submit" value="Publicise book">
+                 </form>
                 <%}%> 
             </div>
         </div>

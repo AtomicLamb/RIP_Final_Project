@@ -14,10 +14,13 @@ import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @desctripion:    The concrete implementation of the AdminEditorDAO.
+ * @author:         Tyler Schwegler.
+ * @Version:        v.1.0.0
+ */
+
 public class StoryImplementation implements StoryDAOInterface {
-    
-    
-    //TODO: JUnit Test, @Author, 2 Methods.
     
     
     private Connection conn;
@@ -26,7 +29,8 @@ public class StoryImplementation implements StoryDAOInterface {
     private String query;
     private String message;
     private byte[] decoder;
-    private InputStream inputStream;
+    private InputStream input = null;
+    private ByteArrayOutputStream output = null;
     FunctionsClass functionsClass = new FunctionsClass();
     
     
@@ -411,21 +415,23 @@ public class StoryImplementation implements StoryDAOInterface {
             
             while (rs.next()) {
                 
-                InputStream inputStream = rs.getBinaryStream(2);
-                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                String imagePath = rs.getString(2);
+                
+                input = new FileInputStream(new File(imagePath));
+                output = new ByteArrayOutputStream();
                 byte[] buffer = new byte[4096];
                 int bytesRead = -1;
                 
-                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                while ((bytesRead = input.read(buffer)) != -1) {
                     
-                    outputStream.write(buffer, 0, bytesRead);
+                    output.write(buffer, 0, bytesRead);
                     
                 }
                 
-                byte[] imageBytes = outputStream.toByteArray();
+                byte[] imageBytes = output.toByteArray();
                 String image = Base64.getEncoder().encodeToString(imageBytes);
                 
-                publishedStories.add(new Story(rs.getString(1), image));
+                publishedStories.add(new Story(rs.getString(1), image, imagePath));
                 
             }
             
@@ -438,6 +444,34 @@ public class StoryImplementation implements StoryDAOInterface {
             throw new RuntimeException(e);
             
         } finally {
+            
+            if (input!=null){
+                
+                try {
+                    
+                    input.close();
+                    
+                } catch (IOException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (output!=null){
+                
+                try {
+                    
+                    output.close();
+                    
+                } catch (IOException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
             
             if (rs!=null){
                 
@@ -573,11 +607,7 @@ public class StoryImplementation implements StoryDAOInterface {
             ps.setInt(2, story.getAuthorID());
             ps.setString(3, story.getStoryBody());
             ps.setString(4, story.getSynopsis());
-            
-            decoder = Base64.getDecoder().decode(story.getCoverImage());
-            Blob blob = new SerialBlob(decoder);
-            
-            ps.setBlob(5, blob);
+            ps.setString(5, functionsClass.decodeBase64(story.getCoverImage()));
             ps.setInt(6, functionsClass.booleanToInteger(story.getCommentsEnabled()));
             
             ps.executeUpdate();
@@ -652,32 +682,15 @@ public class StoryImplementation implements StoryDAOInterface {
             ps.setInt(1, story.getStoryID());
             
             rs = ps.executeQuery();
+            
             rs.next();
             
-            InputStream inputStream = rs.getBinaryStream(6);
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            byte[] buffer = new byte[4096];
-            int bytesRead = -1;
-            
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                
-                outputStream.write(buffer, 0, bytesRead);
-                
-            }
-            
-            byte[] imageBytes = outputStream.toByteArray();
-            String image = Base64.getEncoder().encodeToString(imageBytes);
-            
-            pendingStory = new Story(); //TODO
+            pendingStory = new Story();
             
             
         } catch (SQLException e) {
             
             Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error getting pending Story.", e);
-            
-        } catch (IOException e) {
-            
-            throw new RuntimeException(e);
             
         } finally {
             

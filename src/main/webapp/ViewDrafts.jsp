@@ -18,6 +18,10 @@
     </head>
     <body>
         <%List<Story> drafts=(List<Story>)request.getAttribute("drafts"); %>
+        <%String message=(String)request.getAttribute("message");%>
+        <%if(message!=null){%>
+        <h1><%=message%></h1>
+        <%}%>
         <div class="Container" >
             <h1 style="font-size:50px;text-align:center;">View Drafts</h1><br><br>
             <div class="scrollmenu" style=" margin: auto; width: 800px;height: 550px">

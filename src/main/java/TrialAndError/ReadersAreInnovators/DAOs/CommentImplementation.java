@@ -5,7 +5,6 @@ import TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
-
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,10 +16,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+/**
+ * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Author:         Tyler Schwegler.
+ * @Version:        v.1.0.0
+ * @Complete:       True
+ */
+
 public class CommentImplementation implements CommentDAOInterface{
-    
-    
-    //TODO: Deprecated Method, @Author.
     
     
     private Connection conn;
@@ -28,8 +31,6 @@ public class CommentImplementation implements CommentDAOInterface{
     private ResultSet rs;
     private String query;
     private String message;
-    private byte[] decoder;
-    private InputStream inputStream;
     FunctionsClass functionsClass = new FunctionsClass();
     
     
@@ -540,92 +541,6 @@ public class CommentImplementation implements CommentDAOInterface{
         }
         
         return numberOfComments;
-        
-    }
-    
-    @Deprecated
-    @Override
-    public String clearComments(Story story) {
-        
-        conn = DatabaseConnectionManager.getConnection();
-        query = "select * from readers_are_innovators.stories where StoryID = ?";
-        
-        try {
-          
-                ps = conn.prepareStatement(query);
-                ps.setInt(1, story.getStoryID());
-                rs = ps.executeQuery();
-            if(rs.next()!= false) {
-                //rs.next();
-                
-            } else{
-                System.out.println("Story no = exist :(");
-            }
-        } catch (SQLException e) {
-            System.out.println("Error finding story");
-            e.printStackTrace();
-        } 
-        
-        
-        query = "delete from readers_are_innovators.comments where StoryID = ?";
-        try {
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, story.getStoryID());
-            
-            int deleted = ps.executeUpdate();
-            message = deleted + " comments cleared from " + story;
-            
-        } catch (SQLException e) {
-            System.out.println("Error clearing comments from " + story);
-            e.printStackTrace();
-            
-        } finally {
-            
-            if (rs!=null){
-                
-                try {
-                    
-                    rs.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-            if (ps!=null){
-                
-                try {
-                    
-                    ps.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-            if (conn!=null){
-                
-                try {
-                    
-                    conn.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-        }
-        
-        return message;
         
     }
     

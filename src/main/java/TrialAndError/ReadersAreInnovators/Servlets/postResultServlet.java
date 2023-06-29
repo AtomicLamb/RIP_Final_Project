@@ -6,7 +6,9 @@ package TrialAndError.ReadersAreInnovators.Servlets;
 
 
 import TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication;
+import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
+import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayer_Interface;
 import jakarta.servlet.ServletException;
@@ -66,7 +68,16 @@ public class postResultServlet extends HttpServlet {
                 storyServlet.fillStoryDetailsPage(request,response,"newComment",request.getParameter("newComment"));
                 break;
             case"followAuthor":
-                storyServlet.fillStoryDetailsPage(request,response,"followMessage",request.getParameter("followMessage"));
+                storyServlet.fillStoryDetailsPage(request,response,"message",request.getParameter("followMessage"));
+                break;
+            case"like":
+                session= request.getSession(false);
+                Story story1=new Story();
+                User user=new User();
+                
+                user.setUserID((Integer)session.getAttribute("UserID"));
+                story1.setStoryID(Integer.valueOf(request.getParameter("storyId")));
+                storyServlet.fillStoryDetailsPage(request,response,"message",slc.likeStory(story1,user));
                 break;
             case"Accept":
                 story=new StoryApplication();
@@ -80,7 +91,7 @@ public class postResultServlet extends HttpServlet {
                 Editor editor=new Editor();
                 
                 editor.setUserID((Integer)session.getAttribute("UserID"));
-                 request.setAttribute("approveMessage",slc.approvePendingStory(story,editor));
+                 request.setAttribute("message",slc.approvePendingStory(story,editor));
                   request.setAttribute("pendingStories",pendingStories);
                   var dispatcher=request.getRequestDispatcher("ReviewPendingStories");
                   dispatcher.forward(request,response);
@@ -88,7 +99,7 @@ public class postResultServlet extends HttpServlet {
             case "Deny":
                 story=new StoryApplication();
                 story.setPendingStoryID(Integer.valueOf(request.getParameter("storyId")));
-                request.setAttribute("approveMessage",slc.removePendingStory(story));
+                request.setAttribute("message",slc.removePendingStory(story));
                 request.setAttribute("pendingStories",pendingStories);
                 dispatcher=request.getRequestDispatcher("ReviewPendingStories");
                 dispatcher.forward(request,response);

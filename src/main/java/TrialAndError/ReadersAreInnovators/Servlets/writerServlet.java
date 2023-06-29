@@ -18,7 +18,9 @@ import jakarta.servlet.http.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.Base64;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,7 +35,11 @@ public class writerServlet extends HttpServlet
 {
     private HttpSession session;
     private Writer writer;
+    private Story story;
       private final ServiceLayer_Interface slc=new ServiceLayerClass();
+    private Part filePart; 
+    private InputStream image;
+    private String newCoverImage;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
@@ -66,13 +72,13 @@ public class writerServlet extends HttpServlet
                break;
                
            case"editDraft":
-               Story story=new Story();
+               story=new Story();
                 story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
                   request.setAttribute("draft",slc.getDraft(story));
                dispacther =  request.getRequestDispatcher("EditDraft.jsp");
                dispacther.forward(request, response);
                break;
-                   
+          
        }
     }
 
@@ -82,17 +88,116 @@ public class writerServlet extends HttpServlet
     {
         switch(request.getParameter("submit")){
             case"Submit Story":
-                
+                  
+                filePart = request.getPart("fileImage");
+                image = filePart.getInputStream();
+                story = new Story();
+                story.setAuthorID(Integer.valueOf(request.getParameter("draftId")));
+                newCoverImage = Base64.getEncoder().encodeToString(image.readAllBytes());
+                session= request.getSession(false);
+                            
+                request.setAttribute("message",slc.submitStory(new Story(request.getParameter("storyTitle"),(Integer)session.getAttribute("UserID")
+                        ,request.getParameter("storySynopsis"), newCoverImage, "",request.getParameter("storyBody"))));
+                var dispatcher=request.getRequestDispatcher("ViewDrafts.jsp");
+                dispatcher.forward(request,response);
                 break;
             case"Save Story":
-                saveDraft(request, response);    
+                //Title, AuthorID, StoryBody, Synopsis, CoverImage, CommentsEnabled
+                filePart = request.getPart("fileImage");
+                image = filePart.getInputStream();
+                story=new Story();
+                story.setAuthorID(Integer.valueOf(request.getParameter("draftId")));
+                 newCoverImage = Base64.getEncoder().encodeToString(image.readAllBytes());
+                saveAsDraft(getCoverImage(newCoverImage),request,response);
                 break;
             case"Submit Draft":
+                filePart = request.getPart("fileImage");
+                image = filePart.getInputStream();
+                story=new Story();
+                story.setAuthorID(Integer.valueOf(request.getParameter("draftId")));
+                
+                newCoverImage = Base64.getEncoder().encodeToString(image.readAllBytes());
+                
+                if(newCoverImage!=null){
+                    submitStory(getCoverImage(newCoverImage),request,response);
+                }
+                else {
+                    submitStory(getCoverImage(slc.getDraft(story).getCoverImage()),request,response);
+                }
                
-                break;
-            case"Save Draft":
                 
                 break;
+            case"Save Draft":
+                filePart = request.getPart("fileImage");
+                image = filePart.getInputStream();
+                 
+               
+                newCoverImage = Base64.getEncoder().encodeToString(image.readAllBytes());
+               
+                if(newCoverImage!=null){
+                    saveDraft2Database(getCoverImage(newCoverImage),request,response);
+                }
+                else {
+                    saveDraft2Database(getCoverImage(slc.getDraft(story).getCoverImage()),request,response);
+                }
+                break;
+            case"Private book":
+                story=new Story();
+                story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
+                request.setAttribute("message",slc.privatizeStory(story));
+                var dispacther =  request.getRequestDispatcher("ViewStories.jsp");
+                dispacther.forward(request, response);
+                break;
+            case "Publicise book":
+                story=new Story();
+                story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
+                request.setAttribute("message",slc.publiciseStory(story));
+                var dispacther2 =  request.getRequestDispatcher("ViewStories.jsp");
+                dispacther2.forward(request, response);
+                break;
+        }
+    }
+    public void saveAsDraft(String coverImage,HttpServletRequest request,HttpServletResponse response){
+        session= request.getSession(false);
+        
+        request.setAttribute("message",slc.saveAsDraft(new Story(request.getParameter("storyTitle"),(Integer)session.getAttribute("UserID"),coverImage, "", Boolean.parseBoolean(request.getParameter("draftCommentsEnabled")),
+                request.getParameter("storySynopsis"),request.getParameter("storyBody"))));
+        var dispatcher=request.getRequestDispatcher("ViewDrafts.jsp");
+        try {
+            dispatcher.forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public String getCoverImage(String CoverImage){
+          return CoverImage;
+    }
+    public void submitStory(String coverImage,HttpServletRequest request,HttpServletResponse response){
+         
+        request.setAttribute("message",slc.submitStory(new Story(request.getParameter("draftTitle"),Integer.valueOf(request.getParameter("authorId")),coverImage, "",Boolean.parseBoolean(request.getParameter("draftCommentsEnabled")),
+                request.getParameter("draftSynopsis"),request.getParameter("draftStoryBody"))));
+        var dispatcher=request.getRequestDispatcher("ViewDrafts.jsp");
+        try {
+            dispatcher.forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void saveDraft2Database(String coverImage,HttpServletRequest request,HttpServletResponse response){
+        request.setAttribute("message",slc.editDraft(new Story(request.getParameter("draftTitle"),Integer.valueOf(request.getParameter("draftId")),coverImage, "", Boolean.parseBoolean(request.getParameter("draftCommentsEnabled")),
+                                                                request.getParameter("draftSynopsis"),request.getParameter("draftStoryBody"))));
+        var dispatcher=request.getRequestDispatcher("ViewDrafts.jsp");
+        try {
+            dispatcher.forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     public void saveDraft(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException

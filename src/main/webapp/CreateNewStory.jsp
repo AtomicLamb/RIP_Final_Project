@@ -17,7 +17,7 @@
     <body>
         <div class="myContainer" >
             <h1 style="font-size:50px;text-align:center;">CREATE NEW STORY</h1><br><br>
-            <form action="writerServlet" method="post">
+            <form action="writerServlet" method="post" enctype="multipart/form-data">
               <div class="input-box" style="font-size:20px;text-align:center;">
                 <h2>Enter the book title here</h2>
                 <input style="width: 20%" type="text" placeholder="Enter the book title" name="storyTitle" required><br><br>

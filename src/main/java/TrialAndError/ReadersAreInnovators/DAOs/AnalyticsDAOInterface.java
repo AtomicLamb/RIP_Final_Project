@@ -10,6 +10,7 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Desctripion:    The Analytics DAO Interface.
@@ -26,8 +27,8 @@ public interface AnalyticsDAOInterface{
     String addView(Story story);
     String addLike(Story story);
     String removeLike(Story story);
-    ArrayList<Story> getMostViewedStories(Analytics analytics);
-    ArrayList<Story> getHighestRatedStories(Analytics analytics);
+    List<Story> getMostViewedStories(Analytics analytics);
+    List<Story> getHighestRatedStories(Analytics analytics);
     ArrayList<Story> getMostLikedStories(Analytics analytics);
     ArrayList<Genre> getTopGenres(Analytics analytics);
     ArrayList<Writer> getTopWriters(Analytics analytics);

@@ -16,10 +16,13 @@ import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @desctripion:    The concrete implementation of the AdminEditorDAO.
+ * @author:         Tyler Schwegler.
+ * @Version:        v.1.0.0
+ */
+
 public class WriterImplementation implements WriterDAOInterface{
-    
-    
-    //TODO:  @Author, JUnit Test.
     
     
     private Connection conn;
@@ -67,8 +70,8 @@ public class WriterImplementation implements WriterDAOInterface{
             byte[] imageBytes = outputStream.toByteArray();
             String image = Base64.getEncoder().encodeToString(imageBytes);
             
-            draft = new Story(rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), 
-                    image, functionsClass.integerToBoolean(rs.getInt(7)));
+//            draft = new Story(rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), 
+//                    image, "", functionsClass.integerToBoolean(rs.getInt(7)));
             
         } catch (SQLException e) {
             
@@ -158,8 +161,8 @@ public class WriterImplementation implements WriterDAOInterface{
                 byte[] imageBytes = outputStream.toByteArray();
                 String image = Base64.getEncoder().encodeToString(imageBytes);
                 
-                userDrafts.add(new Story(rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5),
-                        image, functionsClass.integerToBoolean(rs.getInt(7))));
+//                userDrafts.add(new Story(rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5),
+//                        image, "", functionsClass.integerToBoolean(rs.getInt(7))));
                 
             }
             

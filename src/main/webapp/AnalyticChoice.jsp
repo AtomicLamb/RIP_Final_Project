@@ -30,7 +30,7 @@
         <div class="signup-form">
           <div class="title">Analytic Choice Page</div>
           <p style="color:red">Enter the start date first and end date second </p>
-          <form action="editorServlet" method="post">
+          <form action="analyticalServlet" method="post">
               <div class="input-boxes">
                  <div class="input-box">
                      <input type="number" placeholder="Enter a number from 1-30" name="analyticNum" min="1" max="30" required>
@@ -46,6 +46,12 @@
                   </div>
               </div>
           </form>
+            <%
+                String message = (String) request.getAttribute("message");
+                if(message!=null){
+            %>
+            <p><strong style ="color:red;"><%=message %></strong></p>
+            <%}%>
     </div>
     </div>
     </div>

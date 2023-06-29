@@ -1,6 +1,7 @@
 package TrialAndError.ReadersAreInnovators.DAOs;
 
 
+import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
@@ -16,9 +17,10 @@ import java.util.logging.Logger;
 
 
 /**
- * @desctripion:    The concrete implementation of the AdminEditorDAO.
- * @author:         Tyler Schwegler.
+ * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
+ * @Complete:       True
  */
 
 public class AdminEditorImplementation implements AdminEditorDAOInterface{
@@ -29,8 +31,6 @@ public class AdminEditorImplementation implements AdminEditorDAOInterface{
     private ResultSet rs;
     private String query;
     private String message;
-    private byte[] decoder;
-    private InputStream inputStream;
     FunctionsClass functionsClass = new FunctionsClass();
     
     
@@ -257,5 +257,11 @@ public class AdminEditorImplementation implements AdminEditorDAOInterface{
         
     }
     
+    @Override       //TODO: Fuck ME
+    public String setBookOfDay(Story story) {
+        
+        return null;
+        
+    }
     
 }

@@ -7,6 +7,7 @@ package TrialAndError.ReadersAreInnovators.Servlets;
 
 
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
+import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayer_Interface;
 import jakarta.servlet.ServletException;
@@ -14,6 +15,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -36,7 +39,8 @@ import javax.swing.JLabel;
  */
 @WebServlet(urlPatterns = {"/HomePageServlet"})
 public class HomePageServlet extends HttpServlet {
-
+private final ServiceLayer_Interface service=new ServiceLayerClass();
+private HttpSession session;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -67,26 +71,14 @@ public class HomePageServlet extends HttpServlet {
       
         switch(request.getParameter("submit")){
             case "HomePage":
-                BufferedImage img = null;
-                
-                List<Story>storyList=new ArrayList();
-                storyList.add(new Story());
-                ServiceLayer_Interface service=new ServiceLayerClass();
-                
-                
-                img=ImageIO.read(new File("C:\\Users\\user\\Documents\\NetBeansProjects\\RIP_system2\\web\\images\\ffxiv_06022022_151541_540.png"));
-                BufferedImage img2=ImageIO.read(new File("C:\\Users\\user\\Documents\\NetBeansProjects\\RIP_system2\\web\\images\\ffxiv_05022022_223708_933.png"));
-                ByteArrayOutputStream output = new ByteArrayOutputStream();
-                ImageIO.write(img, "png", output);
-                String imageAsBase64=Base64.getEncoder().encodeToString(output.toByteArray());
-                ByteArrayOutputStream output2 = new ByteArrayOutputStream();
-                ImageIO.write(img2, "png", output);
-                String imageAsBase64_2=Base64.getEncoder().encodeToString(output2.toByteArray());
-                List<Story>stories=new ArrayList();
-                stories.add(new Story("Past the far edge of fate",5,"In the beginning","Some crazy story",imageAsBase64,true));
-                stories.add(new Story("A Tale Of Loss And Faith",6,"In the beginning","Some crazy story",imageAsBase64_2,true));
-                request.setAttribute("stories", stories);
-                var dispatcher=request.getRequestDispatcher("HomePage2.jsp");
+                  session= request.getSession(false);
+                User user=new User();
+                user.setUserID((Integer)session.getAttribute("UserID"));
+                List<Story>stories=service.getStoriesFromGenres(user);
+                Integer num = 0;
+                request.setAttribute("message", num);
+                  request.setAttribute("stories", stories);
+                var dispatcher=request.getRequestDispatcher("HomePage.jsp");
                 dispatcher.forward(request,response);
                 
                 break;

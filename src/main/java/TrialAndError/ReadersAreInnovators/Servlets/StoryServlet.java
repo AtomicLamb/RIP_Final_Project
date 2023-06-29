@@ -38,8 +38,8 @@ import javax.imageio.ImageIO;
  */
 @WebServlet(name = "StoryServlet", urlPatterns = {"/StoryServlet"})
 public class StoryServlet extends HttpServlet {
-    HttpSession session;
-    
+    private HttpSession session;
+    private final ServiceLayer_Interface service =new ServiceLayerClass();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -64,7 +64,7 @@ public class StoryServlet extends HttpServlet {
    
     public Story getChosenStory(HttpServletRequest request){
          
-        ServiceLayer_Interface service=new ServiceLayerClass();
+        
         Story chosenStory=new Story();
                 chosenStory.setStoryID(Integer.valueOf(request.getParameter("storyId")));
                 return service.displayStoryDetails(chosenStory);
@@ -77,7 +77,7 @@ public class StoryServlet extends HttpServlet {
     }
     public Comment getComment(HttpServletRequest request){
         
-        ServiceLayer_Interface service=new ServiceLayerClass();
+       
         Story story=new Story();
         story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
         service.getComments(service.displayStoryDetails(story));
@@ -107,7 +107,7 @@ public class StoryServlet extends HttpServlet {
     }
      
     public void fillStoryDetailsPage(HttpServletRequest request, HttpServletResponse response,String attributeName,Object value){
-         ServiceLayer_Interface service=new ServiceLayerClass();
+         
         Story chosenStory=getChosenStory(request);
           Writer writer=new Writer(Integer.valueOf(request.getParameter("authorId")));
         request.setAttribute("storyDetails", chosenStory);
@@ -127,32 +127,32 @@ public class StoryServlet extends HttpServlet {
         }
         
     }
-    public User getUserSession(HttpServletRequest request){
+    public User getUserSessionJustId(HttpServletRequest request){
         session= request.getSession(false);
-        User user=(User)session.getAttribute("currentUser");
+        User user=new User();
+        user.setUserID((Integer)session.getAttribute("UserID"));
         return user;
     }
     public String rateStory(HttpServletRequest request){
         Story story=getChosenStory(request);
-        ServiceLayer_Interface service= new ServiceLayerClass();
+        
         story.setRatingAverage(Double.valueOf(request.getParameter("rating")));
          
-       return service.rateStory(new Rating(getUserSession(request).getUserID(),Integer.valueOf(request.getParameter("storyId")),Integer.valueOf(request.getParameter("rating"))));
-           
+       return service.rateStory(new Rating(getUserSessionJustId(request).getUserID(),Integer.valueOf(request.getParameter("storyId")),Integer.valueOf(request.getParameter("rating"))));
+            
     }
     public String addComment(HttpServletRequest request){
-        ServiceLayer_Interface serviceLayer=new ServiceLayerClass();
-        
+         
           session=request.getSession(false);
-        User user=(User)session.getAttribute("currentUser");
+         
            Comment comment=new Comment();
          
-        comment.setName(user.getName());
-        comment.setUserID(user.getUserID());
+        comment.setName((String)session.getAttribute("Name"));
+        comment.setUserID((Integer)session.getAttribute("UserID"));
         comment.setStoryID(Integer.valueOf(request.getParameter("storyId")));
         comment.setComment(request.getParameter("commentArea"));
         comment.setFlagged(false);
-        return serviceLayer.addComment(comment);
+        return service.addComment(comment);
     }
     public Comment getNewComment(HttpServletRequest request){
         
@@ -163,10 +163,7 @@ public class StoryServlet extends HttpServlet {
          return comments.get(comments.size()-1);
     }
     public String followAuthor(HttpServletRequest request){
-        ServiceLayer_Interface serviceLayer=new ServiceLayerClass();
-        session= request.getSession(false);
-        User user=(User)session.getAttribute("currentUser");
-         return serviceLayer.followAuthor(serviceLayer.getAuthor(new Writer(request.getParameter("authorId"))),user);
+           return service.followAuthor(service.getAuthor(new Writer(request.getParameter("authorId"))),getUserSessionJustId(request));
          
      }
     @Override
@@ -176,25 +173,24 @@ public class StoryServlet extends HttpServlet {
         switch(request.getParameter("submit")){
             
             case"storyDetails":
-                List<User>users=getUsers();
-                HttpSession session=request.getSession(true);
-                session.setAttribute("currentUser", users.get(0));
                 fillStoryDetailsPage(request,response,"", null);
                 break;
            
             case "AuthorDetails":
                 Writer writer=new Writer();
                 writer.setUserID(Integer.valueOf(request.getParameter("authorId")));
-                ServiceLayerClass service=new ServiceLayerClass();
-                request.setAttribute("authorStories", service.getPublishedStories(writer));
+                  request.setAttribute("authorStories", service.getPublishedStories(writer));
                 request.setAttribute("chosenWriter",service.getAuthor(writer));
                var dispatcher=request.getRequestDispatcher("AuthorDetails.jsp");
                 dispatcher.forward(request,response);
                  break;
             
             case "read":
+                   Story story=new Story();
+                     story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
                 request.setAttribute("chosenStory", getChosenStory(request));
                 dispatcher=request.getRequestDispatcher("StoryBody.jsp");
+                service.readStory(story,getUserSessionJustId(request));
                 dispatcher.forward(request, response);
                 
                 break;
@@ -230,6 +226,9 @@ public class StoryServlet extends HttpServlet {
                 
             case "followAuthor":
                 response.sendRedirect("postResultServlet?submit=followAuthor&storyId="+request.getParameter("storyId")+"&followMessage="+followAuthor(request));
+                break;
+            case"like":
+                response.sendRedirect("postResultServlet?submit=like&storyId="+request.getParameter("storyId")+"&like="+followAuthor(request));
                 break;
         }
     }

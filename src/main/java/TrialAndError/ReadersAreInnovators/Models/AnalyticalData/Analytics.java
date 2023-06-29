@@ -3,6 +3,7 @@ package TrialAndError.ReadersAreInnovators.Models.AnalyticalData;
 public class Analytics {
     
     
+    private String analyticType;
     private Integer numberOfAnalytics;
     private String startDate;
     private String endDate;
@@ -11,13 +12,30 @@ public class Analytics {
         
     }
     
-    
     public Analytics(Integer numberOfAnalytics, String startDate, String endDate) {
         
         this.numberOfAnalytics = numberOfAnalytics;
         this.startDate = startDate;
         this.endDate = endDate;
         
+    }
+    
+    public Analytics(String analyticType, Integer numberOfAnalytics, String startDate, String endDate) {
+        
+        this.analyticType = analyticType;
+        this.numberOfAnalytics = numberOfAnalytics;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        
+    }
+    
+    
+    public String getAnalyticType() {
+        return analyticType;
+    }
+    
+    public void setAnalyticType(String analyticType) {
+        this.analyticType = analyticType;
     }
     
     public Integer getNumberOfAnalytics() {
@@ -48,7 +66,8 @@ public class Analytics {
     public String toString() {
         
         return "Analytics{" +
-                "numberOfAnalytics=" + numberOfAnalytics +
+                "analyticType='" + analyticType + '\'' +
+                ", numberOfAnalytics=" + numberOfAnalytics +
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
                 '}';

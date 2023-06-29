@@ -9,9 +9,13 @@ import TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.*;
+import TrialAndError.ReadersAreInnovators.Models.UserTypes.Reader;
+import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
+import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
 import org.codehaus.jackson.annotate.JsonIgnoreType;
 import org.junit.Test;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -51,9 +55,9 @@ public class JUnitTesting {
     
     Comment comment = new Comment(9, 17, 51, "Reader", "Test Comment", "2022/06/23");
     Genre genre = new Genre(15, "Test");
-    Story story = new Story(5, "TestStory", 52, 0, 0, 0.0, "This is a Story for Testing", "To Test", "C:\\Users\\TKS\\IdeaProjects\\Trial and Error - Readers are Innovators\\src\\main\\resources\\images\\Default Book Cover.jpg", false, "2022/06/23", 49);
-    StoryApplication pendingStory = new StoryApplication(8, "Test", 52, "Testing Pending Story", "Pending Test", "C:\\Users\\TKS\\IdeaProjects\\Trial and Error - Readers are Innovators\\src\\main\\resources\\images\\Default Book Cover.jpg", true, "'2023-06-25'");
-    Story draft = new Story(2, "Test", 16, "Testing Drafts", "Draft test", "C:\\Users\\TKS\\IdeaProjects\\Trial and Error - Readers are Innovators\\src\\main\\resources\\images\\Default Book Cover.jpg", true);
+    Story story = new Story(5, "TestStory", 52, 0, 0, 0.0, "", "This is a Story for Testing", "To Test", "C:\\Users\\TKS\\IdeaProjects\\Trial and Error - Readers are Innovators\\src\\main\\resources\\images\\Default Book Cover.jpg", false, "2022/06/23", 49);
+    StoryApplication pendingStory = new StoryApplication(1, 29);
+    Story draft = new Story(2, "Test", 16, "Testing Drafts", "", "Draft test", "C:\\Users\\TKS\\IdeaProjects\\Trial and Error - Readers are Innovators\\src\\main\\resources\\images\\Default Book Cover.jpg", true);
     
     
     Analytics analytics = new Analytics(5, "2023-05-01", "2023-07-01");
@@ -128,7 +132,7 @@ public class JUnitTesting {
     @Test
     public void getMostViewedStoriesTest(){
         
-        ArrayList<Story> mostViewed = analyticsImp.getMostViewedStories(analytics);
+        List<Story> mostViewed = analyticsImp.getMostViewedStories(analytics);
         
         for (Story s: mostViewed) {
             
@@ -141,7 +145,7 @@ public class JUnitTesting {
     @Test
     public void getHighestRatedStoriesTest(){
         
-        ArrayList<Story> highestRated = analyticsImp.getHighestRatedStories(analytics);
+        List<Story> highestRated = analyticsImp.getHighestRatedStories(analytics);
         
         for (Story s: highestRated) {
             
@@ -494,7 +498,7 @@ public class JUnitTesting {
     
     
     
-    //Story Tests:  TODO:
+    //Story Tests:
     
     @Test
     public void removeStoryTest(){
@@ -538,10 +542,45 @@ public class JUnitTesting {
         
     }
     
+    
+    
     @Test
-    public void createStoryTest(){
+    public void displayStoryDetailsTest(){
         
         //TODO
+        
+    }
+    
+    @Test
+    public void saveAsDraftTest(){
+        
+        InputStream inputStream = null;
+        
+        try {
+            
+            inputStream = new FileInputStream(new File("C:\\Users\\TKS\\Desktop\\success.jpg"));
+            
+            FunctionsClass functionsClass = new FunctionsClass();
+            
+            String image64 = functionsClass.encodeBase64(inputStream);
+            
+            Story myTestStory = new Story("Image Test 2 the return of the cum sock", 52, "The story body to test images is very boring. Until one day the all mighty and all powerful cum sock came to life, empowered by the success of the RIP program developed by Trial and Error.", "An up and cumming success story.", image64, true);
+            
+            System.out.println(storyImp.saveAsDraft(myTestStory));
+            
+        } catch (FileNotFoundException e) {
+            
+            throw new RuntimeException(e);
+            
+        } finally {
+            
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            
+        }
         
     }
     
@@ -593,6 +632,13 @@ public class JUnitTesting {
     public void editPersonalInfoTest(){
         
         System.out.println(userImp.editPersonalInfo(reader));
+        
+    }
+    
+    @Test
+    public void emailVerificationTest(){
+        
+        System.out.println(userImp.emailVerification("tksrex@gmail.com"));
         
     }
     

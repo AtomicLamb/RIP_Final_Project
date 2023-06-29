@@ -9,7 +9,11 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * @desctripion:    The concrete implementation of the AdminEditorDAO.
+ * @author:         Tyler Schwegler.
+ * @Version:        v.1.0.0
+ */
 public interface WriterDAOInterface {
     
     

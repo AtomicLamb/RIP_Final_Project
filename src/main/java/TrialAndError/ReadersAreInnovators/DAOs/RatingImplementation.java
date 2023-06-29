@@ -13,10 +13,14 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Author:         Tyler Schwegler.
+ * @Version:        v.1.0.0
+ * @Complete:       True
+ */
+
 public class RatingImplementation implements RatingDAOInterface{
-    
-    
-    //TODO: @Author, Deprecated Method.
     
     
     private Connection conn;
@@ -24,8 +28,6 @@ public class RatingImplementation implements RatingDAOInterface{
     private ResultSet rs;
     private String query;
     private String message;
-    private byte[] decoder;
-    private InputStream inputStream;
     FunctionsClass functionsClass = new FunctionsClass();
     
     
@@ -270,76 +272,6 @@ public class RatingImplementation implements RatingDAOInterface{
             message = "Error removing your rating.";
             Logger.getLogger(RatingImplementation.class.getName()).log(Level.FINE, "Error removing your rating.", e);
             
-        } finally {
-            
-            if (rs!=null){
-                
-                try {
-                    
-                    rs.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-            if (ps!=null){
-                
-                try {
-                    
-                    ps.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-            if (conn!=null){
-                
-                try {
-                    
-                    conn.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-        }
-        
-        return message;
-        
-    }
-    
-    //TODO
-    @Deprecated
-    @Override
-    public String clearRating(Story story) {
-        
-        conn = DatabaseConnectionManager.getConnection();
-        
-        try {
-            
-            query = "select * from readers_are_innovators.stories where StoryID = ?";
-            
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, story.getStoryID());
-            rs = ps.executeQuery();
-            
-        } catch (SQLException e) {
-            
-            message = "Error clearing the story's ratings.";
-            Logger.getLogger(RatingImplementation.class.getName()).log(Level.FINE, "Error clearing the story's ratings.", e);
-        
         } finally {
             
             if (rs!=null){

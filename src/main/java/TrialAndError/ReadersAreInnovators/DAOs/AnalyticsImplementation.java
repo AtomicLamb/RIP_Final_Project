@@ -11,6 +11,7 @@ import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,13 +20,10 @@ import java.util.logging.Logger;
  * @Desctripion:    The concrete implementation of the AnalyticsDAO.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
+ * @Complete:       True
  */
 
-
 public class AnalyticsImplementation implements AnalyticsDAOInterface{
-    
-    
-    //TODO: JUnit Test.
     
     
     private Connection conn;
@@ -33,8 +31,6 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
     private ResultSet rs;
     private String query;
     private String message;
-    private byte[] decoder;
-    private InputStream inputStream;
     FunctionsClass functionsClass = new FunctionsClass();
     
     
@@ -462,7 +458,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
     }
     
     @Override       //Complete: Gets X most viewed stories in selected time period.
-    public ArrayList<Story> getMostViewedStories(Analytics analytics) {
+    public List<Story> getMostViewedStories(Analytics analytics) {
         
         conn = DatabaseConnectionManager.getConnection();
         ArrayList<Story> mostViewed = new ArrayList<>();
@@ -539,7 +535,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
     }
     
     @Override       //Complete: Gets X highest rated stories in selected time period.
-    public ArrayList<Story> getHighestRatedStories(Analytics analytics) {
+    public List<Story> getHighestRatedStories(Analytics analytics) {
         
         conn = DatabaseConnectionManager.getConnection();
         ArrayList<Story> highestRated = new ArrayList<>();
@@ -712,7 +708,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
             while (rs.next() && i < analytics.getNumberOfAnalytics()){
                 
                 i++;
-                topGenres.add(new Genre(rs.getString(1)));
+                topGenres.add(new Genre(rs.getString(1), rs.getDouble(2)));
                 
             }
             

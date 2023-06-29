@@ -54,7 +54,7 @@ private ServiceLayerClass slc;
                         dispacther.forward(request, response);
                 break;
             case"ANALYSE DATA":
-                 dispacther =  request.getRequestDispatcher("AnalyticChoice.jsp");
+                 dispacther =  request.getRequestDispatcher("AnalyseData.jsp");
                         dispacther.forward(request, response);   
                 break;
             case"REVIEW COMMENTS":
@@ -99,11 +99,8 @@ private ServiceLayerClass slc;
              case"REVOKE WRITER PRIVILEGE":
                  revokeWriterPrivileges(request,response);
                  break;
-             case"Submit Analytic Choice":
-                 var dispacther =  request.getRequestDispatcher("AnalyseData.jsp");
-                        dispacther.forward(request, response);  
-                 break;
              case"Accept":
+                 
                 response.sendRedirect("postResultServlet?submit=Accept&storyTitle="
                         +request.getParameter("storyTitle")
                         +"&storyBody="+request.getParameter("storyBody")

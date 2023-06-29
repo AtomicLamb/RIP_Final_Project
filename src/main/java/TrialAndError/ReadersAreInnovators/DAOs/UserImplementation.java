@@ -4,6 +4,7 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
 
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,10 +14,13 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @desctripion:    The concrete implementation of the AdminEditorDAO.
+ * @author:         Tyler Schwegler.
+ * @Version:        v.1.0.0
+ */
+
 public class UserImplementation implements UserDAOInterface {
-    
-    
-    //TODO: @Author, JUnit Test.
     
     
     private Connection conn;
@@ -25,7 +29,8 @@ public class UserImplementation implements UserDAOInterface {
     private String query;
     private String message;
     private byte[] decoder;
-    private InputStream inputStream;
+    private InputStream input = null;
+    private ByteArrayOutputStream output = null;
     FunctionsClass functionsClass = new FunctionsClass();
     
     
@@ -34,7 +39,7 @@ public class UserImplementation implements UserDAOInterface {
     }
     
     
-    @Override       //Completed: Allows users to search for stories or authors.
+    @Override       //Completed: Allows users to search for stories or authors. //TODO: In Service Layer make it get all searches using this then have a genres, writers, and stories arraylist returned. 
     public ArrayList<String> search(String topic) {
         
         conn = DatabaseConnectionManager.getConnection();
@@ -371,5 +376,79 @@ public class UserImplementation implements UserDAOInterface {
         
     }
     
+    @Override       //Completed: Allows a user to verify their email.
+    public String emailVerification(String email) {
+        
+        conn = DatabaseConnectionManager.getConnection();
+        
+        try {
+            
+            query = "update users u set u.EmailVerified = 1 where u.Email = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, email);
+            ps.executeUpdate();
+            
+            message = "Email successfully verified.";
+            
+        } catch (SQLException e) {
+            
+            message = "Error verifying email.";
+            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error verifying email.", e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return message;
+        
+    }
+    
+    @Override       //TODO
+    public String referFriend(Integer phoneNumber) {
+        return null;
+    }
     
 }

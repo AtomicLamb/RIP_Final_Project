@@ -19,7 +19,7 @@
     </head>
     <body>
         <%List<StoryApplication> pendingStories=(List<StoryApplication>)request.getAttribute("pendingStories");%>
-        <%String message=(String)request.getAttribute("approveMessage");%>
+        <%String message=(String)request.getAttribute("message");%>
            <%if(message!=null){%>
           <h1 style="color: blue"> <%=message%></h1>
         <%}%>

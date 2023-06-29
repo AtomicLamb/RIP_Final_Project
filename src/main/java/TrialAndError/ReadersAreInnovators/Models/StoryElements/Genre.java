@@ -37,9 +37,8 @@ public class Genre {
         
     }
     
-    public Genre(Integer genreID, String genre, Double data) {
+    public Genre(String genre, Double data) {
         
-        this.genreID = genreID;
         this.genre = genre;
         this.data = data;
         

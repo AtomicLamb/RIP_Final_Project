@@ -1,6 +1,7 @@
 package TrialAndError.ReadersAreInnovators.REST;
 
 import TrialAndError.ReadersAreInnovators.Models.Administration.WriterApplication;
+import TrialAndError.ReadersAreInnovators.Models.AnalyticalData.Analytics;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
@@ -179,4 +180,21 @@ public class RESTControllerRIP {
     {
         return Response.ok().entity(service.denyWriter(writer)).build();
     }
+    
+    @Path("/emailVerification/{email}")
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response emailVerification(@PathParam("email") String email)
+    {
+        return Response.ok().entity(service.emailVerification(email)).build();
+    }
+    @Path("/getMostViewedStories")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMostViewedStories(Analytics analytics)
+    {
+        return Response.ok().entity(service.getMostViewedStories(analytics)).build();
+    }
+    //getHighestRatedStories
 }

@@ -2,6 +2,7 @@ package TrialAndError.ReadersAreInnovators.ServiceLayers;
 
 
 import TrialAndError.ReadersAreInnovators.DAOs.*;
+import TrialAndError.ReadersAreInnovators.Models.Administration.Email;
 import TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication;
 import TrialAndError.ReadersAreInnovators.Models.Administration.WriterApplication;
 import TrialAndError.ReadersAreInnovators.Models.AnalyticalData.Analytics;
@@ -20,7 +21,6 @@ import java.util.List;
 
 public class ServiceLayerClass implements ServiceLayer_Interface{
     
-    
     AdminEditorImplementation adminImp;
     AnalyticsImplementation analyticsImp;
     CommentImplementation commentImp;
@@ -32,7 +32,9 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     WriterImplementation writerImp;
     UserImplementation userImp;
     FunctionsClass functionsClass = new FunctionsClass();
-    
+    Email email = new Email();
+    private String subject;
+    private String text;
     
     public ServiceLayerClass() {
         
@@ -48,6 +50,9 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
         this.writerImp = new WriterImplementation();
         this.userImp = new UserImplementation();
         
+    }
+    public String saveAsDraft(Story story){
+        return storyImp.saveAsDraft(story);
     }
     @Override
     public String removePendingStory(StoryApplication pendingStory){
@@ -116,15 +121,15 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
         
     }
     
-    @Override
-    public ArrayList<Story> getMostViewedStories(Analytics analytics) {
+    @Override 
+    public List<Story> getMostViewedStories(Analytics analytics) {
         
        return analyticsImp.getMostViewedStories(analytics);
         
     }
     
     @Override
-    public ArrayList<Story> getHighestRatedStories(Analytics analytics) {
+    public List<Story> getHighestRatedStories(Analytics analytics) {
         
         return analyticsImp.getHighestRatedStories(analytics);
         
@@ -203,13 +208,6 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     }
     
     @Override
-    public String clearComments(Story story) {
-        
-        return commentImp.clearComments(story);
-        
-    }
-    
-    @Override
     public List<WriterApplication> viewWriterApplications() {
         
         return editorImp.viewWriterApplications();
@@ -220,6 +218,10 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     @Override
     public String denyWriter(Writer writer) {
         
+        subject = "Writer Application";
+        text = "Unfortunately you have not been approved to be a writer on our platform";
+        email = new Email();
+        email.sendEmail(writer.getEmail(), subject, text);
         return editorImp.denyWriter(writer);
         
     }
@@ -229,16 +231,23 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
         return editorImp.viewWriters();
     }
     
-    @Override
+    @Override //TODO sms things
     public String approvePendingStory(StoryApplication story, Editor editor) {
+        
+        subject = "Submitted Story Progress";
+        text = "Congratulations! Your story has been approved and is now available for anyone to read on the Readers Are Innovators website";
+        email.sendEmail(story.getAuthorEmail(), subject, text);
         
         return editorImp.approvePendingStory(story, editor);
         
     }
     
-    @Override
+    @Override //TODO sms things
     public String denyPendingStory(StoryApplication story, Editor editor) {
         
+        subject = "Submitted Story Progress";
+        text = "Unfortunately your story does not adhere to the company policy and was rejected. Thank you for taking the time to use our platform.";
+        email.sendEmail(story.getAuthorEmail(), subject, text);
         return editorImp.removePendingStory(story);
         
     }
@@ -283,13 +292,6 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     }
     
     @Override
-    public String clearGenres(Story story) {
-        
-        return genresImp.clearGenres(story);
-        
-    }
-    
-    @Override
     public Double getStoryRating(Story story) {
         
         return ratingImp.getStoryRating(story);
@@ -318,14 +320,14 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     }
     
     @Override
-    public String clearRating(Story story) {
-        
-        return ratingImp.clearRating(story);
-        
-    }
-    
-    @Override       //Done
     public String registerReader(Reader reader) {
+        
+        String subject = "Please Verify your Email.";
+        String text = "Welcome to the Readers are Innovators Program. '\n'" +
+                "Please click the link below to verify your Email address: '\n''\n'" +
+                "http://192.168.0.105:8080/Trial_and_Error_Readers_are_Innovators-1.0-SNAPSHOT/controllerServlet?submit=Verified+Email&email=" + reader.getEmail();
+        
+        email.sendEmail(reader.getEmail(), subject, text);
         
         return readerImp.registerReader(reader);
         
@@ -334,10 +336,10 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     @Override
     public User login(User user) {
         
-        if (functionsClass.verifyLoginDetails(userImp.login(user).getPassword(), user.getPassword())){
-            
+        if (functionsClass.verifyLoginDetails(user, userImp.login(user).getEmail(), userImp.login(user).getPassword())){
+
             return userImp.login(user);
-            
+
         }
         
         return null;
@@ -458,6 +460,9 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
         Reader reader = new Reader(writerApplication.getName(),writerApplication.getSurname(),writerApplication.getEmail(),
                 writerApplication.getPhoneNumber(),writerApplication.getPassword());
         
+        subject = "Writer Registration";
+        text = "Your application has been sent and an Editor will review it as soon as possible. During this time you have received reader rights and can browse the platform as a reader";
+        email.sendEmail(reader.getEmail(), subject, text);
         return readerImp.registerReader(reader) + writerImp.writerRegistration(writerApplication);
     }
     
@@ -476,6 +481,12 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
         
     }
     
+    @Override 
+    public ArrayList<Story> getStoriesFromGenres(User user) {
+        
+        return readerImp.getStoriesFromGenres(user);
+    }
+    
     @Override
     public Writer getAuthor(Writer writer) {
         return writerImp.getAuthor(writer);
@@ -484,6 +495,11 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     @Override 
     public String revokeWriterPrivileges(Writer writer)
     {
+        
+        subject = "Writer Priveleges";
+        text = "Because you have failed to follow company policy several times we have decided to remove your writeing priveleges on our platform. \n " +
+                "You may still read short stories but may no longer add stories to the platform";
+        email.sendEmail(writer.getEmail(), subject, text);
         return editorImp.revokeWriterPrivileges(writer);
     }
     
@@ -496,10 +512,26 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     
     @Override
     public String applyForWriter(WriterApplication writerApplication) {
+        
+        subject = "Writer Application";
+        text = "Your appliction to be a writer has been sent. Please wait until an editor has reviewed your application until your application status changes";
+        email.sendEmail(writerApplication.getEmail(), subject, text);
         return writerImp.writerRegistration(writerApplication);
     }
     @Override
     public String approveWriter(WriterApplication writerApplication) {
+        
+        subject = "Writer Application";
+        text = "Congratualtions! Your writer application has been approved and you are now officially a writer on our platform!" +
+                "We welcome you and hope you will contribute many amaing stories to our community that you are now part of!";
+        email.sendEmail(writerApplication.getEmail(), subject, text);
+        
         return editorImp.approveWriter(writerApplication);
+        
+    }
+    @Override
+    public String emailVerification(String email)
+    {
+        return userImp.emailVerification(email);
     }
 }

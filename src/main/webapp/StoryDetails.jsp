@@ -4,7 +4,7 @@
     <%@page import="TrialAndError.ReadersAreInnovators.Models.StoryElements.Story"%>
     <%@page import="TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer"%>
     <%@page import="TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment"%>
-     <%@page import="TrialAndError.ReadersAreInnovators.Models.UserTypes.User"%>
+    
 <head>
 <!-- basic -->
 <meta charset="utf-8">
@@ -40,7 +40,7 @@
 <body>
     <%String message=(String)request.getAttribute("message");%>
     <%if(message!=null){%>
-    <p><%=message%></p>
+    <h1><%=message%></h1>
     <%}%>
     <!-- header section start-->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed; width: 100%; z-index:99;">
@@ -75,12 +75,12 @@
                         <%Writer writer=(Writer)request.getAttribute("chosenWriter");%>
                         <%Story story=(Story)request.getAttribute("storyDetails");%>
                         <%session=request.getSession(false);%>
-                         <%User currentUser=(User)session.getAttribute("currentUser");%>
+                         
                         <h1 class="jobs_text">Author <%=writer.getName()%> <%=writer.getSurname()%></h1>
                         <div class="image_1 padding_0"><h1><%=story.getTitle()%></h1><img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%story.getTitle();%>" style="height: 400px;width:300px; "><div style="float:right; margin-right: 700px;">
                                     
                                     <span><br>Views<i class="fa-sharp fa-solid fa-eye"></i><%=story.getViews()%></span><br><br>
-                                    <span>Likes<i class="fa-solid fa-heart" style="color: #f42d1f;"></i><%=story.getLikes()%></span><br><br>
+                                    <span>Likes<a href="StoryServlet?submit=like&storyId=<%=story.getStoryID()%>" method="post"><i class="fa-solid fa-heart" style="color: #f42d1f;"></i></a><%=story.getLikes()%></span><br><br>
                                     <span>Rating<i class="fa-sharp fa-solid fa-star" style="color: #fff93d;"></i><%=story.getRatingAverage()%></span><br><br>
                                     <span><a href="StoryServlet?submit=AuthorDetails&authorId=<%=writer.getUserID()%>" method="get" style="text-decoration:none">Author <%=writer.getName()%> <%=writer.getSurname()%></a></span>
                                     <div id="openButton" class="apply_bt"><button onclick="openForm()">Rate Story</button></div>
@@ -116,14 +116,14 @@
                                                                    <textarea type="text" id="commentArea" name="commentArea" rows="4" cols="50" maxlength="500"></textarea>><br>
                                                                     
                                                                    <input type="hidden" name="storyId" value="<%=story.getStoryID()%>">
-                                                                   <input type="hidden" name="userId" value="<%=currentUser.getUserID()%>">
+                                                                   <input type="hidden" name="userId" value="<%=(Integer)session.getAttribute("UserID")%>">
                                                                    <input type="submit" name="submit"  value="comment">
                                                                </form>
                                                                  </div>   
                                              <div style="position: relative;top: 150px">
                                                                <h2>Comments</h2>
                                                                <%if(newComment!=null){%>
-                                                               <p>posted by<%=currentUser.getName()%> <%=currentUser.getSurname()%> on <%=newComment.getDateAdded()%><br><%=newComment.getComment()%></p>
+                                                               <p>posted by<%=(String)session.getAttribute("Name")%> <%=(String)session.getAttribute("Surname")%> on <%=newComment.getDateAdded()%><br><%=newComment.getComment()%></p>
                                                                <form action="StoryServlet" method="post">
                                                                    <input type="hidden" name="commentId" value="<%=newComment.getCommentID()%>">
                                                                    <input type="hidden" name="storyId" value="<%=story.getStoryID()%>">

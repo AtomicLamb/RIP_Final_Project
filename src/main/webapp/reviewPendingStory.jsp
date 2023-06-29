@@ -40,7 +40,6 @@
                 <input type="hidden" name="storyTitle" value="<%=story.getTitle()%>">
                 <input type="hidden" name="storySynopsis" value="<%=story.getSynopsis()%>">
                 <input type="hidden" name="storyBody" value="<%=story.getStoryBody()%>">
-                <input type="hidden" name="storyCover" value="<%=story.getCoverImage()%>">
                 <input type="hidden" name="storyCommentsEnabled" value="<%=story.getCommentsEnabled()%>">
                 <input type="hidden" name="authorId" value="<%=story.getAuthorID()%>">
                 <button class="block" type="submit" name="submit" value="Accept">Deny Story</button><br><br>

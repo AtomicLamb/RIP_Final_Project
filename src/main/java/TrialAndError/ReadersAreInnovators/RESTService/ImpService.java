@@ -1,6 +1,7 @@
 package TrialAndError.ReadersAreInnovators.RESTService;
 
 import TrialAndError.ReadersAreInnovators.Models.Administration.WriterApplication;
+import TrialAndError.ReadersAreInnovators.Models.AnalyticalData.Analytics;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
@@ -252,6 +253,16 @@ public class ImpService
         
         return response.readEntity(String.class);
     }
+    public String emailVerification(String email)
+    {
+        String personURI = uri + "/emailVerification/{email}";
+        
+        webTarget = client.target(personURI);
+        webTarget = webTarget.resolveTemplate("email",email);
+        response = webTarget.request().get();
+        
+        return response.readEntity(String.class);
+    }
     private String toJsonString(Object o)
     {
         try
@@ -262,6 +273,17 @@ public class ImpService
         }
         return null;
     }
-    //
-   
+    public List<Analytics> getMostViewedStories(Analytics analytics)
+    {
+        String personURI = uri + "/getMostViewedStories";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(analytics)));
+        
+        try {
+            return Arrays.asList(mapper.readValue(webTarget.request().accept(MediaType.APPLICATION_JSON).get(String.class), Analytics[].class));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

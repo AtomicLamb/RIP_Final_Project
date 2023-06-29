@@ -7,6 +7,11 @@ import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @desctripion:    The concrete implementation of the AdminEditorDAO.
+ * @author:         Tyler Schwegler.
+ * @Version:        v.1.0.0
+ */
 
 public interface CommentDAOInterface {
     
@@ -18,7 +23,6 @@ public interface CommentDAOInterface {
     String unFlagComment(Comment comment);                                        //Allows the editors to un-flag reported comments.
     List<Comment> viewFlaggedComments();                                       //Allows the editors to view all the reported comments.
     Integer getNumberOfComments(Story story);
-    String clearComments(Story story);
     
     
 }

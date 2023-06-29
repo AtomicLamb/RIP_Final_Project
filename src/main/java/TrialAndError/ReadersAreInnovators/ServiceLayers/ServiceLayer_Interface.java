@@ -1,5 +1,6 @@
 package TrialAndError.ReadersAreInnovators.ServiceLayers;
 
+import TrialAndError.ReadersAreInnovators.Models.Administration.Email;
 import TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication;
 import TrialAndError.ReadersAreInnovators.Models.Administration.WriterApplication;
 import TrialAndError.ReadersAreInnovators.Models.AnalyticalData.Analytics;
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface ServiceLayer_Interface {
+    String saveAsDraft(Story story);
+    
     String removePendingStory(StoryApplication pendingStory);
     ArrayList<StoryApplication> viewPendingStories();
     
@@ -42,10 +45,10 @@ public interface ServiceLayer_Interface {
     String addView(Story story);
     
     
-    ArrayList<Story> getMostViewedStories(Analytics analytics);
+    List<Story> getMostViewedStories(Analytics analytics);
     
     
-    ArrayList<Story> getHighestRatedStories(Analytics analytics);
+    List<Story> getHighestRatedStories(Analytics analytics);
     
     
     ArrayList<Story> getMostLikedStories(Analytics analytics);
@@ -58,7 +61,7 @@ public interface ServiceLayer_Interface {
     
     ArrayList<Editor> getTopEditors(Analytics analytics);
     
-    
+    ArrayList<Story> getStoriesFromGenres(User user);
     String addComment(Comment comment);
     
     
@@ -76,11 +79,7 @@ public interface ServiceLayer_Interface {
     
     Integer getNumberOfComments(Story story);
     
-    String clearComments(Story story);
-    
-    
     List<WriterApplication> viewWriterApplications();
-    
     
     String denyWriter(Writer writer);
     
@@ -114,9 +113,6 @@ public interface ServiceLayer_Interface {
     ArrayList<Genre> getUserGenres(User user);
     
     
-    String clearGenres(Story story);
-    
-    
     Double getStoryRating(Story story);
     
     
@@ -127,9 +123,6 @@ public interface ServiceLayer_Interface {
     
     
     String removeRating(Rating rating);
-    
-    
-    String clearRating(Story story);
     
     
     String registerReader(Reader reader);
@@ -201,4 +194,6 @@ public interface ServiceLayer_Interface {
     String applyForWriter(WriterApplication writerApplication);
     
     String approveWriter(WriterApplication writerApplication);
+    
+    String emailVerification(String email);
 }

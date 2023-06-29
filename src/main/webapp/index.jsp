@@ -53,9 +53,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 </div>
                             </div>
                         </form>
-                        <form action="controllerServlet" method="get">
+                        <form action="HomePageServlet" method="get">
                             <div class="button input-box">
-                                <input type="submit" name="submit" value="Continue to Homepage" formnovalidate>
+                                <input type="submit" name="submit" value="HomePage" formnovalidate>
                             </div>
                         </form>
                         <div class="text sign-up-text">Don't have an account? <label for="flip">Sign-Up now</label></div>

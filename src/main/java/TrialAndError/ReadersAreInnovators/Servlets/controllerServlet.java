@@ -3,6 +3,7 @@ package TrialAndError.ReadersAreInnovators.Servlets;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
+import TrialAndError.ReadersAreInnovators.Models.Administration.Email;
 import TrialAndError.ReadersAreInnovators.Models.Administration.WriterApplication;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.RESTService.ImpService;
@@ -20,36 +21,20 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-
-
-
 /**
  *
  * @author matth
  */
 @WebServlet(urlPatterns = {"/controllerServlet"})
 public class controllerServlet extends HttpServlet {
-    public Email emailImp = new Email();
+    private Email e;
     private ImpService imp;
     private HttpSession session;
     private ServiceLayerClass service;
     
     public controllerServlet()
     {
+        e = new Email();
         imp = new ImpService();
         service = new ServiceLayerClass();
     }
@@ -58,7 +43,7 @@ public class controllerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-       switch(request.getParameter("submit"))       //Here
+       switch(request.getParameter("submit"))
        {
            case"Writer":
                var dispatcher =  request.getRequestDispatcher("WriterSign-Up.jsp");
@@ -70,6 +55,15 @@ public class controllerServlet extends HttpServlet {
                    dispatcher =  request.getRequestDispatcher("HomePage.jsp");
                         dispatcher.forward(request, response);
                break;
+           case"Verified Email":
+               String message = imp.emailVerification(request.getParameter("email"));
+               request.setAttribute("message", message);
+               request.getRequestDispatcher("EmailVerification.jsp").forward(request,response);
+               break;
+           case"GO TO LOGIN":
+               dispatcher =  request.getRequestDispatcher("index.jsp");
+               dispatcher.forward(request, response);
+               break;    
           
        }
     }
@@ -99,19 +93,19 @@ public class controllerServlet extends HttpServlet {
             String email = request.getParameter("readerEmail");
             String phoneNum = request.getParameter("readerPhoneNum");
             String password = request.getParameter("readerPassword");
-            
         
         request.setAttribute("message", imp.registerReader(new Reader(firstName,surname,email,phoneNum,password)));
                         var dispatcher =  request.getRequestDispatcher("index.jsp");
                        try {
                            dispatcher.forward(request, response);
-                           emailImp.sendEmail(email);
+                          // e.sendEmail(email);
+                          // emailImp.sendEmail(email);
                        } catch (ServletException | IOException ex) {
                            Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
                        }
                        
                        //TODO email stuff
-        
+        //e.sendEmail(email);
                        
                        
     }
@@ -168,7 +162,7 @@ public class controllerServlet extends HttpServlet {
            {
                Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
            }
-       
+       //emailVerification
       
    }
 }

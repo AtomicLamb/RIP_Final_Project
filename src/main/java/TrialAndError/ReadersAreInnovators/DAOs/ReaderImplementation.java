@@ -1,6 +1,7 @@
 package TrialAndError.ReadersAreInnovators.DAOs;
 
 
+import TrialAndError.ReadersAreInnovators.Models.Administration.Email;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Reader;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
@@ -8,9 +9,7 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,11 +19,14 @@ import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @desctripion:    The concrete implementation of the AdminEditorDAO.
+ * @author:         Tyler Schwegler.
+ * @Version:        v.1.0.0
+ * Completed:       True
+ */
 
 public class ReaderImplementation implements ReaderDAOInterface {
-    
-    
-    //TODO @Author.
     
     
     private Connection conn;
@@ -33,8 +35,11 @@ public class ReaderImplementation implements ReaderDAOInterface {
     private String query;
     private String message;
     private byte[] decoder;
-    private InputStream inputStream;
+    private InputStream input = null;
+    private ByteArrayOutputStream output = null;
+    Email email = new Email();
     FunctionsClass functionsClass = new FunctionsClass();
+    
     
     public ReaderImplementation(){
         
@@ -59,7 +64,7 @@ public class ReaderImplementation implements ReaderDAOInterface {
             ps.setString(6, reader.getPassword());
             ps.executeUpdate();
             
-            message = "Reader successfully added.";
+            message = "Reader successfully added, Please check your emails to verify your account.";
             
         } catch (SQLException e) {
             
@@ -351,21 +356,23 @@ public class ReaderImplementation implements ReaderDAOInterface {
             
             while (rs.next()){
                 
-                InputStream inputStream = rs.getBinaryStream(2);
-                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                String imagePath = rs.getString(2);
+                
+                InputStream input = new FileInputStream(new File(imagePath));
+                ByteArrayOutputStream output = new ByteArrayOutputStream();
                 byte[] buffer = new byte[4096];
                 int bytesRead = -1;
                 
-                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                while ((bytesRead = input.read(buffer)) != -1) {
                     
-                    outputStream.write(buffer, 0, bytesRead);
+                    output.write(buffer, 0, bytesRead);
                     
                 }
                 
-                byte[] imageBytes = outputStream.toByteArray();
+                byte[] imageBytes = output.toByteArray();
                 String image = Base64.getEncoder().encodeToString(imageBytes);
                 
-                favoriteStories.add(new Story(rs.getString(1), rs.getString(3), image));
+                favoriteStories.add(new Story(rs.getString(1), rs.getString(3), image, imagePath));
                 
             }
             
@@ -378,6 +385,34 @@ public class ReaderImplementation implements ReaderDAOInterface {
             throw new RuntimeException(e);
             
         } finally {
+            
+            if (input!=null){
+                
+                try {
+                    
+                    input.close();
+                    
+                } catch (IOException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (output!=null){
+                
+                try {
+                    
+                    output.close();
+                    
+                } catch (IOException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
             
             if (rs!=null){
                 
@@ -427,6 +462,13 @@ public class ReaderImplementation implements ReaderDAOInterface {
         
     }
     
+    @Override       //Completed: Gets stories from selected genres.                                                     TODO: Method
+    public ArrayList<Story> getStoriesFromGenres(User user){
+        
+        return null;
+        
+    } 
+    
     @Override       //Completed: Allows a user to see all their favorite books that they have read.
     public ArrayList<Story> getReadFavorites(User user) {
         
@@ -445,21 +487,23 @@ public class ReaderImplementation implements ReaderDAOInterface {
             
             while (rs.next()){
                 
-                InputStream inputStream = rs.getBinaryStream(2);
-                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                String imagePath = rs.getString(2);
+                
+                InputStream input = new FileInputStream(new File(imagePath));
+                ByteArrayOutputStream output = new ByteArrayOutputStream();
                 byte[] buffer = new byte[4096];
                 int bytesRead = -1;
                 
-                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                while ((bytesRead = input.read(buffer)) != -1) {
                     
-                    outputStream.write(buffer, 0, bytesRead);
+                    output.write(buffer, 0, bytesRead);
                     
                 }
                 
-                byte[] imageBytes = outputStream.toByteArray();
+                byte[] imageBytes = output.toByteArray();
                 String image = Base64.getEncoder().encodeToString(imageBytes);
                 
-                readFavoriteStories.add(new Story(rs.getString(1), rs.getString(3), image));
+                readFavoriteStories.add(new Story(rs.getString(1), rs.getString(3), image, imagePath));
                 
             }
             
@@ -472,6 +516,34 @@ public class ReaderImplementation implements ReaderDAOInterface {
             throw new RuntimeException(e);
             
         } finally {
+            
+            if (input!=null){
+                
+                try {
+                    
+                    input.close();
+                    
+                } catch (IOException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (output!=null){
+                
+                try {
+                    
+                    output.close();
+                    
+                } catch (IOException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
             
             if (rs!=null){
                 
@@ -539,21 +611,23 @@ public class ReaderImplementation implements ReaderDAOInterface {
             
             while (rs.next()){
                 
-                InputStream inputStream = rs.getBinaryStream(2);
-                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                String imagePath = rs.getString(2);
+                
+                InputStream input = new FileInputStream(new File(imagePath));
+                ByteArrayOutputStream output = new ByteArrayOutputStream();
                 byte[] buffer = new byte[4096];
                 int bytesRead = -1;
                 
-                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                while ((bytesRead = input.read(buffer)) != -1) {
                     
-                    outputStream.write(buffer, 0, bytesRead);
+                    output.write(buffer, 0, bytesRead);
                     
                 }
                 
-                byte[] imageBytes = outputStream.toByteArray();
+                byte[] imageBytes = output.toByteArray();
                 String image = Base64.getEncoder().encodeToString(imageBytes);
                 
-                unreadFavoriteStories.add(new Story(rs.getString(1), rs.getString(3), image));
+                unreadFavoriteStories.add(new Story(rs.getString(1), rs.getString(3), image, imagePath));
                 
             }
             
@@ -566,6 +640,34 @@ public class ReaderImplementation implements ReaderDAOInterface {
             throw new RuntimeException(e);
             
         } finally {
+            
+            if (input!=null){
+                
+                try {
+                    
+                    input.close();
+                    
+                } catch (IOException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (output!=null){
+                
+                try {
+                    
+                    output.close();
+                    
+                } catch (IOException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
             
             if (rs!=null){
                 

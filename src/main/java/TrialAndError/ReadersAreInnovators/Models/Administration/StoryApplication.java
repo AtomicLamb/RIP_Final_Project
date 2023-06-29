@@ -6,9 +6,12 @@ public class StoryApplication {
     Integer pendingStoryID;
     private String title;
     private Integer authorID;
+    private String authorEmail;
+    private String authorPhoneNumber;
     private String storyBody;
     private String synopsis;
     private String coverImage;
+    private String imagePath;
     private Boolean commentsEnabled;
     private String dateSubmitted;
     
@@ -17,14 +20,24 @@ public class StoryApplication {
         
     }
     
-    public StoryApplication(Integer pendingStoryID, String title, Integer authorID, String storyBody, String synopsis, String coverImage, Boolean commentsEnabled, String dateSubmitted) {
+    public StoryApplication(Integer pendingStoryID, Integer authorID) {
+        
+        this.pendingStoryID = pendingStoryID;
+        this.authorID = authorID;
+        
+    }
+    
+    public StoryApplication(Integer pendingStoryID, String title, Integer authorID, String authorEmail, String authorPhoneNumber, String storyBody, String synopsis, String coverImage, String imagePath, Boolean commentsEnabled, String dateSubmitted) {
         
         this.pendingStoryID = pendingStoryID;
         this.title = title;
         this.authorID = authorID;
+        this.authorEmail = authorEmail;
+        this.authorPhoneNumber = authorPhoneNumber;
         this.storyBody = storyBody;
         this.synopsis = synopsis;
         this.coverImage = coverImage;
+        this.imagePath = imagePath;
         this.commentsEnabled = commentsEnabled;
         this.dateSubmitted = dateSubmitted;
         
@@ -55,6 +68,22 @@ public class StoryApplication {
         this.authorID = authorID;
     }
     
+    public String getAuthorEmail() {
+        return authorEmail;
+    }
+    
+    public void setAuthorEmail(String authorEmail) {
+        this.authorEmail = authorEmail;
+    }
+    
+    public String getAuthorPhoneNumber() {
+        return authorPhoneNumber;
+    }
+    
+    public void setAuthorPhoneNumber(String authorPhoneNumber) {
+        this.authorPhoneNumber = authorPhoneNumber;
+    }
+    
     public String getStoryBody() {
         return storyBody;
     }
@@ -77,6 +106,14 @@ public class StoryApplication {
     
     public void setCoverImage(String coverImage) {
         this.coverImage = coverImage;
+    }
+    
+    public String getImagePath() {
+        return imagePath;
+    }
+    
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
     
     public Boolean getCommentsEnabled() {

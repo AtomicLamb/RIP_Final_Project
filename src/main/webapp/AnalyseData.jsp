@@ -28,7 +28,7 @@
     <div class="forms">
         <div class="form-content">
         <div class="signup-form">
-          <div class="title">Analyse Data Page</div>
+          <div class="title">Analyse Data Page</div><br>
           <form action="analyticalServlet" method="get">
               <div class="input-boxes">
                   <div class="button input-box">

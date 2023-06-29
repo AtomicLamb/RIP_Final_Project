@@ -16,10 +16,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Author:         Tyler Schwegler.
+ * @Version:        v.1.0.0
+ * @Complete:       True
+ */
+
 public class GenresImplementation implements GenresDAOInterface{
-    
-    
-    //TODO: @Author, Deprecated Method.
     
     
     private Connection conn;
@@ -27,8 +31,6 @@ public class GenresImplementation implements GenresDAOInterface{
     private ResultSet rs;
     private String query;
     private String message;
-    private byte[] decoder;
-    private InputStream inputStream;
     FunctionsClass functionsClass = new FunctionsClass();
     
     
@@ -465,86 +467,6 @@ public class GenresImplementation implements GenresDAOInterface{
         }
         
         return userGenres;
-        
-    }
-    
-    //TODO
-    @Deprecated
-    @Override
-    public String clearGenres(Story story) {
-        
-        conn = DatabaseConnectionManager.getConnection();
-        
-        try {
-            
-            query = "delete from readers_are_innovators.storygenreintersect where StoryID = ?";
-            
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, story.getStoryID());
-            int cleared = ps.executeUpdate();
-            
-            if(cleared == 0){
-                
-                message = "This story had no genres to clear.";
-                
-            } else {
-                
-                message = cleared + " genres cleared.";
-                
-            }
-            
-        } catch (SQLException e) {
-            
-            message = "Error clearing genres.";
-            Logger.getLogger(GenresImplementation.class.getName()).log(Level.FINE, "Error clearing genres.", e);
-            
-        } finally {
-            
-            if (rs!=null){
-                
-                try {
-                    
-                    rs.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-            if (ps!=null){
-                
-                try {
-                    
-                    ps.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-            if (conn!=null){
-                
-                try {
-                    
-                    conn.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-        }
-        
-        return message;
         
     }
     

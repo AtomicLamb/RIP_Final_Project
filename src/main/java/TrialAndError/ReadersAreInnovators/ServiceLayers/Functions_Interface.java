@@ -1,22 +1,25 @@
 package TrialAndError.ReadersAreInnovators.ServiceLayers;
 
+import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
+
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Date;
 import java.util.ArrayList;
 
 public interface Functions_Interface {
    
    
-   Boolean verifyLoginDetails(String password, String pw);
+   Boolean verifyLoginDetails(User user, String DBEmail, String DBPassword);
    Boolean isNumber(String value);
    Boolean phoneNumberVerification(String phoneNum);
-   Boolean emailVerification(String email);
-   Boolean passwordVerification(String password);
-   Boolean wordCountVerification(String message);
    Boolean integerToBoolean(Integer value);
    Integer booleanToInteger(Boolean bool);
-   Double getAverage(ArrayList<Integer> ratings);
+   Boolean wordCountVerification(String storyBody);
    String dateToString(Date date);
    Date stringToDate(String string);
+   String encodeBase64(InputStream imageStream);
+   String decodeBase64(String imageString);
    
  
 }

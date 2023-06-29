@@ -1,5 +1,7 @@
 package TrialAndError.ReadersAreInnovators.Models.StoryElements;
 
+import java.util.Base64;
+
 public class Story {
     
     
@@ -13,6 +15,7 @@ public class Story {
     private String storyBody;
     private String synopsis;
     private String coverImage;
+    private String imagePath;
     private Boolean isPrivate;
     private Boolean commentsEnabled;
     private String datePublished;
@@ -30,18 +33,20 @@ public class Story {
         
     }
     
-    public Story(String title, String coverImage) {
+    public Story(String title, String coverImage, String imagePath) {
         
         this.title = title;
         this.coverImage = coverImage;
+        this.imagePath = imagePath;
         
     }
     
-    public Story(String title, String authorName, String coverImage) {
+    public Story(String title, String authorName,String coverImage, String imagePath) {
         
         this.title = title;
         this.authorName = authorName;
         this.coverImage = coverImage;
+        this.imagePath = imagePath;
         
     }
     
@@ -53,11 +58,35 @@ public class Story {
         
     }
     
-    public Story(String title, Integer authorID, String coverImage) {
+    public Story(String title, Integer authorID, String coverImage, String imagePath) {
         
         this.title = title;
         this.authorID = authorID;
         this.coverImage = coverImage;
+        this.imagePath = imagePath;
+        
+    }
+    
+    public Story(String title, Integer authorID,String synopsis , String coverImage, String imagePath, String storyBody) {
+        
+        this.title = title;
+        this.synopsis = synopsis;
+        this.storyBody = storyBody;
+        this.authorID = authorID;
+        this.coverImage = coverImage;
+        this.imagePath = imagePath;
+        
+    }
+    
+    public Story(String title, Integer storyID, String coverImage, String imagePath, Boolean commentsEnabled, String synopsis, String storyBody) {
+        
+        this.title = title;
+        this.storyID = storyID;
+        this.coverImage = coverImage;
+        this.imagePath = imagePath;
+        this.commentsEnabled = commentsEnabled;
+        this.synopsis = synopsis;
+        this.storyBody = storyBody;
         
     }
     
@@ -72,7 +101,7 @@ public class Story {
         
     }
     
-    public Story(Integer storyID, String title, Integer authorID, String storyBody, String synopsis, String coverImage, Boolean commentsEnabled) {
+    public Story(Integer storyID, String title, Integer authorID, String storyBody, String synopsis, String coverImage, String imagePath, Boolean commentsEnabled) {
         
         this.storyID = storyID;
         this.title = title;
@@ -80,11 +109,12 @@ public class Story {
         this.storyBody = storyBody;
         this.synopsis = synopsis;
         this.coverImage = coverImage;
+        this.imagePath = imagePath;
         this.commentsEnabled = commentsEnabled;
         
     }
     
-    public Story(String title, Integer authorID, Integer views, Integer likes, Double ratingAverage, String synopsis, String coverImage, String datePublished) {
+    public Story(String title, Integer authorID, Integer views, Integer likes, Double ratingAverage, String synopsis, String coverImage, String imagePath, String datePublished) {
         
         this.title = title;
         this.authorID = authorID;
@@ -93,11 +123,12 @@ public class Story {
         this.ratingAverage = ratingAverage;
         this.synopsis = synopsis;
         this.coverImage = coverImage;
+        this.imagePath = imagePath;
         this.datePublished = datePublished;
         
     }
     
-    public Story(Integer storyID, String title, Integer authorID, String storyBody, String synopsis, String coverImage, Boolean commentsEnabled, String datePublished) {
+    public Story(Integer storyID, String title, Integer authorID, String storyBody, String synopsis, String coverImage, String imagePath, Boolean commentsEnabled, String datePublished) {
         
         this.storyID = storyID;
         this.title = title;
@@ -105,12 +136,13 @@ public class Story {
         this.storyBody = storyBody;
         this.synopsis = synopsis;
         this.coverImage = coverImage;
+        this.imagePath = imagePath;
         this.commentsEnabled = commentsEnabled;
         this.datePublished = datePublished;
         
     }
     
-    public Story(Integer storyID, String title, Integer authorID, String storyBody, String synopsis, String coverImage, Boolean commentsEnabled, Integer editorID) {
+    public Story(Integer storyID, String title, Integer authorID, String storyBody, String synopsis, String coverImage, String imagePath, Boolean commentsEnabled, Integer editorID) {
         
         this.storyID = storyID;
         this.title = title;
@@ -118,12 +150,13 @@ public class Story {
         this.storyBody = storyBody;
         this.synopsis = synopsis;
         this.coverImage = coverImage;
+        this.imagePath = imagePath;
         this.commentsEnabled = commentsEnabled;
         this.editorID = editorID;
         
     }
     
-    public Story(String title, Integer authorID, Integer views, Integer likes, Double ratingAverage, String storyBody, String synopsis, String coverImage, Boolean isPrivate, String datePublished, Integer editorID) {
+    public Story(String title, Integer authorID, Integer views, Integer likes, Double ratingAverage, String storyBody, String synopsis, String coverImage, String imagePath, Boolean isPrivate, String datePublished, Integer editorID) {
         
         this.title = title;
         this.authorID = authorID;
@@ -133,13 +166,14 @@ public class Story {
         this.storyBody = storyBody;
         this.synopsis = synopsis;
         this.coverImage = coverImage;
+        this.imagePath = imagePath;
         this.isPrivate = isPrivate;
         this.datePublished = datePublished;
         this.editorID = editorID;
         
     }
     
-    public Story(Integer storyID, String title, Integer authorID, Integer views, Integer likes, Double ratingAverage, String storyBody, String synopsis, String coverImage, Boolean commentsEnabled, String datePublished, Integer editorID) {
+    public Story(Integer storyID, String title, Integer authorID, Integer views, Integer likes, Double ratingAverage, String storyBody, String synopsis, String coverImage, String imagePath, Boolean commentsEnabled, String datePublished, Integer editorID) {
         
         this.storyID = storyID;
         this.title = title;
@@ -150,13 +184,14 @@ public class Story {
         this.storyBody = storyBody;
         this.synopsis = synopsis;
         this.coverImage = coverImage;
+        this.imagePath = imagePath;
         this.commentsEnabled = commentsEnabled;
         this.datePublished = datePublished;
         this.editorID = editorID;
         
     }
     
-    public Story(Integer storyID, String title, Integer authorID, Integer views, Integer likes, Double ratingAverage, String storyBody, String synopsis, String coverImage, Boolean isPrivate, String datePublished, Double data) {
+    public Story(Integer storyID, String title, Integer authorID, Integer views, Integer likes, Double ratingAverage, String storyBody, String synopsis, String coverImage, String imagePath, Boolean isPrivate, String datePublished, Double data) {
         
         this.storyID = storyID;
         this.title = title;
@@ -167,6 +202,7 @@ public class Story {
         this.storyBody = storyBody;
         this.synopsis = synopsis;
         this.coverImage = coverImage;
+        this.imagePath = imagePath;
         this.isPrivate = isPrivate;
         this.datePublished = datePublished;
         this.data = data;
@@ -252,6 +288,14 @@ public class Story {
     
     public void setCoverImage(String coverImage) {
         this.coverImage = coverImage;
+    }
+    
+    public String getImagePath() {
+        return imagePath;
+    }
+    
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
     
     public Boolean getPrivate() {

@@ -1,17 +1,19 @@
-<%-- 
-    Document   : AnalyticCharts
-    Created on : 23 Jun 2023, 08:56:21
-    Author     : matth
+<%--
+  Created by IntelliJ IDEA.
+  User: TKS
+  Date: 29/06/2023
+  Time: 22:07
+  To change this template use File | Settings | File Templates.
 --%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType = "text/html;charset=UTF-8"
+         language = "java" %>
 <%@page import = "java.util.List"%>
 <%@ page import = "TrialAndError.ReadersAreInnovators.Models.StoryElements.Story" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Most Viewed Books Page</title>
+        <title>Most Liked Books Page</title>
         <link rel="stylesheet" href="style.css">
         <!-- Fontawesome CDN Link -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -245,25 +247,25 @@
                            {
                                case 1:
                           %>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>]
                 <% break; 
                 
                 case 2:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                 <% break; 
                 
                case 3:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
                 <% break; 
                 
                 case 4:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -272,7 +274,7 @@
                 <% break; 
                 
                 case 5:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -282,7 +284,7 @@
                 <% break; 
                 
                 case 6:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -292,7 +294,7 @@
                 <% break; 
                 
                 case 7:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -304,7 +306,7 @@
                 <% break; 
                 
                 case 8:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -317,7 +319,7 @@
                 <% break; 
                 
                 case 9:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -331,7 +333,7 @@
                 <% break; 
                 
                 case 10:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -345,7 +347,7 @@
                 <% break; 
                        
                        case 11:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -361,7 +363,7 @@
                 <% break; 
                 
                 case 12:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -378,7 +380,7 @@
                 <% break; 
                
                case 13:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -396,7 +398,7 @@
                 <% break; 
                
                case 14:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -415,7 +417,7 @@
                 <% break; 
                 
                 case 15:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -435,7 +437,7 @@
                 <% break; 
                 
                 case 16:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -456,7 +458,7 @@
                 <% break; 
                 
                 case 17:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -477,7 +479,7 @@
                 <% break; 
                 
                 case 18:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -499,7 +501,7 @@
                 <% break; 
                 
                 case 19:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -522,7 +524,7 @@
                 <% break; 
                 
                 case 20:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -546,7 +548,7 @@
                 <% break; 
                 
                 case 21:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -571,7 +573,7 @@
                 <% break; 
                 
                 case 22:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -597,7 +599,7 @@
                 <% break; 
                 
                 case 23:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -624,7 +626,7 @@
                 <% break; 
                
                case 24:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -652,7 +654,7 @@
                 <% break; 
                 
                 case 25:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -681,7 +683,7 @@
                 <% break; 
                 
                 case 26:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -711,7 +713,7 @@
                 <% break; 
                 
                 case 27:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -742,7 +744,7 @@
                 <% break; 
                 
                 case 28:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -774,7 +776,7 @@
                 <% break; 
                 
                 case 29:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -807,7 +809,7 @@
                 <% break; 
                 
                 case 30:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -841,7 +843,7 @@
                 <% break; 
                         
                         case 31:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -878,7 +880,7 @@
 
             ]);
                 // Optional; add a title and set the width and height of the chart
-                var options = {'title':'Most Viewed Books', 'width':700, 'height':700};
+                var options = {'title':'Most Liked Books', 'width':700, 'height':700};
 
                 // Display the chart inside the <div> element with id="piechart"
                 var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -898,25 +900,25 @@
                      {
                          case 1:
                     %>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>]
                 <% break; 
                 
                 case 2:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                 <% break; 
                 
                case 3:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
                 <% break; 
                 
                 case 4:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -925,7 +927,7 @@
                 <% break; 
                 
                 case 5:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -935,7 +937,7 @@
                 <% break; 
                 
                 case 6:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -945,7 +947,7 @@
                 <% break; 
                 
                 case 7:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -957,7 +959,7 @@
                 <% break; 
                 
                 case 8:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -970,7 +972,7 @@
                 <% break; 
                 
                 case 9:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -984,7 +986,7 @@
                 <% break; 
                 
                 case 10:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -998,7 +1000,7 @@
                 <% break; 
                        
                        case 11:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1014,7 +1016,7 @@
                 <% break; 
                 
                 case 12:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1031,7 +1033,7 @@
                 <% break; 
                
                case 13:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1049,7 +1051,7 @@
                 <% break; 
                
                case 14:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1068,7 +1070,7 @@
                 <% break; 
                 
                 case 15:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1088,7 +1090,7 @@
                 <% break; 
                 
                 case 16:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1109,7 +1111,7 @@
                 <% break; 
                 
                 case 17:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1130,7 +1132,7 @@
                 <% break; 
                 
                 case 18:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1152,7 +1154,7 @@
                 <% break; 
                 
                 case 19:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1175,7 +1177,7 @@
                 <% break; 
                 
                 case 20:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1199,7 +1201,7 @@
                 <% break; 
                 
                 case 21:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1224,7 +1226,7 @@
                 <% break; 
                 
                 case 22:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1250,7 +1252,7 @@
                 <% break; 
                 
                 case 23:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1277,7 +1279,7 @@
                 <% break; 
                
                case 24:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1305,7 +1307,7 @@
                 <% break; 
                 
                 case 25:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1334,7 +1336,7 @@
                 <% break; 
                 
                 case 26:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1364,7 +1366,7 @@
                 <% break; 
                 
                 case 27:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1395,7 +1397,7 @@
                 <% break; 
                 
                 case 28:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1427,7 +1429,7 @@
                 <% break; 
                 
                 case 29:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1460,7 +1462,7 @@
                 <% break; 
                 
                 case 30:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1494,7 +1496,7 @@
                 <% break; 
                         
                         case 31:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1532,7 +1534,7 @@
             ]);
 
                 // Optional; add a title and set the width and height of the chart
-                var options = {'title':'Most Viewed Books', 'width':700, 'height':1000};
+                var options = {'title':'Most Liked Books', 'width':700, 'height':1000};
 
                 // Display the chart inside the <div> element with id="piechart"
                 var chart = new google.visualization.BarChart(document.getElementById('barchart'));
@@ -1552,25 +1554,25 @@
                      {
                          case 1:
                     %>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>]
                 <% break; 
                 
                 case 2:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                 <% break; 
                 
                case 3:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
                 <% break; 
                 
                 case 4:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1579,7 +1581,7 @@
                 <% break; 
                 
                 case 5:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1589,7 +1591,7 @@
                 <% break; 
                 
                 case 6:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1599,7 +1601,7 @@
                 <% break; 
                 
                 case 7:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1611,7 +1613,7 @@
                 <% break; 
                 
                 case 8:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1624,7 +1626,7 @@
                 <% break; 
                 
                 case 9:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1638,7 +1640,7 @@
                 <% break; 
                 
                 case 10:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1652,7 +1654,7 @@
                 <% break; 
                        
                        case 11:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1668,7 +1670,7 @@
                 <% break; 
                 
                 case 12:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1685,7 +1687,7 @@
                 <% break; 
                
                case 13:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1703,7 +1705,7 @@
                 <% break; 
                
                case 14:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1722,7 +1724,7 @@
                 <% break; 
                 
                 case 15:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1742,7 +1744,7 @@
                 <% break; 
                 
                 case 16:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1763,7 +1765,7 @@
                 <% break; 
                 
                 case 17:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1784,7 +1786,7 @@
                 <% break; 
                 
                 case 18:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1806,7 +1808,7 @@
                 <% break; 
                 
                 case 19:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1829,7 +1831,7 @@
                 <% break; 
                 
                 case 20:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1853,7 +1855,7 @@
                 <% break; 
                 
                 case 21:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1878,7 +1880,7 @@
                 <% break; 
                 
                 case 22:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1904,7 +1906,7 @@
                 <% break; 
                 
                 case 23:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1931,7 +1933,7 @@
                 <% break; 
                
                case 24:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1959,7 +1961,7 @@
                 <% break; 
                 
                 case 25:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1988,7 +1990,7 @@
                 <% break; 
                 
                 case 26:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -2018,7 +2020,7 @@
                 <% break; 
                 
                 case 27:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -2049,7 +2051,7 @@
                 <% break; 
                 
                 case 28:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -2081,7 +2083,7 @@
                 <% break; 
                 
                 case 29:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -2114,7 +2116,7 @@
                 <% break; 
                 
                 case 30:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -2148,7 +2150,7 @@
                 <% break; 
                         
                         case 31:%>
-                var data = google.visualization.arrayToDataTable([['Title','Views'],
+                var data = google.visualization.arrayToDataTable([['Title','Likes'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
