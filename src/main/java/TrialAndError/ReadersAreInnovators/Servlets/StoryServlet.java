@@ -166,6 +166,7 @@ public class StoryServlet extends HttpServlet {
            return service.followAuthor(service.getAuthor(new Writer(request.getParameter("authorId"))),getUserSessionJustId(request));
          
      }
+     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -194,11 +195,26 @@ public class StoryServlet extends HttpServlet {
                 dispatcher.forward(request, response);
                 
                 break;
+            case"like":
+                response.sendRedirect("postResultServlet?submit=like&storyId="+request.getParameter("storyId")+"&likeMessage="+likeStory(request));
+                break;
+            case"unlike":
+                response.sendRedirect("postResultServlet?submit=unlike&storyId="+request.getParameter("storyId")+"&unlikeMessage="+unLikeStory(request));
+                break;
         }
         
         
     }
-    
+   public String likeStory(HttpServletRequest request){
+        Story story=new Story();
+        story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
+       return service.likeStory(story,getUserSessionJustId(request));
+   }
+    public String unLikeStory(HttpServletRequest request){
+        Story story=new Story();
+        story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
+        return service.unlikeStory(story,getUserSessionJustId(request));
+    }
     /**
      * Handles the HTTP <code>POST</code> method.
      *

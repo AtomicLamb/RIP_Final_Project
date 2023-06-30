@@ -392,6 +392,13 @@ public class WriterImplementation implements WriterDAOInterface{
         
     }
     
+    @Override
+    public String deleteDraft(Story Story){
+        
+        return null;
+        
+    }
+    
     @Override       //Completed: Gets the information to display on the Author details page.
     public Writer getAuthor(Writer writer) {
         

@@ -84,7 +84,7 @@
         <div>              <h1>Followed Authors</h1>
                              <%if(followedAuthors!=null){%>
                              <% for(Writer writer:followedAuthors){%>
-                             <p><%=writer.getName()%> <%=writer.getSurname()%></p>
+            <p><a href="StoryServlet?submit=AuthorDetails&authorId=<%=writer.getUserID()%>"style="text-decoration:none"><%=writer.getName()%> <%=writer.getSurname()%></a></p>
                              <%}%>
                              <%}%>
                              <%if(followedAuthors==null){%>

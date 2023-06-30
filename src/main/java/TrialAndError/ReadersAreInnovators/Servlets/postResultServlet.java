@@ -72,12 +72,13 @@ public class postResultServlet extends HttpServlet {
                 break;
             case"like":
                 session= request.getSession(false);
-                Story story1=new Story();
-                User user=new User();
+                 
+                storyServlet.fillStoryDetailsPage(request,response,"message",request.getParameter("likeMessage"));
+                break;
+            case"unlike":
+                session= request.getSession(false);
                 
-                user.setUserID((Integer)session.getAttribute("UserID"));
-                story1.setStoryID(Integer.valueOf(request.getParameter("storyId")));
-                storyServlet.fillStoryDetailsPage(request,response,"message",slc.likeStory(story1,user));
+                storyServlet.fillStoryDetailsPage(request,response,"message",request.getParameter("unlikeMessage"));
                 break;
             case"Accept":
                 story=new StoryApplication();
@@ -93,7 +94,7 @@ public class postResultServlet extends HttpServlet {
                 editor.setUserID((Integer)session.getAttribute("UserID"));
                  request.setAttribute("message",slc.approvePendingStory(story,editor));
                   request.setAttribute("pendingStories",pendingStories);
-                  var dispatcher=request.getRequestDispatcher("ReviewPendingStories");
+                  var dispatcher=request.getRequestDispatcher("ReviewPendingStories.jsp");
                   dispatcher.forward(request,response);
                 break;
             case "Deny":
@@ -101,7 +102,7 @@ public class postResultServlet extends HttpServlet {
                 story.setPendingStoryID(Integer.valueOf(request.getParameter("storyId")));
                 request.setAttribute("message",slc.removePendingStory(story));
                 request.setAttribute("pendingStories",pendingStories);
-                dispatcher=request.getRequestDispatcher("ReviewPendingStories");
+                dispatcher=request.getRequestDispatcher("ReviewPendingStories.jsp");
                 dispatcher.forward(request,response);
                 break;
             

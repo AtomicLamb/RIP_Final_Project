@@ -63,7 +63,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             String message = (String) request.getAttribute("message");
                             if(message!=null){
                         %>
-                        <p><strong style ="color:red;"><%=message %></strong></p>
+                        <p><strong style ="color:red;"><%=message %></strong></p><br>
+                        <%}%>
+                        <%
+                            String[] message2 = (String[]) request.getAttribute("message2");
+                            if(message!=null){
+                        %>
+                        <p><strong style ="color:red;"><%=message2 %></strong></p>
                         <%}%>
                     </div>
                     <div class="signup-form">

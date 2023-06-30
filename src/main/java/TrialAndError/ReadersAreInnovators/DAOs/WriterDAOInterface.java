@@ -21,6 +21,7 @@ public interface WriterDAOInterface {
     Story getDraft(Story story);
     ArrayList<Story> getAllDrafts(Writer writer);
     String editDraft(Story story);
+    String deleteDraft(Story story);
     Writer getAuthor(Writer writer);
     
     

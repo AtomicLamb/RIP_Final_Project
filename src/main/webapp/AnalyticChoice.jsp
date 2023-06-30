@@ -29,15 +29,18 @@
         <div class="form-content">
         <div class="signup-form">
           <div class="title">Analytic Choice Page</div>
-          <p style="color:red">Enter the start date first and end date second </p>
+          
           <form action="analyticalServlet" method="post">
               <div class="input-boxes">
                  <div class="input-box">
                      <input type="number" placeholder="Enter a number from 1-30" name="analyticNum" min="1" max="30" required>
               </div>
+                  <p style="color:red">Top Elements </p><br>
+                  <p style="color:red">Between: </p><br>
                   <div class="input-box">
                      <input type="date" name="analyticDateStart">
               </div>
+                  <p style="color:red">And: </p><br>
                   <div class="input-box">
                      <input type="date" name="analyticDateEnd">
               </div>

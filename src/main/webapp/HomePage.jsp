@@ -125,6 +125,7 @@
 			<div class="scrollmenu" style="margin: auto; width: 800px;">
 
 				<%List<Story>storiesFromFavouriteGenres=(List<Story>)request.getAttribute("stories");%>
+				 
                      <%if(storiesFromFavouriteGenres!=null){%>
 				 <%for(Story story:storiesFromFavouriteGenres){%>
 				<a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>%authorId=<%=story.getAuthorID()%>">
@@ -133,7 +134,9 @@
 				</a>
 				<%}%>
             <%}%>
-
+              <%if(storiesFromFavouriteGenres==null){%>
+				<p>No favourite stories</p>
+				<%}%>
 			</div>
 		</div>
 	</div>

@@ -558,13 +558,13 @@ public class JUnitTesting {
         
         try {
             
-            inputStream = new FileInputStream(new File("C:\\Users\\TKS\\Desktop\\success.jpg"));
+            inputStream = new FileInputStream(new File("C:\\Users\\TKS\\Desktop\\360_F_97589769_t45CqXyzjz0KXwoBZT9PRaWGHRk5hQqQ.jpg"));
             
             FunctionsClass functionsClass = new FunctionsClass();
             
             String image64 = functionsClass.encodeBase64(inputStream);
             
-            Story myTestStory = new Story("Image Test 2 the return of the cum sock", 52, "The story body to test images is very boring. Until one day the all mighty and all powerful cum sock came to life, empowered by the success of the RIP program developed by Trial and Error.", "An up and cumming success story.", image64, true);
+            Story myTestStory = new Story("Image Test 3 the return of the cum sock 4", 52, "The story body to test images is epic of boring its mid and not very boring. Until one day the all mighty and all powerful cum sock came to life, empowered by the success of the RIP program developed by Trial and Error.", "An up and cumming success story.", image64, true);
             
             System.out.println(storyImp.saveAsDraft(myTestStory));
             
@@ -575,9 +575,13 @@ public class JUnitTesting {
         } finally {
             
             try {
+                
                 inputStream.close();
+                
             } catch (IOException e) {
+                
                 throw new RuntimeException(e);
+                
             }
             
         }

@@ -75,6 +75,7 @@ private HttpSession session;
                 User user=new User();
                 user.setUserID((Integer)session.getAttribute("UserID"));
                 List<Story>stories=service.getStoriesFromGenres(user);
+              
                 Integer num = 0;
                 request.setAttribute("message", num);
                   request.setAttribute("stories", stories);

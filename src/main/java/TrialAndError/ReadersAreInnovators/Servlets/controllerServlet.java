@@ -5,6 +5,7 @@ package TrialAndError.ReadersAreInnovators.Servlets;/*
 
 import TrialAndError.ReadersAreInnovators.Models.Administration.Email;
 import TrialAndError.ReadersAreInnovators.Models.Administration.WriterApplication;
+import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.RESTService.ImpService;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Reader;
@@ -17,6 +18,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,6 +34,8 @@ public class controllerServlet extends HttpServlet {
     private ImpService imp;
     private HttpSession session;
     private ServiceLayerClass service;
+    private Reader reader;
+    private String email;
     
     public controllerServlet()
     {
@@ -83,6 +88,9 @@ public class controllerServlet extends HttpServlet {
            case"Confirm Writer":
                addWriter(request,response);
                break;
+           case"Submit Genres":
+               selectGenre(request,response);
+               break;
        }
     }
     
@@ -90,16 +98,15 @@ public class controllerServlet extends HttpServlet {
     {
             String firstName = request.getParameter("readerFirstName");
             String surname = request.getParameter("readerSurname");
-            String email = request.getParameter("readerEmail");
+            email = request.getParameter("readerEmail");
             String phoneNum = request.getParameter("readerPhoneNum");
             String password = request.getParameter("readerPassword");
         
-        request.setAttribute("message", imp.registerReader(new Reader(firstName,surname,email,phoneNum,password)));
-                        var dispatcher =  request.getRequestDispatcher("index.jsp");
+        reader = new Reader(firstName,surname,email,phoneNum,password);
+        request.setAttribute("genreList",service.getGenres());
+                        var dispatcher =  request.getRequestDispatcher("SelectGenre.jsp");
                        try {
                            dispatcher.forward(request, response);
-                          // e.sendEmail(email);
-                          // emailImp.sendEmail(email);
                        } catch (ServletException | IOException ex) {
                            Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
                        }
@@ -133,9 +140,11 @@ public class controllerServlet extends HttpServlet {
        User user = service.login(new User(email,password));
        
        var dispatcher = request.getRequestDispatcher("HomePage.jsp");
-           
+       
            try {
+               
                if (user != null) {
+                   
                    session = request.getSession(true);
                    
                    session.setAttribute("UserID", user.getUserID());
@@ -147,6 +156,9 @@ public class controllerServlet extends HttpServlet {
                    session.setAttribute("UserType", user.getUserType());
                    
                    request.setAttribute("message", user.getUserTypeID());
+                   List<Story>genreStories=service.getStoriesFromGenres(user);
+                   
+                   request.setAttribute("stories", genreStories);
                    dispatcher.forward(request, response);
                }
                 else
@@ -162,7 +174,23 @@ public class controllerServlet extends HttpServlet {
            {
                Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
            }
-       //emailVerification
       
    }
+    public void selectGenre(HttpServletRequest request, HttpServletResponse response)
+    {
+        String[] firstName = request.getParameterValues("choice");
+        User user = new User(email);
+        for(int i = 0; i < firstName.length; i++)
+        {
+           // service.selectGenre()
+        }
+        //request.setAttribute("message", imp.registerReader(reader));
+        request.setAttribute("message2", "");
+        var dispacther =  request.getRequestDispatcher("index.jsp");
+        try {
+            dispacther.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

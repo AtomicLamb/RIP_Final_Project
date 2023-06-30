@@ -77,6 +77,7 @@ public class Story {
         this.imagePath = imagePath;
         
     }
+ 
     
     public Story(String title, Integer storyID, String coverImage, String imagePath, Boolean commentsEnabled, String synopsis, String storyBody) {
         

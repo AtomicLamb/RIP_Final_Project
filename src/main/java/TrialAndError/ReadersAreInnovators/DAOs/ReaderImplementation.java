@@ -462,10 +462,126 @@ public class ReaderImplementation implements ReaderDAOInterface {
         
     }
     
-    @Override       //Completed: Gets stories from selected genres.                                                     TODO: Method
+    @Override       //Completed: Gets stories from selected genres.
     public ArrayList<Story> getStoriesFromGenres(User user){
         
-        return null;
+        conn = DatabaseConnectionManager.getConnection();
+        ArrayList<Story> favoriteStories = new ArrayList<>();
+        
+        try {
+            
+            query = "";
+            
+            ps = conn.prepareStatement(query);
+            
+            
+            rs = ps.executeQuery();
+            
+            while (rs.next()){
+                
+                String imagePath = rs.getString(2);
+                
+                InputStream input = new FileInputStream(new File(imagePath));
+                ByteArrayOutputStream output = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int bytesRead = -1;
+                
+                while ((bytesRead = input.read(buffer)) != -1) {
+                    
+                    output.write(buffer, 0, bytesRead);
+                    
+                }
+                
+                byte[] imageBytes = output.toByteArray();
+                String image = Base64.getEncoder().encodeToString(imageBytes);
+                
+                favoriteStories.add(new Story(rs.getString(1), rs.getString(3), image, imagePath));
+                
+            }
+            
+        } catch (SQLException e) {
+            
+            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error getting all Favorites.", e);
+            
+        } catch (IOException e) {
+            
+            throw new RuntimeException(e);
+            
+        } finally {
+            
+            if (input!=null){
+                
+                try {
+                    
+                    input.close();
+                    
+                } catch (IOException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (output!=null){
+                
+                try {
+                    
+                    output.close();
+                    
+                } catch (IOException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return favoriteStories;
         
     } 
     

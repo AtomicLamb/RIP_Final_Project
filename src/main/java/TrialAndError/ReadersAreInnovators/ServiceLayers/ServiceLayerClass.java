@@ -219,7 +219,7 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     public String denyWriter(Writer writer) {
         
         subject = "Writer Application";
-        text = "Unfortunately you have not been approved to be a writer on our platform";
+        text = "Unfortunately you have not been approved to be a writer on our platform. You may still be use our program as a reader and have reader rights";
         email = new Email();
         email.sendEmail(writer.getEmail(), subject, text);
         return editorImp.denyWriter(writer);

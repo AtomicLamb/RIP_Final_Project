@@ -3,6 +3,7 @@ package TrialAndError.ReadersAreInnovators.DAOs;
 import TrialAndError.ReadersAreInnovators.Models.Administration.Email;
 import TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication;
 import TrialAndError.ReadersAreInnovators.Models.Administration.WriterApplication;
+import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
@@ -513,9 +514,9 @@ public class EditorImplementation implements EditorDAOInterface{
             byte[] imageBytes = output.toByteArray();
             String image = Base64.getEncoder().encodeToString(imageBytes);
             
-            storyApplication = new StoryApplication(rs.getInt(1), rs.getString(2), rs.getInt(3), 
-                    rs.getString(4), rs.getString(5), "Story Body", "Synopsis" , image, imagePath, 
-                    functionsClass.integerToBoolean(rs.getInt(7)), functionsClass.dateToString(rs.getDate(8)));
+//            storyApplication = new StoryApplication(rs.getInt(1), rs.getString(2), rs.getInt(3), 
+//                    rs.getString(4), rs.getString(5), "Story Body", "Synopsis" , image, imagePath, 
+//                    functionsClass.integerToBoolean(rs.getInt(7)), functionsClass.dateToString(rs.getDate(8)));
             
             
         } catch (SQLException e) {
@@ -612,7 +613,7 @@ public class EditorImplementation implements EditorDAOInterface{
         
         try {
             
-            query = "select * from PendingStories ps order by ps.DateSubmitted";
+            query = "select ps.*, u.Email, u.PhoneNumber from PendingStories ps, Users u where ps.AuthorID = u.UserID order by ps.DateSubmitted";
             
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();

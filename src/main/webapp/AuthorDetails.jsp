@@ -71,7 +71,7 @@
                         <h1 class="jobs_text"style="text-align: left;border-bottom-style: solid; border-width:0.5px;border-color: black;">Author <%=writer.getName()%> <%=writer.getSurname()%> <br><span><a href="StoryServlet?submit=followAuthor" 
                                                                               class="button buttonTextColor" style=" font-size: 15px; border: 2px solid black; border-radius: 12px">Follow Author</a></span></h1>
                                  <h1 class="jobs_text"style="text-align: left;">Authors Books</h1>
-                                             s
+                                             
 					      <div class="scrollmenu" style="  width: 800px; background-color: white;height: 550px">
               <%for(Story story:stories){%> 
                 <a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>">

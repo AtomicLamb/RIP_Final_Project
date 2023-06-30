@@ -9,6 +9,7 @@ import TrialAndError.ReadersAreInnovators.DAOs.WriterDAOInterface;
 import TrialAndError.ReadersAreInnovators.DAOs.WriterImplementation;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
+import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayer_Interface;
 import jakarta.servlet.ServletException;
@@ -40,6 +41,8 @@ public class writerServlet extends HttpServlet
     private Part filePart; 
     private InputStream image;
     private String newCoverImage;
+    FunctionsClass functionsClass = new FunctionsClass();
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
@@ -93,7 +96,7 @@ public class writerServlet extends HttpServlet
                 image = filePart.getInputStream();
                 story = new Story();
                 story.setAuthorID(Integer.valueOf(request.getParameter("draftId")));
-                newCoverImage = Base64.getEncoder().encodeToString(image.readAllBytes());
+                newCoverImage = functionsClass.encodeBase64(image);
                 session= request.getSession(false);
                             
                 request.setAttribute("message",slc.submitStory(new Story(request.getParameter("storyTitle"),(Integer)session.getAttribute("UserID")
@@ -102,12 +105,12 @@ public class writerServlet extends HttpServlet
                 dispatcher.forward(request,response);
                 break;
             case"Save Story":
-                //Title, AuthorID, StoryBody, Synopsis, CoverImage, CommentsEnabled
+                
                 filePart = request.getPart("fileImage");
                 image = filePart.getInputStream();
                 story=new Story();
                 story.setAuthorID(Integer.valueOf(request.getParameter("draftId")));
-                 newCoverImage = Base64.getEncoder().encodeToString(image.readAllBytes());
+                newCoverImage = functionsClass.encodeBase64(image);
                 saveAsDraft(getCoverImage(newCoverImage),request,response);
                 break;
             case"Submit Draft":
@@ -116,7 +119,7 @@ public class writerServlet extends HttpServlet
                 story=new Story();
                 story.setAuthorID(Integer.valueOf(request.getParameter("draftId")));
                 
-                newCoverImage = Base64.getEncoder().encodeToString(image.readAllBytes());
+                newCoverImage = functionsClass.encodeBase64(image);
                 
                 if(newCoverImage!=null){
                     submitStory(getCoverImage(newCoverImage),request,response);
@@ -132,7 +135,7 @@ public class writerServlet extends HttpServlet
                 image = filePart.getInputStream();
                  
                
-                newCoverImage = Base64.getEncoder().encodeToString(image.readAllBytes());
+                newCoverImage = functionsClass.encodeBase64(image);
                
                 if(newCoverImage!=null){
                     saveDraft2Database(getCoverImage(newCoverImage),request,response);
@@ -159,7 +162,7 @@ public class writerServlet extends HttpServlet
     }
     public void saveAsDraft(String coverImage,HttpServletRequest request,HttpServletResponse response){
         session= request.getSession(false);
-        
+         
         request.setAttribute("message",slc.saveAsDraft(new Story(request.getParameter("storyTitle"),(Integer)session.getAttribute("UserID"),coverImage, "", Boolean.parseBoolean(request.getParameter("draftCommentsEnabled")),
                 request.getParameter("storySynopsis"),request.getParameter("storyBody"))));
         var dispatcher=request.getRequestDispatcher("ViewDrafts.jsp");
@@ -177,7 +180,8 @@ public class writerServlet extends HttpServlet
     }
     public void submitStory(String coverImage,HttpServletRequest request,HttpServletResponse response){
          
-        request.setAttribute("message",slc.submitStory(new Story(request.getParameter("draftTitle"),Integer.valueOf(request.getParameter("authorId")),coverImage, "",Boolean.parseBoolean(request.getParameter("draftCommentsEnabled")),
+        session= request.getSession(false);
+        request.setAttribute("message",slc.submitStory(new Story(request.getParameter("draftTitle"),(Integer)session.getAttribute("UserID"),coverImage, "",Boolean.parseBoolean(request.getParameter("draftCommentsEnabled")),
                 request.getParameter("draftSynopsis"),request.getParameter("draftStoryBody"))));
         var dispatcher=request.getRequestDispatcher("ViewDrafts.jsp");
         try {

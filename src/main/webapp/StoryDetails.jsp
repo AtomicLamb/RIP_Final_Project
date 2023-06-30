@@ -80,9 +80,10 @@
                         <div class="image_1 padding_0"><h1><%=story.getTitle()%></h1><img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%story.getTitle();%>" style="height: 400px;width:300px; "><div style="float:right; margin-right: 700px;">
                                     
                                     <span><br>Views<i class="fa-sharp fa-solid fa-eye"></i><%=story.getViews()%></span><br><br>
-                                    <span>Likes<a href="StoryServlet?submit=like&storyId=<%=story.getStoryID()%>" method="post"><i class="fa-solid fa-heart" style="color: #f42d1f;"></i></a><%=story.getLikes()%></span><br><br>
+                                    <span>Likes<a href="StoryServlet?submit=like&storyId=<%=story.getStoryID()%>"><i class="fa-solid fa-heart" style="color: #f42d1f;"></i></a><%=story.getLikes()%></span><br><br>
                                     <span>Rating<i class="fa-sharp fa-solid fa-star" style="color: #fff93d;"></i><%=story.getRatingAverage()%></span><br><br>
-                                    <span><a href="StoryServlet?submit=AuthorDetails&authorId=<%=writer.getUserID()%>" method="get" style="text-decoration:none">Author <%=writer.getName()%> <%=writer.getSurname()%></a></span>
+                            <span> Click to remove your like<a href="StoryServlet?submit=like&storyId=<%=story.getStoryID()%>"><i class="fa-solid fa-heart-crack" style="color: #db0f0f;"></i></a></span>      
+                                    <span><a href="StoryServlet?submit=AuthorDetails&authorId=<%=writer.getUserID()%>"style="text-decoration:none">Author <%=writer.getName()%> <%=writer.getSurname()%></a></span>
                                     <div id="openButton" class="apply_bt"><button onclick="openForm()">Rate Story</button></div>
                                                                  
                                                                                                  <div id="radioStar" style="display:none">

@@ -248,25 +248,25 @@
                            {
                                case 1:
                           %>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>]
                 <% break; 
                 
                 case 2:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                 <% break; 
                 
                case 3:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
                 <% break; 
                 
                 case 4:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -275,7 +275,7 @@
                 <% break; 
                 
                 case 5:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -285,7 +285,7 @@
                 <% break; 
                 
                 case 6:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -295,7 +295,7 @@
                 <% break; 
                 
                 case 7:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -307,7 +307,7 @@
                 <% break; 
                 
                 case 8:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -320,7 +320,7 @@
                 <% break; 
                 
                 case 9:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -334,7 +334,7 @@
                 <% break; 
                 
                 case 10:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -348,7 +348,7 @@
                 <% break; 
                        
                        case 11:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -364,7 +364,7 @@
                 <% break; 
                 
                 case 12:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -381,7 +381,7 @@
                 <% break; 
                
                case 13:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -399,7 +399,7 @@
                 <% break; 
                
                case 14:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -418,7 +418,7 @@
                 <% break; 
                 
                 case 15:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -438,7 +438,7 @@
                 <% break; 
                 
                 case 16:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -459,7 +459,7 @@
                 <% break; 
                 
                 case 17:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -480,7 +480,7 @@
                 <% break; 
                 
                 case 18:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -502,7 +502,7 @@
                 <% break; 
                 
                 case 19:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -525,7 +525,7 @@
                 <% break; 
                 
                 case 20:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -549,7 +549,7 @@
                 <% break; 
                 
                 case 21:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -574,7 +574,7 @@
                 <% break; 
                 
                 case 22:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -600,7 +600,7 @@
                 <% break; 
                 
                 case 23:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -627,7 +627,7 @@
                 <% break; 
                
                case 24:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -655,7 +655,7 @@
                 <% break; 
                 
                 case 25:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -684,7 +684,7 @@
                 <% break; 
                 
                 case 26:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -714,7 +714,7 @@
                 <% break; 
                 
                 case 27:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -745,7 +745,7 @@
                 <% break; 
                 
                 case 28:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -777,7 +777,7 @@
                 <% break; 
                 
                 case 29:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -810,7 +810,7 @@
                 <% break; 
                 
                 case 30:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -844,7 +844,7 @@
                 <% break; 
                         
                         case 31:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -901,25 +901,25 @@
                      {
                          case 1:
                     %>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>]
                 <% break; 
                 
                 case 2:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                 <% break; 
                 
                case 3:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
                 <% break; 
                 
                 case 4:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -928,7 +928,7 @@
                 <% break; 
                 
                 case 5:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -938,7 +938,7 @@
                 <% break; 
                 
                 case 6:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -948,7 +948,7 @@
                 <% break; 
                 
                 case 7:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -960,7 +960,7 @@
                 <% break; 
                 
                 case 8:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -973,7 +973,7 @@
                 <% break; 
                 
                 case 9:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -987,7 +987,7 @@
                 <% break; 
                 
                 case 10:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1001,7 +1001,7 @@
                 <% break; 
                        
                        case 11:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1017,7 +1017,7 @@
                 <% break; 
                 
                 case 12:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1034,7 +1034,7 @@
                 <% break; 
                
                case 13:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1052,7 +1052,7 @@
                 <% break; 
                
                case 14:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1071,7 +1071,7 @@
                 <% break; 
                 
                 case 15:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1091,7 +1091,7 @@
                 <% break; 
                 
                 case 16:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1112,7 +1112,7 @@
                 <% break; 
                 
                 case 17:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1133,7 +1133,7 @@
                 <% break; 
                 
                 case 18:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1155,7 +1155,7 @@
                 <% break; 
                 
                 case 19:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1178,7 +1178,7 @@
                 <% break; 
                 
                 case 20:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1202,7 +1202,7 @@
                 <% break; 
                 
                 case 21:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1227,7 +1227,7 @@
                 <% break; 
                 
                 case 22:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1253,7 +1253,7 @@
                 <% break; 
                 
                 case 23:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1280,7 +1280,7 @@
                 <% break; 
                
                case 24:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1308,7 +1308,7 @@
                 <% break; 
                 
                 case 25:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1337,7 +1337,7 @@
                 <% break; 
                 
                 case 26:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1367,7 +1367,7 @@
                 <% break; 
                 
                 case 27:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1398,7 +1398,7 @@
                 <% break; 
                 
                 case 28:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1430,7 +1430,7 @@
                 <% break; 
                 
                 case 29:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1463,7 +1463,7 @@
                 <% break; 
                 
                 case 30:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1497,7 +1497,7 @@
                 <% break; 
                         
                         case 31:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1555,25 +1555,25 @@
                      {
                          case 1:
                     %>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>]
                 <% break; 
                 
                 case 2:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                 <% break; 
                 
                case 3:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
                 <% break; 
                 
                 case 4:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1582,7 +1582,7 @@
                 <% break; 
                 
                 case 5:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1592,7 +1592,7 @@
                 <% break; 
                 
                 case 6:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1602,7 +1602,7 @@
                 <% break; 
                 
                 case 7:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1614,7 +1614,7 @@
                 <% break; 
                 
                 case 8:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1627,7 +1627,7 @@
                 <% break; 
                 
                 case 9:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1641,7 +1641,7 @@
                 <% break; 
                 
                 case 10:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1655,7 +1655,7 @@
                 <% break; 
                        
                        case 11:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1671,7 +1671,7 @@
                 <% break; 
                 
                 case 12:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1688,7 +1688,7 @@
                 <% break; 
                
                case 13:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1706,7 +1706,7 @@
                 <% break; 
                
                case 14:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1725,7 +1725,7 @@
                 <% break; 
                 
                 case 15:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1745,7 +1745,7 @@
                 <% break; 
                 
                 case 16:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1766,7 +1766,7 @@
                 <% break; 
                 
                 case 17:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1787,7 +1787,7 @@
                 <% break; 
                 
                 case 18:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1809,7 +1809,7 @@
                 <% break; 
                 
                 case 19:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1832,7 +1832,7 @@
                 <% break; 
                 
                 case 20:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1856,7 +1856,7 @@
                 <% break; 
                 
                 case 21:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1881,7 +1881,7 @@
                 <% break; 
                 
                 case 22:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1907,7 +1907,7 @@
                 <% break; 
                 
                 case 23:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1934,7 +1934,7 @@
                 <% break; 
                
                case 24:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1962,7 +1962,7 @@
                 <% break; 
                 
                 case 25:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -1991,7 +1991,7 @@
                 <% break; 
                 
                 case 26:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -2021,7 +2021,7 @@
                 <% break; 
                 
                 case 27:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -2052,7 +2052,7 @@
                 <% break; 
                 
                 case 28:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -2084,7 +2084,7 @@
                 <% break; 
                 
                 case 29:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -2117,7 +2117,7 @@
                 <% break; 
                 
                 case 30:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],
@@ -2151,7 +2151,7 @@
                 <% break; 
                         
                         case 31:%>
-                var data = google.visualization.arrayToDataTable([['Writer','Views'],
+                var data = google.visualization.arrayToDataTable([['Writer','Views across all author stories'],
                     ["<%=name%>" ,<%=age%>],
                     ["<%=name1%>" ,<%=age1%>],
                     ["<%=name2%>" ,<%=age2%>],

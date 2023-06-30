@@ -22,23 +22,28 @@
         <%String message=(String)request.getAttribute("message");%>
            <%if(message!=null){%>
           <h1 style="color: blue"> <%=message%></h1>
+        
+        
         <%}%>
         
-        <div class="Container" >
+        <div class="Container" style="background-color: #1c7430; width:100%; position: relative;bottom: 80px"  >
             <h1 style="font-size:50px;text-align:center;">Review Pending Stories</h1><br><br>
-            <div class="scrollmenu" style="margin: auto; width: 800px;">
-                <%if(pendingStories!=null){%>
-                <%for(StoryApplication story:pendingStories){%>
-                <a href="editorServlet?submit=reviewPendingStory&storyId=<%=story.getPendingStoryID()%>%authorId=<%=story.getAuthorID()%>">
-                   <h1 style="color: white;"><%=story.getTitle()%></h1>
-                    <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" >
-                </a>
-                <%}%>
-                <%}%>
-                <%if(pendingStories==null){%>
-                <p>No pending stories currently available</p>
-                <%}%>
-              </div>
+           
+        </div>
+        <br><br>
+        <h1 style="color:red"><%=pendingStories.get(0).getPendingStoryID()%></h1>
+        <div class="scrollmenu" style="margin: auto; width: 800px; background-color: yellow">
+            <h1 style="color:red"><%=pendingStories.get(0).getTitle()%>></h1>
+            <%for(StoryApplication story:pendingStories){%>
+              <a href="editorServlet?submit=reviewPendingStory&storyId=<%=story.getPendingStoryID()%>&authorId=<%=story.getAuthorID()%>">
+                <h1 style="color: white;"><%=story.getTitle()%></h1>
+                <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" >
+            </a>
+            <%}%>
+                  
+            <%if(pendingStories==null){%>
+            <p>No pending stories currently available</p>
+            <%}%>
         </div>
     </body>
 </html>

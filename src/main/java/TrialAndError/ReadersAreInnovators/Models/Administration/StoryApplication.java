@@ -1,5 +1,9 @@
 package TrialAndError.ReadersAreInnovators.Models.Administration;
 
+import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
+
+import java.util.List;
+
 public class StoryApplication {
     
     
@@ -10,6 +14,7 @@ public class StoryApplication {
     private String authorPhoneNumber;
     private String storyBody;
     private String synopsis;
+    private List<Genre> genres;
     private String coverImage;
     private String imagePath;
     private Boolean commentsEnabled;
@@ -36,6 +41,23 @@ public class StoryApplication {
         this.authorPhoneNumber = authorPhoneNumber;
         this.storyBody = storyBody;
         this.synopsis = synopsis;
+        this.coverImage = coverImage;
+        this.imagePath = imagePath;
+        this.commentsEnabled = commentsEnabled;
+        this.dateSubmitted = dateSubmitted;
+        
+    }
+    
+    public StoryApplication(Integer pendingStoryID, String title, Integer authorID, String authorEmail, String authorPhoneNumber, String storyBody, String synopsis, List<Genre> genres, String coverImage, String imagePath, Boolean commentsEnabled, String dateSubmitted) {
+        
+        this.pendingStoryID = pendingStoryID;
+        this.title = title;
+        this.authorID = authorID;
+        this.authorEmail = authorEmail;
+        this.authorPhoneNumber = authorPhoneNumber;
+        this.storyBody = storyBody;
+        this.synopsis = synopsis;
+        this.genres = genres;
         this.coverImage = coverImage;
         this.imagePath = imagePath;
         this.commentsEnabled = commentsEnabled;

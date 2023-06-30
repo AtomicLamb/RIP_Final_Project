@@ -183,6 +183,7 @@ public class FunctionsClass implements Functions_Interface{
         
     }
     
+    
     @Override
     public String decodeBase64(String imageString) {
         

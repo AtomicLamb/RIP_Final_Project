@@ -80,7 +80,7 @@ public class analyticalServlet extends HttpServlet {
                         dispacther.forward(request, response);
                 break;
             case"TOP EDITORS":
-               
+                analyticChoice = "TOP EDITORS";               
                 dispacther =  request.getRequestDispatcher("AnalyticChoice.jsp");
                         dispacther.forward(request, response);
                 break;
@@ -143,6 +143,11 @@ public class analyticalServlet extends HttpServlet {
                              dispatcher = request.getRequestDispatcher("TopWriters.jsp");
                              dispatcher.forward(request, response);
                              break;
+                         case"TOP EDITORS":
+                             request.setAttribute("message", service.getTopEditors(new Analytics(dataChoice,startDateString,endDateString)));
+                             dispatcher = request.getRequestDispatcher("TopEditors.jsp");
+                             dispatcher.forward(request, response);
+                             break;    
                      }
                      
                  }

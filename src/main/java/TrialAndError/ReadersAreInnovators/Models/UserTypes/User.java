@@ -21,9 +21,17 @@ public class User {
     public User() {
         
     }
-    public User(Integer userID) 
-    {
+    
+    public User(Integer userID) {
+        
         this.userID = userID;
+        
+    }
+    
+    public User(String email) {
+        
+        this.email = email;
+        
     }
     
     public User(String email, String password) {
@@ -40,6 +48,7 @@ public class User {
         this.surname = surname;
         
     }
+    
     public User(String name, String surname, String email, String phoneNumber, String password) {
         
         this.name = name;
@@ -49,6 +58,7 @@ public class User {
         this.password = password;
         
     }
+    
     public User(Integer userID, String name, String surname, String email, String phoneNumber, String password) {
         
         this.userID = userID;
@@ -59,6 +69,7 @@ public class User {
         this.password = password;
         
     }
+    
     public User(String name, String surname, String email, String phoneNumber, String password, Integer userTypeID) {
         
         this.name = name;
