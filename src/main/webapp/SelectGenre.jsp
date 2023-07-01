@@ -23,6 +23,12 @@
     <body>
         <div class="Container" >
             <h1 style="font-size:50px;text-align:center;">Select Genre</h1><br><br>
+            <%
+                String message = (String) request.getAttribute("message");
+                if(message!=null){
+            %>
+            <p><strong style ="color:red;"><%=message %></strong></p><br>
+            <%}%>
             <div class="forms">
                 <div class="form-content">
                     <form action="controllerServlet" method="post">

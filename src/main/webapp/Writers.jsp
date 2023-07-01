@@ -45,6 +45,12 @@
                   </div>
               </div>
           </form>
+            <%
+                String message = (String) request.getAttribute("message");
+                if(message!=null){
+            %>
+            <br><p><strong style ="color:black"><%=message %></strong></p>
+            <%}%>
     </div>
     </div>
     </div>

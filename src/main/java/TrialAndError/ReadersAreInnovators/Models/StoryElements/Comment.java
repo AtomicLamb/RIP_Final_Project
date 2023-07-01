@@ -1,5 +1,14 @@
 package TrialAndError.ReadersAreInnovators.Models.StoryElements;
 
+
+/**
+ * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Author:         Tyler Schwegler.
+ * @Version:        v.1.0.0
+ * @Date:           2023-07-05.
+ * @Completed:      True.
+ */
+
 public class Comment {
     
     
@@ -16,6 +25,7 @@ public class Comment {
     public Comment(){
         
     }
+    
     public Comment(Integer commentID)
     {
         this.commentID = commentID;    

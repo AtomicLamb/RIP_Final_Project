@@ -27,6 +27,13 @@
                 <input style="width: 20%" type="file" name="fileImage" accept="image/*" required><br><br>
               </div>
                 <div class="input-box" style="font-size:20px;text-align:center;">
+                    <h2>Would you like comments enabled:</h2>
+                    <input type="radio" id="yes" name="commentsEnabled" value="yes" required>
+                      <label for="yes">Yes</label><br>
+                      <input type="radio" id="no" name="commentsEnabled" value="no" required>
+                      <label for="no">No</label>
+                </div>
+                <div class="input-box" style="font-size:20px;text-align:center;">
                 <h2>Enter the synopsis</h2>
                 <textarea type="text" name="storySynopsis" maxlength="1000" rows="4" cols="55" required>Enter your synopsis here. You have a maximum of 1000 characters.</textarea><br><br>
               </div>

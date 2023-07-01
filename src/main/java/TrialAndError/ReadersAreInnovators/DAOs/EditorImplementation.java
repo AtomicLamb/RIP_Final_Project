@@ -19,10 +19,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @desctripion:    The concrete implementation of the AdminEditorDAO.
- * @author:         Tyler Schwegler.
+ * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
- * Completed:       True
+ * @Date:           2023-07-05.
+ * @Completed:      True.
  */
 
 public class EditorImplementation implements EditorDAOInterface{

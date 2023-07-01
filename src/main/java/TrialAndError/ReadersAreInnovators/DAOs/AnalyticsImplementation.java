@@ -20,7 +20,8 @@ import java.util.logging.Logger;
  * @Desctripion:    The concrete implementation of the AnalyticsDAO.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
- * @Complete:       True
+ * @Date:           2023-07-05.
+ * @Completed:      True.
  */
 
 public class AnalyticsImplementation implements AnalyticsDAOInterface{
@@ -544,7 +545,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         try {
             
             query = "Select s.StoryID, s.Title, avg(r.RatingScore) from stories s, rating r where s.StoryID = r.StoryID and " +
-                    "s.DatePublished between ? AND ? group by s.StoryID order by avg(r.RatingScore) desc;";
+                    "s.DatePublished between ? AND ? group by s.StoryID order by avg(r.RatingScore) desc";
             
             ps = conn.prepareStatement(query);
             ps.setDate(1, functionsClass.stringToDate(analytics.getStartDate()));

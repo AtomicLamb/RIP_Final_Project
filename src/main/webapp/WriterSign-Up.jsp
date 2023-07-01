@@ -45,7 +45,7 @@
               </div>
               <div class="input-box">
                 <i class="fas fa-envelope"></i>
-                <input type="email" placeholder="Enter your email." pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" name="writerEmail" required>
+                <input type="email" placeholder="Enter your email." name="writerEmail" required>
               </div>
               <div class="input-box">
                 <i class="fas fa-lock"></i>

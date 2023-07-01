@@ -323,7 +323,8 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     public String registerReader(Reader reader) {
         
         String subject = "Please Verify your Email.";
-        String text = "Welcome to the Readers are Innovators Program. '\n'" +
+        String text = "Welcome to the Readers are Innovators Program. '\n''\n'" +
+                "You have successfully been registered as a reader. '\n''\n'" +
                 "Please click the link below to verify your Email address: '\n''\n'" +
                 "http://192.168.0.105:8080/Trial_and_Error_Readers_are_Innovators-1.0-SNAPSHOT/controllerServlet?submit=Verified+Email&email=" + reader.getEmail();
         
@@ -422,7 +423,11 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     @Override
     public Story displayStoryDetails(Story story) {
         
-        return storyImp.displayStoryDetails(story);
+        Story storyToDisplay = storyImp.displayStoryDetails(story);
+        
+        storyToDisplay.setRatingAverage(ratingImp.getStoryRating(story));
+        
+        return storyToDisplay;
         
     }
     
@@ -460,10 +465,21 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
         Reader reader = new Reader(writerApplication.getName(),writerApplication.getSurname(),writerApplication.getEmail(),
                 writerApplication.getPhoneNumber(),writerApplication.getPassword());
         
-        subject = "Writer Registration";
-        text = "Your application has been sent and an Editor will review it as soon as possible. During this time you have received reader rights and can browse the platform as a reader";
+        String subject = "Please Verify your Email.";
+        String text = "Welcome to the Readers are Innovators Program. \n\n" +
+                "You have successfully been registered as a reader. \n\n" +
+                "Please click the link below to verify your Email address: \n\n" +
+                "http://192.168.0.105:8080/Trial_and_Error_Readers_are_Innovators-1.0-SNAPSHOT/controllerServlet?submit=Verified+Email&email=" + reader.getEmail();
+        
         email.sendEmail(reader.getEmail(), subject, text);
+        
+        subject = "Writer Registration Status.";
+        text = "Your application has been sent for reviewal and an Editor of the Readers are Innovators team will review  your application as soon as possible. \n\n" + 
+                "During this time you may use the website as a reader and will be notified as soon as your application has been reviewed..";
+        email.sendEmail(reader.getEmail(), subject, text);
+        
         return readerImp.registerReader(reader) + writerImp.writerRegistration(writerApplication);
+        
     }
     
     @Override
@@ -493,14 +509,17 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     }
     
     @Override 
-    public String revokeWriterPrivileges(Writer writer)
-    {
+    public String revokeWriterPrivileges(Writer writer) {
         
-        subject = "Writer Priveleges";
-        text = "Because you have failed to follow company policy several times we have decided to remove your writeing priveleges on our platform. \n " +
-                "You may still read short stories but may no longer add stories to the platform";
+        subject = "Writer Status Revoked.";
+        text = "We regret to inform you that due to your recent behavior you have failed to follow company policy and thus " +
+                "we have decided to remove your writing privileges on our platform. \n\n" +
+                "You may still access our platform and view short stories but you will not be allowed to create or submit stories to our platform.";
+        
         email.sendEmail(writer.getEmail(), subject, text);
+        
         return editorImp.revokeWriterPrivileges(writer);
+        
     }
     
     @Override
@@ -533,5 +552,11 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     public String emailVerification(String email)
     {
         return userImp.emailVerification(email);
+    }
+    
+    @Override
+    public String updateDraft(Story story)
+    {
+        return storyImp.updateDraft(story);
     }
 }

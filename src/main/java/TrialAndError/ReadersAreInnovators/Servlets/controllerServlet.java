@@ -5,6 +5,7 @@ package TrialAndError.ReadersAreInnovators.Servlets;/*
 
 import TrialAndError.ReadersAreInnovators.Models.Administration.Email;
 import TrialAndError.ReadersAreInnovators.Models.Administration.WriterApplication;
+import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.RESTService.ImpService;
@@ -34,7 +35,6 @@ public class controllerServlet extends HttpServlet {
     private ImpService imp;
     private HttpSession session;
     private ServiceLayerClass service;
-    private Reader reader;
     private String email;
     
     public controllerServlet()
@@ -98,40 +98,70 @@ public class controllerServlet extends HttpServlet {
     {
             String firstName = request.getParameter("readerFirstName");
             String surname = request.getParameter("readerSurname");
-            email = request.getParameter("readerEmail");
+           email = request.getParameter("readerEmail");
             String phoneNum = request.getParameter("readerPhoneNum");
             String password = request.getParameter("readerPassword");
-        
-        reader = new Reader(firstName,surname,email,phoneNum,password);
-        request.setAttribute("genreList",service.getGenres());
-                        var dispatcher =  request.getRequestDispatcher("SelectGenre.jsp");
-                       try {
-                           dispatcher.forward(request, response);
-                       } catch (ServletException | IOException ex) {
-                           Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
-                       }
-                       
-                       //TODO email stuff
-        //e.sendEmail(email);
-                       
-                       
+            
+            Reader reader = new Reader(firstName,surname,email,phoneNum,password);
+            String message = imp.registerReader(reader);
+            request.setAttribute("genreList",service.getGenres());
+            
+            if(imp.registerReader(reader).equalsIgnoreCase("Reader successfully added, Please check your emails to verify your account."))
+            {
+                request.setAttribute("message", message);
+                var dispatcher =  request.getRequestDispatcher("SelectGenre.jsp");
+                try {
+                    dispatcher.forward(request, response);
+                } catch (ServletException | IOException ex) {
+                    Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else
+            {
+                request.setAttribute("message", message);
+                var dispacther =  request.getRequestDispatcher("index.jsp");
+                try {
+                    dispacther.forward(request, response);
+                } catch (ServletException | IOException ex) {
+                    Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
     }
    public void addWriter(HttpServletRequest request, HttpServletResponse response)
    {
       String firstName = request.getParameter("writerFirstName");
             String surname = request.getParameter("writerSurname");
-            String email = request.getParameter("writerEmail");
+            email = request.getParameter("writerEmail");
             String phoneNum = request.getParameter("writerPhoneNum");
             String password = request.getParameter("writerPassword");
             String motivation = request.getParameter("writerMotivation");
             
-            request.setAttribute("message", imp.registerWriter(new WriterApplication(firstName,surname,email,phoneNum,password,motivation)));
-                        var dispacther =  request.getRequestDispatcher("index.jsp");
-                       try {
-                           dispacther.forward(request, response);
-                       } catch (ServletException | IOException ex) {
-                           Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
-                       }
+       WriterApplication writer = (new WriterApplication(firstName,surname,email,phoneNum,password,motivation));    
+       String message = imp.registerWriter(writer);
+       request.setAttribute("genreList",service.getGenres());
+       
+            if (imp.registerWriter(writer).equalsIgnoreCase("Application successfully submitted."))
+            {
+                request.setAttribute("message", message);
+                var dispacther =  request.getRequestDispatcher("SelectGenre.jsp");
+                try {
+                    dispacther.forward(request, response);
+                } catch (ServletException | IOException ex) {
+                    Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else
+            {
+                request.setAttribute("message", message);
+                var dispacther =  request.getRequestDispatcher("index.jsp");
+                try {
+                    dispacther.forward(request, response);
+                } catch (ServletException | IOException ex) {
+                    Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
    }
    public void login(HttpServletRequest request, HttpServletResponse response)
    {
@@ -178,19 +208,32 @@ public class controllerServlet extends HttpServlet {
    }
     public void selectGenre(HttpServletRequest request, HttpServletResponse response)
     {
-        String[] firstName = request.getParameterValues("choice");
+        String[] genres = request.getParameterValues("choice");
         User user = new User(email);
-        for(int i = 0; i < firstName.length; i++)
+        
+        if (genres.length >= 3)
         {
-           // service.selectGenre()
+            for(int i = 0; i < genres.length; i++)
+            {
+                request.setAttribute("message", service.selectGenre(user,new Genre(genres[i])));
+            }
+            var dispacther =  request.getRequestDispatcher("index.jsp");
+            try {
+                dispacther.forward(request, response);
+            } catch (ServletException | IOException ex) {
+                Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        //request.setAttribute("message", imp.registerReader(reader));
-        request.setAttribute("message2", "");
-        var dispacther =  request.getRequestDispatcher("index.jsp");
-        try {
-            dispacther.forward(request, response);
-        } catch (ServletException | IOException ex) {
-            Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        else
+        {
+            request.setAttribute("message", "You must select 3 or more genres");
+            request.setAttribute("genreList",service.getGenres());
+            var dispacther =  request.getRequestDispatcher("SelectGenre.jsp");
+            try {
+                dispacther.forward(request, response);
+            } catch (ServletException | IOException ex) {
+                Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }

@@ -196,4 +196,6 @@ public interface ServiceLayer_Interface {
     String approveWriter(WriterApplication writerApplication);
     
     String emailVerification(String email);
+    
+    String updateDraft(Story story);
 }

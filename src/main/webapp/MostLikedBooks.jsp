@@ -42,7 +42,7 @@
             var button = document.getElementById("pdfButton");
             var makepdf = document.getElementById("generatePDF");
             button.addEventListener("click", function () {
-                var mywindow = window.open("", "PRINT", "height=700,width=700");
+                var mywindow = window.open("", "PRINT", "height=700,width=700");        //
                 mywindow.document.write(makepdf.innerHTML);
                 mywindow.document.close();
                 mywindow.focus();

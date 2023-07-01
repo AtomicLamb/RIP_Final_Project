@@ -20,7 +20,8 @@ import java.util.logging.Logger;
  * @Desctripion:    The concrete implementation of the AnalyticsDAO.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
- * @Complete:       True
+ * @Date:           2023-07-05.
+ * @Completed:      True.
  */
 
 public class CommentImplementation implements CommentDAOInterface{

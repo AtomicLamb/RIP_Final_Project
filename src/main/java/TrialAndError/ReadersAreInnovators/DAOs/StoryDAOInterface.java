@@ -8,10 +8,13 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import java.util.ArrayList;
 
 /**
- * @desctripion:    The concrete implementation of the AdminEditorDAO.
- * @author:         Tyler Schwegler.
+ * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
+ * @Date:           2023-07-05.
+ * @Completed:      True.
  */
+
 public interface StoryDAOInterface {
     
     
@@ -23,6 +26,7 @@ public interface StoryDAOInterface {
     ArrayList<Story> getPublishedStories(Writer writer);
     Story displayStoryDetails(Story story);
     String saveAsDraft(Story story);
+    String updateDraft(Story story);
     Story getPendingStory(Story story);
     String likeStory(Story story, User user);
     String unlikeStory(Story story, User user);

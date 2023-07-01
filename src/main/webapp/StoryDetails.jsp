@@ -51,14 +51,12 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                   <a class="nav-link" href="index.html">HOME</a>
+                   <a class="nav-link" href="HomePageServlet?submit=HomePage">HOME</a>
                 </li>
-                <li class="nav-item">
-                   <a class="nav-link" href="search jobs.html">SEARCH JOBS</a>
-                </li>
+                
             </ul>
         </div>
-         <div class="login_text"><a href="login.html">LOGIN HERE</a></div>
+         <div class="login_text"><a href="index.jsp">LOGIN HERE</a></div>
             
     </nav>
 	<!-- header section start-->
@@ -76,7 +74,7 @@
                         <%Story story=(Story)request.getAttribute("storyDetails");%>
                         <%session=request.getSession(false);%>
                          
-                        <h1 class="jobs_text">Author <%=writer.getName()%> <%=writer.getSurname()%></h1>
+                        <h1 class="jobs_text">Author <%=writer.getName()%> <%=writer.getSurname()%></h1> StoryID coverImage Views RatingAverage Title Likes authorUserID
                         <div class="image_1 padding_0"><h1><%=story.getTitle()%></h1><img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%story.getTitle();%>" style="height: 400px;width:300px; "><div style="float:right; margin-right: 700px;">
                                     
                                     <span><br>Views<i class="fa-sharp fa-solid fa-eye"></i><%=story.getViews()%></span><br><br>
@@ -132,11 +130,12 @@
                                                                </form>
                                                                  
                                                                   <%}%>
+                                                                  <%if(!comments.isEmpty()){%>
                                                                <%for(Comment comment:comments){%> 
                                                                    <p>posted by<%=comment.getName()%> on <%=comment.getDateAdded()%><br><%=comment.getComment()%></p>
                                                                   <span id="reportButton" ><a href="StoryServlet?submit=reportComment">Report comment</a></span>
                                                                           <%}%>
-                                                                 
+                                                                 <%}%>
                                                                  
                         
 					</div>

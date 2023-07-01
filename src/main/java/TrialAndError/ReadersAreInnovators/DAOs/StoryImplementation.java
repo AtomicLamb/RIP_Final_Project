@@ -15,9 +15,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @desctripion:    The concrete implementation of the AdminEditorDAO.
- * @author:         Tyler Schwegler.
+ * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
+ * @Date:           2023-07-05.
+ * @Completed:      True.
  */
 
 public class StoryImplementation implements StoryDAOInterface {
@@ -258,20 +260,25 @@ public class StoryImplementation implements StoryDAOInterface {
         
         try {
             
-            query = "insert into PendingStories (Title, AuthorID, StoryBody, Synopsis, CoverImage) values (?, ?, ?, ?, ?) ";
+            query = "insert into PendingStories (Title, AuthorID, StoryBody, Synopsis, CoverImage, CommentsEnabled) values (?, ?, ?, ?, ?, ?) ";
             
             ps = conn.prepareStatement(query);
             ps.setString(1, story.getTitle());
             ps.setInt(2, story.getAuthorID());
             ps.setString(3, story.getStoryBody());
             ps.setString(4, story.getSynopsis());
+            
+            String filePath = functionsClass.decodeBase64(story.getCoverImage());
+            
+            ps.setString(5, filePath);
+            ps.setInt(6, functionsClass.booleanToInteger(story.getCommentsEnabled()));
             ps.executeUpdate();
             
             message = "Story added.";
             
         } catch (SQLException e) {
             
-            message = "Error adding story.";
+            message = "Error adding story. Please wait for an approval message before resubmitting the story for approval.";
             Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error adding story.", e);
             
         } finally {
@@ -407,7 +414,7 @@ public class StoryImplementation implements StoryDAOInterface {
         
         try {
             
-            query = "select s.Title, s.CoverImage from stories s where s.AuthorID = ?";
+            query = "select s.StoryID, s.Title, s.CoverImage from stories s where s.AuthorID = ?";
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, writer.getUserID());
@@ -415,7 +422,7 @@ public class StoryImplementation implements StoryDAOInterface {
             
             while (rs.next()) {
                 
-                String imagePath = rs.getString(2);
+                String imagePath = rs.getString(3);
                 
                 input = new FileInputStream(new File(imagePath));
                 output = new ByteArrayOutputStream();
@@ -431,7 +438,7 @@ public class StoryImplementation implements StoryDAOInterface {
                 byte[] imageBytes = output.toByteArray();
                 String image = Base64.getEncoder().encodeToString(imageBytes);
                 
-                publishedStories.add(new Story(rs.getString(1), image, imagePath));
+                publishedStories.add(new Story(rs.getInt(1), rs.getString(2), image));
                 
             }
             
@@ -521,7 +528,7 @@ public class StoryImplementation implements StoryDAOInterface {
         
     }
     
-    @Override       //TODO: Create story from Result Set.
+    @Override       //Completed: Allows a User to view the Story details page.
     public Story displayStoryDetails(Story story) {
         
         conn = DatabaseConnectionManager.getConnection();
@@ -529,7 +536,7 @@ public class StoryImplementation implements StoryDAOInterface {
         
         try {
             
-            query = "select * from stories s where s.StoryID = ?";
+            query = "select s.*, concat_ws(\" \", u.Name, u.Surname) from stories s, users u where s.AuthorID = u.UserID and s.StoryID = ?";
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, story.getStoryID());
@@ -537,11 +544,21 @@ public class StoryImplementation implements StoryDAOInterface {
             rs = ps.executeQuery();
             rs.next();
             
-            storyToView = new Story();      //TODO
+            InputStream inputStream = new FileInputStream(new File(rs.getString(8)));
+            
+            String coverImage = functionsClass.encodeBase64(inputStream);
+            
+            storyToView = new Story(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(13) , rs.getInt(4), 
+                    rs.getInt(5) ,rs.getString(6), rs.getString(7), coverImage, functionsClass.integerToBoolean(rs.getInt(9)), 
+                    functionsClass.integerToBoolean(rs.getInt(10)), functionsClass.dateToString(rs.getDate(11)), rs.getInt(12));
             
         } catch (SQLException e) {
             
             Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error displaying story details.", e);
+            
+        } catch (FileNotFoundException e) {
+            
+            throw new RuntimeException(e);
             
         } finally {
             
@@ -616,8 +633,86 @@ public class StoryImplementation implements StoryDAOInterface {
             
         } catch (SQLException e) {
             
+            message = "Error saving Draft.";
+            
             Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error saving draft.", e);
         
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return message;
+        
+    }
+    
+    @Override
+    public String updateDraft(Story story){
+        
+        conn = DatabaseConnectionManager.getConnection();
+        
+        try {
+            
+            query = "UPDATE drafts d SET (d.Title, d.StoryBody, d.Synopsis, d.CoverImage, d.CommentsEnabled) = (?, ?, ?, ?, ?) WHERE d.DraftID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, story.getTitle());
+            ps.setString(2, story.getStoryBody());
+            ps.setString(3, story.getSynopsis());
+            ps.setString(4, functionsClass.decodeBase64(story.getCoverImage()));
+            ps.setInt(5, functionsClass.booleanToInteger(story.getCommentsEnabled()));
+            ps.setInt(6, story.getStoryID());
+            
+            ps.executeUpdate();
+            
+            message = "Draft successfully updated.";
+            
+        } catch (SQLException e) {
+            
+            message = "Error updating draft.";
+            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error updating draft.", e);
+            
         } finally {
             
             if (rs!=null){

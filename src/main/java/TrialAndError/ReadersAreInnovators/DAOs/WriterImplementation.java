@@ -7,9 +7,7 @@ import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManage
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
 
 import javax.sql.rowset.serial.SerialBlob;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -17,9 +15,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @desctripion:    The concrete implementation of the AdminEditorDAO.
- * @author:         Tyler Schwegler.
+ * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
+ * @Date:           2023-07-05.
+ * @Completed:      True.
  */
 
 public class WriterImplementation implements WriterDAOInterface{
@@ -56,22 +56,24 @@ public class WriterImplementation implements WriterDAOInterface{
             
             rs.next();
             
-            InputStream inputStream = rs.getBinaryStream(6);
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            String imagePath = rs.getString(6);
+            
+            InputStream input = new FileInputStream(new File(imagePath));
+            ByteArrayOutputStream output = new ByteArrayOutputStream();
             byte[] buffer = new byte[4096];
             int bytesRead = -1;
             
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
+            while ((bytesRead = input.read(buffer)) != -1) {
                 
-                outputStream.write(buffer, 0, bytesRead);
+                output.write(buffer, 0, bytesRead);
                 
             }
             
-            byte[] imageBytes = outputStream.toByteArray();
+            byte[] imageBytes = output.toByteArray();
             String image = Base64.getEncoder().encodeToString(imageBytes);
             
-//            draft = new Story(rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), 
-//                    image, "", functionsClass.integerToBoolean(rs.getInt(7)));
+            draft = new Story(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), 
+                    image, functionsClass.integerToBoolean(rs.getInt(7)), functionsClass.dateToString(rs.getDate(8)));
             
         } catch (SQLException e) {
             
@@ -161,8 +163,8 @@ public class WriterImplementation implements WriterDAOInterface{
                 byte[] imageBytes = outputStream.toByteArray();
                 String image = Base64.getEncoder().encodeToString(imageBytes);
                 
-//                userDrafts.add(new Story(rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5),
-//                        image, "", functionsClass.integerToBoolean(rs.getInt(7))));
+                userDrafts.add(new Story(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5),
+                        image, functionsClass.integerToBoolean(rs.getInt(7)), functionsClass.dateToString(rs.getDate(8))));
                 
             }
             
@@ -256,12 +258,12 @@ public class WriterImplementation implements WriterDAOInterface{
             ps.setString(6, writerApplication.getMotivation());
             ps.executeUpdate();
             
-            message = "Application successfully submitted.";
+            message = "Application successfully submitted. ";
             
         } catch (SQLException e) {
             
-            message = "Error submitting writer application.";
-            Logger.getLogger(WriterImplementation.class.getName()).log(Level.FINE, "Error submitting writer application.", e);
+            message = "Error submitting writer application. ";
+            Logger.getLogger(WriterImplementation.class.getName()).log(Level.FINE, " Error submitting writer application. ", e);
             
         } finally {
             
@@ -335,11 +337,11 @@ public class WriterImplementation implements WriterDAOInterface{
             ps.setInt(6, story.getStoryID());
             ps.executeUpdate();
             
-            message = "Draft successfully edited.";
+            message = "Draft successfully edited. ";
             
         } catch (SQLException e) {
             
-            message = "Error editing draft.";
+            message = "Error editing draft. ";
             Logger.getLogger(WriterImplementation.class.getName()).log(Level.FINE, "Error error editing draft.", e);
             
         } finally {

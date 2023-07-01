@@ -126,7 +126,7 @@
 
 				<%List<Story>storiesFromFavouriteGenres=(List<Story>)request.getAttribute("stories");%>
 				 
-                     <%if(storiesFromFavouriteGenres!=null){%>
+                     <%if(!storiesFromFavouriteGenres.isEmpty()){%>
 				 <%for(Story story:storiesFromFavouriteGenres){%>
 				<a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>%authorId=<%=story.getAuthorID()%>">
 					<h1 style="color: white;"><%=story.getTitle()%></h1>
@@ -134,7 +134,7 @@
 				</a>
 				<%}%>
             <%}%>
-              <%if(storiesFromFavouriteGenres==null){%>
+              <%if(storiesFromFavouriteGenres.isEmpty()){%>
 				<p>No favourite stories</p>
 				<%}%>
 			</div>

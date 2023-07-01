@@ -20,7 +20,8 @@ import java.util.logging.Logger;
  * @Desctripion:    The concrete implementation of the AnalyticsDAO.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
- * @Complete:       True
+ * @Date:           2023-07-05.
+ * @Completed:      True.
  */
 
 public class GenresImplementation implements GenresDAOInterface{
@@ -186,14 +187,32 @@ public class GenresImplementation implements GenresDAOInterface{
         
         try {
             
+            query = "select u.UserID from users u where u.Email = ?";
+                    
+            ps = conn.prepareStatement(query);
+            ps.setString(1, user.getEmail());
+            rs = ps.executeQuery();
+            
+            rs.next();
+            Integer userID = rs.getInt(1);
+            
+            query = "select g.GenreID from genres g where g.Genre = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, genre.getGenre());
+            rs = ps.executeQuery();
+            
+            rs.next();
+            Integer genreID = rs.getInt(1);
+            
             query = "insert into usergenreintersect (userID, genreID) values (?, ?)";
             
             ps = conn.prepareStatement(query);
-            ps.setInt(1, user.getUserID());
-            ps.setInt(2, genre.getGenreID());
+            ps.setInt(1, userID);
+            ps.setInt(2, genreID);
             ps.executeUpdate();
             
-            message = "Genre added to your list of Genres.";
+            message = "Genre/s added to your list of Genres.";
             
         } catch (SQLException e) {
             

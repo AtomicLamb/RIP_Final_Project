@@ -11,6 +11,15 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+/**
+ * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Author:         Tyler Schwegler.
+ * @Version:        v.1.0.0
+ * @Date:           2023-07-05.
+ * @Completed:      True.
+ */
+
 public class Email {
     
     public void sendEmail(String email, String subject, String text) {

@@ -2,9 +2,6 @@ package TrialAndError.ReadersAreInnovators.ServiceLayers;
 
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import org.apache.commons.io.IOUtils;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,7 +13,6 @@ import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Locale;
 import java.util.TimeZone;

@@ -38,22 +38,20 @@
 <body style="background-color:rgb(0,119,145);">
 	<!-- header section start-->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="logo" href="#"><img src="images/logo.png"></a>
+        
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                   <a class="nav-link" href="index.html">HOME</a>
+                   <a class="nav-link" href="HomePageServlet?submit=HomePage">HOME</a>
                 </li>
-                <li class="nav-item">
-                   <a class="nav-link" href="search jobs.html">SEARCH JOBS</a>
-                </li>
+                
   
             </ul>
         </div>
-         <div class="login_text"><a href="login.html">LOGIN HERE</a></div>
+         <div class="login_text"><a href="index.jsp">LOGIN HERE</a></div>
     </nav>
 	<!-- header section start-->
 	<!-- banner section start-->
@@ -67,9 +65,8 @@
            <%Writer writer=(Writer)request.getAttribute("chosenWriter");%>
 		<div class="container-fluid" style="background-color: white;height: 1200px">
                     <div class="row" style="margin-left: 20px;margin-right: 20px;background-color: white; margin-top: 40px;height: 800px">
-				 
-                        <h1 class="jobs_text"style="text-align: left;border-bottom-style: solid; border-width:0.5px;border-color: black;">Author <%=writer.getName()%> <%=writer.getSurname()%> <br><span><a href="StoryServlet?submit=followAuthor" 
-                                                                              class="button buttonTextColor" style=" font-size: 15px; border: 2px solid black; border-radius: 12px">Follow Author</a></span></h1>
+				      <%if(writer!=null){%>
+                        <h1 class="jobs_text"style="text-align: left;border-bottom-style: solid; border-width:0.5px;border-color: black;">Author <%=writer.getName()%> <%=writer.getSurname()%> <br><form action="StoryServlet?submit=followAuthor"><input type="submit" name="submit" value="Follow Author" class="button buttonTextColor" style=" font-size: 15px; border: 2px solid black; border-radius: 12px"></form></h1>
                                  <h1 class="jobs_text"style="text-align: left;">Authors Books</h1>
                                              
 					      <div class="scrollmenu" style="  width: 800px; background-color: white;height: 550px">
@@ -81,6 +78,10 @@
             <%}%>
             
         </div>
+                   <%}%>   
+                        <%if(writer==null){%>
+                        <p>NO WRITER SELECTED</p>
+                        <%}%>
 					</div>
 				</div>
 			 

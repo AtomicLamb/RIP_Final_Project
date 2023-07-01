@@ -7,11 +7,15 @@ import java.util.List;
 
 
 /**
- * @Desctripion:    The Admin-Editor DAO Interface.
+ * @Desctripion:    The concrete implementation of the AnalyticsDAO.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
+ * @Date:           2023-07-05.
+ * @Completed:      True.
  */
 
+
+//TODO: Make author Luaan.
 public interface AdminEditorDAOInterface {
     
     

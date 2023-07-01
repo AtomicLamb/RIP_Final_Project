@@ -20,10 +20,13 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
+
 /**
- * @desctripion:    Class made for JUnit testing of DOA methods.
- * @author:         Tyler Schwegler.
+ * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
+ * @Date:           2023-07-05.
+ * @Completed:      True.
  */
 
 public class JUnitTesting {
@@ -41,36 +44,13 @@ public class JUnitTesting {
     UserImplementation userImp = new UserImplementation();
     
     
-    Base64 image = null;
-    String searchTopic = "Cat";
-    
-    
-    User user = new User(32, "User", "Test", "user.test@gmail.com", "011555000", "User1", 0, "User", false, false, 0);
-    Reader reader = new Reader(56, "Reader", "Test", "reader.test@gmail.com", "0115550000", "Reader1", 1, "Reader", false, false);
-    Writer writer = new Writer(52, "Writer", "Test", "writer.test@gmail.com", "0116660000", "Writer1", 2, "Writer", false, false);
-    WriterApplication writerApplication = new WriterApplication("Test", "Application", "writerapp.test@gmail.com", "0117770000", "Test", "2023-06-23");
-    Editor editor = new Editor("Editor", "Test", "editor23.test@gmail.com", "0114580000", "Editor1");
-    AdminEditor adminEditor = new AdminEditor();
-    
-    
-    Comment comment = new Comment(9, 17, 51, "Reader", "Test Comment", "2022/06/23");
-    Genre genre = new Genre(15, "Test");
-    Story story = new Story(5, "TestStory", 52, 0, 0, 0.0, "", "This is a Story for Testing", "To Test", "C:\\Users\\TKS\\IdeaProjects\\Trial and Error - Readers are Innovators\\src\\main\\resources\\images\\Default Book Cover.jpg", false, "2022/06/23", 49);
-    StoryApplication pendingStory = new StoryApplication(1, 29);
-    Story draft = new Story(2, "Test", 16, "Testing Drafts", "", "Draft test", "C:\\Users\\TKS\\IdeaProjects\\Trial and Error - Readers are Innovators\\src\\main\\resources\\images\\Default Book Cover.jpg", true);
-    
-    
-    Analytics analytics = new Analytics(5, "2023-05-01", "2023-07-01");
-    Rating rating1 = new Rating(51, 17, 4);
-    Rating rating2 = new Rating(51, 17, 5);
-    
-    
-    
     
     //Admin-Editor Tests: Done.
     
     @Test
     public void removeEditorTest(){
+        
+        Editor editor = new Editor();
         
         System.out.println(adminImp.removeEditor(editor));
         
@@ -78,6 +58,8 @@ public class JUnitTesting {
     
     @Test
     public void addEditorTest(){
+        
+        Editor editor = new Editor();
         
         System.out.println(adminImp.addEditor(editor));
         
@@ -90,12 +72,16 @@ public class JUnitTesting {
     @Test
     public void getLikesTest(){
         
+        Story story = new Story();
+        
         System.out.println(analyticsImp.getLikes(story));
         
     }
     
     @Test
     public void getViewsTest(){
+        
+        Story story = new Story();
         
         System.out.println(analyticsImp.getViews(story));
         
@@ -104,12 +90,16 @@ public class JUnitTesting {
     @Test
     public void getAuthorFollowCountTest(){
         
+        Writer writer = new Writer();
+        
         System.out.println(analyticsImp.getAuthorFollowCount(writer));
         
     }
     
     @Test
     public void addViewTest(){
+        
+        Story story = new Story();
         
         System.out.println(analyticsImp.addView(story));
         
@@ -118,6 +108,8 @@ public class JUnitTesting {
     @Test
     public void addLikeTest(){
         
+        Story story = new Story();
+        
         System.out.println(analyticsImp.addLike(story));
         
     }
@@ -125,12 +117,16 @@ public class JUnitTesting {
     @Test
     public void removeLikeTest(){
         
+        Story story = new Story();
+        
         System.out.println(analyticsImp.removeLike(story));
         
     }
     
     @Test
     public void getMostViewedStoriesTest(){
+        
+        Analytics analytics = new Analytics();
         
         List<Story> mostViewed = analyticsImp.getMostViewedStories(analytics);
         
@@ -145,6 +141,8 @@ public class JUnitTesting {
     @Test
     public void getHighestRatedStoriesTest(){
         
+        Analytics analytics = new Analytics();
+        
         List<Story> highestRated = analyticsImp.getHighestRatedStories(analytics);
         
         for (Story s: highestRated) {
@@ -157,6 +155,8 @@ public class JUnitTesting {
     
     @Test
     public void getMostLikedStoriesTest(){
+        
+        Analytics analytics = new Analytics();
         
         ArrayList<Story> mostLiked = analyticsImp.getMostLikedStories(analytics);
         
@@ -171,6 +171,8 @@ public class JUnitTesting {
     @Test
     public void getTopGenresTest(){
         
+        Analytics analytics = new Analytics();
+        
         ArrayList<Genre> topGenres = analyticsImp.getTopGenres(analytics);
         
         for (Genre g: topGenres) {
@@ -184,6 +186,8 @@ public class JUnitTesting {
     @Test
     public void getTopWritersTest(){
         
+        Analytics analytics = new Analytics();
+        
         ArrayList<Writer> topWriters = analyticsImp.getTopWriters(analytics);
         
         for (Writer w: topWriters) {
@@ -196,6 +200,8 @@ public class JUnitTesting {
     
     @Test
     public void getTopEditorsTest(){
+        
+        Analytics analytics = new Analytics();
         
         ArrayList<Editor> topEditors = analyticsImp.getTopEditors(analytics);
         
@@ -214,6 +220,8 @@ public class JUnitTesting {
     @Test
     public void addCommentTest(){
         
+        Comment comment = new Comment();
+        
         System.out.println(commentsImp.addComment(comment));
         
     }
@@ -221,7 +229,10 @@ public class JUnitTesting {
     @Test
     public void getCommentsTest(){
         
+        Story story = new Story();
+        
         ArrayList<Comment> testComments =  commentsImp.getComments(story);
+        
         for (Comment c:testComments) {
             
             System.out.println(c);
@@ -233,12 +244,16 @@ public class JUnitTesting {
     @Test
     public void reportCommentTest(){
         
+        Comment comment = new Comment();
+        
         System.out.println(commentsImp.reportComment(comment));
         
     }
     
     @Test
     public void deleteCommentTest(){
+        
+        Comment comment = new Comment();
         
         System.out.println(commentsImp.deleteComment(comment));
         
@@ -247,12 +262,16 @@ public class JUnitTesting {
     @Test
     public void unFlagCommentTest(){
         
+        Comment comment = new Comment();
+        
         System.out.println(commentsImp.unFlagComment(comment));
         
     }
     
     @Test
     public void getNumberOfCommentsTest(){
+        
+        Story story = new Story();
         
         System.out.println(commentsImp.getNumberOfComments(story));
         
@@ -266,6 +285,7 @@ public class JUnitTesting {
     public void viewWriterApplicationsTest(){
         
         List<WriterApplication> pendingWriters = editorImp.viewWriterApplications();
+        
         for (WriterApplication wa: pendingWriters) {
             
             System.out.println(wa);
@@ -277,12 +297,16 @@ public class JUnitTesting {
     @Test
     public void approveWriter(){
         
+        WriterApplication writerApplication = new WriterApplication();
+        
         System.out.println(editorImp.approveWriter(writerApplication));
         
     }
     
     @Test
     public void denyWriterTest(){
+        
+        WriterApplication writerApplication = new WriterApplication();
         
         System.out.println(editorImp.approveWriter(writerApplication));
         
@@ -292,6 +316,7 @@ public class JUnitTesting {
     public void viewWritersTest(){
         
         List<Writer> allWriters = editorImp.viewWriters();
+        
         for (Writer w: allWriters) {
             
             System.out.println(w);
@@ -303,391 +328,465 @@ public class JUnitTesting {
     @Test
     public void approvePendingStoryTest(){
         
-        System.out.println(editorImp.approvePendingStory(pendingStory, editor));
+        Editor editor = new Editor();
+        StoryApplication storyApplication = new StoryApplication();
         
+        System.out.println(editorImp.approvePendingStory(storyApplication, editor));
+
     }
-    
+
     @Test
     public void denyPendingStoryTest(){
         
-        System.out.println(editorImp.removePendingStory(pendingStory));
+        StoryApplication storyApplication = new StoryApplication();
         
+        System.out.println(editorImp.removePendingStory(storyApplication));
+
     }
-    
+
     @Test
     public void viewPendingStoriesTest(){
-        
+
         System.out.println(editorImp.viewPendingStories());
-        
+
     }
-    
+
     @Test
     public void reviewPendingStoryTest(){
         
-        System.out.println(editorImp.reviewPendingStory(pendingStory));
-        
+        StoryApplication storyApplication = new StoryApplication();
+
+        System.out.println(editorImp.reviewPendingStory(storyApplication));
+
     }
-    
+
     @Test
     public void revokeWriterPrivilegesTest(){
+
+        Writer writer = new Writer();
         
         System.out.println(editorImp.revokeWriterPrivileges(writer));
-        
+
     }
-    
-    
-    
+
+
+
     //Genres Tests:
-    
+
     @Test
     public void addGenreTest(){
         
+        Genre genre = new Genre();
+
         System.out.println(genresImp.addGenre(genre));
-        
+
     }
-    
+
     @Test
     public void removeGenreTest(){
         
+        Genre genre = new Genre();
+
         System.out.println(genresImp.removeGenre(genre));
-        
+
     }
-    
+
     @Test
     public void selectGenreTest(){
         
+        User user = new User();
+        Genre genre = new Genre();
+
         System.out.println(genresImp.selectGenre(user, genre));
-        
+
     }
-    
+
     @Test
     public void deselectGenreTest(){
         
-        System.out.println(genresImp.deselectGenre(user, genre));
+        User user = new User();
+        Genre genre = new Genre();
         
+        System.out.println(genresImp.deselectGenre(user, genre));
+
     }
-    
+
     @Test
     public void getGenresTest(){
-        
+
         List<Genre> allGenres = genresImp.getGenres();
-        for (Genre g:allGenres) {
-            
-            System.out.println(g);
-            
-        }
         
+        for (Genre g:allGenres) {
+
+            System.out.println(g);
+
+        }
+
     }
-    
+
     @Test
     public void getUserGenresTest(){
         
-        ArrayList<Genre> userGenres = genresImp.getUserGenres(user);
-        for (Genre g:userGenres) {
-            
-            System.out.println(g);
-            
-        }
+        User user = new User();
         
+        ArrayList<Genre> userGenres = genresImp.getUserGenres(user);
+        
+        for (Genre g:userGenres) {
+
+            System.out.println(g);
+
+        }
+
     }
-    
-    
-    
+
+
+
     //Rating Tests:
-    
+
     @Test
     public void getStoryRatingTest(){
+
+        Story story = new Story();
         
         System.out.println(ratingImp.getStoryRating(story));
-        
+
     }
-    
+
     @Test
     public void rateStoryTest(){
         
-        System.out.println(ratingImp.rateStory(rating1));
-        
+        Rating rating = new Rating();
+
+        System.out.println(ratingImp.rateStory(rating));
+
     }
-    
+
     @Test
     public void changeRatingTest(){
         
-        System.out.println(ratingImp.changeRating(rating2));
-        
+        Rating rating = new Rating();
+
+        System.out.println(ratingImp.changeRating(rating));
+
     }
-    
+
     @Test
     public void removeRatingTest(){
         
-        System.out.println(ratingImp.removeRating(rating1));
-        
+        Rating rating = new Rating();
+
+        System.out.println(ratingImp.removeRating(rating));
+
     }
-    
-    
-    
+
+
+
     //Readers Tests:
-    
+
     @Test
     public void registerReaderTest(){
         
+        Reader reader = new Reader();
+
         System.out.println(readerImp.registerReader(reader));
-        
+
     }
-    
+
     @Test
     public void followAuthorTest(){
         
+        Writer writer = new Writer();
+        User user = new User();
+
         System.out.println(readerImp.followAuthor(writer, user));
-        
+
     }
-    
+
     @Test
     public void unfollowAuthorTest(){
         
+        Writer writer = new Writer();
+        User user = new User();
+
         System.out.println(readerImp.unfollowAuthor(writer, user));
-        
+
     }
-    
+
     @Test
     public void getFollowedAuthorsTest(){
         
+        User user = new User();
+
         ArrayList<Writer> followedWriters = readerImp.getFollowedAuthors(user);
-        for (Writer w: followedWriters) {
-            
-            System.out.println(w);
-            
-        }
         
+        for (Writer w: followedWriters) {
+
+            System.out.println(w);
+
+        }
+
     }
-    
+
     @Test
     public void getAllFavoritesTest(){
         
+        User user = new User();
+
         ArrayList<Story> allFavorites = readerImp.getAllFavorites(user);
-        for (Story s: allFavorites) {
-            
-            System.out.println(s);
-            
-        }
         
+        for (Story s: allFavorites) {
+
+            System.out.println(s);
+
+        }
+
     }
-    
+
     @Test
     public void getReadFavoritesTest(){
         
+        User user = new User();
+
         ArrayList<Story> readFavorites = readerImp.getReadFavorites(user);
-        for (Story s: readFavorites) {
-            
-            System.out.println(s);
-            
-        }
         
+        for (Story s: readFavorites) {
+
+            System.out.println(s);
+
+        }
+
     }
-    
+
     @Test
     public void getUnreadFavoritesTest(){
         
+        User user = new User();
+
         ArrayList<Story> unreadFavorites = readerImp.getUnreadFavorites(user);
-        for (Story s: unreadFavorites) {
-            
-            System.out.println(s);
-            
-        }
         
+        for (Story s: unreadFavorites) {
+
+            System.out.println(s);
+
+        }
+
     }
-    
-    
-    
+
+
+
     //Story Tests:
-    
+
     @Test
     public void removeStoryTest(){
         
-        System.out.println(storyImp.removeStory(new Story(12, "sgs")));
-        
+        Story story = new Story();
+
+        System.out.println(storyImp.removeStory(story));
+
     }
-    
+
     @Test
     public void privatizeStoryTest(){
         
+        Story story = new Story();
+
         System.out.println(storyImp.privatizeStory(story));
-        
+
     }
-    
+
     @Test
     public void publiciseStoryTest(){
         
+        Story story = new Story();
+
         System.out.println(storyImp.publiciseStory(story));
-        
+
     }
-    
+
     @Test
     public void submitStoryTest(){
-        
+
         //TODO
-        
+
     }
-    
+
     @Test
     public void readStoryTest(){
-        
+
         //TODO
-        
+
     }
-    
+
     @Test
     public void getPublishedStoriesTest(){
-        
+
         //TODO
-        
+
     }
-    
-    
-    
+
+
+
     @Test
     public void displayStoryDetailsTest(){
-        
+
         //TODO
-        
+
     }
-    
+
     @Test
     public void saveAsDraftTest(){
-        
+
         InputStream inputStream = null;
-        
+
         try {
-            
+
             inputStream = new FileInputStream(new File("C:\\Users\\TKS\\Desktop\\360_F_97589769_t45CqXyzjz0KXwoBZT9PRaWGHRk5hQqQ.jpg"));
-            
+
             FunctionsClass functionsClass = new FunctionsClass();
-            
+
             String image64 = functionsClass.encodeBase64(inputStream);
-            
+
             Story myTestStory = new Story("Image Test 3 the return of the cum sock 4", 52, "The story body to test images is epic of boring its mid and not very boring. Until one day the all mighty and all powerful cum sock came to life, empowered by the success of the RIP program developed by Trial and Error.", "An up and cumming success story.", image64, true);
-            
+
             System.out.println(storyImp.saveAsDraft(myTestStory));
-            
+
         } catch (FileNotFoundException e) {
-            
+
             throw new RuntimeException(e);
-            
+
         } finally {
-            
+
             try {
-                
+
                 inputStream.close();
-                
+
             } catch (IOException e) {
-                
+
                 throw new RuntimeException(e);
-                
+
             }
-            
+
         }
-        
+
     }
-    
+
     @Test
     public void getPendingStoryTest(){
-        
+
         //TODO
-        
+
     }
-    
+
     @Test
     public void likeStoryTest(){
-        
+
         //TODO
-        
+
     }
-    
+
     @Test
     public void unlikeStoryTest(){
-        
+
         //TODO
-        
+
     }
-    
-    
-    
+
+
+
     //User Tests:
-    
+
     @Test
     public void searchTest(){
         
+        String searchTopic = "Test";
+
         ArrayList<String> searchResults = userImp.search(searchTopic);
         for (String s:searchResults) {
-            
+
             System.out.println(s);
-            
+
         }
-        
+
     }
-    
+
     @Test
     public void loginTest(){
         
-        System.out.println(userImp.login(new User("tksrex@gmail.com", "awesome123")));
-        
+        User user = new User();
+
+        System.out.println(userImp.login(user));
+
     }
-    
+
     @Test
     public void editPersonalInfoTest(){
+
+        Reader reader = new Reader();
         
         System.out.println(userImp.editPersonalInfo(reader));
-        
+
     }
-    
+
     @Test
     public void emailVerificationTest(){
-        
+
         System.out.println(userImp.emailVerification("tksrex@gmail.com"));
-        
+
     }
-    
-    
-    
+
+
+
     //Writer Tests:
-    
+
     @Test
     public void getDraftTest(){
         
-        System.out.println(writerImp.getDraft(draft));
-        
+        Story story = new Story();
+
+        System.out.println(writerImp.getDraft(story));
+
     }
-    
+
     @Test
     public void getAllDraftsTest(){
         
-        ArrayList<Story> userDrafts = writerImp.getAllDrafts(new Writer(16));
-        for (Story s: userDrafts) {
-            
-            System.out.println(s);
-            
-        }
+        Writer writer = new Writer();
+
+        ArrayList<Story> userDrafts = writerImp.getAllDrafts(writer);
         
+        for (Story s: userDrafts) {
+
+            System.out.println(s);
+
+        }
+
     }
-    
+
     @Test
     public void writerRegistrationTest(){
         
+        WriterApplication writerApplication = new WriterApplication();
+
         System.out.println(writerImp.writerRegistration(writerApplication));
-        
+
     }
-    
+
     @Test
     public void editDraftTest(){
         
-        System.out.println(writerImp.editDraft(draft));
-        
+        Story story = new Story();
+
+        System.out.println(writerImp.editDraft(story));
+
     }
-    
+
     @Test
     public void getAuthorTest(){
         
+        Writer writer = new Writer();
+
         System.out.println(writerImp.getAuthor(writer));
-        
+
     }
     
     

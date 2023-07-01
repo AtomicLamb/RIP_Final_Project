@@ -20,7 +20,8 @@ import java.util.logging.Logger;
  * @Desctripion:    The concrete implementation of the AnalyticsDAO.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
- * @Complete:       True
+ * @Date:           2023-07-05.
+ * @Completed:      True.
  */
 
 public class AdminEditorImplementation implements AdminEditorDAOInterface{
@@ -257,7 +258,7 @@ public class AdminEditorImplementation implements AdminEditorDAOInterface{
         
     }
     
-    @Override       //TODO: Fuck ME
+    @Override       //TODO:
     public String setBookOfDay(Story story) {
         
         return null;

@@ -43,18 +43,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                   <a class="nav-link" href="index.html">HOME</a>
+                   <a class="nav-link" href="HomePageServlet?submit=HomePage">HOME</a>
                 </li>
-                <li class="nav-item">
-                   <a class="nav-link" href="search jobs.html">SEARCH JOBS</a>
-                </li>
-                <li class="nav-item">
-                   <a class="nav-link" href="recurments.html">RECRUITERS</a>
-                </li>
+                
                 
             </ul>
         </div>
-         <div class="login_text"><a href="login.html">LOGIN HERE</a></div>
+         <div class="login_text"><a href="index.jsp">LOGIN HERE</a></div>
     </nav>
 	<!-- header section start-->
 	<!-- banner section start-->
@@ -66,11 +61,13 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div  style=" width: 100%;padding: 0px;margin: auto;">
-					 
+					                            <%if(story!=null){%>
 					    <h1 class="jobs_text"><%=story.getTitle()%></h1>
                                             <p><%=story.getStoryBody()%></p>
-					    
-					 
+                         					    <%}%>
+					                                 <%if(story==null){%>
+                                                    <p>NO STORY WAS SELECTED</p>
+                                                  <%}%>
 				</div>
 				 
 			</div>

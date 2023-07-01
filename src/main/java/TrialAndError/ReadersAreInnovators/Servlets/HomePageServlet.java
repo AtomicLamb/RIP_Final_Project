@@ -71,16 +71,18 @@ private HttpSession session;
       
         switch(request.getParameter("submit")){
             case "HomePage":
-                  session= request.getSession(false);
+                session= request.getSession(false);
                 User user=new User();
+                
                 user.setUserID((Integer)session.getAttribute("UserID"));
                 List<Story>stories=service.getStoriesFromGenres(user);
-              
-                Integer num = 0;
+                
+                Integer num = (Integer)session.getAttribute("UserType");
                 request.setAttribute("message", num);
-                  request.setAttribute("stories", stories);
+                request.setAttribute("stories", stories);
                 var dispatcher=request.getRequestDispatcher("HomePage.jsp");
                 dispatcher.forward(request,response);
+                
                 
                 break;
         }

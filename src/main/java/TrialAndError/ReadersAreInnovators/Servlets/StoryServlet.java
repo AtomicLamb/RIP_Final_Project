@@ -109,7 +109,7 @@ public class StoryServlet extends HttpServlet {
     public void fillStoryDetailsPage(HttpServletRequest request, HttpServletResponse response,String attributeName,Object value){
          
         Story chosenStory=getChosenStory(request);
-          Writer writer=new Writer(Integer.valueOf(request.getParameter("authorId")));
+        Writer writer=new Writer(chosenStory.getAuthorID());
         request.setAttribute("storyDetails", chosenStory);
         request.setAttribute("chosenWriter", service.getAuthor(writer));
         request.setAttribute("comments",service.getComments(chosenStory));
@@ -245,6 +245,9 @@ public class StoryServlet extends HttpServlet {
                 break;
             case"like":
                 response.sendRedirect("postResultServlet?submit=like&storyId="+request.getParameter("storyId")+"&like="+followAuthor(request));
+                break;
+            case"unlike":
+                response.sendRedirect("postResultServlet?submit=unlike&storyId="+request.getParameter("storyId")+"&unlikeMessage="+unLikeStory(request));
                 break;
         }
     }

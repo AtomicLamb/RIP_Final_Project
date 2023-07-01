@@ -26,7 +26,8 @@
         <%}%>
         <div class="Container" >
             <h1 style="font-size:50px;text-align:center;">View Stories</h1><br><br>
-            <div class="scrollmenu" style=" margin: auto; width: 800px;height: 550px">
+            <div class="scrollmenu" style=" margin: auto; width: 400px;height: 400px">
+                <%if(!stories.isEmpty()){%>
                 <%for(Story story:stories){%>
                 <a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>">
                     <h1 style="color: white;"><%=story.getTitle()%></h1>
@@ -34,10 +35,14 @@
                 </a>
                  <form action="writerServlet" method="post">
                      <input type="hidden" name="storyId" value="<%=story.getStoryID()%>"><br>
-                     <input type="submit" name="submit" value="Private book"><br>
-                     <input type="submit" name="submit" value="Publicise book">
+                     <input type="submit" name="submit" value="Make Story Private"><br>
+                     <input type="submit" name="submit" value="Make Story Public">
                  </form>
                 <%}%> 
+                <%}%>
+                <%if(stories.isEmpty()){%>
+                   <p>NO AVAILABLE STORIES</p>
+                <%}%>
             </div>
         </div>
     </body>
