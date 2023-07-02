@@ -146,7 +146,7 @@ public class StoryServlet extends HttpServlet {
           session=request.getSession(false);
          
            Comment comment=new Comment();
-         
+         //StoryID, UserID, Comment
         comment.setName((String)session.getAttribute("Name"));
         comment.setUserID((Integer)session.getAttribute("UserID"));
         comment.setStoryID(Integer.valueOf(request.getParameter("storyId")));
@@ -155,12 +155,15 @@ public class StoryServlet extends HttpServlet {
         return service.addComment(comment);
     }
     public Comment getNewComment(HttpServletRequest request){
-        
-       ServiceLayer_Interface service=new ServiceLayerClass();
-        Story story=new Story();
+         Story story=new Story();
         story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
         List<Comment>comments=service.getComments(service.displayStoryDetails(story));
-         return comments.get(comments.size()-1);
+        if(!comments.isEmpty()){
+            return comments.get(comments.size()-1);
+        }
+         else {
+             return null;
+        }
     }
     public String followAuthor(HttpServletRequest request){
            return service.followAuthor(service.getAuthor(new Writer(request.getParameter("authorId"))),getUserSessionJustId(request));
@@ -208,7 +211,9 @@ public class StoryServlet extends HttpServlet {
    public String likeStory(HttpServletRequest request){
         Story story=new Story();
         story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
-       return service.likeStory(story,getUserSessionJustId(request));
+        session= request.getSession(false);
+        User user=new User((Integer)session.getAttribute("UserID"));
+       return service.likeStory(story,user);
    }
     public String unLikeStory(HttpServletRequest request){
         Story story=new Story();
@@ -228,8 +233,7 @@ public class StoryServlet extends HttpServlet {
             throws ServletException, IOException {
         switch(request.getParameter("submit")){
             case "comment":
-                response.sendRedirect("postResultServlet?submit=comment&storyId="+request.getParameter("storyId")+"&newComment="+getNewComment(request)+
-                        "&addCommentMessage="+addComment(request));
+                response.sendRedirect("postResultServlet?submit=comment&storyId="+request.getParameter("storyId")+"&addCommentMessage="+addComment(request));
                 break;
             
             case"reportComment":

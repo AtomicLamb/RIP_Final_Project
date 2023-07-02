@@ -18,9 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface ServiceLayer_Interface {
+    
     String saveAsDraft(Story story);
     
     String removePendingStory(StoryApplication pendingStory);
+    
     ArrayList<StoryApplication> viewPendingStories();
     
     List<Writer> getFollowedAuthors(User user);
@@ -167,7 +169,12 @@ public interface ServiceLayer_Interface {
     Story displayStoryDetails(Story story);
     
     
-    Story getPendingStory(Story story);
+    StoryApplication reviewPendingStory(StoryApplication storyApplication);
+    
+    
+    List<Genre> getPendingStoryGenres(StoryApplication storyApplication);
+    
+    String addGenreToStory(Story story, Genre genre);
     
     
     String likeStory(Story story, User user);
@@ -198,4 +205,8 @@ public interface ServiceLayer_Interface {
     String emailVerification(String email);
     
     String updateDraft(Story story);
+    
+    String addGenreToPendingStory(StoryApplication storyApplication, Genre genre);
+    
+    String deleteDraft(Story story);
 }

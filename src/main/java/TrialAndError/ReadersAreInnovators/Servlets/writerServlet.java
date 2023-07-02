@@ -7,6 +7,7 @@ import TrialAndError.ReadersAreInnovators.DAOs.StoryDAOInterface;
 import TrialAndError.ReadersAreInnovators.DAOs.StoryImplementation;
 import TrialAndError.ReadersAreInnovators.DAOs.WriterDAOInterface;
 import TrialAndError.ReadersAreInnovators.DAOs.WriterImplementation;
+import TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
@@ -44,6 +45,8 @@ public class writerServlet extends HttpServlet
     private InputStream image;
     private String newCoverImage;
     FunctionsClass functionsClass = new FunctionsClass();
+    private String title;
+    private Integer storyId;
     
     public writerServlet(){
         slc = new ServiceLayerClass();
@@ -82,6 +85,7 @@ public class writerServlet extends HttpServlet
                
            case"editDraft":
                story=new Story();
+               storyId = Integer.valueOf(request.getParameter("storyId"));
                 story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
                   request.setAttribute("draft",slc.getDraft(story));
                dispacther =  request.getRequestDispatcher("EditDraft.jsp");
@@ -102,6 +106,7 @@ public class writerServlet extends HttpServlet
                 filePart = request.getPart("fileImage");
                 image = filePart.getInputStream();
                 newCoverImage = functionsClass.encodeBase64(image);
+                title = request.getParameter("storyTitle");
                 boolean commentsEnabled = true;
                 
                 if (request.getParameter("commentsEnabled").equalsIgnoreCase("yes"))
@@ -113,9 +118,10 @@ public class writerServlet extends HttpServlet
                     commentsEnabled = false;
                 }
                 
-                request.setAttribute("message",slc.submitStory(new Story(request.getParameter("storyTitle"),(Integer)session.getAttribute("UserID")
+                request.setAttribute("genreList",slc.getGenres());
+                request.setAttribute("message",slc.submitStory(new Story(title,(Integer)session.getAttribute("UserID")
                         ,request.getParameter("storySynopsis"), request.getParameter("storyBody"), newCoverImage, commentsEnabled)));
-                var dispatcher=request.getRequestDispatcher("Writers.jsp");
+                var dispatcher=request.getRequestDispatcher("SelectStoryGenre.jsp");
                 dispatcher.forward(request,response);
                 break;
             case"Save Story":
@@ -143,11 +149,13 @@ public class writerServlet extends HttpServlet
             case"Submit Draft":
                 session = request.getSession(false);
                 filePart = request.getPart("fileImage");
+                image = filePart.getInputStream();
+                title = request.getParameter("storyTitle");
                 commentsEnabled = true;
                 
                 if (filePart != null)
                 {
-                    image = filePart.getInputStream();
+                    
                     newCoverImage = functionsClass.encodeBase64(image);
                 }
                 
@@ -160,20 +168,22 @@ public class writerServlet extends HttpServlet
                     commentsEnabled = false;
                 }
                 
+                request.setAttribute("genreList",slc.getGenres());
                 request.setAttribute("message",slc.submitStory(new Story(request.getParameter("storyTitle"),(Integer)session.getAttribute("UserID")
                         ,request.getParameter("storySynopsis"), request.getParameter("storyBody"), newCoverImage, commentsEnabled)));
-                dispatcher=request.getRequestDispatcher("Writers.jsp");
+                dispatcher=request.getRequestDispatcher("SelectStoryGenre.jsp");
                 dispatcher.forward(request,response);
                 
                 break;
             case"Save Draft":
                 session = request.getSession(false);
                 filePart = request.getPart("fileImage");
+                image = filePart.getInputStream();
+                title = request.getParameter("storyTitle");
                 commentsEnabled = true;
                 
                 if (filePart != null)
                 {
-                    image = filePart.getInputStream();
                     newCoverImage = functionsClass.encodeBase64(image);
                 }
                 
@@ -186,7 +196,7 @@ public class writerServlet extends HttpServlet
                     commentsEnabled = false;
                 }
                 
-                request.setAttribute("message",slc.updateDraft(new Story(request.getParameter("storyTitle"),(Integer)session.getAttribute("UserID")
+                request.setAttribute("message",slc.updateDraft(new Story(storyId,title,(Integer)session.getAttribute("UserID")
                         ,request.getParameter("storySynopsis"), request.getParameter("storyBody"), newCoverImage, commentsEnabled)));
                 dispatcher=request.getRequestDispatcher("Writers.jsp");
                 dispatcher.forward(request,response);
@@ -213,6 +223,15 @@ public class writerServlet extends HttpServlet
                 var dispacther2 =  request.getRequestDispatcher("ViewStories.jsp");
                 dispacther2.forward(request, response);
                 break;
+            case"Submit Story Genres":
+                selectStoryGenre(request,response);
+                break;
+            case"Delete Draft":
+                request.setAttribute("message",slc.deleteDraft(new Story(storyId)));
+                dispatcher=request.getRequestDispatcher("Writers.jsp");
+                dispatcher.forward(request,response);
+                break;    
+            //
         }
     }
     public void saveAsDraft(String coverImage,HttpServletRequest request,HttpServletResponse response){
@@ -276,28 +295,41 @@ public class writerServlet extends HttpServlet
                            Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
                        }
     }
-    public void selectGenre(HttpServletRequest request, HttpServletResponse response)
+    
+    public void selectStoryGenre(HttpServletRequest request, HttpServletResponse response)
     {
         String[] genres = request.getParameterValues("choice");
         
-        if (genres.length >= 1 && genres.length <=3)
+        if (genres!=null) 
         {
-            for(int i = 0; i < genres.length; i++)
+            if (genres.length >= 1 && genres.length <= 3) {
+                for (int i = 0; i < genres.length; i++) {
+                    request.setAttribute("message", slc.addGenreToPendingStory(new StoryApplication(title, (Integer) session.getAttribute("UserID")), new Genre(genres[i])));
+                }
+                var dispacther = request.getRequestDispatcher("Writers.jsp");
+                try {
+                    dispacther.forward(request, response);
+                } catch (ServletException | IOException ex) {
+                    Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } 
+            else 
             {
-          //      request.setAttribute("message", service.selectGenre(user,new Genre(genres[i])));
-            }
-            var dispacther =  request.getRequestDispatcher("index.jsp");
-            try {
-                dispacther.forward(request, response);
-            } catch (ServletException | IOException ex) {
-                Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+                request.setAttribute("message", "You must select 1 to 3 genres");
+                request.setAttribute("genreList", slc.getGenres());
+                var dispacther = request.getRequestDispatcher("SelectStoryGenre.jsp");
+                try {
+                    dispacther.forward(request, response);
+                } catch (ServletException | IOException ex) {
+                    Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
-        else
+        else 
         {
-            request.setAttribute("message", "You must select 3 or more genres");
-          //  request.setAttribute("genreList",service.getGenres());
-            var dispacther =  request.getRequestDispatcher("SelectGenre.jsp");
+            request.setAttribute("message", "You must select 1 to 3 genres");
+            request.setAttribute("genreList", slc.getGenres());
+            var dispacther = request.getRequestDispatcher("SelectStoryGenre.jsp");
             try {
                 dispacther.forward(request, response);
             } catch (ServletException | IOException ex) {

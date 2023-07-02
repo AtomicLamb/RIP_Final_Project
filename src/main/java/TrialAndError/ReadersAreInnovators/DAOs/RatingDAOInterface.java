@@ -5,8 +5,8 @@ import TrialAndError.ReadersAreInnovators.Models.AnalyticalData.Rating;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
- * @Author:         Tyler Schwegler.
+ * @Desctripion:    The Ratings DAO Interface.
+ * @Author:         Luaan Robinson.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
  * @Completed:      True.

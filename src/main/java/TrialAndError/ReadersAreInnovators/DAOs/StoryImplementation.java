@@ -1,18 +1,18 @@
 package TrialAndError.ReadersAreInnovators.DAOs;
 
+import TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
-
-import javax.sql.rowset.serial.SerialBlob;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 /**
  * @Desctripion:    The concrete implementation of the AnalyticsDAO.
@@ -30,7 +30,6 @@ public class StoryImplementation implements StoryDAOInterface {
     private ResultSet rs;
     private String query;
     private String message;
-    private byte[] decoder;
     private InputStream input = null;
     private ByteArrayOutputStream output = null;
     FunctionsClass functionsClass = new FunctionsClass();
@@ -544,9 +543,9 @@ public class StoryImplementation implements StoryDAOInterface {
             rs = ps.executeQuery();
             rs.next();
             
-            InputStream inputStream = new FileInputStream(new File(rs.getString(8)));
+            input = new FileInputStream(new File(rs.getString(8)));
             
-            String coverImage = functionsClass.encodeBase64(inputStream);
+            String coverImage = functionsClass.encodeBase64(input);
             
             storyToView = new Story(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(13) , rs.getInt(4), 
                     rs.getInt(5) ,rs.getString(6), rs.getString(7), coverImage, functionsClass.integerToBoolean(rs.getInt(9)), 
@@ -561,6 +560,34 @@ public class StoryImplementation implements StoryDAOInterface {
             throw new RuntimeException(e);
             
         } finally {
+            
+            if (input!=null){
+                
+                try {
+                    
+                    input.close();
+                    
+                } catch (IOException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (output!=null){
+                
+                try {
+                    
+                    output.close();
+                    
+                } catch (IOException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
             
             if (rs!=null){
                 
@@ -687,14 +714,14 @@ public class StoryImplementation implements StoryDAOInterface {
         
     }
     
-    @Override
+    @Override       //Allows a writer to update their drafts.
     public String updateDraft(Story story){
         
         conn = DatabaseConnectionManager.getConnection();
         
         try {
             
-            query = "UPDATE drafts d SET (d.Title, d.StoryBody, d.Synopsis, d.CoverImage, d.CommentsEnabled) = (?, ?, ?, ?, ?) WHERE d.DraftID = ?";
+            query = "UPDATE drafts d SET Title = ?, StoryBody = ?, Synopsis = ?, CoverImage = ?, CommentsEnabled = ? where DraftID = ?";
             
             ps = conn.prepareStatement(query);
             ps.setString(1, story.getTitle());
@@ -702,6 +729,7 @@ public class StoryImplementation implements StoryDAOInterface {
             ps.setString(3, story.getSynopsis());
             ps.setString(4, functionsClass.decodeBase64(story.getCoverImage()));
             ps.setInt(5, functionsClass.booleanToInteger(story.getCommentsEnabled()));
+            
             ps.setInt(6, story.getStoryID());
             
             ps.executeUpdate();
@@ -761,79 +789,6 @@ public class StoryImplementation implements StoryDAOInterface {
         
         return message;
         
-    }
-    
-    @Override       //TODO: Create story from Result Set.
-    public Story getPendingStory(Story story) {
-        
-        conn = DatabaseConnectionManager.getConnection();
-        Story pendingStory = null;
-        
-        try {
-            
-            query = "select * from pendingstories ps where ps.PendingStoryID = ?";
-            
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, story.getStoryID());
-            
-            rs = ps.executeQuery();
-            
-            rs.next();
-            
-            pendingStory = new Story();
-            
-            
-        } catch (SQLException e) {
-            
-            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error getting pending Story.", e);
-            
-        } finally {
-            
-            if (rs!=null){
-                
-                try {
-                    
-                    rs.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-            if (ps!=null){
-                
-                try {
-                    
-                    ps.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-            if (conn!=null){
-                
-                try {
-                    
-                    conn.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-        }
-        
-        return null;
     }
     
     @Override       //Completed: Allows the user to like the story adding it to their list of favorites and increasing the like count of the story by one.

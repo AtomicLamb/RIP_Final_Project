@@ -26,10 +26,18 @@ public class Editor extends Reader {
     public Editor(){
         
     }
+    
+    public Editor(Integer userID) {
+        
+        this.userID = userID;
+        
+    }
+    
     public Editor(String email) {
         
         this.email = email;
     }
+    
     public Editor(String name, String surname, String email) {
         
         this.name = name;

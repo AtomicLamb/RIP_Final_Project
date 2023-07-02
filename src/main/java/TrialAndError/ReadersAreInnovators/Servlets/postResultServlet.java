@@ -64,8 +64,8 @@ public class postResultServlet extends HttpServlet {
                 storyServlet.fillStoryDetailsPage(request, response, "message", request.getParameter("reportMessage"));
                 break;
             case "comment":
-                 request.setAttribute("addCommentMessage",request.getParameter("addCommentMessage"));
-                storyServlet.fillStoryDetailsPage(request,response,"newComment",request.getParameter("newComment"));
+                 request.setAttribute("message",request.getParameter("addCommentMessage"));
+                 storyServlet.fillStoryDetailsPage(request,response,"newComment", storyServlet.getNewComment(request));
                 break;
             case"followAuthor":
                 storyServlet.fillStoryDetailsPage(request,response,"message",request.getParameter("followMessage"));

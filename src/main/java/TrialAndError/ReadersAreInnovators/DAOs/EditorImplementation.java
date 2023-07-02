@@ -1,15 +1,11 @@
 package TrialAndError.ReadersAreInnovators.DAOs;
 
-import TrialAndError.ReadersAreInnovators.Models.Administration.Email;
 import TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication;
 import TrialAndError.ReadersAreInnovators.Models.Administration.WriterApplication;
-import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
-
-import javax.sql.rowset.serial.SerialBlob;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,6 +13,7 @@ import java.util.Base64;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 /**
  * @Desctripion:    The concrete implementation of the AnalyticsDAO.
@@ -34,7 +31,6 @@ public class EditorImplementation implements EditorDAOInterface{
     private ResultSet rs;
     private String query;
     private String message;
-    private byte[] decoder;
     private InputStream input = null;
     private ByteArrayOutputStream output = null;
     FunctionsClass functionsClass = new FunctionsClass();
@@ -119,6 +115,7 @@ public class EditorImplementation implements EditorDAOInterface{
         
     }
     
+    
     @Override       //Completed: Allows an Editor to approve a Pending Writer.
     public String approveWriter(WriterApplication writer) {
         
@@ -197,6 +194,7 @@ public class EditorImplementation implements EditorDAOInterface{
         
     }
     
+    
     @Override       //Completed: Allows an Editor to deny a Pending Writer.
     public String denyWriter(Writer writer) {
         
@@ -266,6 +264,7 @@ public class EditorImplementation implements EditorDAOInterface{
         return message;
         
     }
+    
     
     @Override       //Completed: Allows a User to view a list of all Writers.
     public List<Writer> viewWriters() {
@@ -340,6 +339,7 @@ public class EditorImplementation implements EditorDAOInterface{
         
     }
     
+    
     @Override       //Completed: Allows an editor to approve a pending story application.
     public String approvePendingStory(StoryApplication pendingStory, Editor editor) {
         
@@ -347,21 +347,39 @@ public class EditorImplementation implements EditorDAOInterface{
         
         try {
             
+            query = "select ps.CoverImage from pendingstories ps where ps.PendingStoryID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, pendingStory.getPendingStoryID());
+            rs = ps.executeQuery();
+            
+            rs.next();
+            
+            String imagePath = rs.getString(1);
+            
             query = "insert into stories (Title, AuthorID, StoryBody, Synopsis, CoverImage, CommentsEnabled, EditedByID) values (?, ?, ?, ?, ?, ?, ?)";
+            
             ps = conn.prepareStatement(query);
             ps.setString(1, pendingStory.getTitle());
             ps.setInt(2, pendingStory.getAuthorID());
             ps.setString(3, pendingStory.getStoryBody());
             ps.setString(4, pendingStory.getSynopsis());
-            ps.setString(5, pendingStory.getImagePath());
+            ps.setString(5, imagePath);
             ps.setInt(6, functionsClass.booleanToInteger(pendingStory.getCommentsEnabled()));
             ps.setInt(7, editor.getUserID());
+            ps.executeUpdate();
+            
+            query = "delete from pendingstories ps where ps.PendingStoryID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, pendingStory.getPendingStoryID());
             ps.executeUpdate();
             
             message = "Pending Story approved.";
             
         } catch (SQLException e) {
             
+            message = "Error approving pending Story.";
             Logger.getLogger(EditorImplementation.class.getName()).log(Level.FINE, "Error approving pending Story.", e);
             
         } finally {
@@ -413,6 +431,7 @@ public class EditorImplementation implements EditorDAOInterface{
         return message;
         
     }
+    
     
     @Override       //Completed: Allows an editor to deny a pending Story.
     public String removePendingStory(StoryApplication pendingStory) {
@@ -483,6 +502,7 @@ public class EditorImplementation implements EditorDAOInterface{
         
     }
     
+    
     @Override       //Completed: Allows an editor to review and edit a pending story.
     public StoryApplication reviewPendingStory(StoryApplication pendingStory) {
         
@@ -501,62 +521,15 @@ public class EditorImplementation implements EditorDAOInterface{
             
             String imagePath = rs.getString(6);
             
-            InputStream input = new FileInputStream(new File(imagePath));
-            ByteArrayOutputStream output = new ByteArrayOutputStream();
-            byte[] buffer = new byte[4096];
-            int bytesRead = -1;
-            
-            while ((bytesRead = input.read(buffer)) != -1) {
-                
-                output.write(buffer, 0, bytesRead);
-                
-            }
-            
-            byte[] imageBytes = output.toByteArray();
-            String image = Base64.getEncoder().encodeToString(imageBytes);
-            
-//            storyApplication = new StoryApplication(rs.getInt(1), rs.getString(2), rs.getInt(3), 
-//                    rs.getString(4), rs.getString(5), "Story Body", "Synopsis" , image, imagePath, 
-//                    functionsClass.integerToBoolean(rs.getInt(7)), functionsClass.dateToString(rs.getDate(8)));
-            
+            storyApplication = new StoryApplication(rs.getInt(1), rs.getString(2), rs.getInt(3), 
+                    rs.getString(9), rs.getString(10), rs.getString(4), rs.getString(5) , imagePath, 
+                    functionsClass.integerToBoolean(rs.getInt(7)), functionsClass.dateToString(rs.getDate(8)));
             
         } catch (SQLException e) {
             
             Logger.getLogger(EditorImplementation.class.getName()).log(Level.FINE, "Error reviewing the pending Story.", e);
             
-        } catch (IOException e) {
-            
-            throw new RuntimeException(e);
-            
         } finally {
-            
-            if (input!=null){
-                
-                try {
-                    
-                    input.close();
-                    
-                } catch (IOException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-            if (output!=null){
-                
-                try {
-                    
-                    output.close();
-                    
-                } catch (IOException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
             
             if (rs!=null){
                 
@@ -606,6 +579,7 @@ public class EditorImplementation implements EditorDAOInterface{
         
     }
     
+    
     @Override       //Completed: Allows an editor to view all pending Stories.
     public ArrayList<StoryApplication> viewPendingStories() {
         
@@ -623,8 +597,8 @@ public class EditorImplementation implements EditorDAOInterface{
                 
                 String imagePath = rs.getString(6);
                 
-                InputStream input = new FileInputStream(new File(imagePath));
-                ByteArrayOutputStream output = new ByteArrayOutputStream();
+                input = new FileInputStream(new File(imagePath));
+                output = new ByteArrayOutputStream();
                 byte[] buffer = new byte[4096];
                 int bytesRead = -1;
                 
@@ -638,8 +612,8 @@ public class EditorImplementation implements EditorDAOInterface{
                 String image = Base64.getEncoder().encodeToString(imageBytes);
                 
                 storyApplications.add(new StoryApplication(rs.getInt(1), rs.getString(2), rs.getInt(3), 
-                        rs.getString(9), rs.getString(10), rs.getString(4), rs.getString(5), image, 
-                        imagePath, functionsClass.integerToBoolean(rs.getInt(7)), functionsClass.dateToString(rs.getDate(8))));
+                        rs.getString(9), rs.getString(10), rs.getString(4), rs.getString(5), image,
+                        functionsClass.integerToBoolean(rs.getInt(7)), functionsClass.dateToString(rs.getDate(8))));
                 
             }
             
@@ -728,6 +702,7 @@ public class EditorImplementation implements EditorDAOInterface{
         return storyApplications;
         
     }
+    
     
     @Override       //Completed: Allows an editor to revoke a Writer's writing privilege.
     public String revokeWriterPrivileges(Writer writer) {

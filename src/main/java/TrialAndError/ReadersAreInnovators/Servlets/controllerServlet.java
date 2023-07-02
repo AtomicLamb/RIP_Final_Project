@@ -163,17 +163,16 @@ public class controllerServlet extends HttpServlet {
             }
             
    }
-   public void login(HttpServletRequest request, HttpServletResponse response)
-   {
-       String email = request.getParameter("loginEmail");
-       String password = request.getParameter("loginPassword");
-       User user = service.login(new User(email,password));
+    public void login(HttpServletRequest request, HttpServletResponse response) {
+        String email = request.getParameter("loginEmail");
+        String password = request.getParameter("loginPassword");
+        User user = imp.login(new User(email,password));
+        
+        var dispatcher = request.getRequestDispatcher("HomePage.jsp");
        
-       var dispatcher = request.getRequestDispatcher("HomePage.jsp");
-       
-           try {
+            try {
                
-               if (user != null) {
+                if (user != null) {
                    
                    session = request.getSession(true);
                    

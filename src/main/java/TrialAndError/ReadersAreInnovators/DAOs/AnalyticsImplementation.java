@@ -8,6 +8,8 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
+
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
@@ -32,6 +34,8 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
     private ResultSet rs;
     private String query;
     private String message;
+    private InputStream input = null;
+    private ByteArrayOutputStream output = null;
     FunctionsClass functionsClass = new FunctionsClass();
     
     
@@ -109,6 +113,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
     }
     
+    
     @Override       //Complete: Gets views to display on a story details page.
     public Integer getViews(Story story) {
         
@@ -177,6 +182,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         return views;
         
     }
+    
     
     @Override       //Complete: Gets number of people following the specified author.
     public Integer getAuthorFollowCount(Writer writer) {
@@ -248,6 +254,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
     }
     
+    
     @Override       //Complete: Adds a view to a read story.
     public String addView(Story story) {
         
@@ -265,8 +272,8 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
             
         } catch (SQLException e) {
             
-            message = "Error adding like to the story.";
-            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error adding like to the story.", e);
+            message = "Error adding view to the story.";
+            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error adding view to the story.", e);
             
         } finally {
             
@@ -317,6 +324,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         return message;
         
     }
+    
     
     @Override       //Complete: Increments the like count of a story when liked by a user.
     public String addLike(Story story) {
@@ -388,6 +396,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
     }
     
+    
     @Override       //Complete: Decrements the like count of a story when unliked by a user.
     public String removeLike(Story story) {
         
@@ -457,6 +466,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         return message;
         
     }
+    
     
     @Override       //Complete: Gets X most viewed stories in selected time period.
     public List<Story> getMostViewedStories(Analytics analytics) {
@@ -534,6 +544,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         return mostViewed;
         
     }
+    
     
     @Override       //Complete: Gets X highest rated stories in selected time period.
     public List<Story> getHighestRatedStories(Analytics analytics) {
@@ -613,6 +624,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
     }
     
+    
     @Override       //Complete: Gets X most liked stories in selected time period.
     public ArrayList<Story> getMostLikedStories(Analytics analytics) {
         
@@ -688,6 +700,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         return mostLiked;
         
     }
+    
     
     @Override       //Complete: Gets X most viewed genres in selected time period.
     public ArrayList<Genre> getTopGenres(Analytics analytics) {
@@ -767,6 +780,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         
     }
     
+    
     @Override       //Complete: Gets X most viewed writers in selected time period.
     public ArrayList<Writer> getTopWriters(Analytics analytics) {
         
@@ -793,7 +807,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
             
         } catch (SQLException e) {
             
-            Logger.getLogger(AnalyticsImplementation.class.getName()).log(Level.FINE, "Error getting most viewed writers.", e);
+            Logger.getLogger(AnalyticsImplementation.class.getName()).log(Level.FINE, "Error getting top writers.", e);
             
         } finally {
             
@@ -844,6 +858,7 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
         return topWriters;
         
     }
+    
     
     @Override       //Complete: Gets X most approving editors in selected time period.
     public ArrayList<Editor> getTopEditors(Analytics analytics) {

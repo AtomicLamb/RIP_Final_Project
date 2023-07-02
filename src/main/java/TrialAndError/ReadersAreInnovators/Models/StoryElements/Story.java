@@ -1,6 +1,7 @@
 package TrialAndError.ReadersAreInnovators.Models.StoryElements;
 
 import java.util.Base64;
+import java.util.List;
 
 
 /**
@@ -21,6 +22,7 @@ public class Story {
     private Integer views;
     private Integer likes;
     private Double ratingAverage;
+    private List<Genre> genres;
     private String storyBody;
     private String synopsis;
     private String coverImage;
@@ -35,11 +37,23 @@ public class Story {
     public Story(){
         
     }
+    public Story(Integer storyID) {
+        
+        this.storyID = storyID;
+        
+    }
     
     public Story(Integer storyID, String title) {
         
         this.storyID = storyID;
         this.title = title;
+        
+    }
+    
+    public Story(String title, Integer authorID) {
+        
+        this.title = title;
+        this.authorID = authorID;
         
     }
     

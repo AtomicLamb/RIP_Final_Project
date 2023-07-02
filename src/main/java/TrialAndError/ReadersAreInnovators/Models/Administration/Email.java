@@ -1,6 +1,5 @@
 package TrialAndError.ReadersAreInnovators.Models.Administration;
 
-import TrialAndError.ReadersAreInnovators.DAOs.StoryImplementation;
 import jakarta.mail.Message;
 import jakarta.mail.PasswordAuthentication;
 import jakarta.mail.Session;
@@ -14,7 +13,7 @@ import java.util.logging.Logger;
 
 /**
  * @Desctripion:    The concrete implementation of the AnalyticsDAO.
- * @Author:         Tyler Schwegler.
+ * @Author:         Luaan Robinson.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
  * @Completed:      True.
@@ -50,34 +49,20 @@ public class Email {
             
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("localhost"));
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(email));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
             message.setSubject(subject);
             message.setText(text);
             
-            Transport.send(message);        //Error happened here....
-            
-            System.out.println("Email sent");
+            Transport.send(message);
             
         }
         
-        catch (Exception e)
-        {
-            // throw new RuntimeException(e);
-            System.out.println("Username or Password are incorrect ... exiting !");
-            Logger.getLogger(Email.class.getName()).log(Level.SEVERE, "Error getting pending Story.", e);
+        catch (Exception e) {
+            
+            Logger.getLogger(Email.class.getName()).log(Level.FINE, "Error sending Email to: " + email + ".", e);
         
         }
     }
     
     
-//    public static void main(String[] args)
-//    {
-//        String to = "tksrex@gmail.com";
-//        String email = "totoroseefort25@gmail.com";
-//        String email2 = "luaanrobinson@gmail.com";
-//        String email3 = "cosmosjoker56@gmail.com";
-//        String email4 = "jontymileham@gmail.com";
-//        sendEmail(email4, "Juicy get over here", "You better come and sign up to our RIP program");
-//    }
 }

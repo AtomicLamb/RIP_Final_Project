@@ -5,6 +5,7 @@ import TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,6 +33,8 @@ public class CommentImplementation implements CommentDAOInterface{
     private ResultSet rs;
     private String query;
     private String message;
+    private InputStream input = null;
+    private ByteArrayOutputStream output = null;
     FunctionsClass functionsClass = new FunctionsClass();
     
     
@@ -59,7 +62,7 @@ public class CommentImplementation implements CommentDAOInterface{
             
         } catch (SQLException e) {
             
-            message = "Comment could not be added.";
+            message = "Error adding Comment.";
             Logger.getLogger(CommentImplementation.class.getName()).log(Level.FINE, "Error adding a comment.", e);
             
         } finally {
@@ -111,6 +114,7 @@ public class CommentImplementation implements CommentDAOInterface{
         return message;
         
     }
+    
     
     @Override       //Completed: Allows the users to see the comments on a stories details page.
     public ArrayList<Comment> getComments(Story story) {
@@ -189,6 +193,7 @@ public class CommentImplementation implements CommentDAOInterface{
         
     }
     
+    
     @Override       //Completed: Allows a user to report a comment that violates the terms of service.
     public String reportComment(Comment comment) {
         
@@ -258,6 +263,7 @@ public class CommentImplementation implements CommentDAOInterface{
         return message;
         
     }
+    
     
     @Override       //Completed: Allows an editor to remove a comment that violates the terms of service.
     public String deleteComment(Comment comment) {
@@ -329,6 +335,7 @@ public class CommentImplementation implements CommentDAOInterface{
         
     }
     
+    
     @Override       //Completed: Allows an editor to unFlag a reported comment if it doesn't violate terms of service.
     public String unFlagComment(Comment comment) {
         
@@ -399,6 +406,7 @@ public class CommentImplementation implements CommentDAOInterface{
         
     }
     
+    
     @Override       //Completed: Allows an editor to view all the reported comments.
     public List<Comment> viewFlaggedComments() {
         
@@ -408,7 +416,7 @@ public class CommentImplementation implements CommentDAOInterface{
         try {
             
             query = "select c.CommentID, c.StoryID, c.UserID, c.Comment, concat_ws(\" \", u.Name, u.Surname) " +
-                    "as FullName from comments c, users u where c.UserID = u.UserID and IsFlagged = 1;";
+                    "as FullName from comments c, users u where c.UserID = u.UserID and IsFlagged = 1";
             
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
@@ -473,6 +481,7 @@ public class CommentImplementation implements CommentDAOInterface{
         return flaggedComments;
         
     }
+    
     
     @Override       //Completed: Allows a user to see how many comments the story has.
     public Integer getNumberOfComments(Story story) {

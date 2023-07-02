@@ -1,6 +1,7 @@
 package TrialAndError.ReadersAreInnovators.DAOs;
 
 
+import TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
@@ -8,8 +9,8 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import java.util.ArrayList;
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
- * @Author:         Tyler Schwegler.
+ * @Desctripion:    The Stories DAO Interface.
+ * @Author:         Luaan Robinson.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
  * @Completed:      True.
@@ -27,7 +28,6 @@ public interface StoryDAOInterface {
     Story displayStoryDetails(Story story);
     String saveAsDraft(Story story);
     String updateDraft(Story story);
-    Story getPendingStory(Story story);
     String likeStory(Story story, User user);
     String unlikeStory(Story story, User user);
     

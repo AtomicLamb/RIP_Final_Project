@@ -7,19 +7,19 @@ package TrialAndError.ReadersAreInnovators.Servlets;/*
 import TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication;
 import TrialAndError.ReadersAreInnovators.Models.Administration.WriterApplication;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment;
+import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import TrialAndError.ReadersAreInnovators.RESTService.ImpService;
+import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -34,8 +34,15 @@ public class editorServlet extends HttpServlet {
 
 private ImpService imp;
 private ServiceLayerClass slc;
+private Integer pendingStoryID;
+    private Part filePart;
+    private InputStream image;
+    private String newCoverImage;
+private final FunctionsClass functionsClass = new FunctionsClass();
 
     HttpSession session;
+    Integer authorId;
+    String title;
     
     public editorServlet()
     {
@@ -70,9 +77,11 @@ private ServiceLayerClass slc;
               viewWriters(request,response);
                 break;
             case"reviewPendingStory":
-               Story story=new Story();
-               story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
-               request.setAttribute("pendingStory",slc.getPendingStory(story));
+                
+               StoryApplication storyApplication = new StoryApplication();
+               storyApplication.setPendingStoryID(Integer.valueOf(request.getParameter("storyId")));
+               request.setAttribute("pendingStory",slc.reviewPendingStory(storyApplication));
+               
                dispacther= request.getRequestDispatcher("reviewPendingStory.jsp");
                dispacther.forward(request,response);
                 break;
@@ -100,25 +109,51 @@ private ServiceLayerClass slc;
                  revokeWriterPrivileges(request,response);
                  break;
              case"Accept":
+                 title = request.getParameter("storyTitle");
+                 authorId = Integer.valueOf(request.getParameter("authorId"));
                  
-                response.sendRedirect("postResultServlet?submit=Accept&storyTitle="
-                        +request.getParameter("storyTitle")
-                        +"&storyBody="+request.getParameter("storyBody")
-                        +"&authorId="+request.getParameter("authorId")
-                        +"&storySynopsis="+request.getParameter("storySynopsis")
-                        +"&storyCover="+request.getParameter("storyCover")
-                        +"&storyCommentsEnabled"+request.getParameter("storyCommentsEnabled"));
+                        session = request.getSession(false);
+                 request.setAttribute("message",slc.approvePendingStory(new StoryApplication(Integer.valueOf(request.getParameter("pendingstoryId")),
+                           request.getParameter("storyTitle"), Integer.valueOf(request.getParameter("authorId")),
+                                 request.getParameter("email"),request.getParameter("number") ,request.getParameter("storyBody"), request.getParameter("storySynopsis"),
+                                 request.getParameter("coverImagePath") , Boolean.parseBoolean(request.getParameter("storyCommentsEnabled"))),
+                         new Editor((Integer)session.getAttribute("UserID"))));
+                 
+                 request.setAttribute("genreList", slc.getGenres());
+                 List<String> genres = new ArrayList<>();
+                 genres.add(request.getParameter("genre1"));
+                 
+                 if (!request.getParameter("genre2").equalsIgnoreCase("null")) {
+                     genres.add(request.getParameter("genre2"));
+                 }
+                 if (!request.getParameter("genre3").equalsIgnoreCase("null")) {
+                     genres.add(request.getParameter("genre3"));
+                 }
+                     
+                 
+                 
+                 request.setAttribute("checkedGenreList", genres);
+                 
+                
+                 
+                 var dispacther= request.getRequestDispatcher("StoryGenre.jsp");
+                 dispacther.forward(request,response);
+                 
                  break;
              case"Deny":
-                 response.sendRedirect("postResultServlet?submit=Deny&storyId="
-                         +request.getParameter("storyId"));
+                 request.setAttribute("message",slc.removePendingStory(new StoryApplication(Integer.valueOf(request.getParameter("pendingstoryId")))));
+                 dispacther= request.getRequestDispatcher("Editors.jsp");
+                 dispacther.forward(request,response);
                  break;
              case"Approve Writer":
                  approveWriter(request,response);
                  break;
              case"Deny Writer":
                  denyWriter(request,response);
-                 break;    
+                 break;
+             case"Submit Genres":
+                 selectPendingStoryGenre(request,response);
+                 break;
          }
     }
      public void viewWriters(HttpServletRequest request, HttpServletResponse response)
@@ -232,4 +267,49 @@ private ServiceLayerClass slc;
             Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public void selectPendingStoryGenre(HttpServletRequest request, HttpServletResponse response)
+    {
+        String[] genres = request.getParameterValues("choice");
+        
+        if (genres!=null)
+        {
+            if (genres.length >= 1 && genres.length <= 3) {
+                for (int i = 0; i < genres.length; i++) {
+                    request.setAttribute("message", slc.addGenreToStory(new Story(title,authorId),new Genre(genres[i])));
+                }
+                var dispacther = request.getRequestDispatcher("Editors.jsp");
+                try {
+                    dispacther.forward(request, response);
+                } catch (ServletException | IOException ex) {
+                    Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else
+            {
+                request.setAttribute("message", "You must select 1 to 3 genres");
+                request.setAttribute("genreList", slc.getGenres());
+                var dispacther = request.getRequestDispatcher("StoryGenre.jsp");
+                try {
+                    dispacther.forward(request, response);
+                } catch (ServletException | IOException ex) {
+                    Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        else
+        {
+            request.setAttribute("message", "You must select 1 to 3 genres");
+            request.setAttribute("genreList", slc.getGenres());
+            var dispacther = request.getRequestDispatcher("StoryGenre.jsp");
+            try {
+                dispacther.forward(request, response);
+            } catch (ServletException | IOException ex) {
+                Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        
+    }
+    
+    
 }

@@ -1,9 +1,9 @@
 package TrialAndError.ReadersAreInnovators.DAOs;
 
+import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
-
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 /**
  * @Desctripion:    The concrete implementation of the AnalyticsDAO.
@@ -448,9 +449,19 @@ public class UserImplementation implements UserDAOInterface {
         
     }
     
-    @Override       //TODO
+    @Override       //Check if the user being referred is already on our system.
     public String referFriend(Integer phoneNumber) {
+        
         return null;
+        
     }
+    
+    @Override       //TODO
+    public Story getBookOfTheDay(String Date) {
+        
+        return null;
+        
+    }
+    
     
 }

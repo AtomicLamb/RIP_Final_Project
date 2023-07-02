@@ -25,7 +25,7 @@
 <!-- Responsive-->
 <link rel="stylesheet" href="css/responsive.css">
 <!-- fevicon -->
-<link rel="icon" href="images/fevicon.png" type="image/gif" />
+
 <!-- Scrollbar Custom CSS -->
 <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
 <!-- Tweaks for older IEs-->
@@ -37,14 +37,14 @@
 <script src="https://kit.fontawesome.com/4eb5aff70c.js" crossorigin="anonymous"></script>
 
 </head>
-<body>
+<body style="background-color:rgb(0,119,145);">
     <%String message=(String)request.getAttribute("message");%>
     <%if(message!=null){%>
     <h1><%=message%></h1>
     <%}%>
     <!-- header section start-->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed; width: 100%; z-index:99;">
-        <a class="logo" href="#"><img src="images/logo.png"></a>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: relative; width: 100%; z-index:99;">
+        
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -68,14 +68,14 @@
 	<!-- marketing section end-->
 	<!-- Industrial section start-->
 	 
-		<div class="container-fluid">
+		<div class="container-fluid" style="background-color:whitesmoke;width: 70%;margin: auto;box-shadow: 10px 10px black;padding:10px;position: relative;bottom: 20px;margin-top:40px  ">
                     <div class="row" style="margin-left: 200px;">
                         <%Writer writer=(Writer)request.getAttribute("chosenWriter");%>
                         <%Story story=(Story)request.getAttribute("storyDetails");%>
                         <%session=request.getSession(false);%>
                          
-                        <h1 class="jobs_text">Author <%=writer.getName()%> <%=writer.getSurname()%></h1> StoryID coverImage Views RatingAverage Title Likes authorUserID
-                        <div class="image_1 padding_0"><h1><%=story.getTitle()%></h1><img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%story.getTitle();%>" style="height: 400px;width:300px; "><div style="float:right; margin-right: 700px;">
+                        <h1 class="jobs_text">Author </h1> StoryID coverImage Views RatingAverage Title Likes authorUserID
+                        <div class="image_1 padding_0" style="margin-left: 0px;padding-left: 0px"><h1><%=story.getTitle()%></h1><img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="height: 400px;width:300px; "><div style="position: relative;right: 150px;margin-right: 0px;float: right">
                                     
                                     <span><br>Views<i class="fa-sharp fa-solid fa-eye"></i><%=story.getViews()%></span><br><br>
                                     <span>Likes<a href="StoryServlet?submit=like&storyId=<%=story.getStoryID()%>"><i class="fa-solid fa-heart" style="color: #f42d1f;"></i></a><%=story.getLikes()%></span><br><br>
@@ -84,7 +84,7 @@
                                     <span><a href="StoryServlet?submit=AuthorDetails&authorId=<%=writer.getUserID()%>"style="text-decoration:none">Author <%=writer.getName()%> <%=writer.getSurname()%></a></span>
                                     <div id="openButton" class="apply_bt"><button onclick="openForm()">Rate Story</button></div>
                                                                  
-                                                                                                 <div id="radioStar" style="display:none">
+                                                                                                 <div id="radioStar"  style="display:none;position: relative;">
                                                                            <form action="StoryServlet" method="post" >
   <input type="radio" id="1star" name="rating" value="1">
   <label for="1star"><i class="fa-sharp fa-solid fa-star" style="color: #fff93d;"></i>1</label><br>
@@ -108,22 +108,23 @@
 					<div class="job_section_2">
                                            
 					      <p class="dummy_text"><%=story.getSynopsis()%></p>
-                                             <div class="apply_bt"><a href="StoryServlet?submit=read&storyId=<%=story.getStoryID()%>">Read</a></div>
-                                             <div style="position: relative;top: 150px">
+                                   <div style="position: relative;bottom: 10px">
+                                             <div class="apply_bt" style="position: relative;bottom: 10px"><a href="StoryServlet?submit=read&storyId=<%=story.getStoryID()%>">Read</a></div>
                                                  <form action="StoryServlet" method="post">
                                                                       <label for="commentArea" style="margin-right: 100px">Type your comment</label>
                                                                    <textarea type="text" id="commentArea" name="commentArea" rows="4" cols="50" maxlength="500"></textarea>><br>
                                                                     
                                                                    <input type="hidden" name="storyId" value="<%=story.getStoryID()%>">
-                                                                   <input type="hidden" name="userId" value="<%=(Integer)session.getAttribute("UserID")%>">
+                                                                   
                                                                    <input type="submit" name="submit"  value="comment">
                                                                </form>
-                                                                 </div>   
-                                             <div style="position: relative;top: 150px">
+                                                                    
+                                       
                                                                <h2>Comments</h2>
                                                                <%if(newComment!=null){%>
                                                                <p>posted by<%=(String)session.getAttribute("Name")%> <%=(String)session.getAttribute("Surname")%> on <%=newComment.getDateAdded()%><br><%=newComment.getComment()%></p>
                                                                <form action="StoryServlet" method="post">
+                                                                   
                                                                    <input type="hidden" name="commentId" value="<%=newComment.getCommentID()%>">
                                                                    <input type="hidden" name="storyId" value="<%=story.getStoryID()%>">
                                                                     <input type="submit" name="submit"  value="reportComment">
@@ -136,16 +137,15 @@
                                                                   <span id="reportButton" ><a href="StoryServlet?submit=reportComment">Report comment</a></span>
                                                                           <%}%>
                                                                  <%}%>
-                                                                 
+                                   </div>
+                    </div> 
                         
 					</div>
                                                                  
 				</div>
                    
 			</div>
-		</div>
-	</div>
-	<!-- Industrial section end-->
+    <!-- Industrial section end-->
 	<!-- Corporate section start-->
 	
 	<!-- Corporate section end-->

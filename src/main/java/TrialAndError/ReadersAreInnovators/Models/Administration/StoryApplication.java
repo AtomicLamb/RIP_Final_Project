@@ -33,6 +33,12 @@ public class StoryApplication {
     public StoryApplication() {
         
     }
+    public StoryApplication(Integer pendingStoryID) {
+        
+        this.pendingStoryID = pendingStoryID;
+        
+    }
+    
     
     public StoryApplication(Integer pendingStoryID, Integer authorID) {
         
@@ -41,7 +47,44 @@ public class StoryApplication {
         
     }
     
-    public StoryApplication(Integer pendingStoryID, String title, Integer authorID, String authorEmail, String authorPhoneNumber, String storyBody, String synopsis, String coverImage, String imagePath, Boolean commentsEnabled, String dateSubmitted) {
+    
+    public StoryApplication(String title, Integer authorID){
+        
+        this.title = title;
+        this.authorID = authorID;
+    }
+    
+    
+    public StoryApplication(Integer pendingStoryID, String title, Integer authorID, String authorEmail, String authorPhoneNumber, String storyBody, String synopsis, Boolean commentsEnabled) {
+        
+        this.pendingStoryID = pendingStoryID;
+        this.title = title;
+        this.authorID = authorID;
+        this.authorEmail = authorEmail;
+        this.authorPhoneNumber = authorPhoneNumber;
+        this.storyBody = storyBody;
+        this.synopsis = synopsis;
+        this.commentsEnabled = commentsEnabled;
+        
+    }
+    
+    
+    public StoryApplication(Integer pendingStoryID, String title, Integer authorID, String authorEmail, String authorPhoneNumber, String storyBody, String synopsis, String imagePath, Boolean commentsEnabled) {
+        
+        this.pendingStoryID = pendingStoryID;
+        this.title = title;
+        this.authorID = authorID;
+        this.authorEmail = authorEmail;
+        this.authorPhoneNumber = authorPhoneNumber;
+        this.storyBody = storyBody;
+        this.synopsis = synopsis;
+        this.imagePath = imagePath;
+        this.commentsEnabled = commentsEnabled;
+        
+    }
+    
+    
+    public StoryApplication(Integer pendingStoryID, String title, Integer authorID, String authorEmail, String authorPhoneNumber, String storyBody, String synopsis, String coverImage, Boolean commentsEnabled, String dateSubmitted) {
         
         this.pendingStoryID = pendingStoryID;
         this.title = title;
@@ -51,13 +94,13 @@ public class StoryApplication {
         this.storyBody = storyBody;
         this.synopsis = synopsis;
         this.coverImage = coverImage;
-        this.imagePath = imagePath;
         this.commentsEnabled = commentsEnabled;
         this.dateSubmitted = dateSubmitted;
         
     }
     
-    public StoryApplication(Integer pendingStoryID, String title, Integer authorID, String authorEmail, String authorPhoneNumber, String storyBody, String synopsis, List<Genre> genres, String coverImage, String imagePath, Boolean commentsEnabled, String dateSubmitted) {
+    
+    public StoryApplication(Integer pendingStoryID, String title, Integer authorID, String authorEmail, String authorPhoneNumber, String storyBody, String synopsis, List<Genre> genres, String coverImage, Boolean commentsEnabled, String dateSubmitted) {
         
         this.pendingStoryID = pendingStoryID;
         this.title = title;
@@ -68,7 +111,6 @@ public class StoryApplication {
         this.synopsis = synopsis;
         this.genres = genres;
         this.coverImage = coverImage;
-        this.imagePath = imagePath;
         this.commentsEnabled = commentsEnabled;
         this.dateSubmitted = dateSubmitted;
         
@@ -131,6 +173,14 @@ public class StoryApplication {
         this.synopsis = synopsis;
     }
     
+    public List<Genre> getGenres() {
+        return genres;
+    }
+    
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
+    }
+    
     public String getCoverImage() {
         return coverImage;
     }
@@ -163,7 +213,6 @@ public class StoryApplication {
         this.dateSubmitted = dateSubmitted;
     }
     
-    
     @Override
     public String toString() {
         
@@ -171,9 +220,13 @@ public class StoryApplication {
                 "pendingStoryID=" + pendingStoryID +
                 ", title='" + title + '\'' +
                 ", authorID=" + authorID +
+                ", authorEmail='" + authorEmail + '\'' +
+                ", authorPhoneNumber='" + authorPhoneNumber + '\'' +
                 ", storyBody='" + storyBody + '\'' +
                 ", synopsis='" + synopsis + '\'' +
+                ", genres=" + genres +
                 ", coverImage='" + coverImage + '\'' +
+                ", imagePath='" + imagePath + '\'' +
                 ", commentsEnabled=" + commentsEnabled +
                 ", dateSubmitted='" + dateSubmitted + '\'' +
                 '}';

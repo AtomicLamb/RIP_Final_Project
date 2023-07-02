@@ -63,13 +63,14 @@
 	<!-- Industrial section start-->
 	  <%List<Story>stories=(List<Story>)request.getAttribute("authorStories");%>
            <%Writer writer=(Writer)request.getAttribute("chosenWriter");%>
-		<div class="container-fluid" style="background-color: white;height: 1200px">
-                    <div class="row" style="margin-left: 20px;margin-right: 20px;background-color: white; margin-top: 40px;height: 800px">
+    <h1 style="font-size:50px;text-align:center;">Authors Details</h1><br><br>
+		<div class="container-fluid" style="background-color:whitesmoke;width: 70%;margin: auto;box-shadow: 10px 10px black;padding:40px;position: relative;bottom: 20px;margin-top:40px  ">
+                    <div class="row"style="margin-left: 20px;margin-right: 20px; margin-top: 40px;">
 				      <%if(writer!=null){%>
                         <h1 class="jobs_text"style="text-align: left;border-bottom-style: solid; border-width:0.5px;border-color: black;">Author <%=writer.getName()%> <%=writer.getSurname()%> <br><form action="StoryServlet?submit=followAuthor"><input type="submit" name="submit" value="Follow Author" class="button buttonTextColor" style=" font-size: 15px; border: 2px solid black; border-radius: 12px"></form></h1>
                                  <h1 class="jobs_text"style="text-align: left;">Authors Books</h1>
                                              
-					      <div class="scrollmenu" style="  width: 800px; background-color: white;height: 550px">
+					      <div class="scrollmenu" style="  width: 800px; background-color: black;height: 550px">
               <%for(Story story:stories){%> 
                 <a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>">
                   <h1 style="color: white;"><%=story.getTitle()%></h1>
@@ -98,16 +99,7 @@
 	<!-- footer section end-->
 	<!-- copyright section start-->
          
-		<div class="container" style="position: relative; top:10px;">
-                    <div class="row">
-				<div class="col-md-6">
-					<p class="copyright_text">Copyright 2020 All Right Reserved By.<a href="https://html.design"> Free  html Templates</a></p>
-				</div>
-				<div class="col-md-6">
-					<p class="cookies_text">Cookies, Privacy and Terms</p>
-				</div>
-			</div>
-		</div>
+		
 	 
 	<!-- copyright section end-->
 

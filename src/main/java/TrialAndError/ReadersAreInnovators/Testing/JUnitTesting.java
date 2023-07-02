@@ -328,8 +328,8 @@ public class JUnitTesting {
     @Test
     public void approvePendingStoryTest(){
         
-        Editor editor = new Editor();
-        StoryApplication storyApplication = new StoryApplication();
+        Editor editor = new Editor(135);
+        StoryApplication storyApplication = new StoryApplication(42, "stuff you.", 36, "marna@gmail.com", "0116668888", "Stuff.", "Lots of stuff", null, false, null);
         
         System.out.println(editorImp.approvePendingStory(storyApplication, editor));
 
@@ -422,6 +422,21 @@ public class JUnitTesting {
 
         }
 
+    }
+    
+    @Test
+    public void getPendingStoryGenresTest() {
+        
+        StoryApplication storyApplication = new StoryApplication(20);
+        
+        List<Genre> pendingStoryGenres = genresImp.getPendingStoryGenres(storyApplication);
+        
+        for (Genre g : pendingStoryGenres) {
+            
+            System.out.println(g);
+            
+        }
+        
     }
 
     @Test
@@ -640,7 +655,7 @@ public class JUnitTesting {
 
         try {
 
-            inputStream = new FileInputStream(new File("C:\\Users\\TKS\\Desktop\\360_F_97589769_t45CqXyzjz0KXwoBZT9PRaWGHRk5hQqQ.jpg"));
+            inputStream = new FileInputStream(new File(""));
 
             FunctionsClass functionsClass = new FunctionsClass();
 
@@ -669,12 +684,14 @@ public class JUnitTesting {
         }
 
     }
-
+    
     @Test
-    public void getPendingStoryTest(){
-
-        //TODO
-
+    public void updateDraftTest(){
+        
+        Story draft = new Story("Image Test",52,"The goats are in the house","The goats","",true);
+        
+        System.out.println(storyImp.updateDraft(draft));
+        
     }
 
     @Test
@@ -712,7 +729,7 @@ public class JUnitTesting {
     @Test
     public void loginTest(){
         
-        User user = new User();
+        User user = new User("ex@gmail.com", "hi");
 
         System.out.println(userImp.login(user));
 

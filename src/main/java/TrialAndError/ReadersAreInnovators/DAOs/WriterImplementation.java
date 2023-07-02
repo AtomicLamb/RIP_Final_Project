@@ -14,6 +14,7 @@ import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
  * @Desctripion:    The concrete implementation of the AnalyticsDAO.
  * @Author:         Tyler Schwegler.
@@ -30,7 +31,7 @@ public class WriterImplementation implements WriterDAOInterface{
     private ResultSet rs;
     private String query;
     private String message;
-    private byte[] decoder;
+    private byte[] buffer;
     private InputStream inputStream;
     FunctionsClass functionsClass = new FunctionsClass();
     
@@ -149,9 +150,9 @@ public class WriterImplementation implements WriterDAOInterface{
             
             while (rs.next()) {
                 
-                InputStream inputStream = rs.getBinaryStream(6);
+                inputStream = rs.getBinaryStream(6);
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                byte[] buffer = new byte[4096];
+                buffer = new byte[4096];
                 int bytesRead = -1;
                 
                 while ((bytesRead = inputStream.read(buffer)) != -1) {
@@ -329,10 +330,9 @@ public class WriterImplementation implements WriterDAOInterface{
             ps.setString(2, story.getStoryBody());
             ps.setString(3, story.getSynopsis());
             
-            decoder = Base64.getDecoder().decode(story.getCoverImage());
-            Blob blob = new SerialBlob(decoder);
+            String imagePath = functionsClass.decodeBase64(story.getCoverImage());
             
-            ps.setBlob(4, blob);
+            ps.setString(4, imagePath);
             ps.setInt(5, functionsClass.booleanToInteger(story.getCommentsEnabled()));
             ps.setInt(6, story.getStoryID());
             ps.executeUpdate();
@@ -342,7 +342,7 @@ public class WriterImplementation implements WriterDAOInterface{
         } catch (SQLException e) {
             
             message = "Error editing draft. ";
-            Logger.getLogger(WriterImplementation.class.getName()).log(Level.FINE, "Error error editing draft.", e);
+            Logger.getLogger(WriterImplementation.class.getName()).log(Level.FINE, "Error editing draft.", e);
             
         } finally {
             
@@ -394,10 +394,73 @@ public class WriterImplementation implements WriterDAOInterface{
         
     }
     
-    @Override
+    @Override       //Completed: Allows a writer to delete an old draft.
     public String deleteDraft(Story Story){
         
-        return null;
+        conn = DatabaseConnectionManager.getConnection();
+        
+        try {
+            
+            query = "delete from drafts d where d.DraftID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, Story.getStoryID());
+            ps.executeUpdate();
+            
+            message = "Draft successfully deleted. ";
+            
+        } catch (SQLException e) {
+            
+            message = "Error deleting draft. ";
+            Logger.getLogger(WriterImplementation.class.getName()).log(Level.FINE, "Error deleting draft.", e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return message;
         
     }
     

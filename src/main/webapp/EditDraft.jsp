@@ -48,7 +48,8 @@
                 <textarea type="text" name="storyBody" maxlength="1000" rows="10" cols="100" required><%=draft.getStoryBody()%></textarea><br><br>
               </div>                 
                 <button class="block" type="submit" name="submit" value="Submit Draft">Submit</button><br><br>
-                <button class="block" type="submit" name="submit" value="Save Draft" formnovalidate>Save Draft</button><br><br>
+                <button class="block" type="submit" name="submit" value="Save Draft" >Save Draft</button><br><br>
+                <button class="block" type="submit" name="submit" value="Delete Draft" formnovalidate>Delete Draft</button><br><br>
             </form>
             <%}%>
             <%if(draft==null){%>

@@ -1,11 +1,13 @@
 package TrialAndError.ReadersAreInnovators.DAOs;
 
+import TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
 
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 /**
  * @Desctripion:    The concrete implementation of the AnalyticsDAO.
@@ -32,6 +35,8 @@ public class GenresImplementation implements GenresDAOInterface{
     private ResultSet rs;
     private String query;
     private String message;
+    private InputStream input = null;
+    private ByteArrayOutputStream output = null;
     FunctionsClass functionsClass = new FunctionsClass();
     
     
@@ -277,11 +282,29 @@ public class GenresImplementation implements GenresDAOInterface{
         
         try {
             
-            query = "delete from usergenreintersect i where UserID = ? and GenreID = ?";
+            query = "select u.UserID from users u where u.Email = ?";
             
             ps = conn.prepareStatement(query);
-            ps.setInt(1, user.getUserID());
-            ps.setInt(2, genre.getGenreID());
+            ps.setString(1, user.getEmail());
+            rs = ps.executeQuery();
+            
+            rs.next();
+            Integer userID = rs.getInt(1);
+            
+            query = "select g.GenreID from genres g where g.Genre = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, genre.getGenre());
+            rs = ps.executeQuery();
+            
+            rs.next();
+            Integer genreID = rs.getInt(1);
+            
+            query = "delete from usergenreintersect i where i.UserID = ? and i.GenreID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, userID);
+            ps.setInt(2, genreID);
             ps.executeUpdate();
             
             message = "Genre removed from your list of Genres.";
@@ -486,6 +509,518 @@ public class GenresImplementation implements GenresDAOInterface{
         }
         
         return userGenres;
+        
+    }
+    
+    @Override       //Completed: Allows an editor to add a story to a Genre.
+    public String addGenreToStory(Story story, Genre genre){
+        
+        conn = DatabaseConnectionManager.getConnection();
+        
+        try {
+            
+            query = "select s.StoryID from stories s where s.Title = ? and s.AuthorID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, story.getTitle());
+            ps.setInt(2, story.getAuthorID());
+            rs = ps.executeQuery();
+            
+            rs.next();
+            Integer storyID = rs.getInt(1);
+            
+            query = "select g.GenreID from genres g where g.Genre = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, genre.getGenre());
+            rs = ps.executeQuery();
+            
+            rs.next();
+            Integer genreID = rs.getInt(1);
+            
+            query = "insert into storygenreintersect (StoryID, GenreID) values (?, ?)";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, storyID);
+            ps.setInt(2, genreID);
+            ps.executeUpdate();
+            
+            message = "Story Successfully added into Genre category.";
+            
+        } catch (SQLException e) {
+            
+            message = "Error adding Story into Genre category.";
+            Logger.getLogger(GenresImplementation.class.getName()).log(Level.FINE, "Error adding Story into Genre category.", e);
+            
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return message;
+        
+    }
+    
+    @Override       //Completed: Allows an editor to remove a story from a Genre.
+    public String removeGenreFromStory(Story story, Genre genre){
+        
+        conn = DatabaseConnectionManager.getConnection();
+        
+        try {
+            
+            query = "select s.StoryID from stories s where s.Title = ? and s.AuthorID ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, story.getTitle());
+            ps.setInt(2, story.getAuthorID());
+            rs = ps.executeQuery();
+            
+            rs.next();
+            Integer storyID = rs.getInt(1);
+            
+            query = "select g.GenreID from genres g where g.Genre = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, genre.getGenre());
+            rs = ps.executeQuery();
+            
+            rs.next();
+            Integer genreID = rs.getInt(1);
+            
+            query = "delete from storygenreintersect i where i.StoryID = ? and i.GenreID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, storyID);
+            ps.setInt(2, genreID);
+            ps.executeUpdate();
+            
+            message = "Story removed from Genre category.";
+            
+        } catch (SQLException e) {
+            
+            message = "Error removing Story from Genre category.";
+            Logger.getLogger(GenresImplementation.class.getName()).log(Level.FINE, "Error removing Story from Genre category.", e);
+            
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return message;
+        
+    }
+    
+    @Override       //Completed: Allows a writer to add a story pending story to a Genre.
+    public String addGenreToPendingStory(StoryApplication storyApplication, Genre genre){
+        
+        conn = DatabaseConnectionManager.getConnection();
+        
+        try {
+            
+            query = "select ps.PendingStoryID from pendingstories ps where ps.Title = ? and ps.AuthorID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, storyApplication.getTitle());
+            ps.setInt(2, storyApplication.getAuthorID());
+            rs = ps.executeQuery();
+            
+            rs.next();
+            Integer pendingStoryID = rs.getInt(1);
+            
+            query = "select g.GenreID from genres g where g.Genre = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, genre.getGenre());
+            rs = ps.executeQuery();
+            
+            rs.next();
+            Integer genreID = rs.getInt(1);
+            
+            query = "insert into pendingstorygenreintersect (PendingStoryID, GenreID) values (?, ?)";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, pendingStoryID);
+            ps.setInt(2, genreID);
+            ps.executeUpdate();
+            
+            message = "Pending Story Successfully added into Genre category.";
+            
+        } catch (SQLException e) {
+            
+            message = "Error adding Pending Story into Genre category.";
+            Logger.getLogger(GenresImplementation.class.getName()).log(Level.FINE, "Error adding Pending Story into Genre category.", e);
+            
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return message;
+        
+    }
+    
+    @Override       //Completed: Allows a writer to remove a pending story from a Genre.
+    public String removeGenreFromPendingStory(StoryApplication storyApplication, Genre genre){
+        
+        conn = DatabaseConnectionManager.getConnection();
+        
+        try {
+            
+            query = "select ps.PendingStoryID from pendingStories ps where ps.Title = ? and ps.AuthorID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, storyApplication.getTitle());
+            ps.setInt(2, storyApplication.getAuthorID());
+            rs = ps.executeQuery();
+            
+            rs.next();
+            Integer pendingStoryID = rs.getInt(1);
+            
+            query = "select g.GenreID from genres g where g.Genre = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, genre.getGenre());
+            rs = ps.executeQuery();
+            
+            rs.next();
+            Integer genreID = rs.getInt(1);
+            
+            query = "delete from pendingstorygenreintersect i where i.PendingStoryID = ? and GenreID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, pendingStoryID);
+            ps.setInt(2, genreID);
+            ps.executeUpdate();
+            
+            message = "Pending Story successfully removed from Genre category.";
+            
+        } catch (SQLException e) {
+            
+            message = "Error removing Pending Story from Genre category.";
+            Logger.getLogger(GenresImplementation.class.getName()).log(Level.FINE, "Error removing Pending Story from Genre category.", e);
+            
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return message;
+        
+    }
+    
+    @Override       //Completed: Allows a user to see with genres the story belongs to.
+    public ArrayList<Genre> getStoryGenres(Story story){
+        
+        conn = DatabaseConnectionManager.getConnection();
+        ArrayList<Genre> storyGenres = new ArrayList<>();
+        
+        try {
+            
+            query = "SELECT g.GenreID, g.Genre FROM genres g, storygenreintersect i where g.GenreID = i.GenreID and i.StoryID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, story.getStoryID());
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                
+                storyGenres.add(new Genre(rs.getInt(1), rs.getString(2)));
+                
+            }
+            
+        } catch (SQLException e) {
+            
+            Logger.getLogger(GenresImplementation.class.getName()).log(Level.FINE, "Error getting story genres.", e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return storyGenres;
+        
+    }
+    
+    @Override       //Completed: Allows an editor to see with genres the pending story belongs to.
+    public List<Genre> getPendingStoryGenres(StoryApplication storyApplication){
+        
+        conn = DatabaseConnectionManager.getConnection();
+        List<Genre> pendingStoryGenres = new ArrayList<>();
+        
+        try {
+            
+            query = "SELECT g.GenreID, g.Genre FROM genres g, pendingstorygenreintersect i where g.GenreID = i.GenreID and i.PendingStoryID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, storyApplication.getPendingStoryID());
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                
+                pendingStoryGenres.add(new Genre(rs.getInt(1), rs.getString(2)));
+                
+            }
+            
+        } catch (SQLException e) {
+            
+            Logger.getLogger(GenresImplementation.class.getName()).log(Level.FINE, "Error getting pending story genres.", e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return pendingStoryGenres;
         
     }
     

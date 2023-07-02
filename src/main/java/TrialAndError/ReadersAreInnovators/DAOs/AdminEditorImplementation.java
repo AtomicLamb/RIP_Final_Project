@@ -1,10 +1,10 @@
 package TrialAndError.ReadersAreInnovators.DAOs;
 
 
-import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,6 +32,8 @@ public class AdminEditorImplementation implements AdminEditorDAOInterface{
     private ResultSet rs;
     private String query;
     private String message;
+    private InputStream input = null;
+    private ByteArrayOutputStream output = null;
     FunctionsClass functionsClass = new FunctionsClass();
     
     
@@ -47,7 +49,7 @@ public class AdminEditorImplementation implements AdminEditorDAOInterface{
         
         try {
             
-            query = "DELETE FROM users u WHERE (u.email = ?)";
+            query = "DELETE FROM users u WHERE u.email = ?";
             
             ps = conn.prepareStatement(query);
             ps.setString(1, editor.getEmail());
@@ -109,6 +111,7 @@ public class AdminEditorImplementation implements AdminEditorDAOInterface{
         return message;
         
     }
+    
     
     @Override       //Completed: Adds an editor to the database.
     public String addEditor(Editor editor) {
@@ -185,6 +188,7 @@ public class AdminEditorImplementation implements AdminEditorDAOInterface{
         
     }
     
+    
     @Override       //Completed: Allows the Admin-Editors to view a list of all Editors.
     public List<Editor> viewEditors() {
         
@@ -193,7 +197,7 @@ public class AdminEditorImplementation implements AdminEditorDAOInterface{
         
         try {
             
-            query = "select u.Name, u.Surname, u.Email from users u  where u.UserTypeID = 2";
+            query = "select u.Name, u.Surname, u.Email from users u where u.UserTypeID = 2";
             
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
@@ -206,7 +210,7 @@ public class AdminEditorImplementation implements AdminEditorDAOInterface{
             
         } catch (SQLException e) {
             
-            Logger.getLogger(EditorImplementation.class.getName()).log(Level.FINE, "Error viewing all writers.", e);
+            Logger.getLogger(EditorImplementation.class.getName()).log(Level.FINE, "Error viewing all editors.", e);
             
         } finally {
             
@@ -258,11 +262,5 @@ public class AdminEditorImplementation implements AdminEditorDAOInterface{
         
     }
     
-    @Override       //TODO:
-    public String setBookOfDay(Story story) {
-        
-        return null;
-        
-    }
     
 }

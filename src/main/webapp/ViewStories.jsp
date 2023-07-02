@@ -18,27 +18,30 @@
         <link rel="stylesheet" href="css/horizontal_scrollBar.css">
         <link rel="stylesheet" href="css/centerhorizontalbar.css">
     </head>  
-    <body>
+    <body style="background-color: rgb(0, 119, 145);">
         <%ArrayList<Story>stories=(ArrayList<Story>)request.getAttribute("writersPublishedStories");%>
         <%String message=(String) request.getAttribute("message");%>
         <%if(message!=null){%>
         <h1><%=message%></h1>
         <%}%>
-        <div class="Container" >
-            <h1 style="font-size:50px;text-align:center;">View Stories</h1><br><br>
-            <div class="scrollmenu" style=" margin: auto; width: 400px;height: 400px">
+        <h1 style="font-size:50px;text-align:center;">View Stories</h1><br><br>
+        <div class="Container"style="background-color:whitesmoke;width: 70%;margin: auto;box-shadow: 10px 10px;padding:40px;position: relative;bottom: 20px " >
+            <h1 style="font-size:50px;text-align:center;">Select A Story Image To Read It Or Private Or Publicise A Story</h1><br><br>
+            <div class="scrollmenu" style=" margin: auto;width: 80%;"
                 <%if(!stories.isEmpty()){%>
                 <%for(Story story:stories){%>
+            <div style="display: inline-block">
                 <a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>">
                     <h1 style="color: white;"><%=story.getTitle()%></h1>
                     <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" >
                 </a>
-                 <form action="writerServlet" method="post">
+                <br><form action="writerServlet"style="display: inline;position:relative; margin-left: 115px;bottom: 20px" method="post">
                      <input type="hidden" name="storyId" value="<%=story.getStoryID()%>"><br>
-                     <input type="submit" name="submit" value="Make Story Private"><br>
-                     <input type="submit" name="submit" value="Make Story Public">
+                     <input type="submit" name="submit" value="Make Story Private" style="border-radius: 25px">
+                     <input type="submit" name="submit" value="Make Story Public" style="border-radius: 25px">
                  </form>
-                <%}%> 
+            </div>
+            <%}%> 
                 <%}%>
                 <%if(stories.isEmpty()){%>
                    <p>NO AVAILABLE STORIES</p>

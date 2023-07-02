@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
- * @Author:         Tyler Schwegler.
+ * @Desctripion:    The Writers DAO Interface.
+ * @Author:         Luaan Robinson.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
  * @Completed:      True.

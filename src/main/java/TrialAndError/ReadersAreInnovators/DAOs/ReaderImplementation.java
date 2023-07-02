@@ -38,7 +38,6 @@ public class ReaderImplementation implements ReaderDAOInterface {
     private byte[] decoder;
     private InputStream input = null;
     private ByteArrayOutputStream output = null;
-    Email email = new Email();
     FunctionsClass functionsClass = new FunctionsClass();
     
     

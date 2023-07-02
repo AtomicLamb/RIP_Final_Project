@@ -55,6 +55,7 @@ public class ImpService
         response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(user)));
         
         return response.readEntity(User.class);
+        
     }
     
      public String registerReader(Reader reader)
