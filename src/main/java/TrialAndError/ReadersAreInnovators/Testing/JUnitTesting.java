@@ -105,23 +105,6 @@ public class JUnitTesting {
         
     }
     
-    @Test
-    public void addLikeTest(){
-        
-        Story story = new Story();
-        
-        System.out.println(analyticsImp.addLike(story));
-        
-    }
-    
-    @Test
-    public void removeLikeTest(){
-        
-        Story story = new Story();
-        
-        System.out.println(analyticsImp.removeLike(story));
-        
-    }
     
     @Test
     public void getMostViewedStoriesTest(){
@@ -220,7 +203,7 @@ public class JUnitTesting {
     @Test
     public void addCommentTest(){
         
-        Comment comment = new Comment();
+        Comment comment = new Comment(1, 34, "Testing comment in JUnit");
         
         System.out.println(commentsImp.addComment(comment));
         
@@ -470,7 +453,7 @@ public class JUnitTesting {
     @Test
     public void rateStoryTest(){
         
-        Rating rating = new Rating();
+        Rating rating = new Rating(34, 61, 5);
 
         System.out.println(ratingImp.rateStory(rating));
 

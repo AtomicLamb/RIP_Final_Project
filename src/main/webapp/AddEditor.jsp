@@ -52,6 +52,11 @@
                                 </div>
                             </div>
                         </form>
+                        <form action="adminEditorServlet" method="get">
+                            <div class="button input-box">
+                                <input type="submit" name="submit" value="BACK TO ADMIN EDITOR PAGE" formnovalidate>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

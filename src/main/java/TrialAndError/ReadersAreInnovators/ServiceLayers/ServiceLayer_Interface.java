@@ -18,7 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface ServiceLayer_Interface {
+    Boolean checkIfLiked(Story story, User user);
     
+    List<Story> getRecommendedBooks();
+    
+    List<Story> getWeeksTopPicks();
+    
+    Boolean checkRatingExists(Rating rating);
+        
     String saveAsDraft(Story story);
     
     String removePendingStory(StoryApplication pendingStory);
@@ -83,7 +90,7 @@ public interface ServiceLayer_Interface {
     
     List<WriterApplication> viewWriterApplications();
     
-    String denyWriter(Writer writer);
+    String denyWriter(WriterApplication writer);
     
     
     List<Writer> viewWriters();

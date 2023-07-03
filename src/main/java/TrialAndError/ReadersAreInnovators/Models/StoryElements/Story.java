@@ -82,12 +82,12 @@ public class Story {
         
     }
     
-    public Story(String title, Integer authorID, String coverImage, String imagePath) {
+    public Story(Integer storyID, String title, Integer authorID, String coverImage) {
         
+        this.storyID = storyID;
         this.title = title;
         this.authorID = authorID;
         this.coverImage = coverImage;
-        this.imagePath = imagePath;
         
     }
     

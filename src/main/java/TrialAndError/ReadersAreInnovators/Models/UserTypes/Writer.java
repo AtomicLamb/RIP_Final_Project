@@ -57,6 +57,15 @@ public class Writer extends Reader {
         
     }
     
+    public Writer(Integer userID, String name, String surname, String email) {
+        
+        this.userID = userID;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        
+    }
+    
     public Writer(Integer userID, String name, String surname, Double data) {
         
         this.userID = userID;

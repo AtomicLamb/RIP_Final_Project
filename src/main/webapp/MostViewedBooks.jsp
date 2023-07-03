@@ -29,6 +29,11 @@
     </head>
     <body style="overflow-x: scroll;">
         <div class="container">
+            <form action="editorServlet" method="get">
+                <div class="button input-box">
+                    <input style="color: white; background-color: black;" type="submit" name="submit" value="BACK TO EDITORS PAGE"><br>
+                </div>
+            </form>
             <button id="pdfButton"><b>Click here to Generate report PDF</b></button>
             <div class="card" id="generatePDF">
                 <div id="piechart"></div><br>

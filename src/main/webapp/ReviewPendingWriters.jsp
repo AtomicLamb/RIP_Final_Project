@@ -42,6 +42,11 @@
                             <input style="color: white; background-color: black;" type="submit" name="submit" value="Deny Writer">
                         </div>
                     </form>
+                    <form action="editorServlet" method="get">
+                        <div class="button input-box">
+                            <input style="color: white; background-color: black;" type="submit" name="submit" value="BACK TO EDITORS PAGE" formnovalidate>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

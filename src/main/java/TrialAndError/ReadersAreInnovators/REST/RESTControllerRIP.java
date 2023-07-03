@@ -176,7 +176,7 @@ public class RESTControllerRIP {
     @Path("/denyWriter")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response denyWriter(Writer writer)
+    public Response denyWriter(WriterApplication writer)
     {
         return Response.ok().entity(service.denyWriter(writer)).build();
     }

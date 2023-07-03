@@ -71,9 +71,12 @@
           <form action="editPersonalInformationServlet" method="get">
               <div class="button input-box">
                  <input type="submit" name="submit" value="Apply for writer">
-              </div>    
-          </form>
+              </div>
            <%}%>
+              <div class="button input-box">
+                  <input type="submit" name="submit" value="BACK TO PROFILE">
+              </div>
+          </form>
             <%
                 String message = (String) request.getAttribute("message");
                 if(message!=null){

@@ -29,9 +29,6 @@ public interface AnalyticsDAOInterface{
     
     String addView(Story story);
     
-    String addLike(Story story);
-    
-    String removeLike(Story story);
     
     List<Story> getMostViewedStories(Analytics analytics);
     

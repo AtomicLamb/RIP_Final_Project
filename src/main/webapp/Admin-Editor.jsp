@@ -32,6 +32,9 @@
           <form action="adminEditorServlet" method="get">
               <div class="input-boxes">
                   <div class="button input-box">
+                      <input type="submit" name="submit" value="HOME">
+                  </div>
+                  <div class="button input-box">
                     <input type="submit" name="submit" value="EDITOR PAGE">
                   </div>
                   <div class="button input-box">

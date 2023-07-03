@@ -472,7 +472,7 @@ public class WriterImplementation implements WriterDAOInterface{
         
         try {
             
-            query = "select u.Name, u.Surname, u.Email from users u where u.UserID = ?";
+            query = "select u.UserID, u.Name, u.Surname, u.Email from users u where u.UserID = ?";
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, writer.getUserID());
@@ -480,7 +480,7 @@ public class WriterImplementation implements WriterDAOInterface{
             
             rs.next();
             
-            author = new Writer(rs.getString(1), rs.getString(2), rs.getString(3));
+            author = new Writer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
         
         } catch (SQLException e) {
             

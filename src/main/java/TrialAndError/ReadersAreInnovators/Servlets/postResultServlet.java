@@ -68,7 +68,8 @@ public class postResultServlet extends HttpServlet {
                  storyServlet.fillStoryDetailsPage(request,response,"newComment", storyServlet.getNewComment(request));
                 break;
             case"followAuthor":
-                storyServlet.fillStoryDetailsPage(request,response,"message",request.getParameter("followMessage"));
+                request.setAttribute("message",request.getParameter("followMessage"));
+                storyServlet.authorDetails(request,response);
                 break;
             case"like":
                 session= request.getSession(false);

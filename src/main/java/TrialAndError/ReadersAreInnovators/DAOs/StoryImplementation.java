@@ -805,6 +805,12 @@ public class StoryImplementation implements StoryDAOInterface {
             ps.setInt(2, story.getStoryID());
             ps.executeUpdate();
             
+            query = "update stories s SET s.Likes = s.Likes + 1 where s.StoryID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, story.getStoryID());
+            ps.executeUpdate();
+            
             message = "Story has been liked.";
             
         } catch (SQLException e) {
@@ -934,6 +940,88 @@ public class StoryImplementation implements StoryDAOInterface {
         }
         
         return message;
+        
+    }
+    
+    
+    @Override
+    public Boolean checkIfLiked(Story story, User user) {
+        
+        Boolean exists = null;
+        
+        conn = DatabaseConnectionManager.getConnection();
+        
+        try {
+            
+            query = "select * from userfavorites f where f.UserID = ? and f.StoryID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, user.getUserID());
+            ps.setInt(2, story.getStoryID());
+            rs = ps.executeQuery();
+            
+            if (rs.next()){
+                
+                exists = true;
+                
+            } else {
+                
+                exists = false;
+                
+            }
+            
+        } catch (SQLException e) {
+            
+            message = "Error getting existing like.";
+            Logger.getLogger(RatingImplementation.class.getName()).log(Level.FINE, "Error getting existing like.", e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return exists;
         
     }
     

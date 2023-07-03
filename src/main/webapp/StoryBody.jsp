@@ -56,11 +56,17 @@
 	
 	<!-- banner section end-->
 	<!-- marketing section start-->
+    <%String message=(String)request.getAttribute("message");%>
         <%Story story=(Story)request.getAttribute("chosenStory");%>
+    
 	<div class="marketing_section layout_padding" style=" margin: 20px; width: 75%;  z-index: -1; background-color: rgba(192, 248, 255, 1); position: relative; left:150px;" >
 		<div class="container-fluid">
 			<div class="row">
 				<div  style=" width: 100%;padding: 0px;margin: auto;">
+                    <%if(message!=null){%>
+                    <h1><%=message%></h1>
+                    <%}%>
+                    
 					                            <%if(story!=null){%>
 					    <h1 class="jobs_text"><%=story.getTitle()%></h1>
                                             <p><%=story.getStoryBody()%></p>

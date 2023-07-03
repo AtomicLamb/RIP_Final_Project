@@ -134,25 +134,24 @@ public class StoryServlet extends HttpServlet {
         return user;
     }
     public String rateStory(HttpServletRequest request){
-        Story story=getChosenStory(request);
         
-        story.setRatingAverage(Double.valueOf(request.getParameter("rating")));
-         
-       return service.rateStory(new Rating(getUserSessionJustId(request).getUserID(),Integer.valueOf(request.getParameter("storyId")),Integer.valueOf(request.getParameter("rating"))));
+        if(service.checkRatingExists(new Rating(getUserSessionJustId(request).getUserID(),Integer.valueOf(request.getParameter("storyId")),Integer.valueOf(request.getParameter("rating"))))){
+             return service.changeRating(new Rating(getUserSessionJustId(request).getUserID(),Integer.valueOf(request.getParameter("storyId")),Integer.valueOf(request.getParameter("rating"))));
+        }
+       else {
+          return service.rateStory(new Rating(getUserSessionJustId(request).getUserID(),Integer.valueOf(request.getParameter("storyId")),Integer.valueOf(request.getParameter("rating"))));
+        }
             
     }
     public String addComment(HttpServletRequest request){
          
           session=request.getSession(false);
          
-           Comment comment=new Comment();
+           Comment comment=new Comment(Integer.valueOf(request.getParameter("storyId")),
+                   (Integer) session.getAttribute("UserID"),request.getParameter("commentArea"));
          //StoryID, UserID, Comment
-        comment.setName((String)session.getAttribute("Name"));
-        comment.setUserID((Integer)session.getAttribute("UserID"));
-        comment.setStoryID(Integer.valueOf(request.getParameter("storyId")));
-        comment.setComment(request.getParameter("commentArea"));
-        comment.setFlagged(false);
         return service.addComment(comment);
+       
     }
     public Comment getNewComment(HttpServletRequest request){
          Story story=new Story();
@@ -166,10 +165,23 @@ public class StoryServlet extends HttpServlet {
         }
     }
     public String followAuthor(HttpServletRequest request){
-           return service.followAuthor(service.getAuthor(new Writer(request.getParameter("authorId"))),getUserSessionJustId(request));
+           return service.followAuthor(service.getAuthor(new Writer(Integer.valueOf(request.getParameter("authorId")))),getUserSessionJustId(request));
          
      }
-     
+     public void authorDetails(HttpServletRequest request, HttpServletResponse response){
+         Writer writer=new Writer();
+         writer.setUserID(Integer.valueOf(request.getParameter("authorId")));
+         request.setAttribute("authorStories", service.getPublishedStories(writer));
+         request.setAttribute("chosenWriter",service.getAuthor(writer));
+         var dispatcher=request.getRequestDispatcher("AuthorDetails.jsp");
+         try {
+             dispatcher.forward(request,response);
+           } catch (ServletException ex) {
+             Logger.getLogger(StoryServlet.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (IOException ex) {
+             Logger.getLogger(StoryServlet.class.getName()).log(Level.SEVERE, null, ex);
+         }
+     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -194,12 +206,13 @@ public class StoryServlet extends HttpServlet {
                      story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
                 request.setAttribute("chosenStory", getChosenStory(request));
                 dispatcher=request.getRequestDispatcher("StoryBody.jsp");
+                
                 service.readStory(story,getUserSessionJustId(request));
                 dispatcher.forward(request, response);
                 
                 break;
             case"like":
-                response.sendRedirect("postResultServlet?submit=like&storyId="+request.getParameter("storyId")+"&likeMessage="+likeStory(request));
+                response.sendRedirect("postResultServlet?submit=like&storyId="+request.getParameter("storyId")+"&likeMessage="+likeOrUnlike(request));
                 break;
             case"unlike":
                 response.sendRedirect("postResultServlet?submit=unlike&storyId="+request.getParameter("storyId")+"&unlikeMessage="+unLikeStory(request));
@@ -214,6 +227,17 @@ public class StoryServlet extends HttpServlet {
         session= request.getSession(false);
         User user=new User((Integer)session.getAttribute("UserID"));
        return service.likeStory(story,user);
+   }
+   public String likeOrUnlike(HttpServletRequest request){
+       Story story=new Story();
+       story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
+        if (service.checkIfLiked(story,getUserSessionJustId(request))){
+            return unLikeStory(request);
+        }
+        else {
+            return likeStory(request);
+        }
+   
    }
     public String unLikeStory(HttpServletRequest request){
         Story story=new Story();
@@ -245,7 +269,7 @@ public class StoryServlet extends HttpServlet {
                 break;
                 
             case "followAuthor":
-                response.sendRedirect("postResultServlet?submit=followAuthor&storyId="+request.getParameter("storyId")+"&followMessage="+followAuthor(request));
+                response.sendRedirect("postResultServlet?submit=followAuthor&authorId="+request.getParameter("authorId")+"&followMessage="+followAuthor(request));
                 break;
             case"like":
                 response.sendRedirect("postResultServlet?submit=like&storyId="+request.getParameter("storyId")+"&like="+followAuthor(request));

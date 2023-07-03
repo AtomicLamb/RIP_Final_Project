@@ -24,7 +24,7 @@ public interface EditorDAOInterface {
     
     String approveWriter(WriterApplication writer);
     
-    String denyWriter(Writer writer);
+    String denyWriter(WriterApplication writer);
     
     List<Writer> viewWriters();
     

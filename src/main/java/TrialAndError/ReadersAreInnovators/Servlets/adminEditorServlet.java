@@ -5,6 +5,7 @@ package TrialAndError.ReadersAreInnovators.Servlets;/*
 
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
+import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.RESTService.ImpService;
@@ -30,10 +31,12 @@ import java.util.logging.Logger;
 public class adminEditorServlet extends HttpServlet {
     
     private ImpService imp;
+    private ServiceLayerClass service;
     HttpSession session;
     public adminEditorServlet()
     {
         imp = new ImpService();
+        service = new ServiceLayerClass();
     }
 
     @Override
@@ -42,8 +45,22 @@ public class adminEditorServlet extends HttpServlet {
     {
        switch(request.getParameter("submit"))
        {
+           case"HOME":
+               session= request.getSession(false);
+               Integer num = (Integer) session.getAttribute("UserTypeID");
+               request.setAttribute("message", num);
+               
+               List<Story>genreStories=service.getStoriesFromGenres(new User((Integer) session.getAttribute("UserID")));
+               List<Story>topWeekPicksStories=service.getWeeksTopPicks();
+               List<Story>recommendedBooks=service.getRecommendedBooks();
+               request.setAttribute("recommendedBooks",recommendedBooks);
+               request.setAttribute("topPicks",topWeekPicksStories);
+               request.setAttribute("stories", genreStories);
+               var dispacther =  request.getRequestDispatcher("HomePage.jsp");
+               dispacther.forward(request, response);
+               break;
           case"EDITOR PAGE":
-              var dispacther =  request.getRequestDispatcher("Editors.jsp");
+              dispacther =  request.getRequestDispatcher("Editors.jsp");
                         dispacther.forward(request, response);
               break;
           case"MANAGE GENRES":
@@ -65,6 +82,10 @@ public class adminEditorServlet extends HttpServlet {
           case"REMOVE GENRE":
               getGenres(request,response);
               break;
+           case"BACK TO ADMIN EDITOR PAGE":
+               dispacther =  request.getRequestDispatcher("Admin-Editor.jsp");
+               dispacther.forward(request, response);    
+           //
        }
     }
 

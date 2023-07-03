@@ -57,8 +57,14 @@ public class controllerServlet extends HttpServlet {
                case"Continue to Homepage":
                    Integer num = 0;
                    request.setAttribute("message", num);
-                   dispatcher =  request.getRequestDispatcher("HomePage.jsp");
+                   session= request.getSession(false);
+                    List<Story>topWeekPicksStories=service.getWeeksTopPicks();
+                   List<Story>recommendedBooks=service.getRecommendedBooks();
+                   request.setAttribute("recommendedBooks",recommendedBooks);
+                   request.setAttribute("topPicks",topWeekPicksStories);
+                    dispatcher =  request.getRequestDispatcher("HomePage.jsp");
                         dispatcher.forward(request, response);
+                        
                break;
            case"Verified Email":
                String message = imp.emailVerification(request.getParameter("email"));
@@ -68,8 +74,14 @@ public class controllerServlet extends HttpServlet {
            case"GO TO LOGIN":
                dispatcher =  request.getRequestDispatcher("index.jsp");
                dispatcher.forward(request, response);
+               break;
+           case"SIGN OUT":
+               session = request.getSession(false);
+               session.invalidate();
+               
+               dispatcher =  request.getRequestDispatcher("index.jsp");
+               dispatcher.forward(request, response);
                break;    
-          
        }
     }
 
@@ -176,6 +188,7 @@ public class controllerServlet extends HttpServlet {
                    
                    session = request.getSession(true);
                    
+                   session.setAttribute("User", user);
                    session.setAttribute("UserID", user.getUserID());
                    session.setAttribute("Name", user.getName());
                    session.setAttribute("Surname", user.getSurname());
@@ -186,7 +199,10 @@ public class controllerServlet extends HttpServlet {
                    
                    request.setAttribute("message", user.getUserTypeID());
                    List<Story>genreStories=service.getStoriesFromGenres(user);
-                   
+                   List<Story>topWeekPicksStories=service.getWeeksTopPicks();
+                   List<Story>recommendedBooks=service.getRecommendedBooks();
+                   request.setAttribute("recommendedBooks",recommendedBooks);
+                   request.setAttribute("topPicks",topWeekPicksStories);
                    request.setAttribute("stories", genreStories);
                    dispatcher.forward(request, response);
                }

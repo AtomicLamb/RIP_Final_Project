@@ -37,9 +37,14 @@
                 
              <div class="button input-box">
                  <input type="submit" name="submit" value="Confirm Writer Application">
-              </div>    
+              </div>
               </div>
           </form>
+            <form action="editPersonalInformationServlet" method="get">
+                <div class="button input-box">
+                    <input type="submit" name="submit" value="BACK TO PROFILE">
+                </div>
+            </form>
     </div>
     </div>
     </div>

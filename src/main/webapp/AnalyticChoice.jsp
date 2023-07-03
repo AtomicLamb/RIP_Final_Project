@@ -18,7 +18,7 @@
          <div class="container">
         <div class="cover">
       <div class="front">
-        <img src="images/AnalyticChoice.jpg" alt="">
+        <img src="images/AnalyticChoicePic.jpg" alt="">
         <div class="text">
           <span class="text-1">"The future belongs to those who believe in the beauty of their dreams."</span>
           <span class="text-2">-Eleanor Roosevelt</span>
@@ -49,6 +49,11 @@
                   </div>
               </div>
           </form>
+            <form action="editorServlet" method="get">
+                <div class="button input-box">
+                    <input style="color: #007791; background-color: black;" type="submit" name="submit" value="BACK TO EDITORS PAGE" formnovalidate>
+                </div>
+            </form>
             <%
                 String message = (String) request.getAttribute("message");
                 if(message!=null){

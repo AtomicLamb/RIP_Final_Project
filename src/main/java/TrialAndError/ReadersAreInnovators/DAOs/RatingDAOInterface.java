@@ -19,6 +19,7 @@ public interface RatingDAOInterface {
     String rateStory(Rating rating);
     String changeRating(Rating rating);
     String removeRating(Rating rating);
+    Boolean checkRatingExists(Rating rating);
     
     
 }

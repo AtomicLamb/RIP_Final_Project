@@ -42,7 +42,12 @@
                         </div> 
                         <div class="button input-box">
                             <input style="color: white; background-color: black;" type="submit" name="submit" value="REMOVE COMMENT">
-                        </div> 
+                        </div>
+                    </form>
+                    <form action="editorServlet" method="get">
+                        <div class="button input-box">
+                            <input style="color: white; background-color: black;" type="submit" name="submit" value="BACK TO EDITORS PAGE" formnovalidate>
+                        </div>
                     </form>
                 </div>
             </div>

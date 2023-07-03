@@ -196,7 +196,7 @@ public class EditorImplementation implements EditorDAOInterface{
     
     
     @Override       //Completed: Allows an Editor to deny a Pending Writer.
-    public String denyWriter(Writer writer) {
+    public String denyWriter(WriterApplication writer) {
         
         conn = DatabaseConnectionManager.getConnection();
         

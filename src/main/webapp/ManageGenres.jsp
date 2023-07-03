@@ -37,6 +37,9 @@
                   <div class="button input-box">
                     <input type="submit" name="submit" value="REMOVE GENRE">
                   </div>
+                  <div class="button input-box">
+                      <input type="submit" name="submit" value="BACK TO ADMIN EDITOR PAGE">
+                  </div>
               </div>
           </form>
     </div>

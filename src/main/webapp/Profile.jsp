@@ -54,11 +54,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                
-                <li class="nav-item">
-                   <a class="nav-link" href="HomePage.jsp">HOME</a>
                 <li class="nav-item">
                     <form action="editPersonalInformationServlet" method="get">
+                        <input class="nav-link" type="submit" name="submit" value="HOME">
                         <input class="nav-link" type="submit" name="submit" value="EDIT PERSONAL INFORMATION">
                     </form>
                 </li>

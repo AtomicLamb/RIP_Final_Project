@@ -14,10 +14,17 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Reader;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
-
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+
+
+/**
+ * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Author:         Luaan Robinson.
+ * @Version:        v.1.0.0
+ * @Date:           2023-07-05.
+ * @Completed:      True.
+ */
 
 public class ServiceLayerClass implements ServiceLayer_Interface{
     
@@ -38,7 +45,6 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     
     public ServiceLayerClass() {
         
-        
         this.adminImp = new AdminEditorImplementation();
         this.analyticsImp = new AnalyticsImplementation();
         this.commentImp = new CommentImplementation();
@@ -51,6 +57,22 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
         this.userImp = new UserImplementation();
         
     }
+     
+    @Override
+    public List<Story> getRecommendedBooks(){
+        return readerImp.getRecommendedBooks();
+    }
+    
+    @Override
+    public List<Story> getWeeksTopPicks(){
+        return readerImp.getWeeksTopPicks();
+    }
+    
+    @Override
+    public Boolean checkRatingExists(Rating rating){
+        return ratingImp.checkRatingExists(rating);
+    }
+    
     
     @Override
     public String saveAsDraft(Story story){
@@ -245,7 +267,7 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
     
     
     @Override
-    public String denyWriter(Writer writer) {
+    public String denyWriter(WriterApplication writer) {
         
         subject = "Writer Application";
         text = "Unfortunately you have not been approved to be a writer on our platform. You may still be use our program as a reader and have reader rights";
@@ -458,6 +480,9 @@ public class ServiceLayerClass implements ServiceLayer_Interface{
         
     }
     
+    public Boolean checkIfLiked(Story story, User user){
+        return storyImp.checkIfLiked(story,user);
+    }
     
     @Override
     public String publiciseStory(Story story) {

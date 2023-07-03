@@ -38,6 +38,14 @@ public class Comment {
         
     }
     
+    public Comment(Integer storyID, Integer userID, String comment) {
+        
+        this.storyID = storyID;
+        this.userID = userID;
+        this.comment = comment;
+        
+    }
+    
     public Comment(Integer commentID, Integer storyID, Integer userID, String name, String comment) {
         
         this.commentID = commentID;

@@ -32,9 +32,6 @@
           <form action="analyticalServlet" method="get">
               <div class="input-boxes">
                   <div class="button input-box">
-                    <input type="submit" name="submit" value="HOME">
-                  </div>
-                  <div class="button input-box">
                     <input type="submit" name="submit" value="MOST VIEWED BOOKS">
                   </div>
                   <div class="button input-box">
@@ -54,6 +51,11 @@
                   </div>
               </div>
           </form>
+            <form action="editorServlet" method="get">
+                <div class="button input-box">
+                    <input style="color: white; background-color: #007791;" type="submit" name="submit" value="BACK TO EDITORS PAGE" formnovalidate>
+                </div>
+            </form>
     </div>
     </div>
     </div>

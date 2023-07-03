@@ -4,7 +4,7 @@ import TrialAndError.ReadersAreInnovators.Models.AnalyticalData.Rating;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
-
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 /**
  * @Desctripion:    The concrete implementation of the AnalyticsDAO.
@@ -29,6 +30,8 @@ public class RatingImplementation implements RatingDAOInterface{
     private ResultSet rs;
     private String query;
     private String message;
+    private InputStream input = null;
+    private ByteArrayOutputStream output = null;
     FunctionsClass functionsClass = new FunctionsClass();
     
     
@@ -108,6 +111,7 @@ public class RatingImplementation implements RatingDAOInterface{
         
     }
     
+    
     @Override       //Completed: Allows a user to rate a Story.
     public String rateStory(Rating rating) {
         
@@ -179,6 +183,7 @@ public class RatingImplementation implements RatingDAOInterface{
         return message;
         
     }
+    
     
     @Override       //Completed: Allows a user to change their rating for a Story.
     public String changeRating(Rating rating) {
@@ -252,6 +257,7 @@ public class RatingImplementation implements RatingDAOInterface{
         
     }
     
+    
     @Override       //Completed: Allows a user to remove their rating for a Story.
     public String removeRating(Rating rating) {
         
@@ -320,6 +326,88 @@ public class RatingImplementation implements RatingDAOInterface{
         }
         
         return message;
+        
+    }
+    
+    
+    @Override       //Completed: Checks if a user has already rated a story.
+    public Boolean checkRatingExists(Rating rating) {
+        
+        Boolean exists = null;
+        
+        conn = DatabaseConnectionManager.getConnection();
+        
+        try {
+            
+            query = "select * from rating r where r.UserID = ? and r.StoryID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, rating.getUserID());
+            ps.setInt(2, rating.getStoryID());
+            rs = ps.executeQuery();
+            
+            if (rs.next()){
+                
+                exists = true;
+                
+            } else {
+                
+                exists = false;
+                
+            }
+            
+        } catch (SQLException e) {
+            
+            message = "Error getting existing rating.";
+            Logger.getLogger(RatingImplementation.class.getName()).log(Level.FINE, "Error getting existing rating.", e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return exists;
         
     }
     

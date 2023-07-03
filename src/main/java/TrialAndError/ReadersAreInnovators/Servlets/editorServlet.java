@@ -10,6 +10,7 @@ import TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
+import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import TrialAndError.ReadersAreInnovators.RESTService.ImpService;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
@@ -57,6 +58,16 @@ private final FunctionsClass functionsClass = new FunctionsClass();
         switch(request.getParameter("submit"))
         {
             case"HOME":
+                session= request.getSession(false);
+                Integer num = (Integer) session.getAttribute("UserTypeID");
+                request.setAttribute("message", num);
+                
+                List<Story>genreStories=slc.getStoriesFromGenres(new User((Integer) session.getAttribute("UserID")));
+                List<Story>topWeekPicksStories=slc.getWeeksTopPicks();
+                List<Story>recommendedBooks=slc.getRecommendedBooks();
+                request.setAttribute("recommendedBooks",recommendedBooks);
+                request.setAttribute("topPicks",topWeekPicksStories);
+                request.setAttribute("stories", genreStories);
                 var dispacther =  request.getRequestDispatcher("HomePage.jsp");
                         dispacther.forward(request, response);
                 break;
@@ -88,7 +99,12 @@ private final FunctionsClass functionsClass = new FunctionsClass();
             case"REVIEW PENDING WRITERS":
                 viewWriterApplications(request,response);
                 break;
-                
+            case"BACK TO EDITORS PAGE":
+                dispacther =  request.getRequestDispatcher("Editors.jsp");
+                dispacther.forward(request, response);
+            case"BACK TO Analyse Data PAGE":
+                dispacther =  request.getRequestDispatcher("Editors.jsp");
+                dispacther.forward(request, response);
         }
     }
 

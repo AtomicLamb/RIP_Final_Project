@@ -30,6 +30,7 @@ public interface StoryDAOInterface {
     String updateDraft(Story story);
     String likeStory(Story story, User user);
     String unlikeStory(Story story, User user);
+    Boolean checkIfLiked(Story story, User user);
     
     
 }

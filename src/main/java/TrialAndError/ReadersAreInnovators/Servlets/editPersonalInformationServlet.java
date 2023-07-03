@@ -54,7 +54,7 @@ public class editPersonalInformationServlet extends HttpServlet {
                 var dispacther =  request.getRequestDispatcher("applyForWriter.jsp");
                         dispacther.forward(request, response);
                 break;
-            case"Profile":
+            case"PROFILE":
                 session = request.getSession(false);
                 
                 Integer userID = (Integer) session.getAttribute("UserID");
@@ -69,8 +69,37 @@ public class editPersonalInformationServlet extends HttpServlet {
                 request.setAttribute("followedAuthors",followedAuthors);
                 dispacther =  request.getRequestDispatcher("Profile.jsp");
                 dispacther.forward(request, response);
-                
                 break;
+            case"HOME":
+                session= request.getSession(false);
+                Integer num = (Integer) session.getAttribute("UserTypeID");
+                request.setAttribute("message", num);
+                
+                List<Story>genreStories=service.getStoriesFromGenres(new User((Integer) session.getAttribute("UserID")));
+                List<Story>topWeekPicksStories=service.getWeeksTopPicks();
+                List<Story>recommendedBooks=service.getRecommendedBooks();
+                request.setAttribute("recommendedBooks",recommendedBooks);
+                request.setAttribute("topPicks",topWeekPicksStories);
+                request.setAttribute("stories", genreStories);
+                
+                dispacther =  request.getRequestDispatcher("HomePage.jsp");
+                dispacther.forward(request, response);
+                break;
+            case"BACK TO PROFILE":
+                session = request.getSession(false);
+                
+                userID = (Integer) session.getAttribute("UserID");
+                user = new User(userID);
+                readFavorites=service.getReadFavorites(user);
+                unreadFavourites=service.getUnreadFavorites(user);
+                userGenres=service.getUserGenres(user);
+                followedAuthors=service.getFollowedAuthors(user);
+                request.setAttribute("readFavourites",readFavorites);
+                request.setAttribute("unreadFavourites",unreadFavourites);
+                request.setAttribute("userGenres",userGenres);
+                request.setAttribute("followedAuthors",followedAuthors);
+                dispacther =  request.getRequestDispatcher("Profile.jsp");
+                dispacther.forward(request, response);    
         }
     }
 

@@ -59,8 +59,18 @@ public class writerServlet extends HttpServlet
        switch(request.getParameter("submit"))
        {
            case"HOME PAGE":
+               session= request.getSession(false);
+               Integer num = (Integer) session.getAttribute("UserTypeID");
+               request.setAttribute("message", num);
+               
+               List<Story>genreStories=slc.getStoriesFromGenres(new User((Integer) session.getAttribute("UserID")));
+               List<Story>topWeekPicksStories=slc.getWeeksTopPicks();
+               List<Story>recommendedBooks=slc.getRecommendedBooks();
+               request.setAttribute("recommendedBooks",recommendedBooks);
+               request.setAttribute("topPicks",topWeekPicksStories);
+               request.setAttribute("stories", genreStories);
                var dispacther =  request.getRequestDispatcher("HomePage.jsp");
-                        dispacther.forward(request, response);
+               dispacther.forward(request, response);
                break;
            case"VIEW STORIES":
                session= request.getSession(false);

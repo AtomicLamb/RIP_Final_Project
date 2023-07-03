@@ -40,26 +40,23 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
 	<link rel="stylesheet" href="css/horizontal_scrollBar.css">
 </head>
-<body>
+<body style="background-color: #007791">
 	<!-- header section start-->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <span>class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <%
             Integer num = (Integer) request.getAttribute("message");
             %>
-                <li class="nav-item">
-                   <a class="nav-link" href="HomePage.jsp">HOME</a>
-                </li>
                 <%
             if(num == 2)
             {
             %>
                 <li class="nav-item">
-                   <a class="nav-link" href="Writers.jsp">WRITER PAGE</a>
+                   <a style="color: #007791" class="nav-link" href="Writers.jsp">WRITER PAGE</a>
                 </li>
                     <%}%>  
                     <%
@@ -67,7 +64,7 @@
             {
             %>
                 <li class="nav-item">
-                   <a class="nav-link" href="Editors.jsp">EDITORS PAGE</a>
+                   <a style="color: #007791" class="nav-link" href="Editors.jsp">EDITORS PAGE</a>
                 </li>
                 <%}%>
                 <%
@@ -75,25 +72,38 @@
             {
             %>
                 <li class="nav-item">
-                   <a class="nav-link" href="Admin-Editor.jsp">ADMIN EDITORS PAGE</a>
+                   <a style="color: #007791" class="nav-link" href="Admin-Editor.jsp">ADMIN EDITORS PAGE</a>
                 </li>
                 <%}%>
+				<%if(num != 0) {%>
                 <li class="nav-item">
 					<form action="editPersonalInformationServlet" method="get">
-						<input class="nav-link" type="submit" name="submit" value="Profile">
+						<input style="border: none;background-color: #343a40; color: #007791" class="nav-link" type="submit" name="submit" value="PROFILE">
 					</form>
+					<%}%>
                 </li>
+				<%if(num != 0) {%>
                 <li class="nav-item">
                     <div class="dropdown">
-                    <button class="nav-link">MORE</button>
+                    <button style="border: none;background-color: #343a40; color: #007791" class="nav-link" class="nav-link">MORE</button>
                         <div class="dropdown-content">
                         <a href="#">REFER A FRIEND</a>
                         </div>
                     </div>
                 </li>
+				<%}%>
             </ul>
         </div>
+		<%if(num == 0) {%>
          <div class="login_text"><a href="index.jsp">LOGIN HERE</a></div>
+		<%}%>
+		<%if(num != 0) {%>
+		<form action="controllerServlet" method="get">
+		<div class="login_text">
+			<input style="border: none;background-color: #343a40; color: #007791" class="nav-link" type="submit" name="submit" value="SIGN OUT" formnovalidate>
+		</div>
+		<%}%>
+		</form>
     </nav>
 	<!-- header section start-->
 	<!-- banner section start-->
@@ -102,9 +112,16 @@
 			<%
 				String name = (String) session.getAttribute("Name");
 				String surname = (String) session.getAttribute("Surname");
+				
+				if (name == null && surname == null)
+				{
 			%>
-                    <h1 class="best_taital" style="color:black">Welcome: <%= name%> <%= surname%></h1>
-			
+			<h1 class="best_taital" style="color:black">Welcome: User</h1>  
+			<%}
+			else 
+			{%>
+			<h1 class="best_taital" style="color:black">Welcome: <%= name%> <%= surname%></h1>
+			<%}%>
 			<div class="box_main">
 			    <input type="" class="email_bt" placeholder="Search" name="">
 				<button class="subscribe_bt"><a href="#">Search</a></button>
@@ -113,22 +130,20 @@
 	</div>
 	<!-- banner section end-->
 	<!-- marketing section start-->
-
-
+	
+				 <%List<Story>weeksTopStories=(List<Story>)request.getAttribute("topPicks");%>
+	<%List<Story>recommendedBooks=((List<Story>)request.getAttribute("recommendedBooks"));%>
 	<div class="container-fluid" >
 		<div class="row">
 
 
+			<%if(num != 0){%>
+			<%List<Story>storiesFromFavouriteGenres=(List<Story>)request.getAttribute("stories");%>
 			<h1 class="jobs_text"  style="text-align: center">Books from favourite Genres</h1>
-
-
 			<div class="scrollmenu" style="margin: auto; width: 800px;">
-
-				<%List<Story>storiesFromFavouriteGenres=(List<Story>)request.getAttribute("stories");%>
-				 
                      <%if(!storiesFromFavouriteGenres.isEmpty()){%>
 				 <%for(Story story:storiesFromFavouriteGenres){%>
-				<a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>%authorId=<%=story.getAuthorID()%>">
+				<a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>&authorId=<%=story.getAuthorID()%>">
 					<h1 style="color: white;"><%=story.getTitle()%></h1>
 					<img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" >
 				</a>
@@ -140,6 +155,7 @@
 			</div>
 		</div>
 	</div>
+	<% }%>
 	<!-- marketing section end-->
 	<!-- Industrial section start-->
 
@@ -150,30 +166,17 @@
 
 			<div class="scrollmenu" style="margin: auto; width: 800px">
 
-				<a href="#home">
-					<img src="pic_Book1.jpg" alt="Book1">
+				<%if(!weeksTopStories.isEmpty()){%>
+				<%for(Story story:weeksTopStories){%>
+				<a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>&authorId=<%=story.getAuthorID()%>">
+					<h1 style="color: white;"><%=story.getTitle()%></h1>
+					<img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" >
 				</a>
-				<a href="#news">
-					<img src="pic_Book1.jpg" alt="Book2">
-				</a>
-				<a href="#contact">
-					<img src="pic_Book2.jpg" alt="Book3">
-				</a>
-				<a href="#contact">
-					<img src="pic_Book2.jpg" alt="Book3">
-				</a>
-				<a href="#contact">
-					<img src="pic_Book2.jpg" alt="Book3">
-				</a>
-				<a href="#contact">
-					<img src="pic_Book2.jpg" alt="Book3">
-				</a>
-				<a href="#contact">
-					<img src="pic_Book2.jpg" alt="Book3">
-				</a>
-				<a href="#contact">
-					<img src="pic_Book2.jpg" alt="Book3">
-				</a>
+				<%}%>
+				<%}%>
+				<%if(weeksTopStories.isEmpty()){%>
+				<p style="color: white">No top stories for the week are currently available</p>
+				<%}%>
 			</div>
 		</div>
 
@@ -189,31 +192,17 @@
 
 
 			<div class="scrollmenu" style="margin: auto; width: 800px">
-
-				<a href="#home">
-					<img src="pic_Book1.jpg" alt="Book1">
+				<%if(!recommendedBooks.isEmpty()){%>
+				<%for(Story story:recommendedBooks){%>
+				<a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>&authorId=<%=story.getAuthorID()%>">
+					<h1 style="color: white;"><%=story.getTitle()%></h1>
+					<img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" >
 				</a>
-				<a href="#news">
-					<img src="pic_Book1.jpg" alt="Book2">
-				</a>
-				<a href="#contact">
-					<img src="pic_Book2.jpg" alt="Book3">
-				</a>
-				<a href="#contact">
-					<img src="pic_Book2.jpg" alt="Book3">
-				</a>
-				<a href="#contact">
-					<img src="pic_Book2.jpg" alt="Book3">
-				</a>
-				<a href="#contact">
-					<img src="pic_Book2.jpg" alt="Book3">
-				</a>
-				<a href="#contact">
-					<img src="pic_Book2.jpg" alt="Book3">
-				</a>
-				<a href="#contact">
-					<img src="pic_Book2.jpg" alt="Book3">
-				</a>
+				<%}%>
+				<%}%>
+				<%if(recommendedBooks.isEmpty()){%>
+				<p style="color: white">No recommended stories are currently available</p>
+				<%}%>
 			</div>
 		</div>
 
