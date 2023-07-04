@@ -2,7 +2,7 @@ package TrialAndError.ReadersAreInnovators.Models.UserTypes;
 
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Desctripion:    The model for a Writer Object.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -25,7 +25,7 @@ public class Writer extends Reader {
     private Double data;
     
     
-    public Writer(){
+    public Writer() {
         
     }
     
@@ -75,70 +75,6 @@ public class Writer extends Reader {
         
     }
     
-    public Writer(String name, String surname, String email, String phoneNumber, Double data) {
-        
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.data = data;
-        
-    }
-    
-    public Writer(String name, String surname, String email, String phoneNumber, String password) {
-        
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        
-    }
-    
-    public Writer(String name, String surname, String email, String phoneNumber, String password, Integer userTypeID, String userType, Boolean isBanned, Boolean emailVerified) {
-        
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.userTypeID = userTypeID;
-        this.userType = userType;
-        this.isBanned = isBanned;
-        this.emailVerified = emailVerified;
-        
-    }
-    
-    public Writer(Integer userID, String name, String surname, String email, String phoneNumber, String password, Integer userTypeID, String userType, Boolean isBanned, Boolean emailVerified) {
-        
-        this.userID = userID;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.userTypeID = userTypeID;
-        this.userType = userType;
-        this.isBanned = isBanned;
-        this.emailVerified = emailVerified;
-        
-    }
-    
-    public Writer(Integer userID, String name, String surname, String email, String phoneNumber, String password, Integer userTypeID, String userType, Boolean isBanned, Boolean emailVerified, Double data) {
-        
-        this.userID = userID;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.userTypeID = userTypeID;
-        this.userType = userType;
-        this.isBanned = isBanned;
-        this.emailVerified = emailVerified;
-        this.data = data;
-        
-    }
     
     @Override
     public Integer getUserID() {
@@ -168,35 +104,6 @@ public class Writer extends Reader {
     @Override
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-    
-    @Override
-    public Integer getUserTypeID() {
-        return 2;
-    }
-    
-    @Override
-    public void setUserTypeID() {
-        this.userTypeID = 2;
-    }
-    
-    @Override
-    public String getUserType() {
-        return "Writer";
-    }
-    
-    public void setUserType() {
-        this.userType = "Writer";
-    }
-    
-    @Override
-    public Boolean getBanned() {
-        return isBanned;
-    }
-    
-    @Override
-    public void setBanned(Boolean banned) {
-        isBanned = banned;
     }
     
     @Override
@@ -230,6 +137,36 @@ public class Writer extends Reader {
     }
     
     @Override
+    public Integer getUserTypeID() {
+        return userTypeID;
+    }
+    
+    @Override
+    public void setUserTypeID(Integer userTypeID) {
+        this.userTypeID = userTypeID;
+    }
+    
+    @Override
+    public String getUserType() {
+        return userType;
+    }
+    
+    @Override
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+    
+    @Override
+    public Boolean getBanned() {
+        return isBanned;
+    }
+    
+    @Override
+    public void setBanned(Boolean banned) {
+        isBanned = banned;
+    }
+    
+    @Override
     public Boolean getEmailVerified() {
         return emailVerified;
     }
@@ -257,12 +194,12 @@ public class Writer extends Reader {
                 "userID=" + userID +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", userTypeID=" + userTypeID +
-                ", userType='" + userType + '\'' +
-                ", isBanned=" + isBanned +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", password='" + password + '\'' +
+                ", userTypeID=" + userTypeID +
+                ", userType='" + userType + '\'' +
+                ", isBanned=" + isBanned +
                 ", emailVerified=" + emailVerified +
                 ", data=" + data +
                 '}';

@@ -74,7 +74,7 @@
                         <%Story story=(Story)request.getAttribute("storyDetails");%>
                         <%session=request.getSession(false);%>
 
-                       <h1><%=writer.getUserID()%></h1> 
+                      
                         <div class="image_1 padding_0" style="margin-left: 0px;padding-left: 0px"><h1><%=story.getTitle()%></h1><img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="height: 400px;width:300px; "><div style="position: relative;right: 150px;margin-right: 0px;float: right">
                                     
                                     <span><br>Views<i class="fa-sharp fa-solid fa-eye"></i><%=story.getViews()%></span><br><br>
@@ -102,7 +102,7 @@
                                             </div>
                                             </div></div>
 				  <%List<Comment>comments=(List<Comment>)request.getAttribute("comments");%>
-                        <%Comment newComment=(Comment)request.getAttribute("newComment");%>
+                        
 				<div class="col-md-6">
 					<div class="job_section_2">
                                            
@@ -120,17 +120,7 @@
                                                                     
                                        
                                                                <h2>Comments</h2>
-                                                               <%if(newComment!=null){%>
-                                                               <p>Posted by : <%=(String)session.getAttribute("Name")%> <%=(String)session.getAttribute("Surname")%> on <%=newComment.getDateAdded()%><br><%=newComment.getComment()%></p>
-                                                               <form action="StoryServlet" method="post">
-                                                                   
-                                                                   <input type="hidden" name="commentId" value="<%=newComment.getCommentID()%>">
-                                                                   <input type="hidden" name="storyId" value="<%=story.getStoryID()%>">
-                                                                    <input type="submit" name="submit"  value="reportComment">
-                                                               </form>
-                                                                 
-                                                                  <%}%>
-                                                                  <%if(!comments.isEmpty()){%>
+                                                               <%if(!comments.isEmpty()){%>
                                                                <%for(Comment comment:comments){%> 
                                                                    <p>Posted by : <%=comment.getName()%> on <%=comment.getDateAdded()%><br><%=comment.getComment()%></p>
                                                                   <span id="reportButton" ><a href="StoryServlet?submit=reportComment">Report comment</a></span>

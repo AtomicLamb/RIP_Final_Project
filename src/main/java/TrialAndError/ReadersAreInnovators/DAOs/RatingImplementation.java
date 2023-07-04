@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Desctripion:    The concrete implementation of the RatingDAO.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -333,9 +333,8 @@ public class RatingImplementation implements RatingDAOInterface{
     @Override       //Completed: Checks if a user has already rated a story.
     public Boolean checkRatingExists(Rating rating) {
         
-        Boolean exists = null;
-        
         conn = DatabaseConnectionManager.getConnection();
+        Boolean exists = null;
         
         try {
             

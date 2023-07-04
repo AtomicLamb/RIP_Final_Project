@@ -11,7 +11,7 @@ import java.util.List;
 
 
 /**
- * @Desctripion:    The Readers DAO Interface.
+ * @Desctripion:    The Reader DAO Interface.
  * @Author:         Luaan Robinson.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -22,16 +22,24 @@ public interface ReaderDAOInterface {
     
     
     String registerReader(Reader reader);
+    
     String followAuthor(Writer writer, User user);
+    
     String unfollowAuthor(Writer writer, User user);
+    
     public Boolean checkIfAuthorFollowed(User user, Writer writer);
-    ArrayList<Writer> getFollowedAuthors(User user);
-    ArrayList<Story> getAllFavorites(User user);
-    ArrayList<Story> getStoriesFromGenres(User user);
+    
+    List<Writer> getFollowedAuthors(User user);
+    
+    List<Story> getStoriesFromGenres(User user);
+    
     List<Story> getWeeksTopPicks();
+    
     List<Story> getRecommendedBooks();
-    ArrayList<Story> getReadFavorites(User user);
-    ArrayList<Story> getUnreadFavorites(User user);
+    
+    List<Story> getReadFavorites(User user);
+    
+    List<Story> getUnreadFavorites(User user);
     
     
 }

@@ -2,7 +2,7 @@ package TrialAndError.ReadersAreInnovators.Models.StoryElements;
 
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Desctripion:    The model for a Genre Object.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -17,7 +17,7 @@ public class Genre {
     private Double data;
     
     
-    public Genre(){
+    public Genre() {
           
     }
     

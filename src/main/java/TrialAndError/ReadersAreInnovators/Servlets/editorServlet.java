@@ -6,6 +6,8 @@ package TrialAndError.ReadersAreInnovators.Servlets;/*
 
 import TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication;
 import TrialAndError.ReadersAreInnovators.Models.Administration.WriterApplication;
+import TrialAndError.ReadersAreInnovators.Models.RESTModels.StoryApplicationEditorREST;
+import TrialAndError.ReadersAreInnovators.Models.RESTModels.StoryGenreREST;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
@@ -62,9 +64,9 @@ private final FunctionsClass functionsClass = new FunctionsClass();
                 Integer num = (Integer) session.getAttribute("UserTypeID");
                 request.setAttribute("message", num);
                 
-                List<Story>genreStories=slc.getStoriesFromGenres(new User((Integer) session.getAttribute("UserID")));
-                List<Story>topWeekPicksStories=slc.getWeeksTopPicks();
-                List<Story>recommendedBooks=slc.getRecommendedBooks();
+                List<Story>genreStories=imp.getStoriesFromGenres(new User((Integer) session.getAttribute("UserID")));
+                List<Story>topWeekPicksStories=imp.getWeeksTopPicks();
+                List<Story>recommendedBooks=imp.getRecommendedBooks();
                 request.setAttribute("recommendedBooks",recommendedBooks);
                 request.setAttribute("topPicks",topWeekPicksStories);
                 request.setAttribute("stories", genreStories);
@@ -79,7 +81,7 @@ private final FunctionsClass functionsClass = new FunctionsClass();
               viewFlaggedComments(request,response); 
                 break;
             case"REVIEW PENDING STORIES":
-                 List<StoryApplication>pendingStories=slc.viewPendingStories();
+                 List<StoryApplication>pendingStories=imp.viewPendingStories();
                 request.setAttribute("pendingStories",pendingStories);
                   dispacther =  request.getRequestDispatcher("ReviewPendingStories.jsp");
                         dispacther.forward(request, response);   
@@ -91,7 +93,7 @@ private final FunctionsClass functionsClass = new FunctionsClass();
                 
                StoryApplication storyApplication = new StoryApplication();
                storyApplication.setPendingStoryID(Integer.valueOf(request.getParameter("storyId")));
-               request.setAttribute("pendingStory",slc.reviewPendingStory(storyApplication));
+               request.setAttribute("pendingStory",imp.reviewPendingStory(storyApplication));
                
                dispacther= request.getRequestDispatcher("reviewPendingStory.jsp");
                dispacther.forward(request,response);
@@ -129,13 +131,13 @@ private final FunctionsClass functionsClass = new FunctionsClass();
                  authorId = Integer.valueOf(request.getParameter("authorId"));
                  
                         session = request.getSession(false);
-                 request.setAttribute("message",slc.approvePendingStory(new StoryApplication(Integer.valueOf(request.getParameter("pendingstoryId")),
+                 request.setAttribute("message",imp.approvePendingStory(new StoryApplicationEditorREST(new StoryApplication(Integer.valueOf(request.getParameter("pendingstoryId")),
                            request.getParameter("storyTitle"), Integer.valueOf(request.getParameter("authorId")),
                                  request.getParameter("email"),request.getParameter("number") ,request.getParameter("storyBody"), request.getParameter("storySynopsis"),
                                  request.getParameter("coverImagePath") , Boolean.parseBoolean(request.getParameter("storyCommentsEnabled"))),
-                         new Editor((Integer)session.getAttribute("UserID"))));
+                         new Editor((Integer)session.getAttribute("UserID")))));
                  
-                 request.setAttribute("genreList", slc.getGenres());
+                 request.setAttribute("genreList", imp.getGenres());
                  List<String> genres = new ArrayList<>();
                  genres.add(request.getParameter("genre1"));
                  
@@ -157,7 +159,7 @@ private final FunctionsClass functionsClass = new FunctionsClass();
                  
                  break;
              case"Deny":
-                 request.setAttribute("message",slc.removePendingStory(new StoryApplication(Integer.valueOf(request.getParameter("pendingstoryId")))));
+                 request.setAttribute("message",imp.removePendingStory(new StoryApplication(Integer.valueOf(request.getParameter("pendingstoryId")))));
                  dispacther= request.getRequestDispatcher("Editors.jsp");
                  dispacther.forward(request,response);
                  break;
@@ -291,7 +293,7 @@ private final FunctionsClass functionsClass = new FunctionsClass();
         {
             if (genres.length >= 1 && genres.length <= 3) {
                 for (int i = 0; i < genres.length; i++) {
-                    request.setAttribute("message", slc.addGenreToStory(new Story(title,authorId),new Genre(genres[i])));
+                    request.setAttribute("message", imp.addGenreToStory(new StoryGenreREST(new Story(title,authorId),new Genre(genres[i]))));
                 }
                 var dispacther = request.getRequestDispatcher("Editors.jsp");
                 try {
@@ -303,7 +305,7 @@ private final FunctionsClass functionsClass = new FunctionsClass();
             else
             {
                 request.setAttribute("message", "You must select 1 to 3 genres");
-                request.setAttribute("genreList", slc.getGenres());
+                request.setAttribute("genreList", imp.getGenres());
                 var dispacther = request.getRequestDispatcher("StoryGenre.jsp");
                 try {
                     dispacther.forward(request, response);
@@ -315,7 +317,7 @@ private final FunctionsClass functionsClass = new FunctionsClass();
         else
         {
             request.setAttribute("message", "You must select 1 to 3 genres");
-            request.setAttribute("genreList", slc.getGenres());
+            request.setAttribute("genreList", imp.getGenres());
             var dispacther = request.getRequestDispatcher("StoryGenre.jsp");
             try {
                 dispacther.forward(request, response);

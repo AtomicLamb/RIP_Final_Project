@@ -5,6 +5,7 @@ package TrialAndError.ReadersAreInnovators.Servlets;/*
 
 import TrialAndError.ReadersAreInnovators.Models.Administration.Email;
 import TrialAndError.ReadersAreInnovators.Models.Administration.WriterApplication;
+import TrialAndError.ReadersAreInnovators.Models.RESTModels.UserGenreREST;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
@@ -58,8 +59,8 @@ public class controllerServlet extends HttpServlet {
                    Integer num = 0;
                    request.setAttribute("message", num);
                    session= request.getSession(false);
-                    List<Story>topWeekPicksStories=service.getWeeksTopPicks();
-                   List<Story>recommendedBooks=service.getRecommendedBooks();
+                    List<Story>topWeekPicksStories=imp.getWeeksTopPicks();
+                   List<Story>recommendedBooks=imp.getRecommendedBooks();
                    request.setAttribute("recommendedBooks",recommendedBooks);
                    request.setAttribute("topPicks",topWeekPicksStories);
                     dispatcher =  request.getRequestDispatcher("HomePage.jsp");
@@ -70,10 +71,6 @@ public class controllerServlet extends HttpServlet {
                String message = imp.emailVerification(request.getParameter("email"));
                request.setAttribute("message", message);
                request.getRequestDispatcher("EmailVerification.jsp").forward(request,response);
-               break;
-           case"GO TO LOGIN":
-               dispatcher =  request.getRequestDispatcher("index.jsp");
-               dispatcher.forward(request, response);
                break;
            case"SIGN OUT":
                session = request.getSession(false);
@@ -116,9 +113,9 @@ public class controllerServlet extends HttpServlet {
             
             Reader reader = new Reader(firstName,surname,email,phoneNum,password);
             String message = imp.registerReader(reader);
-            request.setAttribute("genreList",service.getGenres());
+            request.setAttribute("genreList",imp.getGenres());
             
-            if(imp.registerReader(reader).equalsIgnoreCase("Reader successfully added, Please check your emails to verify your account."))
+            if(message.equals("Reader successfully added, Please check your emails to verify your account."))
             {
                 request.setAttribute("message", message);
                 var dispatcher =  request.getRequestDispatcher("SelectGenre.jsp");
@@ -151,9 +148,9 @@ public class controllerServlet extends HttpServlet {
             
        WriterApplication writer = (new WriterApplication(firstName,surname,email,phoneNum,password,motivation));    
        String message = imp.registerWriter(writer);
-       request.setAttribute("genreList",service.getGenres());
+       request.setAttribute("genreList",imp.getGenres());
        
-            if (imp.registerWriter(writer).equalsIgnoreCase("Application successfully submitted."))
+            if (message.equalsIgnoreCase("Reader successfully added, Please check your emails to verify your account.Application successfully submitted."))
             {
                 request.setAttribute("message", message);
                 var dispacther =  request.getRequestDispatcher("SelectGenre.jsp");
@@ -181,7 +178,6 @@ public class controllerServlet extends HttpServlet {
         User user = imp.login(new User(email,password));
         
         var dispatcher = request.getRequestDispatcher("HomePage.jsp");
-       
             try {
                
                 if (user != null) {
@@ -198,12 +194,13 @@ public class controllerServlet extends HttpServlet {
                    session.setAttribute("UserType", user.getUserType());
                    
                    request.setAttribute("message", user.getUserTypeID());
-                   List<Story>genreStories=service.getStoriesFromGenres(user);
-                   List<Story>topWeekPicksStories=service.getWeeksTopPicks();
-                   List<Story>recommendedBooks=service.getRecommendedBooks();
+                   List<Story>genreStories=imp.getStoriesFromGenres(user);
+                   List<Story>topWeekPicksStories=imp.getWeeksTopPicks();
+                   List<Story>recommendedBooks=imp.getRecommendedBooks();
                    request.setAttribute("recommendedBooks",recommendedBooks);
                    request.setAttribute("topPicks",topWeekPicksStories);
                    request.setAttribute("stories", genreStories);
+                    
                    dispatcher.forward(request, response);
                }
                 else
@@ -230,7 +227,7 @@ public class controllerServlet extends HttpServlet {
         {
             for(int i = 0; i < genres.length; i++)
             {
-                request.setAttribute("message", service.selectGenre(user,new Genre(genres[i])));
+                request.setAttribute("message", imp.selectGenre(new UserGenreREST(user,new Genre(genres[i]))));
             }
             var dispacther =  request.getRequestDispatcher("index.jsp");
             try {
@@ -242,7 +239,7 @@ public class controllerServlet extends HttpServlet {
         else
         {
             request.setAttribute("message", "You must select 3 or more genres");
-            request.setAttribute("genreList",service.getGenres());
+            request.setAttribute("genreList",imp.getGenres());
             var dispacther =  request.getRequestDispatcher("SelectGenre.jsp");
             try {
                 dispacther.forward(request, response);

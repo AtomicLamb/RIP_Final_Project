@@ -80,45 +80,45 @@
 		</div>
 	</div>
         <div>              <h1>Followed Authors</h1>
-                             <%if(followedAuthors!=null){%>
+                             <%if(!followedAuthors.isEmpty()){%>
                              <% for(Writer writer:followedAuthors){%>
             <p><a href="StoryServlet?submit=AuthorDetails&authorId=<%=writer.getUserID()%>"style="text-decoration:none"><%=writer.getName()%> <%=writer.getSurname()%></a></p>
                              <%}%>
                              <%}%>
-                             <%if(followedAuthors==null){%>
+                             <%if(followedAuthors.isEmpty()){%>
                              <p>No Authors Currently Being Followed</p>
                                <%}%>
                              
                              
                                  <h1>Favourite unread books</h1>
-                            <% if(unreads!=null){%>
+                            <% if(!unreads.isEmpty()){%>
                              <% for(Story story:unreads){%>
                                <p><%=story.getTitle()%></p>
                                  <%}%>
                              <%}%>
-                             <%if(unreads==null){%>
+                             <%if(unreads.isEmpty()){%>
                                <p>No unread favourite books</p>
                              <%}%>
                             
                              
                              <h1>Favourite read books</h1> 
-                             <%if(reads!=null){%>
+                             <%if(!reads.isEmpty()){%>
                               <% for(Story story:reads){%>
                              <p><%=story.getTitle()%></p>
                               <%}%>
                                 <%}%>
-                             <%if(reads==null){%>
+                             <%if(reads.isEmpty()){%>
                              <p>No read favourite books</p>
                               <%}%>
                              
                              
                              <h1>Selected genres</h1>
-                             <%if(genres!=null){%>
+                             <%if(!genres.isEmpty()){%>
                                <% for(Genre genre:genres){%>
                                 <p><%=genre.getGenre()%></p>
                              <%}%>
                              <%}%>
-                             <%if(genres==null){%>
+                             <%if(genres.isEmpty()){%>
                              <p>No selected genres</p>
                              <%}%> 
         </div>

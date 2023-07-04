@@ -93,7 +93,7 @@ public class postResultServlet extends HttpServlet {
                 Editor editor=new Editor();
                 
                 editor.setUserID((Integer)session.getAttribute("UserID"));
-                 request.setAttribute("message",slc.approvePendingStory(story,editor));
+               //  request.setAttribute("message",slc.approvePendingStory(story,editor));
                   request.setAttribute("pendingStories",pendingStories);
                   var dispatcher=request.getRequestDispatcher("ReviewPendingStories.jsp");
                   dispatcher.forward(request,response);

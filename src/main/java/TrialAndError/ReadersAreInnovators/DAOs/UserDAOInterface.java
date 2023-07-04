@@ -4,10 +4,11 @@ package TrialAndError.ReadersAreInnovators.DAOs;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
- * @Desctripion:    The Users DAO Interface.
+ * @Desctripion:    The User DAO Interface.
  * @Author:         Luaan Robinson.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -17,13 +18,19 @@ import java.util.ArrayList;
 public interface UserDAOInterface{
     
     
-    ArrayList<String> search(String topic);
+    List<String> search(String topic);
+    
     User getUser(User user);
+    
     User login(User user);
+    
     String editPersonalInfo(User user);
+    
     String emailVerification(String email);
-    String referFriend(Integer phoneNumber);
-    Story getBookOfTheDay(String Date);
+    
+    Boolean referFriend(String phoneNumber);
+    
+    Story getBookOfTheDay();
     
     
 }

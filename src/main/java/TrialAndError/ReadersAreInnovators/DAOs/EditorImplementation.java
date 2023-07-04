@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Desctripion:    The concrete implementation of the EditorDAO.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -581,10 +581,10 @@ public class EditorImplementation implements EditorDAOInterface{
     
     
     @Override       //Completed: Allows an editor to view all pending Stories.
-    public ArrayList<StoryApplication> viewPendingStories() {
+    public List<StoryApplication> viewPendingStories() {
         
         conn = DatabaseConnectionManager.getConnection();
-        ArrayList<StoryApplication> storyApplications = new ArrayList<>();
+        List<StoryApplication> storyApplications = new ArrayList<>();
         
         try {
             

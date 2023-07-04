@@ -27,20 +27,17 @@ public interface AnalyticsDAOInterface{
     
     Integer getAuthorFollowCount(Writer writer);
     
-    String addView(Story story);
-    
-    
     List<Story> getMostViewedStories(Analytics analytics);
     
     List<Story> getHighestRatedStories(Analytics analytics);
     
-    ArrayList<Story> getMostLikedStories(Analytics analytics);
+    List<Story> getMostLikedStories(Analytics analytics);
     
-    ArrayList<Genre> getTopGenres(Analytics analytics);
+    List<Genre> getTopGenres(Analytics analytics);
     
-    ArrayList<Writer> getTopWriters(Analytics analytics);
+    List<Writer> getTopWriters(Analytics analytics);
     
-    ArrayList<Editor> getTopEditors(Analytics analytics);
+    List<Editor> getTopEditors(Analytics analytics);
     
     
 }

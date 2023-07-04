@@ -6,7 +6,7 @@ import java.util.List;
 
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Desctripion:    The model for a Story Application Object.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -16,7 +16,7 @@ import java.util.List;
 public class StoryApplication {
     
     
-    Integer pendingStoryID;
+    private Integer pendingStoryID;
     private String title;
     private Integer authorID;
     private String authorEmail;
@@ -33,41 +33,19 @@ public class StoryApplication {
     public StoryApplication() {
         
     }
+    
     public StoryApplication(Integer pendingStoryID) {
         
         this.pendingStoryID = pendingStoryID;
         
     }
     
-    
-    public StoryApplication(Integer pendingStoryID, Integer authorID) {
-        
-        this.pendingStoryID = pendingStoryID;
-        this.authorID = authorID;
-        
-    }
-    
-    
-    public StoryApplication(String title, Integer authorID){
+    public StoryApplication(String title, Integer authorID) {
         
         this.title = title;
         this.authorID = authorID;
-    }
-    
-    
-    public StoryApplication(Integer pendingStoryID, String title, Integer authorID, String authorEmail, String authorPhoneNumber, String storyBody, String synopsis, Boolean commentsEnabled) {
-        
-        this.pendingStoryID = pendingStoryID;
-        this.title = title;
-        this.authorID = authorID;
-        this.authorEmail = authorEmail;
-        this.authorPhoneNumber = authorPhoneNumber;
-        this.storyBody = storyBody;
-        this.synopsis = synopsis;
-        this.commentsEnabled = commentsEnabled;
         
     }
-    
     
     public StoryApplication(Integer pendingStoryID, String title, Integer authorID, String authorEmail, String authorPhoneNumber, String storyBody, String synopsis, String imagePath, Boolean commentsEnabled) {
         
@@ -83,7 +61,6 @@ public class StoryApplication {
         
     }
     
-    
     public StoryApplication(Integer pendingStoryID, String title, Integer authorID, String authorEmail, String authorPhoneNumber, String storyBody, String synopsis, String coverImage, Boolean commentsEnabled, String dateSubmitted) {
         
         this.pendingStoryID = pendingStoryID;
@@ -93,23 +70,6 @@ public class StoryApplication {
         this.authorPhoneNumber = authorPhoneNumber;
         this.storyBody = storyBody;
         this.synopsis = synopsis;
-        this.coverImage = coverImage;
-        this.commentsEnabled = commentsEnabled;
-        this.dateSubmitted = dateSubmitted;
-        
-    }
-    
-    
-    public StoryApplication(Integer pendingStoryID, String title, Integer authorID, String authorEmail, String authorPhoneNumber, String storyBody, String synopsis, List<Genre> genres, String coverImage, Boolean commentsEnabled, String dateSubmitted) {
-        
-        this.pendingStoryID = pendingStoryID;
-        this.title = title;
-        this.authorID = authorID;
-        this.authorEmail = authorEmail;
-        this.authorPhoneNumber = authorPhoneNumber;
-        this.storyBody = storyBody;
-        this.synopsis = synopsis;
-        this.genres = genres;
         this.coverImage = coverImage;
         this.commentsEnabled = commentsEnabled;
         this.dateSubmitted = dateSubmitted;
@@ -212,6 +172,7 @@ public class StoryApplication {
     public void setDateSubmitted(String dateSubmitted) {
         this.dateSubmitted = dateSubmitted;
     }
+    
     
     @Override
     public String toString() {

@@ -2,7 +2,7 @@ package TrialAndError.ReadersAreInnovators.Models.UserTypes;
 
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Desctripion:    The model for a Reader Object.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -25,28 +25,7 @@ public class Reader extends User {
     private Double data;
     
     
-    public Reader(){
-        
-    }
-    
-    public Reader(Integer userID, String name, String surname, Double data) {
-        
-        this.userID = userID;
-        this.name = name;
-        this.surname = surname;
-        this.data = data;
-        
-    }
-    
-    public Reader(String name, String surname, String email, String phoneNumber, String password, Boolean emailVerified, Boolean isBanned) {
-        
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.emailVerified = emailVerified;
-        this.isBanned = isBanned;
+    public Reader() {
         
     }
     
@@ -60,24 +39,8 @@ public class Reader extends User {
         
     }
     
-    public Reader(String name, String surname, String email, String phoneNumber, String password, 
-                  Integer userTypeID, String userType, Boolean isBanned, Boolean emailVerified) {
+    public Reader(String name, String surname, String email, String phoneNumber, String password, Integer userTypeID, String userType, Boolean isBanned, Boolean emailVerified) {
         
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.userTypeID = userTypeID;
-        this.userType = userType;
-        this.isBanned = isBanned;
-        this.emailVerified = emailVerified;
-        
-    }
-    
-    public Reader(Integer userID, String name, String surname, String email, String phoneNumber, String password, Integer userTypeID, String userType, Boolean isBanned, Boolean emailVerified) {
-        
-        this.userID = userID;
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -121,66 +84,82 @@ public class Reader extends User {
         this.surname = surname;
     }
     
+    @Override
     public String getEmail() {
         return email;
     }
     
+    @Override
     public void setEmail(String email) {
         this.email = email;
     }
     
+    @Override
     public String getPhoneNumber() {
         return phoneNumber;
     }
     
+    @Override
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
     
+    @Override
     public String getPassword() {
         return password;
     }
     
+    @Override
     public void setPassword(String password) {
         this.password = password;
     }
     
+    @Override
     public Integer getUserTypeID() {
-        return 1;
+        return userTypeID;
     }
     
-    public void setUserTypeID() {
-        this.userTypeID = 1;
+    @Override
+    public void setUserTypeID(Integer userTypeID) {
+        this.userTypeID = userTypeID;
     }
     
+    @Override
     public String getUserType() {
-        return "Reader";
+        return userType;
     }
     
-    public void setUserType() {
-        userType = "Reader";
+    @Override
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
     
+    @Override
     public Boolean getBanned() {
         return isBanned;
     }
     
+    @Override
     public void setBanned(Boolean banned) {
         isBanned = banned;
     }
     
+    @Override
     public Boolean getEmailVerified() {
         return emailVerified;
     }
     
+    @Override
     public void setEmailVerified(Boolean emailVerified) {
         this.emailVerified = emailVerified;
     }
     
+    @Override
     public Double getData() {
         return data;
     }
     
+    @Override
     public void setData(Double data) {
         this.data = data;
     }

@@ -2,7 +2,7 @@ package TrialAndError.ReadersAreInnovators.Models.UserTypes;
 
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Desctripion:    The model for an Editor Object.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -22,8 +22,8 @@ public class Editor extends Reader {
     private String userType;
     private Double data;
     
-
-    public Editor(){
+    
+    public Editor() {
         
     }
     
@@ -65,43 +65,6 @@ public class Editor extends Reader {
         
     }
     
-    public Editor(Integer userID, String name, String surname, String email, String phoneNumber, String password, Integer userTypeID, String userType) {
-        
-        this.userID = userID;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.userTypeID = userTypeID;
-        this.userType = userType;
-        
-    }
-    
-    public Editor(String name, String surname, String email, String phoneNumber, String password, Integer userTypeID, String userType) {
-        
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.userTypeID = userTypeID;
-        this.userType = userType;
-        
-    }
-    
-    public Editor(String name, String surname, String email, String phoneNumber, String password, Integer userTypeID, String userType, Double data) {
-        
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.userTypeID = userTypeID;
-        this.userType = userType;
-        this.data = data;
-        
-    }
     
     @Override
     public Integer getUserID() {
@@ -165,26 +128,30 @@ public class Editor extends Reader {
     
     @Override
     public Integer getUserTypeID() {
-        return 3;
+        return userTypeID;
     }
     
-    public void setUserTypeID() {
-        this.userTypeID = 3;
+    @Override
+    public void setUserTypeID(Integer userTypeID) {
+        this.userTypeID = userTypeID;
     }
     
     @Override
     public String getUserType() {
-        return "Editor";
+        return userType;
     }
     
-    public void setUserType() {
-        this.userType = "Editor";
+    @Override
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
     
+    @Override
     public Double getData() {
         return data;
     }
     
+    @Override
     public void setData(Double data) {
         this.data = data;
     }

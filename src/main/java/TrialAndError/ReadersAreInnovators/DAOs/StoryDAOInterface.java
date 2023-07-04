@@ -7,9 +7,10 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- * @Desctripion:    The Stories DAO Interface.
+ * @Desctripion:    The Story DAO Interface.
  * @Author:         Luaan Robinson.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -20,16 +21,27 @@ public interface StoryDAOInterface {
     
     
     String removeStory(Story story);
+    
     String privatizeStory(Story story);
+    
     String publiciseStory(Story story);
+    
     String submitStory(Story story);
+    
     String readStory(Story story, User user);
-    ArrayList<Story> getPublishedStories(Writer writer);
+    
+    List<Story> getPublishedStories(Writer writer);
+    
     Story displayStoryDetails(Story story);
+    
     String saveAsDraft(Story story);
+    
     String updateDraft(Story story);
+    
     String likeStory(Story story, User user);
+    
     String unlikeStory(Story story, User user);
+    
     Boolean checkIfLiked(Story story, User user);
     
     

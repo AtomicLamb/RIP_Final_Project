@@ -256,7 +256,7 @@ button {
 .banner_section {
     width: 100%;
     float: left;
-    background-image: url(../images/banner-bg.png);
+    background-image: url('images/banner.jpg');
     height: auto;
     padding-bottom: 90px;
     background-size: cover;
@@ -714,7 +714,7 @@ figure:hover+span {
 .services_section {
     width: 100%;
     float: left;
-    background-image: url(../images/banner-bg.png);
+    background-image: url(/images/banner.jpg);
     padding: 30px 0px 20px 0px;
     height: auto;
     background-size: 100%;

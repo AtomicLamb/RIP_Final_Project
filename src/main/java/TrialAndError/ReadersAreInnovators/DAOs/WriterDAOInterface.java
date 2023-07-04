@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Desctripion:    The Writers DAO Interface.
+ * @Desctripion:    The Writer DAO Interface.
  * @Author:         Luaan Robinson.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -21,10 +21,15 @@ public interface WriterDAOInterface {
     
     
     String writerRegistration(WriterApplication writerApplication);
+    
     Story getDraft(Story story);
-    ArrayList<Story> getAllDrafts(Writer writer);
+    
+    List<Story> getAllDrafts(Writer writer);
+    
     String editDraft(Story story);
+    
     String deleteDraft(Story story);
+    
     Writer getAuthor(Writer writer);
     
     

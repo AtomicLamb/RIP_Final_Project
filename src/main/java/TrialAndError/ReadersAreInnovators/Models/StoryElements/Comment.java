@@ -2,7 +2,7 @@ package TrialAndError.ReadersAreInnovators.Models.StoryElements;
 
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Desctripion:    The model for a Comment Object.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -22,19 +22,13 @@ public class Comment {
     private Double data;
     
     
-    public Comment(){
+    public Comment() {
         
     }
     
-    public Comment(Integer commentID)
-    {
-        this.commentID = commentID;    
-    }
-    
-    public Comment(Integer commentID, Double data) {
+    public Comment(Integer commentID) {
         
-        this.commentID = commentID;
-        this.data = data;
+        this.commentID = commentID; 
         
     }
     
@@ -63,30 +57,6 @@ public class Comment {
         this.name = name;
         this.comment = comment;
         this.dateAdded = dateAdded;
-        
-    }
-    
-    public Comment(Integer commentID, Integer storyID, Integer userID, String name, String comment, String dateAdded) {
-        
-        this.commentID = commentID;
-        this.storyID = storyID;
-        this.userID = userID;
-        this.name = name;
-        this.comment = comment;
-        this.dateAdded = dateAdded;
-        
-    }
-    
-    public Comment(Integer commentID, Integer storyID, Integer userID, String name, String comment, Boolean flagged, String dateAdded, Double data) {
-        
-        this.commentID = commentID;
-        this.storyID = storyID;
-        this.userID = userID;
-        this.name = name;
-        this.comment = comment;
-        this.flagged = flagged;
-        this.dateAdded = dateAdded;
-        this.data = data;
         
     }
     
@@ -166,10 +136,11 @@ public class Comment {
                 ", name='" + name + '\'' +
                 ", comment='" + comment + '\'' +
                 ", flagged=" + flagged +
-                ", dateAdded=" + dateAdded +
+                ", dateAdded='" + dateAdded + '\'' +
                 ", data=" + data +
                 '}';
         
     }
+    
     
 }

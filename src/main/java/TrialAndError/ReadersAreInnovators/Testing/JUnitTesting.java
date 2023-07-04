@@ -12,17 +12,13 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.*;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Reader;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
-import org.codehaus.jackson.annotate.JsonIgnoreType;
 import org.junit.Test;
-
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Desctripion:    The J-Unit Testing Class.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -97,16 +93,6 @@ public class JUnitTesting {
     }
     
     @Test
-    public void addViewTest(){
-        
-        Story story = new Story();
-        
-        System.out.println(analyticsImp.addView(story));
-        
-    }
-    
-    
-    @Test
     public void getMostViewedStoriesTest(){
         
         Analytics analytics = new Analytics();
@@ -141,7 +127,7 @@ public class JUnitTesting {
         
         Analytics analytics = new Analytics();
         
-        ArrayList<Story> mostLiked = analyticsImp.getMostLikedStories(analytics);
+        List<Story> mostLiked = analyticsImp.getMostLikedStories(analytics);
         
         for (Story s: mostLiked) {
             
@@ -156,7 +142,7 @@ public class JUnitTesting {
         
         Analytics analytics = new Analytics();
         
-        ArrayList<Genre> topGenres = analyticsImp.getTopGenres(analytics);
+        List<Genre> topGenres = analyticsImp.getTopGenres(analytics);
         
         for (Genre g: topGenres) {
             
@@ -171,7 +157,7 @@ public class JUnitTesting {
         
         Analytics analytics = new Analytics();
         
-        ArrayList<Writer> topWriters = analyticsImp.getTopWriters(analytics);
+        List<Writer> topWriters = analyticsImp.getTopWriters(analytics);
         
         for (Writer w: topWriters) {
             
@@ -186,7 +172,7 @@ public class JUnitTesting {
         
         Analytics analytics = new Analytics();
         
-        ArrayList<Editor> topEditors = analyticsImp.getTopEditors(analytics);
+        List<Editor> topEditors = analyticsImp.getTopEditors(analytics);
         
         for (Editor e: topEditors) {
             
@@ -214,7 +200,7 @@ public class JUnitTesting {
         
         Story story = new Story();
         
-        ArrayList<Comment> testComments =  commentsImp.getComments(story);
+        List<Comment> testComments =  commentsImp.getComments(story);
         
         for (Comment c:testComments) {
             
@@ -427,7 +413,7 @@ public class JUnitTesting {
         
         User user = new User();
         
-        ArrayList<Genre> userGenres = genresImp.getUserGenres(user);
+        List<Genre> userGenres = genresImp.getUserGenres(user);
         
         for (Genre g:userGenres) {
 
@@ -515,7 +501,7 @@ public class JUnitTesting {
         
         User user = new User();
 
-        ArrayList<Writer> followedWriters = readerImp.getFollowedAuthors(user);
+        List<Writer> followedWriters = readerImp.getFollowedAuthors(user);
         
         for (Writer w: followedWriters) {
 
@@ -526,26 +512,11 @@ public class JUnitTesting {
     }
 
     @Test
-    public void getAllFavoritesTest(){
-        
-        User user = new User();
-
-        ArrayList<Story> allFavorites = readerImp.getAllFavorites(user);
-        
-        for (Story s: allFavorites) {
-
-            System.out.println(s);
-
-        }
-
-    }
-
-    @Test
     public void getReadFavoritesTest(){
         
-        User user = new User();
+        User user = new User(36);
 
-        ArrayList<Story> readFavorites = readerImp.getReadFavorites(user);
+        List<Story> readFavorites = readerImp.getReadFavorites(user);
         
         for (Story s: readFavorites) {
 
@@ -558,9 +529,9 @@ public class JUnitTesting {
     @Test
     public void getUnreadFavoritesTest(){
         
-        User user = new User();
+        User user = new User(36);
 
-        ArrayList<Story> unreadFavorites = readerImp.getUnreadFavorites(user);
+        List<Story> unreadFavorites = readerImp.getUnreadFavorites(user);
         
         for (Story s: unreadFavorites) {
 
@@ -700,7 +671,7 @@ public class JUnitTesting {
         
         String searchTopic = "Test";
 
-        ArrayList<String> searchResults = userImp.search(searchTopic);
+        List<String> searchResults = userImp.search(searchTopic);
         for (String s:searchResults) {
 
             System.out.println(s);
@@ -752,7 +723,7 @@ public class JUnitTesting {
         
         Writer writer = new Writer();
 
-        ArrayList<Story> userDrafts = writerImp.getAllDrafts(writer);
+        List<Story> userDrafts = writerImp.getAllDrafts(writer);
         
         for (Story s: userDrafts) {
 

@@ -1,6 +1,5 @@
 package TrialAndError.ReadersAreInnovators.DAOs;
 
-import TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
@@ -10,12 +9,13 @@ import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Desctripion:    The concrete implementation of the StoryDAO.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -110,6 +110,7 @@ public class StoryImplementation implements StoryDAOInterface {
         
     }
     
+    
     @Override       //Completed: Allows a Writer to make their published story private.
     public String privatizeStory(Story story) {
         
@@ -181,6 +182,7 @@ public class StoryImplementation implements StoryDAOInterface {
         
     }
     
+    
     @Override       //Completed: Allows a Writer to make their published story public.
     public String publiciseStory(Story story) {
         
@@ -251,6 +253,7 @@ public class StoryImplementation implements StoryDAOInterface {
         return message;
         
     }
+    
     
     @Override       //Completed: Allows a user to submit a story for editing and approval.
     public String submitStory(Story story) {
@@ -330,6 +333,7 @@ public class StoryImplementation implements StoryDAOInterface {
         
     }
     
+    
     @Override       //Completed: Allows the user to read the story adding it to their list of read stories and increasing the view count of the story by one.
     public String readStory(Story story, User user) {
         
@@ -405,11 +409,12 @@ public class StoryImplementation implements StoryDAOInterface {
         
     }
     
+    
     @Override       //Completed: Allows a Writer to see all their published stories.
-    public ArrayList<Story> getPublishedStories(Writer writer) {
+    public List<Story> getPublishedStories(Writer writer) {
         
         conn = DatabaseConnectionManager.getConnection();
-        ArrayList<Story> publishedStories = new ArrayList<>();
+        List<Story> publishedStories = new ArrayList<>();
         
         try {
             
@@ -527,6 +532,7 @@ public class StoryImplementation implements StoryDAOInterface {
         
     }
     
+    
     @Override       //Completed: Allows a User to view the Story details page.
     public Story displayStoryDetails(Story story) {
         
@@ -637,6 +643,7 @@ public class StoryImplementation implements StoryDAOInterface {
         
     }
     
+    
     @Override       //Completed: Allows a Writer to save their draft.
     public String saveAsDraft(Story story) {
         
@@ -713,6 +720,7 @@ public class StoryImplementation implements StoryDAOInterface {
         return message;
         
     }
+    
     
     @Override       //Allows a writer to update their drafts.
     public String updateDraft(Story story){
@@ -791,6 +799,7 @@ public class StoryImplementation implements StoryDAOInterface {
         
     }
     
+    
     @Override       //Completed: Allows the user to like the story adding it to their list of favorites and increasing the like count of the story by one.
     public String likeStory(Story story, User user) {
         
@@ -868,6 +877,7 @@ public class StoryImplementation implements StoryDAOInterface {
         
     }
     
+    
     @Override       //Completed: Allows the user to unlike the story removing it from their list of favorites and decreasing the like count of the story by one.
     public String unlikeStory(Story story, User user) {
         
@@ -944,12 +954,11 @@ public class StoryImplementation implements StoryDAOInterface {
     }
     
     
-    @Override
+    @Override       //Completed: Checks if the story is already liked by the user.
     public Boolean checkIfLiked(Story story, User user) {
         
-        Boolean exists = null;
-        
         conn = DatabaseConnectionManager.getConnection();
+        Boolean exists = null;
         
         try {
             

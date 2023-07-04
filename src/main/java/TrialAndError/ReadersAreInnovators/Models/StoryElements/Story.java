@@ -5,7 +5,7 @@ import java.util.List;
 
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Desctripion:    The model for the Story Object.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -34,19 +34,13 @@ public class Story {
     private Double data;
     
     
-    public Story(){
-        
-    }
-    public Story(Integer storyID) {
-        
-        this.storyID = storyID;
+    public Story() {
         
     }
     
-    public Story(Integer storyID, String title) {
+    public Story(Integer storyID) {
         
         this.storyID = storyID;
-        this.title = title;
         
     }
     
@@ -57,7 +51,7 @@ public class Story {
         
     }
     
-    public Story(Integer storyID, String title, String coverImage){
+    public Story(Integer storyID, String title, String coverImage) {
         
         this.storyID = storyID;
         this.title = title;
@@ -126,20 +120,6 @@ public class Story {
         
     }
     
-    public Story(String title, Integer authorID, Integer views, Integer likes, Double ratingAverage, String synopsis, String coverImage, String imagePath, String datePublished) {
-        
-        this.title = title;
-        this.authorID = authorID;
-        this.views = views;
-        this.likes = likes;
-        this.ratingAverage = ratingAverage;
-        this.synopsis = synopsis;
-        this.coverImage = coverImage;
-        this.imagePath = imagePath;
-        this.datePublished = datePublished;
-        
-    }
-    
     public Story(Integer storyID, String title, Integer authorID, String storyBody, String synopsis, String coverImage, Boolean commentsEnabled, String datePublished) {
         
         this.storyID = storyID;
@@ -150,55 +130,6 @@ public class Story {
         this.coverImage = coverImage;
         this.commentsEnabled = commentsEnabled;
         this.datePublished = datePublished;
-        
-    }
-    
-    public Story(Integer storyID, String title, Integer authorID, String storyBody, String synopsis, String coverImage, String imagePath, Boolean commentsEnabled, Integer editorID) {
-        
-        this.storyID = storyID;
-        this.title = title;
-        this.authorID = authorID;
-        this.storyBody = storyBody;
-        this.synopsis = synopsis;
-        this.coverImage = coverImage;
-        this.imagePath = imagePath;
-        this.commentsEnabled = commentsEnabled;
-        this.editorID = editorID;
-        
-    }
-    
-    public Story(String title, Integer authorID, Integer views, Integer likes, Double ratingAverage, String storyBody, String synopsis, String coverImage, String imagePath, Boolean isPrivate, String datePublished, Integer editorID) {
-        
-        this.title = title;
-        this.authorID = authorID;
-        this.views = views;
-        this.likes = likes;
-        this.ratingAverage = ratingAverage;
-        this.storyBody = storyBody;
-        this.synopsis = synopsis;
-        this.coverImage = coverImage;
-        this.imagePath = imagePath;
-        this.isPrivate = isPrivate;
-        this.datePublished = datePublished;
-        this.editorID = editorID;
-        
-    }
-    
-    public Story(Integer storyID, String title, Integer authorID, Integer views, Integer likes, Double ratingAverage, String storyBody, String synopsis, String coverImage, String imagePath, Boolean commentsEnabled, String datePublished, Integer editorID) {
-        
-        this.storyID = storyID;
-        this.title = title;
-        this.authorID = authorID;
-        this.views = views;
-        this.likes = likes;
-        this.ratingAverage = ratingAverage;
-        this.storyBody = storyBody;
-        this.synopsis = synopsis;
-        this.coverImage = coverImage;
-        this.imagePath = imagePath;
-        this.commentsEnabled = commentsEnabled;
-        this.datePublished = datePublished;
-        this.editorID = editorID;
         
     }
     
@@ -217,43 +148,6 @@ public class Story {
         this.commentsEnabled = commentsEnabled;
         this.datePublished = datePublished;
         this.editorID = editorID;
-        
-    }
-    
-    public Story(Integer storyID, String title, Integer authorID, String authorName, Integer views, Integer likes, Double ratingAverage, String storyBody, String synopsis, String coverImage, Boolean isPrivate, Boolean commentsEnabled, String datePublished, Integer editorID) {
-        
-        this.storyID = storyID;
-        this.title = title;
-        this.authorID = authorID;
-        this.authorName = authorName;
-        this.views = views;
-        this.likes = likes;
-        this.ratingAverage = ratingAverage;
-        this.storyBody = storyBody;
-        this.synopsis = synopsis;
-        this.coverImage = coverImage;
-        this.isPrivate = isPrivate;
-        this.commentsEnabled = commentsEnabled;
-        this.datePublished = datePublished;
-        this.editorID = editorID;
-        
-    }
-    
-    public Story(Integer storyID, String title, Integer authorID, Integer views, Integer likes, Double ratingAverage, String storyBody, String synopsis, String coverImage, String imagePath, Boolean isPrivate, String datePublished, Double data) {
-        
-        this.storyID = storyID;
-        this.title = title;
-        this.authorID = authorID;
-        this.views = views;
-        this.likes = likes;
-        this.ratingAverage = ratingAverage;
-        this.storyBody = storyBody;
-        this.synopsis = synopsis;
-        this.coverImage = coverImage;
-        this.imagePath = imagePath;
-        this.isPrivate = isPrivate;
-        this.datePublished = datePublished;
-        this.data = data;
         
     }
     
@@ -312,6 +206,14 @@ public class Story {
     
     public void setRatingAverage(Double ratingAverage) {
         this.ratingAverage = ratingAverage;
+    }
+    
+    public List<Genre> getGenres() {
+        return genres;
+    }
+    
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
     }
     
     public String getStoryBody() {
@@ -386,6 +288,7 @@ public class Story {
         this.data = data;
     }
     
+    
     @Override
     public String toString() {
         
@@ -393,12 +296,15 @@ public class Story {
                 "storyID=" + storyID +
                 ", title='" + title + '\'' +
                 ", authorID=" + authorID +
+                ", authorName='" + authorName + '\'' +
                 ", views=" + views +
                 ", likes=" + likes +
                 ", ratingAverage=" + ratingAverage +
+                ", genres=" + genres +
                 ", storyBody='" + storyBody + '\'' +
                 ", synopsis='" + synopsis + '\'' +
-                ", coverImage=" + coverImage +
+                ", coverImage='" + coverImage + '\'' +
+                ", imagePath='" + imagePath + '\'' +
                 ", isPrivate=" + isPrivate +
                 ", commentsEnabled=" + commentsEnabled +
                 ", datePublished='" + datePublished + '\'' +

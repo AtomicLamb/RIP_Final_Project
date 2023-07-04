@@ -76,8 +76,8 @@ public class editPersonalInformationServlet extends HttpServlet {
                 request.setAttribute("message", num);
                 
                 List<Story>genreStories=service.getStoriesFromGenres(new User((Integer) session.getAttribute("UserID")));
-                List<Story>topWeekPicksStories=service.getWeeksTopPicks();
-                List<Story>recommendedBooks=service.getRecommendedBooks();
+                List<Story>topWeekPicksStories=imp.getWeeksTopPicks();
+                List<Story>recommendedBooks=imp.getRecommendedBooks();
                 request.setAttribute("recommendedBooks",recommendedBooks);
                 request.setAttribute("topPicks",topWeekPicksStories);
                 request.setAttribute("stories", genreStories);
@@ -163,7 +163,7 @@ public class editPersonalInformationServlet extends HttpServlet {
         
         Integer userID = (Integer) session.getAttribute("UserID");
         
-        request.setAttribute("personalInfo", service.getUser(new User(userID)));
+        request.setAttribute("personalInfo", imp.getUser(new User(userID)));
         var dispatcher =  request.getRequestDispatcher("editPersonalData.jsp");
         try
         {

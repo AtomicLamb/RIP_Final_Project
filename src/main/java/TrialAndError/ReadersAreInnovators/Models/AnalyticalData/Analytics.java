@@ -2,7 +2,7 @@ package TrialAndError.ReadersAreInnovators.Models.AnalyticalData;
 
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Desctripion:    The model for an Analytics Object.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -17,21 +17,13 @@ public class Analytics {
     private String startDate;
     private String endDate;
     
-    public Analytics(){
+    
+    public Analytics() {
         
     }
     
     public Analytics(Integer numberOfAnalytics, String startDate, String endDate) {
         
-        this.numberOfAnalytics = numberOfAnalytics;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        
-    }
-    
-    public Analytics(String analyticType, Integer numberOfAnalytics, String startDate, String endDate) {
-        
-        this.analyticType = analyticType;
         this.numberOfAnalytics = numberOfAnalytics;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -70,6 +62,7 @@ public class Analytics {
     public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
+    
     
     @Override
     public String toString() {

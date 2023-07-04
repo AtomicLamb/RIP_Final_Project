@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Desctripion:    The concrete implementation of the GenresDAO.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -115,6 +115,7 @@ public class GenresImplementation implements GenresDAOInterface{
         
     }
     
+    
     @Override       //Completed: Allows the Admin-Editor to remove a Genre.
     public String removeGenre(Genre genre) {
         
@@ -184,6 +185,7 @@ public class GenresImplementation implements GenresDAOInterface{
         return message;
         
     }
+    
     
     @Override       //Completed: Allows a user to select their preferred genres.
     public String selectGenre(User user, Genre genre) {
@@ -275,6 +277,7 @@ public class GenresImplementation implements GenresDAOInterface{
         
     }
     
+    
     @Override       //Completed: Allows a user to deselect a genre.
     public String deselectGenre(User user, Genre genre) {
         
@@ -365,6 +368,7 @@ public class GenresImplementation implements GenresDAOInterface{
         
     }
     
+    
     @Override       //Completed: Allows a user to see all available Genres.
     public List<Genre> getGenres() {
         
@@ -438,11 +442,12 @@ public class GenresImplementation implements GenresDAOInterface{
             
     }
     
+    
     @Override       //Completed: Allows a user to see all their selected Genres.
-    public ArrayList<Genre> getUserGenres(User user) {
+    public List<Genre> getUserGenres(User user) {
         
         conn = DatabaseConnectionManager.getConnection();
-        ArrayList<Genre> userGenres = new ArrayList<>();
+        List<Genre> userGenres = new ArrayList<>();
         
         try {
             
@@ -511,6 +516,7 @@ public class GenresImplementation implements GenresDAOInterface{
         return userGenres;
         
     }
+    
     
     @Override       //Completed: Allows an editor to add a story to a Genre.
     public String addGenreToStory(Story story, Genre genre){
@@ -603,6 +609,7 @@ public class GenresImplementation implements GenresDAOInterface{
         
     }
     
+    
     @Override       //Completed: Allows an editor to remove a story from a Genre.
     public String removeGenreFromStory(Story story, Genre genre){
         
@@ -693,6 +700,7 @@ public class GenresImplementation implements GenresDAOInterface{
         return message;
         
     }
+    
     
     @Override       //Completed: Allows a writer to add a story pending story to a Genre.
     public String addGenreToPendingStory(StoryApplication storyApplication, Genre genre){
@@ -785,6 +793,7 @@ public class GenresImplementation implements GenresDAOInterface{
         
     }
     
+    
     @Override       //Completed: Allows a writer to remove a pending story from a Genre.
     public String removeGenreFromPendingStory(StoryApplication storyApplication, Genre genre){
         
@@ -876,8 +885,9 @@ public class GenresImplementation implements GenresDAOInterface{
         
     }
     
+    
     @Override       //Completed: Allows a user to see with genres the story belongs to.
-    public ArrayList<Genre> getStoryGenres(Story story){
+    public List<Genre> getStoryGenres(Story story){
         
         conn = DatabaseConnectionManager.getConnection();
         ArrayList<Genre> storyGenres = new ArrayList<>();
@@ -949,6 +959,7 @@ public class GenresImplementation implements GenresDAOInterface{
         return storyGenres;
         
     }
+    
     
     @Override       //Completed: Allows an editor to see with genres the pending story belongs to.
     public List<Genre> getPendingStoryGenres(StoryApplication storyApplication){

@@ -121,6 +121,7 @@ public class ReaderImplementation implements ReaderDAOInterface {
         
     }
     
+    
     @Override       //Completed: Allows a user to follow an author.
     public String followAuthor(Writer writer, User user) {
         
@@ -191,6 +192,7 @@ public class ReaderImplementation implements ReaderDAOInterface {
         return message;
         
     }
+    
     
     @Override       //Completed: Allows a user to unfollow and author.
     public String unfollowAuthor(Writer writer, User user) {
@@ -264,20 +266,92 @@ public class ReaderImplementation implements ReaderDAOInterface {
     }
     
     
-    @Override       //TODO: 
+    @Override       //Completed: Checks if the user is already following the author.
     public Boolean checkIfAuthorFollowed(User user, Writer writer) {
         
+        conn = DatabaseConnectionManager.getConnection();
+        Boolean exists = null;
         
+        try {
+            
+            query = "select * from followedauthors f where f.UserID = ? and f.AuthorID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, user.getUserID());
+            ps.setInt(2, writer.getUserID());
+            rs = ps.executeQuery();
+            
+            if (rs.next()){
+                
+                exists = true;
+                
+            } else {
+                
+                exists = false;
+                
+            }
+            
+        } catch (SQLException e) {
+            
+            message = "Error following the selected Author.";
+            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error following the selected Author.", e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
         
-        return null;
+        return exists;
         
     }
     
+    
     @Override       //Completed: Allows a user to see which authors they follow.
-    public ArrayList<Writer> getFollowedAuthors(User user) {
+    public List<Writer> getFollowedAuthors(User user) {
         
         conn = DatabaseConnectionManager.getConnection();
-        ArrayList<Writer> followedAuthors = new ArrayList<>();
+        List<Writer> followedAuthors = new ArrayList<>();
         
         try {
             
@@ -348,135 +422,12 @@ public class ReaderImplementation implements ReaderDAOInterface {
         
     }
     
-    @Override       //Completed: Allows a user to see all their favorite books.
-    public ArrayList<Story> getAllFavorites(User user) {
-        
-       conn = DatabaseConnectionManager.getConnection();
-       ArrayList<Story> favoriteStories = new ArrayList<>();
-       
-        try {
-            
-            query = "select s.Title, s.CoverImage, concat_ws(\" \", u.Name, u.Surname) as AuthorName from stories s, users u, userfavorites f " +
-                    "where f.StoryID = s.StoryID and s.AuthorID = u.UserID and f.UserID = ?";
-            
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, user.getUserID());
-            
-            rs = ps.executeQuery();
-            
-            while (rs.next()){
-                
-                String imagePath = rs.getString(2);
-                
-                InputStream input = new FileInputStream(new File(imagePath));
-                ByteArrayOutputStream output = new ByteArrayOutputStream();
-                byte[] buffer = new byte[4096];
-                int bytesRead = -1;
-                
-                while ((bytesRead = input.read(buffer)) != -1) {
-                    
-                    output.write(buffer, 0, bytesRead);
-                    
-                }
-                
-                byte[] imageBytes = output.toByteArray();
-                String image = Base64.getEncoder().encodeToString(imageBytes);
-                
-                favoriteStories.add(new Story(rs.getString(1), rs.getString(3), image, imagePath));
-                
-            }
-            
-        } catch (SQLException e) {
-            
-            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error getting all Favorites.", e);
-            
-        } catch (IOException e) {
-            
-            throw new RuntimeException(e);
-            
-        } finally {
-            
-            if (input!=null){
-                
-                try {
-                    
-                    input.close();
-                    
-                } catch (IOException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-            if (output!=null){
-                
-                try {
-                    
-                    output.close();
-                    
-                } catch (IOException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-            if (rs!=null){
-                
-                try {
-                    
-                    rs.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-            if (ps!=null){
-                
-                try {
-                    
-                    ps.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-            if (conn!=null){
-                
-                try {
-                    
-                    conn.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-        }
-        
-        return favoriteStories;
-        
-    }
     
     @Override       //Completed: Gets stories from selected genres.
-    public ArrayList<Story> getStoriesFromGenres(User user) {
+    public List<Story> getStoriesFromGenres(User user) {
         
         conn = DatabaseConnectionManager.getConnection();
-        ArrayList<Story> favoriteStories = new ArrayList<>();
+        List<Story> favoriteStories = new ArrayList<>();
         
         try {
             
@@ -595,6 +546,7 @@ public class ReaderImplementation implements ReaderDAOInterface {
         return favoriteStories;
         
     }
+    
     
     @Override       //Completed: Gets the top picks for the week.
     public List<Story> getWeeksTopPicks() {
@@ -726,6 +678,7 @@ public class ReaderImplementation implements ReaderDAOInterface {
         
     }
     
+    
     @Override       //Completed: Gets the recommended picks for the week.
     public List<Story> getRecommendedBooks() {
         
@@ -856,16 +809,17 @@ public class ReaderImplementation implements ReaderDAOInterface {
         
     }
     
-    @Override       //Completed: Allows a user to see all their favorite books that they have read.
-    public ArrayList<Story> getReadFavorites(User user) {
+    
+    @Override       //Completed: Allows a user to see all their favorite books that they have read.     //TODO
+    public List<Story> getReadFavorites(User user) {
         
         conn = DatabaseConnectionManager.getConnection();
-        ArrayList<Story> readFavoriteStories = new ArrayList<>();
+        List<Story> readFavoriteStories = new ArrayList<>();
         
         try {
             
             query = "select s.Title, s.CoverImage, concat_ws(\" \", u.Name, u.Surname) as Name from stories s, users u, userfavorites f, userread r " +
-                            "where f.StoryID = s.StoryID and s.AuthorID = u.UserID and s.StoryID = r.StoryID and r.IsRead = 1 and  f.UserID = ?";
+                            "where f.StoryID = s.StoryID and s.AuthorID = u.UserID and s.StoryID = r.StoryID and r.IsRead = 1 and f.UserID = u.UserID = ?";
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, user.getUserID());
@@ -980,16 +934,17 @@ public class ReaderImplementation implements ReaderDAOInterface {
         
     }
     
-    @Override       //Completed: Allows a user to see all their favorite books that they have not read.
-    public ArrayList<Story> getUnreadFavorites(User user) {
+    
+    @Override       //Completed: Allows a user to see all their favorite books that they have not read.     //TODO
+    public List<Story> getUnreadFavorites(User user) {
         
         conn = DatabaseConnectionManager.getConnection();
-        ArrayList<Story> unreadFavoriteStories = new ArrayList<>();
+        List<Story> unreadFavoriteStories = new ArrayList<>();
         
         try {
             
             query = "select s.Title, s.CoverImage, concat_ws(\" \", u.Name, u.Surname) as Name from stories s, users u, userfavorites f, userread r " +
-                    "where f.StoryID = s.StoryID and s.AuthorID = u.UserID and s.StoryID = r.StoryID and r.IsRead = 0 and  f.UserID = ?";
+                    "where f.StoryID = s.StoryID and s.AuthorID = u.UserID and s.StoryID = r.StoryID and r.IsRead = 0 and f.UserID = u.UserID = ?";
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, user.getUserID());

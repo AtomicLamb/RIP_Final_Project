@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Desctripion:    The concrete implementation of the CommentDAO.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -117,10 +117,10 @@ public class CommentImplementation implements CommentDAOInterface{
     
     
     @Override       //Completed: Allows the users to see the comments on a stories details page.
-    public ArrayList<Comment> getComments(Story story) {
+    public List<Comment> getComments(Story story) {
         
         conn = DatabaseConnectionManager.getConnection();
-        ArrayList<Comment> allComments = new ArrayList<>();
+        List<Comment> allComments = new ArrayList<>();
         
         try {
             

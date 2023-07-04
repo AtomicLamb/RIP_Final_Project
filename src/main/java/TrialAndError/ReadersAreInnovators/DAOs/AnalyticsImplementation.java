@@ -255,77 +255,6 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
     }
     
     
-    @Override       //Complete: Adds a view to a read story.
-    public String addView(Story story) {
-        
-        conn = DatabaseConnectionManager.getConnection();
-        
-        try {
-            
-            query = "update stories s SET s.Views = s.Views + 1 where s.StoryID = ?";
-            
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, story.getStoryID());
-            ps.executeUpdate();
-            
-            message = "Story view count has increased.";
-            
-        } catch (SQLException e) {
-            
-            message = "Error adding view to the story.";
-            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error adding view to the story.", e);
-            
-        } finally {
-            
-            if (rs!=null){
-                
-                try {
-                    
-                    rs.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-            if (ps!=null){
-                
-                try {
-                    
-                    ps.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-            if (conn!=null){
-                
-                try {
-                    
-                    conn.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-        }
-        
-        return message;
-        
-    }
-    
-    
     @Override       //Complete: Gets X most viewed stories in selected time period.
     public List<Story> getMostViewedStories(Analytics analytics) {
         
@@ -484,11 +413,11 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
     
     
     @Override       //Complete: Gets X most liked stories in selected time period.
-    public ArrayList<Story> getMostLikedStories(Analytics analytics) {
+    public List<Story> getMostLikedStories(Analytics analytics) {
         
         conn = DatabaseConnectionManager.getConnection();
         query = "Select s.StoryID, s.Title, s.Likes from stories s where s.DatePublished between ? AND ? order by s.Likes desc";
-        ArrayList<Story> mostLiked = new ArrayList<>();
+        List<Story> mostLiked = new ArrayList<>();
         Integer i = 0;
         
         try {
@@ -561,10 +490,10 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
     
     
     @Override       //Complete: Gets X most viewed genres in selected time period.
-    public ArrayList<Genre> getTopGenres(Analytics analytics) {
+    public List<Genre> getTopGenres(Analytics analytics) {
         
         conn = DatabaseConnectionManager.getConnection();
-        ArrayList<Genre> topGenres = new ArrayList<>();
+        List<Genre> topGenres = new ArrayList<>();
         Integer i = 0;
         
         try {
@@ -640,10 +569,10 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
     
     
     @Override       //Complete: Gets X most viewed writers in selected time period.
-    public ArrayList<Writer> getTopWriters(Analytics analytics) {
+    public List<Writer> getTopWriters(Analytics analytics) {
         
         conn = DatabaseConnectionManager.getConnection();
-        ArrayList<Writer> topWriters = new ArrayList<>();
+        List<Writer> topWriters = new ArrayList<>();
         Integer i = 0;
         
         try {
@@ -719,10 +648,10 @@ public class AnalyticsImplementation implements AnalyticsDAOInterface{
     
     
     @Override       //Complete: Gets X most approving editors in selected time period.
-    public ArrayList<Editor> getTopEditors(Analytics analytics) {
+    public List<Editor> getTopEditors(Analytics analytics) {
         
         conn = DatabaseConnectionManager.getConnection();
-        ArrayList<Editor> topEditors = new ArrayList<>();
+        List<Editor> topEditors = new ArrayList<>();
         Integer i = 0;
         
         try {

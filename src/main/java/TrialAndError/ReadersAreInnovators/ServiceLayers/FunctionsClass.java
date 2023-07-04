@@ -6,25 +6,25 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Locale;
+import java.util.StringTokenizer;
 import java.util.TimeZone;
 
+
+/**
+ * @Desctripion:    The Functions Class for common functions of the system.
+ * @Author:         Tyler Schwegler.
+ * @Version:        v.1.0.0
+ * @Date:           2023-07-05.
+ * @Completed:      True.
+ */
+
 public class FunctionsClass implements Functions_Interface{
-    
-    
-    private Connection conn;
-    private PreparedStatement ps;
-    private ResultSet rs;
-    private String query;
-    private String message;
     
     
     public FunctionsClass() {
@@ -42,13 +42,14 @@ public class FunctionsClass implements Functions_Interface{
             
             return true;
             
-        }else{
+        } else {
             
             return false;
                     
         }
         
     }
+    
     
     @Override
     public Boolean isNumber(String value) {
@@ -59,13 +60,14 @@ public class FunctionsClass implements Functions_Interface{
             
         }catch (NumberFormatException n){
             
-            return true;
+            return false;
             
         }
         
-        return false;
+        return true;
         
     }
+    
     
     @Override
     public Boolean phoneNumberVerification(String phoneNum) {
@@ -94,10 +96,32 @@ public class FunctionsClass implements Functions_Interface{
         
     }
     
+    
     @Override
     public Boolean wordCountVerification(String storyBody) {
-        return null;
+        
+        StringTokenizer tokenizer = new StringTokenizer(storyBody);
+        Integer wordCount = 0;
+        
+        while (tokenizer.hasMoreTokens()){
+            
+            tokenizer.nextToken(" ");
+            wordCount++;
+            
+        }
+        
+        if (wordCount >= 10000){
+            
+            return false;
+            
+        } else {
+            
+            return false;
+            
+        }
+        
     }
+    
     
     @Override
     public Boolean integerToBoolean(Integer value) {
@@ -108,7 +132,7 @@ public class FunctionsClass implements Functions_Interface{
             
             b = false;
             
-        }else{
+        } else {
             
             b = true;
             
@@ -118,14 +142,22 @@ public class FunctionsClass implements Functions_Interface{
         
     }
     
+    
     @Override
     public Integer booleanToInteger(Boolean bool) {
+        
         if(bool == false){
+            
             return 0;
+            
         } else {
+            
             return 1;
+            
         }
+        
     }
+    
     
     @Override
     public String dateToString(Date date) {
@@ -133,6 +165,7 @@ public class FunctionsClass implements Functions_Interface{
         return date.toString();
         
     }
+    
     
     @Override
     public Date stringToDate(String string) {
@@ -157,6 +190,7 @@ public class FunctionsClass implements Functions_Interface{
         return sqlDate;
         
     }
+    
     
     @Override
     public String encodeBase64(InputStream imageStream) {
@@ -230,6 +264,30 @@ public class FunctionsClass implements Functions_Interface{
         String pathName = "C:\\Users\\TKS\\IdeaProjects\\Trial and Error - Readers are Innovators\\src\\main\\resources\\images\\" + fileName;
         
         return pathName;
+        
+    }
+    
+    
+    @Override
+    public String passwordEncryption(String password) {
+        
+        byte[] passwordBytes = password.getBytes();
+        
+        String encryptedPassword = Base64.getEncoder().encodeToString(passwordBytes);
+        
+        return encryptedPassword;
+        
+    }
+    
+    
+    @Override
+    public String passwordDecryption(String password) {
+        
+        byte[] passwordBytes = Base64.getDecoder().decode(password);
+        
+        String decryptedPassword = new String(passwordBytes);
+        
+        return decryptedPassword;
         
     }
     

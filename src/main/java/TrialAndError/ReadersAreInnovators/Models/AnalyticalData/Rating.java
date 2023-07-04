@@ -2,7 +2,7 @@ package TrialAndError.ReadersAreInnovators.Models.AnalyticalData;
 
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Desctripion:    The model for a Rating Object.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -17,8 +17,8 @@ public class Rating {
     private Integer rating;
     private Double data;
     
-
-    public Rating(){
+    
+    public Rating() {
         
     }
     
@@ -27,15 +27,6 @@ public class Rating {
         this.userID = userID;
         this.storyID = storyID;
         this.rating = rating;
-        
-    }
-    
-    public Rating(Integer userID, Integer storyID, Integer rating, Double data) {
-        
-        this.userID = userID;
-        this.storyID = storyID;
-        this.rating = rating;
-        this.data = data;
         
     }
     
@@ -77,7 +68,7 @@ public class Rating {
     public String toString() {
         
         return "Rating{" +
-                ", userID=" + userID +
+                "userID=" + userID +
                 ", storyID=" + storyID +
                 ", rating=" + rating +
                 ", data=" + data +

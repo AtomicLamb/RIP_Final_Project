@@ -2,7 +2,7 @@ package TrialAndError.ReadersAreInnovators.Models.UserTypes;
 
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Desctripion:    The model for a User Object.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -57,16 +57,6 @@ public class User {
         
     }
     
-    public User(String name, String surname, String email, String phoneNumber, String password) {
-        
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        
-    }
-    
     public User(Integer userID, String name, String surname, String email, String phoneNumber, String password) {
         
         this.userID = userID;
@@ -89,20 +79,6 @@ public class User {
         
     }
     
-    public User(String name, String surname, String email, String phoneNumber, String password, Integer userTypeID, String userType, Boolean isBanned, Boolean emailVerified) {
-        
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.userTypeID = userTypeID;
-        this.userType = userType;
-        this.isBanned = isBanned;
-        this.emailVerified = emailVerified;
-        
-    }
-    
     public User(Integer userID, String name, String surname, String email, String phoneNumber, String password, Integer userTypeID, String userType, Boolean isBanned, Boolean emailVerified, Integer timesLoggedIn) {
         
         this.userID = userID;
@@ -119,21 +95,6 @@ public class User {
         
     }
     
-    public User(Integer userID, String name, String surname, String email, String phoneNumber, String password, Integer userTypeID, String userType, Boolean isBanned, Boolean emailVerified, Double data) {
-        
-        this.userID = userID;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.userTypeID = userTypeID;
-        this.userType = userType;
-        this.isBanned = isBanned;
-        this.emailVerified = emailVerified;
-        this.data = data;
-       
-    }
     
     public Integer getUserID() {
         return userID;

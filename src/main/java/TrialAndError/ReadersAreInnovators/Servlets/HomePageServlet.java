@@ -7,7 +7,7 @@ package TrialAndError.ReadersAreInnovators.Servlets;
 
 
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
-import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
+import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayer_Interface;
 import jakarta.servlet.ServletException;
@@ -39,8 +39,8 @@ import javax.swing.JLabel;
  */
 @WebServlet(urlPatterns = {"/HomePageServlet"})
 public class HomePageServlet extends HttpServlet {
-private final ServiceLayer_Interface service=new ServiceLayerClass();
-private HttpSession session;
+    private final ServiceLayer_Interface service = new ServiceLayerClass();
+    private HttpSession session;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -50,43 +50,26 @@ private HttpSession session;
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-  
-
+    
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException { 
-       
+            throws ServletException, IOException {
+        
+        
       
-      
-       
-      
-        switch(request.getParameter("submit")){
-            case "HomePage":
-                session= request.getSession(false);
-                User user=new User();
-                
-                user.setUserID((Integer)session.getAttribute("UserID"));
-                List<Story>stories=service.getStoriesFromGenres(user);
-                
-                Integer num = (Integer)session.getAttribute("UserType");
-                request.setAttribute("message", num);
-                request.setAttribute("stories", stories);
-                var dispatcher=request.getRequestDispatcher("HomePage.jsp");
-                dispatcher.forward(request,response);
-                
-                
-                break;
-        }
     }
+
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -99,7 +82,21 @@ private HttpSession session;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        switch (request.getParameter("submit")) {
+            case "Search":
+                
+                String userSearch=request.getParameter("search");
+                List<Story> storiesByTitle;
+                List<Story>storiesByAuthor;
+                List<Story> storiesByGenres;
+                List<Writer> authorsByName;
+                
+                var dispatcher = request.getRequestDispatcher("Search.jsp");
+                dispatcher.forward(request, response);
+                
+                
+                break;
+        }
     }
 
     /**

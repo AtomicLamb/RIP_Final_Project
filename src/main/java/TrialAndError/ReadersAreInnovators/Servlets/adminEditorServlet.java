@@ -50,9 +50,9 @@ public class adminEditorServlet extends HttpServlet {
                Integer num = (Integer) session.getAttribute("UserTypeID");
                request.setAttribute("message", num);
                
-               List<Story>genreStories=service.getStoriesFromGenres(new User((Integer) session.getAttribute("UserID")));
-               List<Story>topWeekPicksStories=service.getWeeksTopPicks();
-               List<Story>recommendedBooks=service.getRecommendedBooks();
+               List<Story>genreStories=imp.getStoriesFromGenres(new User((Integer) session.getAttribute("UserID")));
+               List<Story>topWeekPicksStories=imp.getWeeksTopPicks();
+               List<Story>recommendedBooks=imp.getRecommendedBooks();
                request.setAttribute("recommendedBooks",recommendedBooks);
                request.setAttribute("topPicks",topWeekPicksStories);
                request.setAttribute("stories", genreStories);

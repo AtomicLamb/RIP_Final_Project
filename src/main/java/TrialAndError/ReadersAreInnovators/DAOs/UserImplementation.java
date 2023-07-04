@@ -4,19 +4,22 @@ import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
+
+import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Desctripion:    The concrete implementation of the UserDAO.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -43,10 +46,10 @@ public class UserImplementation implements UserDAOInterface {
     
     
     @Override       //Completed: Allows users to search for stories or authors. //TODO: In Service Layer make it get all searches using this then have a genres, writers, and stories arraylist returned. 
-    public ArrayList<String> search(String topic) {
+    public List<String> search(String topic) {
         
         conn = DatabaseConnectionManager.getConnection();
-        ArrayList<String> search = new ArrayList<>();
+        List<String> search = new ArrayList<>();
         
         try {
 
@@ -148,6 +151,7 @@ public class UserImplementation implements UserDAOInterface {
         
     }
     
+    
     @Override       //Completed: Allows a user to log into their account.
     public User login(User user) {
         
@@ -229,6 +233,7 @@ public class UserImplementation implements UserDAOInterface {
         
     }
     
+    
     @Override       //Completed: Allows a user to edit their personal details.
     public String editPersonalInfo(User user) {
         
@@ -303,6 +308,7 @@ public class UserImplementation implements UserDAOInterface {
         return message;
         
     }
+    
     
     @Override       //Completed: Gets all users personal information to allow them to update it.
     public User getUser(User user) {
@@ -379,6 +385,7 @@ public class UserImplementation implements UserDAOInterface {
         
     }
     
+    
     @Override       //Completed: Allows a user to verify their email.
     public String emailVerification(String email) {
         
@@ -449,17 +456,217 @@ public class UserImplementation implements UserDAOInterface {
         
     }
     
-    @Override       //Check if the user being referred is already on our system.
-    public String referFriend(Integer phoneNumber) {
+    
+    @Override       //Completed: Checks if the friend being referred is already on the system.
+    public Boolean referFriend(String phoneNumber) {
         
-        return null;
+        conn = DatabaseConnectionManager.getConnection();
+        Boolean exists = null;
+        
+        try {
+            
+            query = "select u.Name from users u where u.PhoneNumber = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, phoneNumber);
+            rs = ps.executeQuery();
+            
+            if (rs.next()){
+                
+                exists = true;
+                
+            } else{
+                
+                exists = false;
+                
+            }
+            
+        } catch (SQLException e) {
+            
+            message = "Error checking if user exists.";
+            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error checking if user exists.", e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return exists;
         
     }
     
-    @Override       //TODO
-    public Story getBookOfTheDay(String Date) {
+    
+    @Override       //Completed: Sets the book of the day to a random popular story from the previous week.
+    public Story getBookOfTheDay() {
         
-        return null;
+        conn = DatabaseConnectionManager.getConnection();
+        List<Story> weeksTopPicks = new ArrayList<>();
+        Story bookOfDay = null;
+        
+        try {
+            
+            LocalDate endDate = LocalDate.now();
+            LocalDate startDate = endDate.minusDays(7);
+            
+            String date1 = String.valueOf(startDate);
+            String date2 = String.valueOf(endDate);
+            
+            query = "select DISTINCT s.StoryID, s.Title, s.CoverImage, s.AuthorID, s.Likes from stories s where s.DatePublished between ? and ? order by s.Likes desc limit 10";
+            
+            ps = conn.prepareStatement(query);
+            ps.setDate(1, functionsClass.stringToDate(date1));
+            ps.setDate(2, functionsClass.stringToDate(date2));
+            
+            rs = ps.executeQuery();
+            
+            while (rs.next()){
+                
+                String imagePath = rs.getString(3);
+                
+                input = new FileInputStream(new File(imagePath));
+                output = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int bytesRead = -1;
+                
+                while ((bytesRead = input.read(buffer)) != -1) {
+                    
+                    output.write(buffer, 0, bytesRead);
+                    
+                }
+                
+                byte[] imageBytes = output.toByteArray();
+                String image = Base64.getEncoder().encodeToString(imageBytes);
+                
+                weeksTopPicks.add(new Story(rs.getInt(1), rs.getString(2), rs.getInt(4), image));
+                
+                bookOfDay = weeksTopPicks.get((int) Math.random()*10);
+                
+            }
+            
+        } catch (SQLException e) {
+            
+            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error getting all Favorites.", e);
+            
+        } catch (IOException e) {
+            
+            throw new RuntimeException(e);
+            
+        } finally {
+            
+            if (input!=null){
+                
+                try {
+                    
+                    input.close();
+                    
+                } catch (IOException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (output!=null){
+                
+                try {
+                    
+                    output.close();
+                    
+                } catch (IOException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return bookOfDay;
         
     }
     

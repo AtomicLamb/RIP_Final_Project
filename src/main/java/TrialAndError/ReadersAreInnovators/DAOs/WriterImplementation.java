@@ -11,12 +11,13 @@ import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Desctripion:    The concrete implementation of the WriterDAO.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -134,11 +135,12 @@ public class WriterImplementation implements WriterDAOInterface{
         
     }
     
+    
     @Override       //Completed: Allows a user to see all their current drafts.
-    public ArrayList<Story> getAllDrafts(Writer writer) {
+    public List<Story> getAllDrafts(Writer writer) {
         
         conn = DatabaseConnectionManager.getConnection();
-        ArrayList<Story> userDrafts = new ArrayList<>();
+        List<Story> userDrafts = new ArrayList<>();
         
         try {
             
@@ -241,6 +243,7 @@ public class WriterImplementation implements WriterDAOInterface{
         
     }
     
+    
     @Override       //Completed: Allows a user to register as a writer.
     public String writerRegistration(WriterApplication writerApplication) {
         
@@ -315,6 +318,7 @@ public class WriterImplementation implements WriterDAOInterface{
         return message;
         
     }
+    
     
     @Override       //Completed: Allows a writer to edit an existing draft.
     public String editDraft(Story story) {
@@ -394,6 +398,7 @@ public class WriterImplementation implements WriterDAOInterface{
         
     }
     
+    
     @Override       //Completed: Allows a writer to delete an old draft.
     public String deleteDraft(Story Story){
         
@@ -463,6 +468,7 @@ public class WriterImplementation implements WriterDAOInterface{
         return message;
         
     }
+    
     
     @Override       //Completed: Gets the information to display on the Author details page.
     public Writer getAuthor(Writer writer) {
@@ -535,7 +541,6 @@ public class WriterImplementation implements WriterDAOInterface{
         return author;
         
     }
-    
     
     
 }

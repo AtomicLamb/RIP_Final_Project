@@ -12,6 +12,7 @@ import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
+import TrialAndError.ReadersAreInnovators.RESTService.ImpService;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayer_Interface;
@@ -40,7 +41,8 @@ public class writerServlet extends HttpServlet
     private HttpSession session;
     private Writer writer;
     private Story story;
-      private ServiceLayerClass slc;
+    private ServiceLayerClass slc;
+    private ImpService imp;
     private Part filePart; 
     private InputStream image;
     private String newCoverImage;
@@ -50,6 +52,7 @@ public class writerServlet extends HttpServlet
     
     public writerServlet(){
         slc = new ServiceLayerClass();
+        imp = new ImpService();
     }
     
     @Override
@@ -64,8 +67,8 @@ public class writerServlet extends HttpServlet
                request.setAttribute("message", num);
                
                List<Story>genreStories=slc.getStoriesFromGenres(new User((Integer) session.getAttribute("UserID")));
-               List<Story>topWeekPicksStories=slc.getWeeksTopPicks();
-               List<Story>recommendedBooks=slc.getRecommendedBooks();
+               List<Story>topWeekPicksStories=imp.getWeeksTopPicks();
+               List<Story>recommendedBooks=imp.getRecommendedBooks();
                request.setAttribute("recommendedBooks",recommendedBooks);
                request.setAttribute("topPicks",topWeekPicksStories);
                request.setAttribute("stories", genreStories);
@@ -97,7 +100,7 @@ public class writerServlet extends HttpServlet
                story=new Story();
                storyId = Integer.valueOf(request.getParameter("storyId"));
                 story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
-                  request.setAttribute("draft",slc.getDraft(story));
+                  request.setAttribute("draft",imp.getDraft(story));
                dispacther =  request.getRequestDispatcher("EditDraft.jsp");
                dispacther.forward(request, response);
                break;
@@ -128,7 +131,7 @@ public class writerServlet extends HttpServlet
                     commentsEnabled = false;
                 }
                 
-                request.setAttribute("genreList",slc.getGenres());
+                request.setAttribute("genreList",imp.getGenres());
                 request.setAttribute("message",slc.submitStory(new Story(title,(Integer)session.getAttribute("UserID")
                         ,request.getParameter("storySynopsis"), request.getParameter("storyBody"), newCoverImage, commentsEnabled)));
                 var dispatcher=request.getRequestDispatcher("SelectStoryGenre.jsp");

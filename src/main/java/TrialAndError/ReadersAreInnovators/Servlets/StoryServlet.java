@@ -8,10 +8,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import TrialAndError.ReadersAreInnovators.Models.AnalyticalData.Rating;
+import TrialAndError.ReadersAreInnovators.Models.RESTModels.StoryUserREST;
+import TrialAndError.ReadersAreInnovators.Models.RESTModels.UserWriterREST;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.*;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
+import TrialAndError.ReadersAreInnovators.RESTService.ImpService;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayer_Interface;
 import jakarta.servlet.ServletException;
@@ -39,7 +42,14 @@ import javax.imageio.ImageIO;
 @WebServlet(name = "StoryServlet", urlPatterns = {"/StoryServlet"})
 public class StoryServlet extends HttpServlet {
     private HttpSession session;
+    private ImpService imp;
     private final ServiceLayer_Interface service =new ServiceLayerClass();
+    private Boolean follow;
+    
+    public StoryServlet()
+    {
+        imp = new ImpService();
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -111,7 +121,7 @@ public class StoryServlet extends HttpServlet {
         Story chosenStory=getChosenStory(request);
         Writer writer=new Writer(chosenStory.getAuthorID());
         request.setAttribute("storyDetails", chosenStory);
-        request.setAttribute("chosenWriter", service.getAuthor(writer));
+        request.setAttribute("chosenWriter", imp.getAuthor(writer));
         request.setAttribute("comments",service.getComments(chosenStory));
         request.setAttribute(attributeName, value);
         
@@ -135,11 +145,11 @@ public class StoryServlet extends HttpServlet {
     }
     public String rateStory(HttpServletRequest request){
         
-        if(service.checkRatingExists(new Rating(getUserSessionJustId(request).getUserID(),Integer.valueOf(request.getParameter("storyId")),Integer.valueOf(request.getParameter("rating"))))){
-             return service.changeRating(new Rating(getUserSessionJustId(request).getUserID(),Integer.valueOf(request.getParameter("storyId")),Integer.valueOf(request.getParameter("rating"))));
+        if(imp.checkRatingExists(new Rating(getUserSessionJustId(request).getUserID(),Integer.valueOf(request.getParameter("storyId")),Integer.valueOf(request.getParameter("rating"))))){
+             return imp.changeRating(new Rating(getUserSessionJustId(request).getUserID(),Integer.valueOf(request.getParameter("storyId")),Integer.valueOf(request.getParameter("rating"))));
         }
        else {
-          return service.rateStory(new Rating(getUserSessionJustId(request).getUserID(),Integer.valueOf(request.getParameter("storyId")),Integer.valueOf(request.getParameter("rating"))));
+          return imp.rateStory(new Rating(getUserSessionJustId(request).getUserID(),Integer.valueOf(request.getParameter("storyId")),Integer.valueOf(request.getParameter("rating"))));
         }
             
     }
@@ -150,7 +160,7 @@ public class StoryServlet extends HttpServlet {
            Comment comment=new Comment(Integer.valueOf(request.getParameter("storyId")),
                    (Integer) session.getAttribute("UserID"),request.getParameter("commentArea"));
          //StoryID, UserID, Comment
-        return service.addComment(comment);
+        return imp.addComment(comment);
        
     }
     public Comment getNewComment(HttpServletRequest request){
@@ -164,15 +174,29 @@ public class StoryServlet extends HttpServlet {
              return null;
         }
     }
+    public String followOrUnfollow(HttpServletRequest request){
+        if(imp.checkIfAuthorFollowed(new UserWriterREST(getUserSessionJustId(request),new Writer(Integer.valueOf(request.getParameter("authorId")))))){
+                  return unFollowAuthor(request);
+                          }
+        else{
+            return followAuthor(request);
+        }
+    }
+    public Boolean followed(HttpServletRequest request){
+       return imp.checkIfAuthorFollowed(new UserWriterREST(getUserSessionJustId(request),new Writer(Integer.valueOf(request.getParameter("authorId")))));
+    }
+    public String unFollowAuthor(HttpServletRequest request){
+        return imp.unfollowAuthor(new UserWriterREST(getUserSessionJustId(request),new Writer(Integer.valueOf(request.getParameter("authorId")))));
+    }
     public String followAuthor(HttpServletRequest request){
-           return service.followAuthor(service.getAuthor(new Writer(Integer.valueOf(request.getParameter("authorId")))),getUserSessionJustId(request));
-         
-     }
+        return imp.followAuthor(new UserWriterREST(getUserSessionJustId(request),new Writer(Integer.valueOf(request.getParameter("authorId")))));
+      }
      public void authorDetails(HttpServletRequest request, HttpServletResponse response){
          Writer writer=new Writer();
          writer.setUserID(Integer.valueOf(request.getParameter("authorId")));
          request.setAttribute("authorStories", service.getPublishedStories(writer));
-         request.setAttribute("chosenWriter",service.getAuthor(writer));
+         request.setAttribute("chosenWriter",imp.getAuthor(writer));
+         request.setAttribute("followed",followed(request));
          var dispatcher=request.getRequestDispatcher("AuthorDetails.jsp");
          try {
              dispatcher.forward(request,response);
@@ -196,7 +220,8 @@ public class StoryServlet extends HttpServlet {
                 Writer writer=new Writer();
                 writer.setUserID(Integer.valueOf(request.getParameter("authorId")));
                   request.setAttribute("authorStories", service.getPublishedStories(writer));
-                request.setAttribute("chosenWriter",service.getAuthor(writer));
+                request.setAttribute("chosenWriter",imp.getAuthor(writer));
+                request.setAttribute("followed",followed(request));
                var dispatcher=request.getRequestDispatcher("AuthorDetails.jsp");
                 dispatcher.forward(request,response);
                  break;
@@ -207,7 +232,7 @@ public class StoryServlet extends HttpServlet {
                 request.setAttribute("chosenStory", getChosenStory(request));
                 dispatcher=request.getRequestDispatcher("StoryBody.jsp");
                 
-                service.readStory(story,getUserSessionJustId(request));
+                imp.readStory(new StoryUserREST(story,getUserSessionJustId(request)));
                 dispatcher.forward(request, response);
                 
                 break;
@@ -226,12 +251,12 @@ public class StoryServlet extends HttpServlet {
         story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
         session= request.getSession(false);
         User user=new User((Integer)session.getAttribute("UserID"));
-       return service.likeStory(story,user);
+       return imp.likeStory(new StoryUserREST(story,user));
    }
    public String likeOrUnlike(HttpServletRequest request){
        Story story=new Story();
        story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
-        if (service.checkIfLiked(story,getUserSessionJustId(request))){
+        if (imp.checkIfLiked(new StoryUserREST(story,getUserSessionJustId(request)))){
             return unLikeStory(request);
         }
         else {
@@ -242,7 +267,7 @@ public class StoryServlet extends HttpServlet {
     public String unLikeStory(HttpServletRequest request){
         Story story=new Story();
         story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
-        return service.unlikeStory(story,getUserSessionJustId(request));
+        return imp.unlikeStory(new StoryUserREST(story,getUserSessionJustId(request)));
     }
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -269,7 +294,7 @@ public class StoryServlet extends HttpServlet {
                 break;
                 
             case "followAuthor":
-                response.sendRedirect("postResultServlet?submit=followAuthor&authorId="+request.getParameter("authorId")+"&followMessage="+followAuthor(request));
+                response.sendRedirect("postResultServlet?submit=followAuthor&authorId="+request.getParameter("authorId")+"&followMessage="+followOrUnfollow(request));
                 break;
             case"like":
                 response.sendRedirect("postResultServlet?submit=like&storyId="+request.getParameter("storyId")+"&like="+followAuthor(request));

@@ -6,7 +6,7 @@ import java.util.List;
 
 
 /**
- * @Desctripion:    The Admin-Editors DAO Interface.
+ * @Desctripion:    The Admin-Editor DAO Interface.
  * @Author:         Luaan Robinson.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.

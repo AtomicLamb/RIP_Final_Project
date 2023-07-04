@@ -10,7 +10,7 @@ import java.util.List;
 
 
 /**
- * @Desctripion:    The Editors DAO Interface.
+ * @Desctripion:    The Editor DAO Interface.
  * @Author:         Luaan Robinson.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -34,7 +34,7 @@ public interface EditorDAOInterface {
     
     StoryApplication reviewPendingStory(StoryApplication story);
     
-    ArrayList<StoryApplication> viewPendingStories();
+    List<StoryApplication> viewPendingStories();
     
     String revokeWriterPrivileges(Writer writer);
     

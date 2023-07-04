@@ -2,7 +2,7 @@ package TrialAndError.ReadersAreInnovators.Models.Administration;
 
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Desctripion:    The model for a Writer Application Object.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -11,6 +11,7 @@ package TrialAndError.ReadersAreInnovators.Models.Administration;
 
 public class WriterApplication {
     
+    
     private String name;
     private String surname;
     private String email;
@@ -18,6 +19,7 @@ public class WriterApplication {
     private String password;
     private String motivation;
     private String applicationDate;
+    
     
     public WriterApplication() {
         
@@ -61,6 +63,7 @@ public class WriterApplication {
         this.applicationDate = applicationDate;
         
     }
+    
     
     public String getName() {
         return name;
@@ -127,6 +130,7 @@ public class WriterApplication {
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", password='" + password + '\'' +
                 ", motivation='" + motivation + '\'' +
                 ", applicationDate='" + applicationDate + '\'' +
                 '}';

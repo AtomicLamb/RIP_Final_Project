@@ -2,7 +2,7 @@ package TrialAndError.ReadersAreInnovators.Models.UserTypes;
 
 
 /**
- * @Desctripion:    The concrete implementation of the AnalyticsDAO.
+ * @Desctripion:    The model for the Admin-Editor Object.
  * @Author:         Tyler Schwegler.
  * @Version:        v.1.0.0
  * @Date:           2023-07-05.
@@ -23,40 +23,7 @@ public class AdminEditor extends Editor {
     private Double data;
     
     
-    public AdminEditor(){
-        
-    }
-    
-    public AdminEditor(Integer userID, String name, String surname, Double data) {
-        
-        this.userID = userID;
-        this.name = name;
-        this.surname = surname;
-        this.data = data;
-        
-    }
-    
-    public AdminEditor(String name, String surname, String email, String phoneNumber, String password) {
-        
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        
-    }
-    
-    public AdminEditor(Integer userID, String name, String surname, String email, String phoneNumber, String password, Integer userTypeID, String userType, Double data) {
-        
-        this.userID = userID;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.userTypeID = userTypeID;
-        this.userType = userType;
-        this.data = data;
+    public AdminEditor() {
         
     }
     
@@ -123,26 +90,30 @@ public class AdminEditor extends Editor {
     
     @Override
     public Integer getUserTypeID() {
-        return 4;
+        return userTypeID;
     }
     
-    public void setUserTypeID() {
-        this.userTypeID = 4;
+    @Override
+    public void setUserTypeID(Integer userTypeID) {
+        this.userTypeID = userTypeID;
     }
     
     @Override
     public String getUserType() {
-        return "Admin-Editor";
+        return userType;
     }
     
-    public void setUserType() {
-        this.userType = "Admin-Editor";
+    @Override
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
     
+    @Override
     public Double getData() {
         return data;
     }
     
+    @Override
     public void setData(Double data) {
         this.data = data;
     }
