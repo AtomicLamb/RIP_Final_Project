@@ -47,7 +47,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                     <i class="fas fa-lock"></i>
                                     <input type="password" placeholder="Enter your password" name="loginPassword" required>
                                 </div>
-                                <div class="text"><a href="#" style="color: #007791">Forgot password?</a></div>
+                                <div class="text"><a href="ForgotPassword.jsp" style="color: #007791">Forgot password?</a></div>
                                 <div class="button input-box">
                                     <input type="submit" name="submit" value="Login">
                                 </div>

@@ -31,12 +31,10 @@ import java.util.logging.Logger;
 public class adminEditorServlet extends HttpServlet {
     
     private ImpService imp;
-    private ServiceLayerClass service;
     HttpSession session;
     public adminEditorServlet()
     {
         imp = new ImpService();
-        service = new ServiceLayerClass();
     }
 
     @Override
@@ -95,17 +93,17 @@ public class adminEditorServlet extends HttpServlet {
     {
        switch(request.getParameter("submit"))
        {
-           case"Add Genre":
+           case"ADD GENRE":
                addGenre(request,response);
                break;
                
-           case"Add Editor":
+           case"ADD EDITOR":
                addEditor(request,response);    
                break;
-           case"Remove Genre":
+           case"REMOVE GENRE":
                removeGenre(request,response);
                break;
-           case"Remove Editor":
+           case"REMOVE EDITOR":
                removeEditor(request,response);
                break;
        }

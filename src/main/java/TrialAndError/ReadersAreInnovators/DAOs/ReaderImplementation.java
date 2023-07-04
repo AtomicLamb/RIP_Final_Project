@@ -810,7 +810,7 @@ public class ReaderImplementation implements ReaderDAOInterface {
     }
     
     
-    @Override       //Completed: Allows a user to see all their favorite books that they have read.     //TODO
+    @Override       //Completed: Allows a user to see all their favorite books that they have read.
     public List<Story> getReadFavorites(User user) {
         
         conn = DatabaseConnectionManager.getConnection();
@@ -818,8 +818,133 @@ public class ReaderImplementation implements ReaderDAOInterface {
         
         try {
             
-            query = "select s.Title, s.CoverImage, concat_ws(\" \", u.Name, u.Surname) as Name from stories s, users u, userfavorites f, userread r " +
-                            "where f.StoryID = s.StoryID and s.AuthorID = u.UserID and s.StoryID = r.StoryID and r.IsRead = 1 and f.UserID = u.UserID = ?";
+            query = "select s.Title, s.CoverImage, concat_ws(\" \", u.Name, u.Surname) as Name from stories s, users u, readandfavorites f where f.StoryID = s.StoryID " +
+                    "and s.AuthorID = u.UserID and f.IsRead = 1 and f.IsFavorite = 1 and f.UserID = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, user.getUserID());
+            
+            rs = ps.executeQuery();
+            
+            while (rs.next()){
+                
+                String imagePath = rs.getString(2);
+                
+                input = new FileInputStream(new File(imagePath));
+                output = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int bytesRead = -1;
+                
+                while ((bytesRead = input.read(buffer)) != -1) {
+                    
+                    output.write(buffer, 0, bytesRead);
+                    
+                }
+                
+                byte[] imageBytes = output.toByteArray();
+                String image = Base64.getEncoder().encodeToString(imageBytes);
+                
+                readFavoriteStories.add(new Story(rs.getString(1), rs.getString(3), image, imagePath));
+                
+            }
+            
+        } catch (SQLException e) {
+            
+            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error getting all read Favorites.", e);
+            
+        } catch (IOException e) {
+            
+            throw new RuntimeException(e);
+            
+        } finally {
+            
+            if (input!=null){
+                
+                try {
+                    
+                    input.close();
+                    
+                } catch (IOException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (output!=null){
+                
+                try {
+                    
+                    output.close();
+                    
+                } catch (IOException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return readFavoriteStories;
+        
+    }
+    
+    
+    @Override       //Completed: Allows a user to see all their favorite books that they have not read.
+    public List<Story> getUnreadFavorites(User user) {
+        
+        conn = DatabaseConnectionManager.getConnection();
+        List<Story> readFavoriteStories = new ArrayList<>();
+        
+        try {
+            
+            query = "select s.Title, s.CoverImage, concat_ws(\" \", u.Name, u.Surname) as Name from stories s, users u, readandfavorites f where f.StoryID = s.StoryID " +
+                    "and s.AuthorID = u.UserID and f.IsRead = 0 and f.IsFavorite = 1 and f.UserID = ?";
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, user.getUserID());
@@ -931,131 +1056,6 @@ public class ReaderImplementation implements ReaderDAOInterface {
         }
         
         return readFavoriteStories;
-        
-    }
-    
-    
-    @Override       //Completed: Allows a user to see all their favorite books that they have not read.     //TODO
-    public List<Story> getUnreadFavorites(User user) {
-        
-        conn = DatabaseConnectionManager.getConnection();
-        List<Story> unreadFavoriteStories = new ArrayList<>();
-        
-        try {
-            
-            query = "select s.Title, s.CoverImage, concat_ws(\" \", u.Name, u.Surname) as Name from stories s, users u, userfavorites f, userread r " +
-                    "where f.StoryID = s.StoryID and s.AuthorID = u.UserID and s.StoryID = r.StoryID and r.IsRead = 0 and f.UserID = u.UserID = ?";
-            
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, user.getUserID());
-            
-            rs = ps.executeQuery();
-            
-            while (rs.next()){
-                
-                String imagePath = rs.getString(2);
-                
-                InputStream input = new FileInputStream(new File(imagePath));
-                ByteArrayOutputStream output = new ByteArrayOutputStream();
-                byte[] buffer = new byte[4096];
-                int bytesRead = -1;
-                
-                while ((bytesRead = input.read(buffer)) != -1) {
-                    
-                    output.write(buffer, 0, bytesRead);
-                    
-                }
-                
-                byte[] imageBytes = output.toByteArray();
-                String image = Base64.getEncoder().encodeToString(imageBytes);
-                
-                unreadFavoriteStories.add(new Story(rs.getString(1), rs.getString(3), image, imagePath));
-                
-            }
-            
-        } catch (SQLException e) {
-            
-            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error getting all unread Favorites.", e);
-            
-        } catch (IOException e) {
-            
-            throw new RuntimeException(e);
-            
-        } finally {
-            
-            if (input!=null){
-                
-                try {
-                    
-                    input.close();
-                    
-                } catch (IOException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-            if (output!=null){
-                
-                try {
-                    
-                    output.close();
-                    
-                } catch (IOException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-            if (rs!=null){
-                
-                try {
-                    
-                    rs.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-            if (ps!=null){
-                
-                try {
-                    
-                    ps.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-            if (conn!=null){
-                
-                try {
-                    
-                    conn.close();
-                    
-                } catch (SQLException e) {
-                    
-                    throw new RuntimeException(e);
-                    
-                }
-                
-            }
-            
-        }
-        
-        return unreadFavoriteStories;
         
     }
     

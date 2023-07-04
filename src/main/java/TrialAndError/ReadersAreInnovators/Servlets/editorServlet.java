@@ -163,10 +163,10 @@ private final FunctionsClass functionsClass = new FunctionsClass();
                  dispacther= request.getRequestDispatcher("Editors.jsp");
                  dispacther.forward(request,response);
                  break;
-             case"Approve Writer":
+             case"APPROVE WRITER":
                  approveWriter(request,response);
                  break;
-             case"Deny Writer":
+             case"DENY WRITER":
                  denyWriter(request,response);
                  break;
              case"Submit Genres":

@@ -17,6 +17,8 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import java.util.List;
+
 @Path("/TrialAndError")
 public class RESTControllerRIP {
     
@@ -321,10 +323,12 @@ public class RESTControllerRIP {
     @Path("/likeStory")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response likeStory(StoryUserREST storyUserREST)
-    {
+    public Response likeStory(StoryUserREST storyUserREST) {
+        
         return Response.ok().entity(service.likeStory(storyUserREST)).build();
+        
     }
+    
     @Path("/checkIfLiked")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -353,4 +357,96 @@ public class RESTControllerRIP {
     {
         return Response.ok().entity(service.getDraft(story)).build();
     }
+    @Path("/getReadFavorites")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getReadFavorites(User user)
+    {
+        return Response.ok().entity(service.getReadFavorites(user)).build();
+    }
+    @Path("/getUnreadFavorites")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUnreadFavorites(User user)
+    {
+        return Response.ok().entity(service.getUnreadFavorites(user)).build();
+    }
+    @Path("/getUserGenres")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserGenres(User user)
+    {
+        return Response.ok().entity(service.getUserGenres(user)).build();
+    }
+    @Path("/getFollowedAuthors")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getFollowedAuthors(User user)
+    {
+        return Response.ok().entity(service.getFollowedAuthors(user)).build();
+    }
+    @Path("/displayStoryDetails")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response displayStoryDetails(Story story)
+    {
+        return Response.ok().entity(service.displayStoryDetails(story)).build();
+    }
+    @Path("/getComments")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getComments(Story story)
+    {
+        return Response.ok().entity(service.getComments(story)).build();
+    }
+    @Path("/getPublishedStories")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPublishedStories(Writer writer)
+    {
+        return Response.ok().entity(service.getPublishedStories(writer)).build();
+    }
+    @Path("/getAllDrafts")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllDrafts(Writer writer)
+    {
+        return Response.ok().entity(service.getAllDrafts(writer)).build();
+    }
+    //searchByTitle
+    @Path("/searchByTitle")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response searchByTitle(String topic)
+    {
+        return Response.ok().entity(service.searchByTitle(topic)).build();
+    }
+    @Path("/searchByAuthor")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response   searchByAuthor(String topic)
+    {
+        return Response.ok().entity(service.searchByAuthor(topic)).build();
+    }
+   @Path("/searchByGenre")
+   @POST
+   @Produces(MediaType.APPLICATION_JSON)
+   public Response searchByGenre(String topic)
+   {
+       return Response.ok().entity(service.searchByGenre(topic)).build();
+   }
+   @Path("/searchByName")
+   @POST
+   @Produces(MediaType.APPLICATION_JSON)
+   public Response searchByName(String topic)
+   {
+       return Response.ok().entity(service.searchByName(topic)).build();
+   }
+   @Path("/searchByStories")
+   @POST
+   @Produces(MediaType.APPLICATION_JSON)
+   public Response searchByStories(String topic)
+   {
+       return Response.ok().entity(service.searchByStories(topic)).build();
+   }
 }

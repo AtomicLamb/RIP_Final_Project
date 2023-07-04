@@ -1,4 +1,4 @@
-/*--------------------------------------------------------------------- File Name: style.css ---------------------------------------------------------------------*/
+/*--------------------------------------------------------------------- File Name: style2.css ---------------------------------------------------------------------*/
 
 
 /*--------------------------------------------------------------------- import Fonts ---------------------------------------------------------------------*/
@@ -13,17 +13,18 @@
 
 /*--------------------------------------------------------------------- import Files ---------------------------------------------------------------------*/
 
-@import url(animate.min.css);
-@import url(normalize.css);
-@import url(icomoon.css);
-@import url(font-awesome.min.css);
-@import url(meanmenu.css);
-@import url(owl.carousel.min.css);
-@import url(swiper.min.css);
-@import url(slick.css);
-@import url(jquery.fancybox.min.css);
-@import url(jquery-ui.css);
-@import url(nice-select.css);
+@import url(css/animate.min.css);
+@import url(css/normalize.css);
+@import url(css/icomoon.css);
+@import url(css/font-awesome.min.css);
+@import url(css/meanmenu.css);
+@import url(css/owl.carousel.min.css);
+@import url(css/swiper.min.css);
+@import url(css/slick.css);
+@import url(css/jquery.fancybox.min.css);
+@import url(css/jquery-ui.css);
+@import url(css/nice-select.css);
+@import url('images/homePageBanner.jpg');
 
 /*--------------------------------------------------------------------- skeleton ---------------------------------------------------------------------*/
 
@@ -210,11 +211,6 @@ button {
      width: 100%;
 }
 
-.layout_padding {
-     padding-top: 90px;
-     padding-bottom: 0px;
-}
-
 .padding_0{
      padding: 0px;
 }
@@ -253,15 +249,6 @@ button {
      color: #676868;
 }
 
-.banner_section {
-    width: 100%;
-    float: left;
-    background-image: url('images/banner.jpg');
-    height: auto;
-    padding-bottom: 90px;
-    background-size: cover;
-}
-
 .best_taital{
      width: 100%;
      float: left;
@@ -271,8 +258,7 @@ button {
 }
 
 .email_bt {
-    width: 70%;
-    float: left;
+    width: 400px;
     font-size: 16px;
     color: #c3c2c2;
     background-color: #ffffff;
@@ -285,7 +271,7 @@ button {
 }
 
 .subscribe_bt {
-    width: 30%;
+    width: 100px;
     background-color: #313233;
     float: right;
     padding: 9px 14px;
@@ -301,7 +287,7 @@ button {
 }
 
 .box_main {
-    width: 50%;
+    width: 500px;
     margin: 0 auto;
     text-align: center;
     padding-top: 30px !important;
@@ -493,7 +479,7 @@ button {
 .search_section {
     width: 100%;
     float: left;
-    background-image: url(../images/search_bg.png);
+    background-image: url(images/search_bg.png);
     height: auto;
     background-size: cover;
     padding-bottom: 90px;
@@ -1078,6 +1064,18 @@ input.btn_main_3::placeholder {
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+}
+.layout_padding {
+    padding-top: 90px;
+    padding-bottom: 0px;
+}
+.banner_section {
+    width: 100%;
+    float: left;
+    background-image: url('images/homePageBanner.jpg');
+    height: auto;
+    padding-bottom: 90px;
+    background-size: cover;
 }
 
 .dropdown-content a:hover {background-color: #ddd;}

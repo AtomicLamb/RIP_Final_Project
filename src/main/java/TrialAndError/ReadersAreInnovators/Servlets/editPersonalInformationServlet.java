@@ -59,10 +59,10 @@ public class editPersonalInformationServlet extends HttpServlet {
                 
                 Integer userID = (Integer) session.getAttribute("UserID");
                 User user = new User(userID);
-                List<Story> readFavorites=service.getReadFavorites(user);
-                List<Story>unreadFavourites=service.getUnreadFavorites(user);
-                List<Genre>userGenres=service.getUserGenres(user);
-                List<Writer>followedAuthors=service.getFollowedAuthors(user);
+                List<Story> readFavorites=imp.getReadFavorites(user);
+                List<Story>unreadFavourites=imp.getUnreadFavorites(user);
+                List<Genre>userGenres=imp.getUserGenres(user);
+                List<Writer>followedAuthors=imp.getFollowedAuthors(user);
                 request.setAttribute("readFavourites",readFavorites);
                 request.setAttribute("unreadFavourites",unreadFavourites);
                 request.setAttribute("userGenres",userGenres);
@@ -75,7 +75,7 @@ public class editPersonalInformationServlet extends HttpServlet {
                 Integer num = (Integer) session.getAttribute("UserTypeID");
                 request.setAttribute("message", num);
                 
-                List<Story>genreStories=service.getStoriesFromGenres(new User((Integer) session.getAttribute("UserID")));
+                List<Story>genreStories=imp.getStoriesFromGenres(new User((Integer) session.getAttribute("UserID")));
                 List<Story>topWeekPicksStories=imp.getWeeksTopPicks();
                 List<Story>recommendedBooks=imp.getRecommendedBooks();
                 request.setAttribute("recommendedBooks",recommendedBooks);
@@ -90,10 +90,10 @@ public class editPersonalInformationServlet extends HttpServlet {
                 
                 userID = (Integer) session.getAttribute("UserID");
                 user = new User(userID);
-                readFavorites=service.getReadFavorites(user);
-                unreadFavourites=service.getUnreadFavorites(user);
-                userGenres=service.getUserGenres(user);
-                followedAuthors=service.getFollowedAuthors(user);
+                readFavorites=imp.getReadFavorites(user);
+                unreadFavourites=imp.getUnreadFavorites(user);
+                userGenres=imp.getUserGenres(user);
+                followedAuthors=imp.getFollowedAuthors(user);
                 request.setAttribute("readFavourites",readFavorites);
                 request.setAttribute("unreadFavourites",unreadFavourites);
                 request.setAttribute("userGenres",userGenres);
@@ -115,10 +115,10 @@ public class editPersonalInformationServlet extends HttpServlet {
                
                Integer userID = (Integer) session.getAttribute("UserID");
                User user = new User(userID);
-               List<Story> readFavorites=service.getReadFavorites(user);
-               List<Story>unreadFavourites=service.getUnreadFavorites(user);
-               List<Genre>userGenres=service.getUserGenres(user);
-               List<Writer>followedAuthors=service.getFollowedAuthors(user);
+               List<Story> readFavorites=imp.getReadFavorites(user);
+               List<Story>unreadFavourites=imp.getUnreadFavorites(user);
+               List<Genre>userGenres=imp.getUserGenres(user);
+               List<Writer>followedAuthors=imp.getFollowedAuthors(user);
                request.setAttribute("readFavourites",readFavorites);
                request.setAttribute("unreadFavourites",unreadFavourites);
                request.setAttribute("userGenres",userGenres);

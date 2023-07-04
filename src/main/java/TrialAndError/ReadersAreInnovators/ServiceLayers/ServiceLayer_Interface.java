@@ -28,6 +28,7 @@ import java.util.List;
 public interface ServiceLayer_Interface {
     
     
+    
     //Admin-Editor:
     
     List<Editor> viewEditors();
@@ -35,6 +36,7 @@ public interface ServiceLayer_Interface {
     String removeEditor(Editor editor);
     
     String addEditor(Editor editor);
+    
     
     
     //Analytics:
@@ -58,6 +60,7 @@ public interface ServiceLayer_Interface {
     List<Editor> getTopEditors(Analytics analytics);
     
     
+    
     //Comment:
     
     String addComment(Comment comment);
@@ -73,6 +76,7 @@ public interface ServiceLayer_Interface {
     List<Comment> viewFlaggedComments();
     
     Integer getNumberOfComments(Story story);
+    
     
     
     //Editor:
@@ -94,6 +98,7 @@ public interface ServiceLayer_Interface {
     List<StoryApplication> viewPendingStories();
     
     String revokeWriterPrivileges(Writer writer);
+    
     
     
     //Genre:
@@ -123,6 +128,7 @@ public interface ServiceLayer_Interface {
     List<Genre> getPendingStoryGenres(StoryApplication storyApplication);
     
     
+    
     //Rating:
     
     Double getStoryRating(Story story);
@@ -134,6 +140,7 @@ public interface ServiceLayer_Interface {
     String removeRating(Rating rating);
     
     Boolean checkRatingExists(Rating rating);
+    
     
     
     //Reader:
@@ -157,6 +164,7 @@ public interface ServiceLayer_Interface {
     List<Story> getReadFavorites(User user);
     
     List<Story> getUnreadFavorites(User user);
+    
     
     
     //Story:
@@ -186,9 +194,18 @@ public interface ServiceLayer_Interface {
     Boolean checkIfLiked(StoryUserREST storyUserREST);
     
     
+    
     //User:
     
-    List<String> search(String topic);
+    List<Story> searchByTitle(String topic);
+    
+    List<Story> searchByAuthor(String topic);
+    
+    List<Story> searchByGenre(String topic);
+    
+    List<Writer> searchByName(String topic);
+    
+    List<Writer> searchByStories(String topic);
     
     User getUser(User user);
     
@@ -198,9 +215,10 @@ public interface ServiceLayer_Interface {
     
     String emailVerification(String email);
     
-    Boolean referFriend(String phoneNumber);
+    String referFriend(String phoneNumber, String name);
     
     Story getBookOfTheDay();
+    
     
     
     //Writer:
@@ -218,9 +236,12 @@ public interface ServiceLayer_Interface {
     Writer getAuthor(Writer writer);
     
     
+    
     //Other:
     
     String applyForWriter(WriterApplication writerApplication);
+    
+    String forgotPassword(String email,String number);
     
     
 }

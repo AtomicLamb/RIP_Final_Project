@@ -21,7 +21,7 @@
 <!-- bootstrap css -->
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <!-- style css -->
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="style2.css">
 <!-- Responsive-->
 <link rel="stylesheet" href="css/responsive.css">
 <!-- fevicon -->
@@ -53,7 +53,9 @@
                 <li class="nav-item">
                    <a class="nav-link" href="HomePageServlet?submit=HomePage">HOME</a>
                 </li>
-                
+                <li class="nav-item">
+                <a href="StoryServlet?submit=storyOfTheDay"  class="nav-link"  style="border: none;background-color: #343a40; color: #007791">STORY OF THE DAY</a>
+                </li>
             </ul>
         </div>
          <div class="login_text"><a href="index.jsp">LOGIN HERE</a></div>
@@ -72,7 +74,7 @@
                     <div class="row" style="margin-left: 200px;">
                         <%Writer writer=(Writer)request.getAttribute("chosenWriter");%>
                         <%Story story=(Story)request.getAttribute("storyDetails");%>
-                        <%session=request.getSession(false);%>
+                       
 
                       
                         <div class="image_1 padding_0" style="margin-left: 0px;padding-left: 0px"><h1><%=story.getTitle()%></h1><img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="height: 400px;width:300px; "><div style="position: relative;right: 150px;margin-right: 0px;float: right">

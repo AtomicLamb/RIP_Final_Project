@@ -35,23 +35,23 @@
                  <div class="input-box">
                      <input type="number" placeholder="Enter a number from 1-30" name="analyticNum" min="1" max="30" required>
               </div>
-                  <p style="color:red">Top Elements </p><br>
-                  <p style="color:red">Between: </p><br>
+                  <p style="color:black">Top Elements </p><br>
+                  <p style="color:black">Between: </p><br>
                   <div class="input-box">
                      <input type="date" name="analyticDateStart">
               </div>
-                  <p style="color:red">And: </p><br>
+                  <p style="color:black">And: </p><br>
                   <div class="input-box">
                      <input type="date" name="analyticDateEnd">
               </div>
                   <div class="button input-box">
-                    <input type="submit" name="submit" value="Submit Analytic Choice">
+                    <input type="submit" name="submit" value="SUBMIT ANALYTIC CHOICE">
                   </div>
               </div>
           </form>
             <form action="editorServlet" method="get">
                 <div class="button input-box">
-                    <input style="color: #007791; background-color: black;" type="submit" name="submit" value="BACK TO EDITORS PAGE" formnovalidate>
+                    <input type="submit" name="submit" value="BACK TO EDITORS PAGE" formnovalidate>
                 </div>
             </form>
             <%

@@ -77,7 +77,7 @@ public class StoryServlet extends HttpServlet {
         
         Story chosenStory=new Story();
                 chosenStory.setStoryID(Integer.valueOf(request.getParameter("storyId")));
-                return service.displayStoryDetails(chosenStory);
+                return imp.displayStoryDetails(chosenStory);
    }
     public List<User>getUsers(){
         List<User>users=new ArrayList();
@@ -90,9 +90,9 @@ public class StoryServlet extends HttpServlet {
        
         Story story=new Story();
         story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
-        service.getComments(service.displayStoryDetails(story));
+        imp.getComments(imp.displayStoryDetails(story));
          
-        List<Comment>comments=service.getComments(service.displayStoryDetails(story));
+        List<Comment>comments=imp.getComments(imp.displayStoryDetails(story));
         for(Comment comment:comments){
             if(comment.getCommentID()==(Integer.valueOf(request.getParameter("commentId")))) {
                 
@@ -122,7 +122,7 @@ public class StoryServlet extends HttpServlet {
         Writer writer=new Writer(chosenStory.getAuthorID());
         request.setAttribute("storyDetails", chosenStory);
         request.setAttribute("chosenWriter", imp.getAuthor(writer));
-        request.setAttribute("comments",service.getComments(chosenStory));
+        request.setAttribute("comments",imp.getComments(chosenStory));
         request.setAttribute(attributeName, value);
         
         var dispatcher=request.getRequestDispatcher("StoryDetails.jsp");
@@ -166,7 +166,7 @@ public class StoryServlet extends HttpServlet {
     public Comment getNewComment(HttpServletRequest request){
          Story story=new Story();
         story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
-        List<Comment>comments=service.getComments(service.displayStoryDetails(story));
+        List<Comment>comments=imp.getComments(imp.displayStoryDetails(story));
         if(!comments.isEmpty()){
             return comments.get(comments.size()-1);
         }
@@ -194,7 +194,7 @@ public class StoryServlet extends HttpServlet {
      public void authorDetails(HttpServletRequest request, HttpServletResponse response){
          Writer writer=new Writer();
          writer.setUserID(Integer.valueOf(request.getParameter("authorId")));
-         request.setAttribute("authorStories", service.getPublishedStories(writer));
+         request.setAttribute("authorStories", imp.getPublishedStories(writer));
          request.setAttribute("chosenWriter",imp.getAuthor(writer));
          request.setAttribute("followed",followed(request));
          var dispatcher=request.getRequestDispatcher("AuthorDetails.jsp");
@@ -219,7 +219,7 @@ public class StoryServlet extends HttpServlet {
             case "AuthorDetails":
                 Writer writer=new Writer();
                 writer.setUserID(Integer.valueOf(request.getParameter("authorId")));
-                  request.setAttribute("authorStories", service.getPublishedStories(writer));
+                  request.setAttribute("authorStories", imp.getPublishedStories(writer));
                 request.setAttribute("chosenWriter",imp.getAuthor(writer));
                 request.setAttribute("followed",followed(request));
                var dispatcher=request.getRequestDispatcher("AuthorDetails.jsp");
@@ -241,6 +241,15 @@ public class StoryServlet extends HttpServlet {
                 break;
             case"unlike":
                 response.sendRedirect("postResultServlet?submit=unlike&storyId="+request.getParameter("storyId")+"&unlikeMessage="+unLikeStory(request));
+                break;
+            case "storyOfTheDay":
+                story=service.getBookOfTheDay();
+                writer=new Writer(story.getAuthorID());
+                
+                  request.setAttribute("storyDetails",story);
+                request.setAttribute("chosenWriter", service.getAuthor(writer));
+                dispatcher= request.getRequestDispatcher("StoryDetails.jsp");
+                dispatcher.forward(request,response);
                 break;
         }
         

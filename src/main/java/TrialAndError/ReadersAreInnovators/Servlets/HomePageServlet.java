@@ -8,6 +8,7 @@ package TrialAndError.ReadersAreInnovators.Servlets;
 
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
+import TrialAndError.ReadersAreInnovators.RESTService.ImpService;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayer_Interface;
 import jakarta.servlet.ServletException;
@@ -39,46 +40,22 @@ import javax.swing.JLabel;
  */
 @WebServlet(urlPatterns = {"/HomePageServlet"})
 public class HomePageServlet extends HttpServlet {
-    private final ServiceLayer_Interface service = new ServiceLayerClass();
     private HttpSession session;
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    private ImpService imp;
+    private ServiceLayerClass service;
     
+    public HomePageServlet()
+    {
+        imp = new ImpService();
+        service = new ServiceLayerClass();
+    }
     
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request  servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        
-      
     }
-
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -86,27 +63,37 @@ public class HomePageServlet extends HttpServlet {
             case "Search":
                 
                 String userSearch=request.getParameter("search");
-                List<Story> storiesByTitle;
-                List<Story>storiesByAuthor;
-                List<Story> storiesByGenres;
-                List<Writer> authorsByName;
-                
+                List<Story> storiesByTitle=imp.searchByTitle(userSearch);
+                List<Story>storiesByAuthor=imp.searchByAuthor(userSearch);
+                List<Story> storiesByGenres=imp.searchByGenre(userSearch);
+                List<Writer> authorsByName=imp.searchByName(userSearch);
+                List<Writer>authorsByStoryTitle=imp.searchByStories(userSearch);
+                request.setAttribute("searchByTitle",storiesByTitle);
+                request.setAttribute("searchByAuthor",storiesByAuthor);
+                request.setAttribute("searchByGenres",storiesByGenres);
+                request.setAttribute("searchAuthors",authorsByName);
+                request.setAttribute("searchAuthorByTitle",authorsByStoryTitle);
                 var dispatcher = request.getRequestDispatcher("Search.jsp");
                 dispatcher.forward(request, response);
                 
                 
                 break;
+            case "refer":
+                session= request.getSession(false);
+               request.setAttribute("message",service.referFriend(request.getParameter("email"),
+                       (String)session.getAttribute("Name")+" "+(String)session.getAttribute("Surname")));
+                dispatcher=request.getRequestDispatcher("HomePage.jsp");
+                dispatcher.forward(request,response);
+                break;
+            case "send":
+                request.setAttribute("message",service.forgotPassword(request.getParameter("email"),request.getParameter("number")));
+                dispatcher=request.getRequestDispatcher("OneTimeLogin.jsp");
+                dispatcher.forward(request,response);
+                break;
+                
+            case "login" :
+                
+                break;
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

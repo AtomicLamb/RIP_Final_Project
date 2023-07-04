@@ -3,6 +3,8 @@ package TrialAndError.ReadersAreInnovators.DAOs;
 
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
+import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,15 @@ import java.util.List;
 public interface UserDAOInterface{
     
     
-    List<String> search(String topic);
+    List<Story> searchByTitle(String topic);
+    
+    List<Story> searchByAuthor(String topic);
+    
+    List<Story> searchByGenre(String topic);
+    
+    List<Writer> searchByName(String topic);
+    
+    List<Writer> searchByStories(String topic);
     
     User getUser(User user);
     

@@ -55,6 +55,7 @@ public class DatabaseConnectionManager {
         dataSource1.setMinIdle(100);
         dataSource1.setMaxIdle(100);
         dataSource1.setMaxOpenPreparedStatements(100);
+        dataSource1.setMaxTotal(25);
         
     }
     

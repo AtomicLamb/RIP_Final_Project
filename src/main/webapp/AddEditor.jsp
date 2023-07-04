@@ -48,7 +48,7 @@
                                     <input type="email" placeholder="Enter your email" name="editorEmail" required>
                                 </div>
                                 <div class="button input-box" style="top:10px">
-                                    <input type="submit" name="submit" value="Add Editor">
+                                    <input type="submit" name="submit" value="ADD EDITOR">
                                 </div>
                             </div>
                         </form>

@@ -2,6 +2,7 @@ package TrialAndError.ReadersAreInnovators.DAOs;
 
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
+import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
 
@@ -45,15 +46,15 @@ public class UserImplementation implements UserDAOInterface {
     }
     
     
-    @Override       //Completed: Allows users to search for stories or authors. //TODO: In Service Layer make it get all searches using this then have a genres, writers, and stories arraylist returned. 
-    public List<String> search(String topic) {
+    @Override       //Completed: Allows users to search for stories by Title.
+    public List<Story> searchByTitle(String topic) {
         
         conn = DatabaseConnectionManager.getConnection();
-        List<String> search = new ArrayList<>();
+        List<Story> searchResults = new ArrayList<>();
         
         try {
 
-            query = "SELECT Title FROM readers_are_innovators.stories where title regexp ?";
+            query = "SELECT s.StoryID, s.Title, s.CoverImage, s.AuthorID FROM stories s where s.Title regexp ?";
 
             ps = conn.prepareStatement(query);
             ps.setString(1, topic);
@@ -61,12 +62,98 @@ public class UserImplementation implements UserDAOInterface {
 
             while(rs.next()){
                 
-                String title = rs.getString(1);
-                search.add(title);
+                String imagePath = rs.getString(3);
+                
+                input = new FileInputStream(new File(imagePath));
+                output = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int bytesRead = -1;
+                
+                while ((bytesRead = input.read(buffer)) != -1) {
+                    
+                    output.write(buffer, 0, bytesRead);
+                    
+                }
+                
+                byte[] imageBytes = output.toByteArray();
+                String image = Base64.getEncoder().encodeToString(imageBytes);
+                
+                searchResults.add(new Story(rs.getInt(1), rs.getString(2),  rs.getInt(4), image));
 
             }
+            
+        } catch (SQLException e) {
+            
+            Logger.getLogger(UserImplementation.class.getName()).log(Level.FINE, "Error getting Search Results.", e);
+            
+        } catch (FileNotFoundException e) {
+            
+            throw new RuntimeException(e);
+            
+        } catch (IOException e) {
+            
+            throw new RuntimeException(e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
         
-            query = "SELECT distinct Title FROM stories s, users u where u.UserID = s.AuthorID and u.Name regexp ? or u.surname regexp ?";
+        return searchResults;
+        
+    }
+    
+    
+    @Override       //Completed: Allows users to search for stories by Title.
+    public List<Story> searchByAuthor(String topic) {
+        
+        conn = DatabaseConnectionManager.getConnection();
+        List<Story> searchResults = new ArrayList<>();
+        
+        try {
+            
+            query = "SELECT distinct s.StoryID, s.Title, s.CoverImage, s.AuthorID FROM stories s, users u where u.UserID = s.AuthorID and u.Name regexp ? or u.Surname regexp ?";
             
             ps = conn.prepareStatement(query);
             ps.setString(1, topic);
@@ -75,12 +162,198 @@ public class UserImplementation implements UserDAOInterface {
             
             while(rs.next()){
                 
-                String title = rs.getString(1);
-                search.add(title);
+                String imagePath = rs.getString(3);
+                
+                input = new FileInputStream(new File(imagePath));
+                output = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int bytesRead = -1;
+                
+                while ((bytesRead = input.read(buffer)) != -1) {
+                    
+                    output.write(buffer, 0, bytesRead);
+                    
+                }
+                
+                byte[] imageBytes = output.toByteArray();
+                String image = Base64.getEncoder().encodeToString(imageBytes);
+                
+                searchResults.add(new Story(rs.getInt(1), rs.getString(2),  rs.getInt(4), image));
                 
             }
             
-            query = "SELECT Name, Surname from readers_are_innovators.users where name regexp ? or surname regexp ?";
+        } catch (SQLException e) {
+            
+            Logger.getLogger(UserImplementation.class.getName()).log(Level.FINE, "Error getting Search Results.", e);
+            
+        } catch (FileNotFoundException e) {
+            
+            throw new RuntimeException(e);
+            
+        } catch (IOException e) {
+            
+            throw new RuntimeException(e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return searchResults;
+        
+    }
+    
+    
+    @Override       //Completed: Allows users to search for stories by Title.
+    public List<Story> searchByGenre(String topic) {
+        
+        conn = DatabaseConnectionManager.getConnection();
+        List<Story> searchResults = new ArrayList<>();
+        
+        try {
+            
+            query = "SELECT distinct s.StoryID, s.Title, s.CoverImage, s.AuthorID FROM stories s, storygenreintersect i, genres g where " +
+                    "i.StoryID = s.StoryID and i.GenreID = g.GenreID and g.Genre regexp ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, topic);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                
+                String imagePath = rs.getString(3);
+                
+                input = new FileInputStream(new File(imagePath));
+                output = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int bytesRead = -1;
+                
+                while ((bytesRead = input.read(buffer)) != -1) {
+                    
+                    output.write(buffer, 0, bytesRead);
+                    
+                }
+                
+                byte[] imageBytes = output.toByteArray();
+                String image = Base64.getEncoder().encodeToString(imageBytes);
+                
+                searchResults.add(new Story(rs.getInt(1), rs.getString(2),  rs.getInt(4), image));
+                
+            }
+            
+        } catch (SQLException e) {
+            
+            Logger.getLogger(UserImplementation.class.getName()).log(Level.FINE, "Error getting Search Results.", e);
+            
+        } catch (FileNotFoundException e) {
+            
+            throw new RuntimeException(e);
+            
+        } catch (IOException e) {
+            
+            throw new RuntimeException(e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return searchResults;
+        
+    }
+    
+    
+    @Override       //Completed: Allows users to search for stories by Title.
+    public List<Writer> searchByName(String topic) {
+        
+        conn = DatabaseConnectionManager.getConnection();
+        List<Writer> searchResults = new ArrayList<>();
+        
+        try {
+            
+            query = "SELECT u.UserID, u.Name, u.Surname from users u where u.Name regexp ? or u.Surname regexp ?";
             
             ps = conn.prepareStatement(query);
             ps.setString(1, topic);
@@ -89,11 +362,7 @@ public class UserImplementation implements UserDAOInterface {
             
             while(rs.next()){
                 
-                String name = rs.getString(1);
-                String surname = rs.getString(2);
-                String fullName = name + " " + surname;
-                
-                search.add(fullName);
+                searchResults.add(new Writer(rs.getInt(1), rs.getString(2), rs.getString(3)));
                 
             }
             
@@ -147,7 +416,82 @@ public class UserImplementation implements UserDAOInterface {
             
         }
         
-        return search;
+        return searchResults;
+        
+    }
+    
+    
+    @Override
+    public List<Writer> searchByStories(String topic){
+        
+        conn = DatabaseConnectionManager.getConnection();
+        List<Writer> searchResults = new ArrayList<>();
+        
+        try {
+            
+            query = "SELECT u.UserID, u.Name, u.Surname from users u, stories s where u.UserID = s.AuthorID and s.Title regexp ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, topic);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                
+                searchResults.add(new Writer(rs.getInt(1), rs.getString(2), rs.getString(3)));
+                
+            }
+            
+        } catch (SQLException e) {
+            
+            Logger.getLogger(UserImplementation.class.getName()).log(Level.FINE, "Error getting Search Results.", e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return searchResults;
         
     }
     

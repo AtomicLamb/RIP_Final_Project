@@ -35,7 +35,7 @@
                     <input type="text" placeholder="Enter the genre" name="genreName" required>
                 </div>
                   <div class="button input-box">
-                    <input type="submit" name="submit" value="Add Genre">
+                    <input type="submit" name="submit" value="ADD GENRE">
                   </div>
               </div>
           </form>

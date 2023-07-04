@@ -40,12 +40,12 @@
                             <input style="color: white; background-color: black;" type="number" placeholder="Enter the id num of the genre you want to remove." name="removeGenreID" min="1" required>
                         </div>
                         <div class="button input-box">
-                        <input style="color: white; background-color: black;" type="submit" name="submit" value="Remove Genre">
+                        <input style="color: white; background-color: black;" type="submit" name="submit" value="REMOVE GENRE">
                         </div>
                     </form>
                     <form action="adminEditorServlet" method="get">
                         <div class="button input-box">
-                            <input type="submit" name="submit" value="BACK TO ADMIN EDITOR PAGE" formnovalidate>
+                            <input style="color: white; background-color: black;" type="submit" name="submit" value="BACK TO ADMIN EDITOR PAGE" formnovalidate>
                         </div>
                     </form>
                 </div>

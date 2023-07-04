@@ -18,7 +18,7 @@
 <!-- bootstrap css -->
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <!-- style css -->
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="style2.css">
 <!-- Responsive-->
 <link rel="stylesheet" href="css/responsive.css">
 <!-- fevicon -->
@@ -45,7 +45,9 @@
                 <li class="nav-item">
                    <a class="nav-link" href="HomePageServlet?submit=HomePage">HOME</a>
                 </li>
-                
+                <li class="nav-item">
+                    <a href="StoryServlet?submit=storyOfTheDay"  class="nav-link"  style="border: none;background-color: #343a40; color: #007791">STORY OF THE DAY</a>
+                </li>
                 
             </ul>
         </div>

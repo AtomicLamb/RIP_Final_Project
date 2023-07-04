@@ -8,6 +8,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 */
 /* Google Font Link */
 @import url('images/storybackgroundpic.jpg');
+
+
 *{
   margin: 0;
   padding: 0;
@@ -299,6 +301,7 @@ td, th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+
 
 
 

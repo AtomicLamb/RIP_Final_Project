@@ -38,12 +38,12 @@
                             <input style="color: white; background-color: black;" type="email" placeholder="Enter the editors email to remove them." name="removeEditorEmail" required>
                         </div>
                         <div class="button input-box">
-                            <input style="color: white; background-color: black;" type="submit" name="submit" value="Remove Editor">
+                            <input style="color: white; background-color: black;" type="submit" name="submit" value="REMOVE EDITOR">
                         </div>
                     </form>
                     <form action="adminEditorServlet" method="get">
                         <div class="button input-box">
-                            <input type="submit" name="submit" value="BACK TO ADMIN EDITOR PAGE" formnovalidate>
+                            <input style="color: white; background-color: black;" type="submit" name="submit" value="BACK TO ADMIN EDITOR PAGE" formnovalidate>
                         </div>
                     </form>
                 </div>

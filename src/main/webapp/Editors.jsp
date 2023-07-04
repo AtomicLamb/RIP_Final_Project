@@ -35,7 +35,7 @@
                     <input type="submit" name="submit" value="HOME">
                   </div>
                   <div class="button input-box">
-                    <input type="submit" name="submit" value="ANALYSE DATA">
+                      <input type="submit" name="submit" value="ANALYSE DATA">
                   </div>
                   <div class="button input-box">
                     <input type="submit" name="submit" value="REVIEW COMMENTS">
@@ -44,10 +44,10 @@
                     <input type="submit" name="submit" value="REVIEW PENDING STORIES">
                   </div>
                   <div class="button input-box">
-                    <input type="submit" name="submit" value="REVOKE WRITER PRIVILEGES">
+                      <input type="submit" name="submit" value="REVIEW PENDING WRITERS">
                   </div>
                   <div class="button input-box">
-                      <input type="submit" name="submit" value="REVIEW PENDING WRITERS">
+                      <input type="submit" name="submit" value="REVOKE WRITER PRIVILEGES">
                   </div>
               </div>
           </form>

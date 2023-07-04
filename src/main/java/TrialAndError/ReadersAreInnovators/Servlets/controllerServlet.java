@@ -100,6 +100,9 @@ public class controllerServlet extends HttpServlet {
            case"Submit Genres":
                selectGenre(request,response);
                break;
+           case"LoginOTL":
+               loginOTL(request,response);
+               break;
        }
     }
     
@@ -247,5 +250,51 @@ public class controllerServlet extends HttpServlet {
                 Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    public void loginOTL(HttpServletRequest request, HttpServletResponse response) {
+        String email = request.getParameter("loginEmail");
+        String password = request.getParameter("loginPassword");
+        User user = imp.login(new User(email,password));
+        
+        var dispatcher = request.getRequestDispatcher("HomePage.jsp");
+        try {
+            
+            if (user != null) {
+                
+                session = request.getSession(true);
+                
+                session.setAttribute("User", user);
+                session.setAttribute("UserID", user.getUserID());
+                session.setAttribute("Name", user.getName());
+                session.setAttribute("Surname", user.getSurname());
+                session.setAttribute("Email", user.getEmail());
+                session.setAttribute("PhoneNumber", user.getPhoneNumber());
+                session.setAttribute("UserTypeID", user.getUserTypeID());
+                session.setAttribute("UserType", user.getUserType());
+                
+                request.setAttribute("message", user.getUserTypeID());
+                List<Story>genreStories=imp.getStoriesFromGenres(user);
+                List<Story>topWeekPicksStories=imp.getWeeksTopPicks();
+                List<Story>recommendedBooks=imp.getRecommendedBooks();
+                request.setAttribute("recommendedBooks",recommendedBooks);
+                request.setAttribute("topPicks",topWeekPicksStories);
+                request.setAttribute("stories", genreStories);
+                
+                dispatcher.forward(request, response);
+            }
+            else
+            {
+                request.setAttribute("message", "Incorrect email or password. Please try again");
+                dispatcher =  request.getRequestDispatcher("ForgotPassword.jsp");
+                
+                dispatcher.forward(request, response);
+                
+            }
+        }
+        catch (ServletException | IOException ex)
+        {
+            Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }

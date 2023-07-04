@@ -482,4 +482,120 @@ public class ImpService
         
         return response.readEntity(Story.class);
     }
+    public List<Story> getReadFavorites(User user)
+    {
+        String personURI = uri + "/getReadFavorites";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(user)));
+        
+        return List.of(response.readEntity(Story[].class));
+    }
+    public List<Story> getUnreadFavorites(User user)
+    {
+        String personURI = uri + "/getUnreadFavorites";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(user)));
+        
+        return List.of(response.readEntity(Story[].class));
+    }
+    public List<Genre> getUserGenres(User user)
+    {
+        String personURI = uri + "/getUserGenres";
+
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(user)));
+
+        return List.of(response.readEntity(Genre[].class));
+    }
+    public List<Writer> getFollowedAuthors(User user)
+    {
+        String personURI = uri + "/getFollowedAuthors";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(user)));
+        
+        return List.of(response.readEntity(Writer[].class));
+    }
+    public Story displayStoryDetails(Story story)
+    {
+        String personURI = uri + "/displayStoryDetails";
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(story)));
+
+        return response.readEntity(Story.class);
+    }
+    public List<Comment> getComments(Story story)
+    {
+        String personURI = uri + "/getComments";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(story)));
+        
+        return List.of(response.readEntity(Comment[].class));
+    }
+    public List<Story> getPublishedStories(Writer writer)
+    {
+        String personURI = uri + "/getPublishedStories";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(writer)));
+        
+        return List.of(response.readEntity(Story[].class));
+    }
+    public List<Story> getAllDrafts(Writer writer)
+    {
+        String personURI = uri + "/getAllDrafts";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(writer)));
+        
+        return List.of(response.readEntity(Story[].class));
+    }
+    public List<Story> searchByTitle(String topic)
+    {
+        String personURI = uri + "/searchByTitle";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(topic)));
+        
+        return List.of(response.readEntity(Story[].class));
+    }
+    public List<Story> searchByAuthor(String topic)
+    {
+        String personURI = uri + "/searchByAuthor";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(topic)));
+        
+        return List.of(response.readEntity(Story[].class));
+    }
+    public List<Story> searchByGenre(String topic)
+    {
+        String personURI = uri + "/searchByGenre";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(topic)));
+        
+        return List.of(response.readEntity(Story[].class));
+    }
+    public List<Writer> searchByName(String topic)
+    {
+        String personURI = uri + "/searchByName";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(topic)));
+        
+        return List.of(response.readEntity(Writer[].class));
+    }
+    public List<Writer> searchByStories(String topic)
+    {
+        String personURI = uri + "/searchByStories";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(topic)));
+        
+        return List.of(response.readEntity(Writer[].class));
+    }
 }

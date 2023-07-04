@@ -93,7 +93,7 @@ public class analyticalServlet extends HttpServlet {
     {
          switch(request.getParameter("submit"))
          {
-             case"Submit Analytic Choice":
+             case"SUBMIT ANALYTIC CHOICE":
                  Integer dataChoice = Integer.valueOf(request.getParameter("analyticNum"));
                  String startDateString = request.getParameter("analyticDateStart");
                  String endDateString = request.getParameter("analyticDateEnd");

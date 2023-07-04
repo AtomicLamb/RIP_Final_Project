@@ -25,7 +25,7 @@
 <!-- bootstrap css -->
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <!-- style css -->
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="style2.css">
 <!-- Responsive-->
 <link rel="stylesheet" href="css/responsive.css">
 <!-- fevicon -->
@@ -82,20 +82,25 @@
 					</form>
 					<%}%>
                 </li>
+				<li>
+					<a href="StoryServlet?submit=storyOfTheDay"  class="nav-link"  style="border: none;background-color: #343a40; color: #007791">STORY OF THE DAY</a>
+				</li>
 				<%if(num != 0) {%>
                 <li class="nav-item">
                     <div class="dropdown">
                     <button style="border: none;background-color: #343a40; color: #007791" class="nav-link" class="nav-link">MORE</button>
                         <div class="dropdown-content">
-                        <a href="#">REFER A FRIEND</a>
+                        <a href="ReferFriend.jsp">REFER A FRIEND</a>
                         </div>
                     </div>
                 </li>
 				<%}%>
-            </ul>
+			</ul>
         </div>
 		<%if(num == 0) {%>
-         <div class="login_text"><a href="index.jsp">LOGIN HERE</a></div>
+		<li class="nav-item">
+			<a style="color: #007791" class="nav-link" href="index.jsp">LOGIN HERE</a>
+		</li>
 		<%}%>
 		<%if(num != 0) {%>
 		<form action="controllerServlet" method="get">
@@ -116,18 +121,20 @@
 				if (name == null && surname == null)
 				{
 			%>
-			<h1 class="best_taital" style="color:black">Welcome: User</h1>  
+			<h1 class="best_taital" style="color:#007791">Welcome: User</h1>  
 			<%}
 			else 
 			{%>
-			<h1 class="best_taital" style="color:black">Welcome: <%= name%> <%= surname%></h1>
+			<h1 class="best_taital" style="color:#007791">Welcome: <%= name%> <%= surname%></h1>
 			<%}%>
 			<div class="box_main">
-			    <input type="" class="email_bt" placeholder="Search" name="">
-				<button class="subscribe_bt"><a href="#">Search</a></button>
+				<form action="HomePageServlet" method="post">
+					<input type="text" class="email_bt" placeholder="Search" name="search">
+					<button style="background-color:#007791; color: black" type="submit" name="submit" value="Search" class="subscribe_bt">SEARCH</button>
+				</form>
 		    </div>
 		</div>
-	</div>
+	</div><br><br>
 	<!-- banner section end-->
 	<!-- marketing section start-->
 	
@@ -135,52 +142,49 @@
 	<%List<Story>recommendedBooks=((List<Story>)request.getAttribute("recommendedBooks"));%>
 	<div class="container-fluid" >
 		<div class="row">
-
-
 			<%if(num != 0){%>
 			<%List<Story>storiesFromFavouriteGenres=(List<Story>)request.getAttribute("stories");%>
-			<h1 class="jobs_text"  style="text-align: center">Books from favourite Genres</h1>
-			<div class="scrollmenu" style="margin: auto; width: 800px;">
+			<h1 class="jobs_text"  style="text-align: center">Stories From Favourite Genres:</h1>
+			<div class="scrollmenu" style="margin: auto; width: 90%;">
                      <%if(!storiesFromFavouriteGenres.isEmpty()){%>
 				 <%for(Story story:storiesFromFavouriteGenres){%>
 				<a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>&authorId=<%=story.getAuthorID()%>">
 					<h1 style="color: white;"><%=story.getTitle()%></h1>
-					<img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" >
+					<img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:300px;height:400px;" >
 				</a>
 				<%}%>
             <%}%>
               <%if(storiesFromFavouriteGenres.isEmpty()){%>
-				<p>No favourite stories</p>
+				<p style="text-align: center">No favourite stories.</p>
 				<%}%>
 			</div>
 		</div>
-	</div>
+	</div><br><br>
 	<% }%>
 	<!-- marketing section end-->
 	<!-- Industrial section start-->
 
 	<div class="container-fluid">
 		<div class="row">
-			<h1 class="jobs_text"  style="text-align: center">This weeks top picks</h1>
+			<h1 class="jobs_text"  style="text-align: center">This Weeks Top Picks:</h1>
 
 
-			<div class="scrollmenu" style="margin: auto; width: 800px">
+			<div class="scrollmenu" style="margin: auto; width: 90%">
 
 				<%if(!weeksTopStories.isEmpty()){%>
 				<%for(Story story:weeksTopStories){%>
 				<a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>&authorId=<%=story.getAuthorID()%>">
 					<h1 style="color: white;"><%=story.getTitle()%></h1>
-					<img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" >
+					<img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:300px;height:400px;" >
 				</a>
 				<%}%>
 				<%}%>
 				<%if(weeksTopStories.isEmpty()){%>
-				<p style="color: white">No top stories for the week are currently available</p>
+				<p style="text-align: center">No top stories for the week are currently available.</p>
 				<%}%>
 			</div>
 		</div>
-
-	</div>
+	</div><br><br>
 
 
 	<!-- Industrial section end-->
@@ -188,25 +192,25 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<h1 class="jobs_text" style="text-align: center">Recommended books</h1>
+			<h1 class="jobs_text" style="text-align: center">Recommended Stories:</h1>
 
 
-			<div class="scrollmenu" style="margin: auto; width: 800px">
+			<div class="scrollmenu" style="margin: auto; width: 90%">
 				<%if(!recommendedBooks.isEmpty()){%>
 				<%for(Story story:recommendedBooks){%>
 				<a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>&authorId=<%=story.getAuthorID()%>">
 					<h1 style="color: white;"><%=story.getTitle()%></h1>
-					<img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" >
+					<img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:300px;height:400px;" >
 				</a>
 				<%}%>
 				<%}%>
 				<%if(recommendedBooks.isEmpty()){%>
-				<p style="color: white">No recommended stories are currently available</p>
+				<p style="text-align: center">No recommended stories are currently available.</p>
 				<%}%>
 			</div>
 		</div>
 
-	</div>
+	</div><br><br><br>
 
 
 	<!-- Corporate section end-->
@@ -219,10 +223,10 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6">
-					<p class="copyright_text">Copyright 2020 All Right Reserved By.<a href="https://html.design"> Free  html Templates</a></p>
+					<p class="copyright_text">Copyright 2020 All Rights Reserved By.<a href="https://html.design"> Free  html Templates</a></p>
 				</div>
 				<div class="col-md-6">
-					<p class="cookies_text">Cookies, Privacy and Terms</p>
+					<p class="copyright_text">Copyright 2023 All Rights Reserved By Trial And Error.</p>
 				</div>
 			</div>
 		</div>

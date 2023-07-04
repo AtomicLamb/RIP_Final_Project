@@ -341,7 +341,22 @@ public class StoryImplementation implements StoryDAOInterface {
         
         try {
             
-            query = "insert into userread (userID, storyID) values (?, ?)";
+            query = "select * from readandfavorites f where f.UserID = ? and f.StoryID ?";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, user.getUserID());
+            ps.setInt(2, story.getStoryID());
+            ps.executeUpdate();
+            
+            if (rs.next()){
+                
+                query = "UPDATE readandfavorites f SET f.IsRead = 1 WHERE UserID = ? and StoryID = ?";
+                
+            } else {
+                
+                query = "INSERT INTO readandfavorites (UserID, StoryID, IsRead, IsFavorite) VALUES (?, ?, 1, 0)";
+                
+            }
+            
             ps = conn.prepareStatement(query);
             ps.setInt(1, user.getUserID());
             ps.setInt(2, story.getStoryID());
@@ -807,7 +822,21 @@ public class StoryImplementation implements StoryDAOInterface {
         
         try {
             
-            query = "insert into userfavorites (userID, storyID) values (?, ?)";
+            query = "select * from readandfavorites f where f.UserID = ? and f.StoryID ?";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, user.getUserID());
+            ps.setInt(2, story.getStoryID());
+            ps.executeUpdate();
+            
+            if (rs.next()){
+                
+                query = "UPDATE readandfavorites f SET f.IsFavorite = 1 WHERE UserID = ? and StoryID = ?";
+                
+            } else {
+                
+                query = "INSERT INTO readandfavorites (UserID, StoryID, IsRead, IsFavorite) VALUES (?, ?, 0, 1)";
+                
+            }
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, user.getUserID());
@@ -815,7 +844,6 @@ public class StoryImplementation implements StoryDAOInterface {
             ps.executeUpdate();
             
             query = "update stories s SET s.Likes = s.Likes + 1 where s.StoryID = ?";
-            
             ps = conn.prepareStatement(query);
             ps.setInt(1, story.getStoryID());
             ps.executeUpdate();
@@ -885,13 +913,28 @@ public class StoryImplementation implements StoryDAOInterface {
         
         try {
             
-            query = "delete from userfavorites f where f.UserID = ? and f.StoryID = ?";
+            query = "select * from readandfavorites f where f.UserID = ? and f.StoryID ?";
             ps = conn.prepareStatement(query);
             ps.setInt(1, user.getUserID());
             ps.setInt(2, story.getStoryID());
             ps.executeUpdate();
             
-            query = "update stories s SET s.Likes = s.Likes - 1 where s.StoryID = ?";
+            if (rs.next()){
+                
+                query = "UPDATE readandfavorites f SET f.IsFavorite = 0 WHERE UserID = ? and StoryID = ?";
+                
+            } else {
+                
+                return "Cannot unlike a story you haven't liked.";
+                
+            }
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, user.getUserID());
+            ps.setInt(2, story.getStoryID());
+            ps.executeUpdate();
+            
+            query = "update stories s SET s.Likes = s.Likes + 1 where s.StoryID = ?";
             ps = conn.prepareStatement(query);
             ps.setInt(1, story.getStoryID());
             ps.executeUpdate();
@@ -901,7 +944,7 @@ public class StoryImplementation implements StoryDAOInterface {
         } catch (SQLException e) {
             
             message = "Error unliking the story.";
-            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error saving draft.", e);
+            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error unliking the story.", e);
             
         } finally {
             
@@ -962,7 +1005,7 @@ public class StoryImplementation implements StoryDAOInterface {
         
         try {
             
-            query = "select * from userfavorites f where f.UserID = ? and f.StoryID = ?";
+            query = "select * from readandfavorites f where f.IsFavorite = 1 and f.UserID = ? and f.StoryID = ?";
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, user.getUserID());

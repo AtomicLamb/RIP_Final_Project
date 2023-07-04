@@ -66,7 +66,7 @@ public class writerServlet extends HttpServlet
                Integer num = (Integer) session.getAttribute("UserTypeID");
                request.setAttribute("message", num);
                
-               List<Story>genreStories=slc.getStoriesFromGenres(new User((Integer) session.getAttribute("UserID")));
+               List<Story>genreStories=imp.getStoriesFromGenres(new User((Integer) session.getAttribute("UserID")));
                List<Story>topWeekPicksStories=imp.getWeeksTopPicks();
                List<Story>recommendedBooks=imp.getRecommendedBooks();
                request.setAttribute("recommendedBooks",recommendedBooks);
@@ -78,7 +78,7 @@ public class writerServlet extends HttpServlet
            case"VIEW STORIES":
                session= request.getSession(false);
                writer=new Writer((Integer) session.getAttribute("UserID"));
-              List<Story> publishedStories=slc.getPublishedStories(writer);
+              List<Story> publishedStories=imp.getPublishedStories(writer);
                 request.setAttribute("writersPublishedStories",publishedStories);
                 dispacther =  request.getRequestDispatcher("ViewStories.jsp");
                         dispacther.forward(request, response);
@@ -90,7 +90,7 @@ public class writerServlet extends HttpServlet
            case"VIEW DRAFTS":
                session= request.getSession(false);
                writer=new Writer((Integer) session.getAttribute("UserID"));
-               List<Story>drafts=slc.getAllDrafts(writer);
+               List<Story>drafts=imp.getAllDrafts(writer);
                request.setAttribute("drafts",drafts);
                 dispacther =  request.getRequestDispatcher("ViewDrafts.jsp");
                         dispacther.forward(request, response);
@@ -220,7 +220,7 @@ public class writerServlet extends HttpServlet
                 request.setAttribute("message",slc.privatizeStory(story));
                 session= request.getSession(false);
                 writer=new Writer((Integer) session.getAttribute("UserID"));
-                List<Story> publishedStories=slc.getPublishedStories(writer);
+                List<Story> publishedStories=imp.getPublishedStories(writer);
                 request.setAttribute("writersPublishedStories",publishedStories);
                 var dispacther =  request.getRequestDispatcher("ViewStories.jsp");
                 dispacther.forward(request, response);
@@ -231,7 +231,7 @@ public class writerServlet extends HttpServlet
                 request.setAttribute("message",slc.publiciseStory(story));
                 session= request.getSession(false);
                 writer=new Writer((Integer) session.getAttribute("UserID"));
-                List<Story>publishedStories2=slc.getPublishedStories(writer);
+                List<Story>publishedStories2=imp.getPublishedStories(writer);
                 request.setAttribute("writersPublishedStories",publishedStories2);
                 var dispacther2 =  request.getRequestDispatcher("ViewStories.jsp");
                 dispacther2.forward(request, response);

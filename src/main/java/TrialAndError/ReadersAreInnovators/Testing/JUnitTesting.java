@@ -665,20 +665,53 @@ public class JUnitTesting {
 
 
     //User Tests:
-
+    
     @Test
-    public void searchTest(){
+    public void searchByTitleTest(){
         
-        String searchTopic = "Test";
-
-        List<String> searchResults = userImp.search(searchTopic);
-        for (String s:searchResults) {
-
-            System.out.println(s);
-
-        }
-
+        String topic = "Sneeze";
+        
+        System.out.println(userImp.searchByTitle(topic));
+        
     }
+    
+    @Test
+    public void searchByAuthorTest(){
+        
+        String topic = "Marna";
+        
+        System.out.println(userImp.searchByAuthor(topic));
+        
+    }
+    
+    @Test
+    public void searchByGenreTest(){
+        
+        String topic = "Horror";
+        
+        System.out.println(userImp.searchByGenre(topic));
+        
+    }
+    
+    @Test
+    public void searchByNameTest(){
+        
+        String topic = "Marn";
+        
+        System.out.println(userImp.searchByName(topic));
+        
+    }
+    
+    
+    @Test
+    public void searchByStoriesTest(){
+        
+        String topic = "Sneeze";
+        
+        System.out.println(userImp.searchByStories(topic));
+        
+    }
+    
 
     @Test
     public void loginTest(){

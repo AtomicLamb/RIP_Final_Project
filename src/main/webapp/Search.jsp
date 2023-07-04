@@ -1,4 +1,3 @@
-<%@ page import = "TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre" %>
 <%@ page import = "TrialAndError.ReadersAreInnovators.Models.StoryElements.Story" %>
 <%@ page import = "TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer" %>
 <%@ page import = "java.util.List" %><%-- 
@@ -26,7 +25,7 @@
         <!-- bootstrap css -->
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <!-- style css -->
-        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="style2.css">
         <!-- Responsive-->
         <link rel="stylesheet" href="css/responsive.css">
         <!-- fevicon -->
@@ -39,6 +38,7 @@
         <link rel="stylesheet" href="css/owl.carousel.min.css">
         <link rel="stylesoeet" href="css/owl.theme.default.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+        <link rel="stylesheet" href="css/horizontal_scrollBar.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Personal Data Page</title>
     </head>
@@ -48,6 +48,7 @@
         <%List<Story>storiesByAuthor=(List<Story>) request.getAttribute("searchByAuthor");%>
         <%List<Story> storiesByGenres=(List<Story>) request.getAttribute("searchByGenres");%>
         <%List<Writer> authorsByName=(List<Writer>) request.getAttribute("searchAuthors");%>
+        <%List<Writer>authorsByTitle=(List<Writer>) request.getAttribute("searchAuthorByTitle");%>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -68,7 +69,7 @@
         <!-- banner section start-->
         <div class="banner_section layout_padding">
             <div class="container">
-                <h1 class="best_taital" style="color:black">WELCOME TO YOUR PERSONAL PAGE</h1>
+                <h1 class="best_taital" style="color:black">Search Results</h1>
                 <%
                     String message = (String) request.getAttribute("message");
                     if(message!=null){
@@ -121,22 +122,46 @@
                     <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" >
                 </a>
                  <%}%>
+                 <%}%>
+                 <%if(storiesByGenres.isEmpty()){%>
+                                  <p style="color: white">No stories found by the genre</p>
+                                  <%}%>
             </div>
-             <%}%>
-            <%if(storiesByGenres.isEmpty()){%>
-            <p>No stories found by the genre</p>
-            <%}%>
+             
+            
 
 
             <h1>Authors By Name</h1>
             <%if(!authorsByName.isEmpty()){%>
+            <div class="scrollmenu" style="margin: auto; width: 800px">
             <% for(Writer writer:authorsByName){%>
-            <p><a href="StoryServlet?submit=AuthorDetails&authorId=<%=writer.getUserID()%>" style="text-decoration:none"><%=writer.getName()%> <%=writer.getSurname()%></a></p>
+            <a href="StoryServlet?submit=AuthorDetails&authorId=<%=writer.getUserID()%>">
+                <h1 style="color: white;"><%=writer.getName()%> <%=writer.getSurname()%></h1>
+                <img src="images/Default%20User%20Icon.jpg" alt="<%=writer.getName()%> <%=writer.getSurname()%>" style="width:400px;height:400px;" >
+            </a>
             <%}%>
-            <%}%>
-            <%if(authorsByName.isEmpty()){%>
-            <p>No authors found</p>
-            <%}%>
+                <%}%>
+                <%if(authorsByName.isEmpty()){%>
+                            <p style="color: white">No authors found</p>
+                            <%}%>
+            </div>
+            
+            
+
+            <h1>Authors By Story Title</h1>
+            <%if(!authorsByTitle.isEmpty()){%>
+            <div class="scrollmenu" style="margin: auto; width: 800px">
+                <% for(Writer writer:authorsByTitle){%>
+                <a href="StoryServlet?submit=AuthorDetails&authorId=<%=writer.getUserID()%>">
+                    <h1 style="color: white;"><%=writer.getName()%> <%=writer.getSurname()%></h1>
+                    <img src="images/Default%20User%20Icon.jpg" alt="<%=writer.getName()%> <%=writer.getSurname()%>" style="width:400px;height:400px;" >
+                </a>
+                <%}%>
+                <%}%>
+                <%if(authorsByName.isEmpty()){%>
+                <p style="color: white">No authors found by story title</p>
+                <%}%>
+            </div>
         </div>
 
     </body>
