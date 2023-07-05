@@ -4,8 +4,10 @@
     <%@page import="TrialAndError.ReadersAreInnovators.Models.StoryElements.Story"%>
     <%@page import="TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer"%>
     <%@page import="TrialAndError.ReadersAreInnovators.Models.StoryElements.Comment"%>
-    
-<head>
+    <%@ page import = "TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre" %>
+
+
+    <head>
 <!-- basic -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,7 +46,7 @@
     <h1><%=message%></h1>
     <%}%>
     <!-- header section start-->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: relative; width: 100%; z-index:99;">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: relative; width: 100%; z-index:99;">
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -54,12 +56,13 @@
                 <li class="nav-item">
                    <a class="nav-link" href="HomePageServlet?submit=HomePage">HOME</a>
                 </li>
-                <li class="nav-item">
-                <a href="StoryServlet?submit=storyOfTheDay"  class="nav-link"  style="border: none;background-color: #343a40; color: #007791">STORY OF THE DAY</a>
-                </li>
             </ul>
         </div>
-         <div class="login_text"><a href="index.jsp">LOGIN HERE</a></div>
+        <form action="controllerServlet" method="get">
+            <div class="login_text">
+                <input style="border: none;background-color: #343a40; color: #007791" class="nav-link" type="submit" name="submit" value="SIGN OUT" formnovalidate>
+            </div>
+        </form>
     </nav>
 	<!-- header section start-->
 	<!-- banner section start-->
@@ -75,22 +78,24 @@
 	<!-- Industrial section start-->
 	 
     
-                        <%Writer writer=(Writer)request.getAttribute("chosenWriter");%>
+    <%Writer writer=(Writer)request.getAttribute("chosenWriter");%>
                         
-                       
-
-                      
-                        <div class="image_1 padding_0" style="margin-left: 0px;padding-left: 0px"><h1><%=story.getTitle()%></h1><img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="height: 400px;width:300px; "><div style="position: relative;right: 150px;margin-right: 0px;float: right">
+    <div class="image_1 padding_0" style="margin-left: 0px;padding-left: 0px"><h1><%=story.getTitle()%></h1><img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="height: 400px;width:300px; "><div style="position: relative;right: 150px;margin-right: 0px;float: right">
                                     
-                                    <span><br>Views<i class="fa-sharp fa-solid fa-eye"></i><%=story.getViews()%></span><br><br>
-                                    <span>Click this heart to like the story: Likes<a href="StoryServlet?submit=like&storyId=<%=story.getStoryID()%>"><i class="fa-solid fa-heart" style="color: #f42d1f;"></i></a><%=story.getLikes()%></span><br><br>
-                                    <span>Rating<i class="fa-sharp fa-solid fa-star" style="color: #fff93d;"></i><%=story.getRatingAverage()%></span><br><br>
-                            <span> Click to remove your like<a href="StoryServlet?submit=like&storyId=<%=story.getStoryID()%>"><i class="fa-solid fa-heart-crack" style="color: #db0f0f;"></i></a></span>      
-                                    <span><a href="StoryServlet?submit=AuthorDetails&authorId=<%=writer.getUserID()%>" style="text-decoration:none">Author <%=writer.getName()%> <%=writer.getSurname()%></a></span>
-                                    <div id="openButton" class="apply_bt"><button onclick="openForm()">Rate Story</button></div>
+        <span><br>Views<i class="fa-sharp fa-solid fa-eye"></i><%=story.getViews()%></span><br><br>
+        <span>Click this heart to like the story: Likes<a href="StoryServlet?submit=like&storyId=<%=story.getStoryID()%>"><i class="fa-solid fa-heart" style="color: #f42d1f;"></i></a><%=story.getLikes()%></span><br><br>
+        <span>Rating<i class="fa-sharp fa-solid fa-star" style="color: #fff93d;"></i><%=story.getRatingAverage()%></span><br><br>
+        <span> <%if(story.getGenres() != null) {%>
+            <%for(Genre genre:story.getGenres()){%>
+             <p><%=genre.getGenre()%></p>
+            <%}%>
+            <%}%>
+        </span>      
+        <span><a href="StoryServlet?submit=AuthorDetails&authorId=<%=writer.getUserID()%>" style="text-decoration:none">Author <%=writer.getName()%> <%=writer.getSurname()%></a></span>
+        <div id="openButton" class="apply_bt"><button onclick="openForm()">Rate Story</button></div>
                                                                
-                                                                                                 <div id="radioStar"  style="display:none;position: relative;">
-                                                                           <form action="StoryServlet" method="post" >
+        <div id="radioStar"  style="display:none;position: relative;">
+            <form action="StoryServlet" method="post" >
   <input type="radio" id="1star" name="rating" value="1">
   <label for="1star"><i class="fa-sharp fa-solid fa-star" style="color: #fff93d;"></i>1</label><br>
   <input type="radio" id="2star" name="rating" value="2">
@@ -107,13 +112,16 @@
                                             </div>
                                             </div></div>
 				  <%List<Comment>comments=(List<Comment>)request.getAttribute("comments");%>
-                        
+    
 				<div class="col-md-6">
 					<div class="job_section_2">
-                                           
+                                             <%session= request.getSession(false);%>
+                                             <% Integer userType=(Integer) session.getAttribute("UserTypeID");%>
 					      <p class="dummy_text"><%=story.getSynopsis()%></p>
                                    <div style="position: relative;bottom: 10px">
+                                           <%if(userType!=0){%>
                                              <div class="apply_bt" style="position: relative;bottom: 10px"><a href="StoryServlet?submit=read&storyId=<%=story.getStoryID()%>">Read</a></div>
+                                               <%}%>
                                                     <%if(story.getCommentsEnabled()){%>
                                                  <form action="StoryServlet" method="post">
                                                                       <label for="commentArea" style="margin-right: 100px">Type your comment</label>
@@ -169,11 +177,7 @@
 
     <!-- Javascript files-->
 <script>
-             
-                 
-            
-        
-    
+   
 </script>
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
@@ -210,8 +214,5 @@
     }
         
         </script>
-
-
-     
 </body>
 </html>

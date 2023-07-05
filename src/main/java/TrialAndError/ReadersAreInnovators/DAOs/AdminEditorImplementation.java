@@ -210,7 +210,7 @@ public class AdminEditorImplementation implements AdminEditorDAOInterface{
             
         } catch (SQLException e) {
             
-            Logger.getLogger(EditorImplementation.class.getName()).log(Level.FINE, "Error viewing all editors.", e);
+            Logger.getLogger(AdminEditorImplementation.class.getName()).log(Level.FINE, "Error viewing all editors.", e);
             
         } finally {
             

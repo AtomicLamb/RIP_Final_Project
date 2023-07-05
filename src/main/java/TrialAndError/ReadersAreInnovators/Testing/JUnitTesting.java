@@ -373,10 +373,9 @@ public class JUnitTesting {
     @Test
     public void deselectGenreTest(){
         
-        User user = new User();
-        Genre genre = new Genre();
+        User user = new User("tyler.k.schwegler@gmail.com");
         
-        System.out.println(genresImp.deselectGenre(user, genre));
+        System.out.println(genresImp.deselectGenre(user));
 
     }
 

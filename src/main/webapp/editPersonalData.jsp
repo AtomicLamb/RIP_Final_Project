@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import = "java.util.List"%>
 <%@ page import = "TrialAndError.ReadersAreInnovators.Models.UserTypes.User" %>
+<%@ page import="TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,6 +33,7 @@
           <div class="title">Edit Personal Information</div>
             <%
                 User user = (User) request.getAttribute("personalInfo");
+                FunctionsClass functionsClass = new FunctionsClass();
             %>
          <form action="editPersonalInformationServlet" method="post">
               <div class="input-boxes">
@@ -53,7 +55,7 @@
               </div>
               <div class="input-box">
                 <i class="fas fa-lock"></i>
-                <input id="password" type="password" value="<%=user.getPassword() %>" name="editPassword" required>
+                <input id="password" type="password" value="<%=functionsClass.passwordDecryption(user.getPassword()) %>" name="editPassword" required>
               </div>
              <div class="input-box">
                 <i class="fas fa-lock"></i>
@@ -64,15 +66,17 @@
               </div>    
               </div>
           </form>
+            <form action="editPersonalInformationServlet" method="get">
             <% if(user.getUserTypeID() == 1)
             {
             %>
-            
-          <form action="editPersonalInformationServlet" method="get">
               <div class="button input-box">
                  <input type="submit" name="submit" value="APPLY FOR WRITER">
               </div>
            <%}%>
+              <div class="button input-box">
+                  <input type="submit" name="submit" value="CHANGE GENRES">
+              </div>
               <div class="button input-box">
                   <input type="submit" name="submit" value="BACK TO PROFILE">
               </div>
@@ -81,7 +85,7 @@
                 String message = (String) request.getAttribute("message");
                 if(message!=null){
             %>
-            <p><strong style ="color:red;"><%=message %></strong></p>
+            <p><strong style ="color:black;"><%=message %></strong></p>
             <%}%>
     </div>
     </div>

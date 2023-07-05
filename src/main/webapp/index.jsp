@@ -49,13 +49,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 </div>
                                 <div class="text"><a href="ForgotPassword.jsp" style="color: #007791">Forgot password?</a></div>
                                 <div class="button input-box">
-                                    <input type="submit" name="submit" value="Login">
+                                    <input type="submit" name="submit" value="LOGIN">
                                 </div>
                             </div>
                         </form>
                         <form action="controllerServlet" method="get">
                             <div class="button input-box">
-                                <input type="submit" name="submit" value="Continue to Homepage" formnovalidate>
+                                <input type="submit" name="submit" value="CONTINUE TO HOMEPAGE" formnovalidate>
                             </div>
                         </form>
                         <div class="text sign-up-text">Don't have an account? <label for="flip">Sign-Up now</label></div>
@@ -67,7 +67,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         <%}%>
                     </div>
                     <div class="signup-form">
-                        <div class="title">Signup As Reader</div>
+                        <div class="title">Sign-Up As Reader</div>
                         <form action="controllerServlet" method="post">
                             <div class="input-boxes">
                                 <div class="input-box">
@@ -95,13 +95,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                     <input id="confirm_password" type="password" placeholder="Confirm Password" required>
                                 </div>
                                 <div class="button input-box">
-                                    <input type="submit" name="submit" value="Confirm Reader">
+                                    <input type="submit" name="submit" value="CONFIRM READER">
                                 </div>
                             </div>
                         </form>
                         <form action="controllerServlet" method="get">
                             <div class="button input-box">
-                                <input type="submit" name="submit" value="Writer" formnovalidate>
+                                <input type="submit" name="submit" value="WRITER" formnovalidate>
                             </div>
                         </form>
                         <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label></div>

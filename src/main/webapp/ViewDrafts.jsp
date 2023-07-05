@@ -9,42 +9,88 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <style>
-            input:hover {
-                background-color:blue;
-            }
-        </style>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>View Drafts Page</title>
-        <link rel="stylesheet" href="style.css">
-    <!-- Fontawesome CDN Link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <!-- basic -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- mobile metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+        <!-- site metas -->
+        <title>RIP Home Page</title>
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!-- bootstrap css -->
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <!-- style css -->
+        <link rel="stylesheet" type="text/css" href="style2.css">
+        <!-- Responsive-->
+        <link rel="stylesheet" href="css/responsive.css">
+        <!-- fevicon -->
+        <link rel="icon" href="images/fevicon.png" type="image/gif" />
+        <!-- Scrollbar Custom CSS -->
         <link rel="stylesheet" href="css/horizontal_scrollBar.css">
+        <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+        <!-- Tweaks for older IEs-->
+        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+        <!-- owl stylesheets -->
+        <link rel="stylesheet" href="css/owl.carousel.min.css">
+        <link rel="stylesoeet" href="css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
-    <body style="background-color: rgb(0, 119, 145);">
+    <body style="background-color: #007791">
         <%List<Story>drafts=(List<Story>)request.getAttribute("drafts"); %>
-        <%String message=(String)request.getAttribute("message");%>
-       <h1 style="font-size:50px;text-align:center;">View Drafts</h1><br><br>
-        <div class="Container"  style="background-color:whitesmoke;width: 70%;margin: auto;box-shadow: 10px 10px;padding:40px;position: relative;bottom: 20px " >
-             <%if(message!=null){%>
-                    <h1><%=message%></h1>
-                    <%}%>
-            <div class="scrollmenu" style=" margin: auto;width: 80%;">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <form action="editPersonalInformationServlet" method="get">
+                            <input style="border: none;background-color: #343a40; color: #007791" class="nav-link" type="submit" name="submit" value="HOME">
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <form action="controllerServlet" method="get">
+                <div class="login_text">
+                    <input style="border: none;background-color: #343a40; color: #007791" class="nav-link" type="submit" name="submit" value="SIGN OUT" formnovalidate>
+                </div>
+            </form>
+        </nav>
+        <!-- header section start-->
+        <!-- banner section start-->
+        <div class="banner_section layout_padding">
+            <div class="container">
+                <h1 class="best_taital" style="color:#007791">VIEW DRAFTS</h1>
+                <%String message=(String)request.getAttribute("message");
+                    if(message!=null){
+                %>
+                <p><strong style ="color:red;"><%=message %></strong></p>
+                <%}%>
+            </div>
+        </div>
+        <div><br><br>
+
+            <h1 class="jobs_text"  style="text-align: center">Drafts:</h1>
+            <div class="scrollmenu" style="margin: auto; width: 90%">
                 <%if(!drafts.isEmpty()){%>
                 <%for(Story story:drafts){%>
                 <div style="display: inline-block">
-                <a href="writerServlet?submit=editDraft&storyId=<%=story.getStoryID()%>">
-                    <h1 style="color: white;"><%=story.getTitle()%></h1>
-                    <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" >
-                 </a>
+                    <a href="writerServlet?submit=editDraft&storyId=<%=story.getStoryID()%>">
+                        <h1 style="color: white;"><%=story.getTitle()%></h1>
+                        <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:300px;height:400px;" >
+                    </a>
                 </div>
                 <%}%>
                 <%}%>
                 <%if(drafts.isEmpty()){%>
-                <p>NO AVAILABLE DRAFTS</p>
+                <p style="text-align: center">NO AVAILABLE DRAFTS</p>
                 <%}%>
-            </div>
-            
+            </div><br><br>
         </div>
     </body>
 </html>

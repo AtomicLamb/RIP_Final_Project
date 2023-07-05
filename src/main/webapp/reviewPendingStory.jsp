@@ -34,12 +34,33 @@
                   </div>
                 <div class="input-box" style="font-size:20px;text-align:center;">
                     <h2>The Synopsis can be edited</h2>
-                    <textarea type="text" name="storySynopsis" maxlength="1000" rows="4" cols="55" required><%=story.getSynopsis()%></textarea><br><br>
-                </div>
+                    <label>
+                        <textarea id="synopsis" type="text" name="storySynopsis" maxlength="995" rows="4" cols="55" required><%=story.getSynopsis()%></textarea>
+                    </label>
+                    <div class="output row">
+                        <div>Characters: <span id="charCount">0</span></div>
+                        <div>Words: <span id="wrdCount">0</span></div>
+                    </div>
+                    <div class="output row">
+                        <div>Sentences: <span id="sentCount">0</span></div>
+                        <div>Paragraphs: <span id="parCount">0</span></div>
+                    </div>
+                </div><br><br>
                 <div class="input-box" style="font-size:20px;text-align:center;">
                     <h2>The Story can be edited</h2>
-                    <textarea type="text" name="storyBody" maxlength="1000" rows="10" cols="100" required><%=story.getStoryBody()%>.</textarea><br><br>
-                </div>
+                    <label>
+                        <textarea id="storyBody" type="text" name="storyBody" rows="10" cols="100" required><%=story.getStoryBody()%>.</textarea>
+                    </label>
+                    <div class="output row">
+                        <div>Characters: <span id="characterCount">0</span></div>
+                        <div>Words: <span id="wordCount">0</span></div>
+                    </div>
+                    <div class="output row">
+                        <div>Sentences: <span id="sentenceCount">0</span></div>
+                        <div>Paragraphs: <span id="paragraphCount">0</span></div>
+                    </div>
+                </div><br><br>
+                
                 <input type="hidden" name="pendingstoryId" value="<%=story.getPendingStoryID()%>">
                 <input type="hidden" name="storyTitle" value="<%=story.getTitle()%>">
                 <input type="hidden" name="storySynopsis" value="<%=story.getSynopsis()%>">
@@ -65,5 +86,7 @@
                 <button class="block" type="submit" name="submit" value="BACK TO REVIEW PENDING STORIES">BACK TO REVIEW PENDING STORIES</button><br><br>
             </form>
         </div>
+        <script src="js/word_count_story.js"></script>
+        <script src="js/word_count_synopsis.js"></script>
     </body>
 </html>

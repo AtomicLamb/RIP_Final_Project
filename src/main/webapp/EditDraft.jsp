@@ -40,22 +40,45 @@
                       <label for="no">No</label>
                 </div>
                 <div class="input-box" style="font-size:20px;text-align:center;">
-                <h2>Edit the synopsis</h2> 
-                <textarea type="text" name="storySynopsis" maxlength="1000" rows="4" cols="55" required><%=draft.getSynopsis()%></textarea><br><br>
-              </div>
+                <h2>Edit the synopsis</h2>
+                    <label>
+                        <textarea id="synopsis" type="text" name="storySynopsis" maxlength="1000" rows="4" cols="55" required><%=draft.getSynopsis()%></textarea>
+                    </label>
+                    <div class="output row">
+                        <div>Characters: <span id="charCount">0</span></div>
+                        <div>Words: <span id="wrdCount">0</span></div>
+                    </div>
+                    <div class="output row">
+                        <div>Sentences: <span id="sentCount">0</span></div>
+                        <div>Paragraphs: <span id="parCount">0</span></div>
+                    </div>
+              </div><br><br>
                 <div class="input-box" style="font-size:20px;text-align:center;">
                 <h2>Edit your story</h2>
-                <textarea type="text" name="storyBody" maxlength="1000" rows="10" cols="100" required><%=draft.getStoryBody()%></textarea><br><br>
-              </div>                 
-                <button class="block" type="submit" name="submit" value="Submit Draft">Submit</button><br><br>
-                <button class="block" type="submit" name="submit" value="Save Draft" >Save Draft</button><br><br>
-                <button class="block" type="submit" name="submit" value="Delete Draft" formnovalidate>Delete Draft</button><br><br>
+                    <label>
+                        <textarea id="storyBody" type="text" name="storyBody" maxlength="1000" rows="10" cols="100" required><%=draft.getStoryBody()%></textarea>
+                    </label>
+                    <div class="output row">
+                        <div>Characters: <span id="characterCount">0</span></div>
+                        <div>Words: <span id="wordCount">0</span></div>
+                    </div>
+                    <div class="output row">
+                        <div>Sentences: <span id="sentenceCount">0</span></div>
+                        <div>Paragraphs: <span id="paragraphCount">0</span></div>
+                    </div>
+              </div><br><br><br>               
+                <button class="block" type="submit" name="submit" value="Submit Draft">SUBMIT DRAFT</button><br><br>
+                <button class="block" type="submit" name="submit" value="Save Draft" >SAVE DRAFT</button><br><br>
+                <button class="block" type="submit" name="submit" value="Delete Draft" formnovalidate>DELETE DRAFT</button><br><br>
+                <button class="block" type="submit" name="submit" value="BACK TO WRITER PAGE" >BACK TO WRITER PAGE</button><br><br>
             </form>
             <%}%>
             <%if(draft==null){%>
             <p>NO DRAFT SELECTED</p>
             <%}%>
         </div>
+        <script src="js/word_count_story.js"></script>
+        <script src="js/word_count_synopsis.js"></script>
     </body>
 </html>
 

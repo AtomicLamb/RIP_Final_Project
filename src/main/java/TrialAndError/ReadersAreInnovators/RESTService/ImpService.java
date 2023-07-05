@@ -2,6 +2,7 @@ package TrialAndError.ReadersAreInnovators.RESTService;
 
 import TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication;
 import TrialAndError.ReadersAreInnovators.Models.Administration.WriterApplication;
+import TrialAndError.ReadersAreInnovators.Models.Administration.smsreq;
 import TrialAndError.ReadersAreInnovators.Models.AnalyticalData.Analytics;
 import TrialAndError.ReadersAreInnovators.Models.AnalyticalData.Rating;
 import TrialAndError.ReadersAreInnovators.Models.RESTModels.*;
@@ -12,6 +13,7 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Reader;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.ws.rs.client.Client;
@@ -20,11 +22,10 @@ import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.xml.bind.JAXB;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import java.io.*;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,15 +46,30 @@ public class ImpService
     private ObjectMapper mapper;
     private String uri;
     private Response response;
+    private String smsUri;
     
      public ImpService(){
         client = ClientBuilder.newClient();
         mapper = new ObjectMapper();
         uri = "http://localhost:8080/Trial_and_Error_Readers_are_Innovators-1.0-SNAPSHOT/ReadersAreInnovators/TrialAndError";
-         
+        smsUri = "http://196.41.180.157:8080/sms/sms_request";
     }
+    
+    public String sms(){
+         String smsURI = uri + "/sms";
+         smsreq smsreq=new smsreq(new smsreq().currentDate(),"Rath","password","84000000","hi");
+         webTarget = client.target((smsUri));
+        StringWriter sw = new StringWriter();
+         JAXB.marshal(smsreq, sw);
+         String xmlString = sw.toString();
+         response = webTarget.request(MediaType.APPLICATION_XML).post(Entity.xml(xmlString));
+         return response.readEntity(String.class);
+    }
+    
+    
     public User login(User user)
     {
+        
         String personURI = uri + "/login";
         
         webTarget = client.target(personURI);
@@ -271,7 +287,7 @@ public class ImpService
             return mapper.writeValueAsString(o);
         } catch (JsonProcessingException ex) {
             Logger.getLogger(ImpService.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
         return null;
     }
     public String selectGenre(UserGenreREST userGenreREST)
@@ -545,7 +561,7 @@ public class ImpService
         String personURI = uri + "/searchByTitle";
         
         webTarget = client.target(personURI);
-        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(topic)));
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.text(topic));
         
         return List.of(response.readEntity(Story[].class));
     }
@@ -554,7 +570,7 @@ public class ImpService
         String personURI = uri + "/searchByAuthor";
         
         webTarget = client.target(personURI);
-        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(topic)));
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.text(topic));
         
         return List.of(response.readEntity(Story[].class));
     }
@@ -563,7 +579,7 @@ public class ImpService
         String personURI = uri + "/searchByGenre";
         
         webTarget = client.target(personURI);
-        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(topic)));
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.text(topic));
         
         return List.of(response.readEntity(Story[].class));
     }
@@ -572,7 +588,7 @@ public class ImpService
         String personURI = uri + "/searchByName";
         
         webTarget = client.target(personURI);
-        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(topic)));
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.text(topic));
         
         return List.of(response.readEntity(Writer[].class));
     }
@@ -581,7 +597,7 @@ public class ImpService
         String personURI = uri + "/searchByStories";
         
         webTarget = client.target(personURI);
-        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(topic)));
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.text(topic));
         
         return List.of(response.readEntity(Writer[].class));
     }
@@ -638,5 +654,71 @@ public class ImpService
         response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(analytics)));
         
         return List.of(response.readEntity(Editor[].class));
+    }
+    public String updateDraft(Story story)
+    {
+        String personURI = uri + "/updateDraft";
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(story)));
+        
+        return response.readEntity(String.class);
+    }
+    public String deleteDraft(Story story)
+    {
+        String personURI = uri + "/deleteDraft";
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(story)));
+        
+        return response.readEntity(String.class);
+    }
+    public String saveAsDraft(Story story)
+    {
+        String personURI = uri + "/saveAsDraft";
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(story)));
+        
+        return response.readEntity(String.class);
+    }
+    //Test
+    public String addGenreToPendingStory(StoryApplicationGenreREST storyApplicationGenreREST)
+    {
+        String personURI = uri + "/addGenreToPendingStory";
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(storyApplicationGenreREST)));
+        
+        return response.readEntity(String.class);
+    }
+    public String submitStory(Story story)
+    {
+        String personURI = uri + "/submitStory";
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(story)));
+        
+        return response.readEntity(String.class);
+    }
+    public String publiciseStory(Story story)
+    {
+        String personURI = uri + "/publiciseStory";
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(story)));
+        
+        return response.readEntity(String.class);
+    }
+    public String privatizeStory(Story story)
+    {
+        String personURI = uri + "/privatizeStory";
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(story)));
+        
+        return response.readEntity(String.class);
+    }
+    //Test
+    public String editUserGenres(UserGenreListREST userGenreListREST)
+    {
+        String personURI = uri + "/editUserGenres";
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(userGenreListREST)));
+        
+        return response.readEntity(String.class);
     }
 }

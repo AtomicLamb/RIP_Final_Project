@@ -10,6 +10,8 @@ import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import TrialAndError.ReadersAreInnovators.RESTService.ImpService;
+import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
+import TrialAndError.ReadersAreInnovators.ServiceLayers.Functions_Interface;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayer_Interface;
 import jakarta.servlet.ServletException;
@@ -44,7 +46,7 @@ public class HomePageServlet extends HttpServlet {
     private HttpSession session;
     private ImpService imp;
     private ServiceLayerClass service;
-    
+   
     public HomePageServlet()
     {
         imp = new ImpService();
@@ -79,14 +81,26 @@ public class HomePageServlet extends HttpServlet {
                 
                 
                 break;
-            case "refer":
+            case "REFER A FRIEND":
                 session= request.getSession(false);
-               request.setAttribute("message",service.referFriend(request.getParameter("email"),
+               request.setAttribute("message2",service.referFriend(request.getParameter("email"),
                        (String)session.getAttribute("Name")+" "+(String)session.getAttribute("Surname")));
+                
+                session= request.getSession(false);
+                Integer num = (Integer) session.getAttribute("UserTypeID");
+                request.setAttribute("message", num);
+                
+                List<Story>genreStories=imp.getStoriesFromGenres(new User((Integer) session.getAttribute("UserID")));
+                List<Story>topWeekPicksStories=imp.getWeeksTopPicks();
+                List<Story>recommendedBooks=imp.getRecommendedBooks();
+                request.setAttribute("recommendedBooks",recommendedBooks);
+                request.setAttribute("topPicks",topWeekPicksStories);
+                request.setAttribute("stories", genreStories);
+               
                 dispatcher=request.getRequestDispatcher("HomePage.jsp");
                 dispatcher.forward(request,response);
                 break;
-            case "send":
+            case "SEND":
                 User user=new User();
                 user.setEmail(request.getParameter("email"));
                 user.setPhoneNumber(request.getParameter("number"));
@@ -95,9 +109,7 @@ public class HomePageServlet extends HttpServlet {
                 dispatcher.forward(request,response);
                 break;
                 
-            case "login" :
-                
-                break;
+             
         }
     }
 }

@@ -236,12 +236,12 @@ public class FunctionsClass implements Functions_Interface{
         byte[] imageBytes = Base64.getDecoder().decode(imageString);
         
         int fileNumber = 1;
-        String fileName = "image" + fileNumber + ".png";
+        String fileName = "Image" + fileNumber + ".jpg";
         
         while (Files.exists(folder.resolve(fileName))) {
             
             fileNumber++;
-            fileName = "image" + fileNumber + ".png";
+            fileName = "Image" + fileNumber + ".jpg";
             
         }
         

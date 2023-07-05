@@ -23,6 +23,7 @@ public class StoryApplication {
     private String authorPhoneNumber;
     private String storyBody;
     private String synopsis;
+    private String reasonsForDenial;
     private List<Genre> genres;
     private String coverImage;
     private String imagePath;
@@ -133,6 +134,14 @@ public class StoryApplication {
         this.synopsis = synopsis;
     }
     
+    public String getReasonsForDenial() {
+        return reasonsForDenial;
+    }
+    
+    public void setReasonsForDenial(String reasonsForDenial) {
+        this.reasonsForDenial = reasonsForDenial;
+    }
+    
     public List<Genre> getGenres() {
         return genres;
     }
@@ -185,6 +194,7 @@ public class StoryApplication {
                 ", authorPhoneNumber='" + authorPhoneNumber + '\'' +
                 ", storyBody='" + storyBody + '\'' +
                 ", synopsis='" + synopsis + '\'' +
+                ", reasonsForDenial='" + reasonsForDenial + '\'' +
                 ", genres=" + genres +
                 ", coverImage='" + coverImage + '\'' +
                 ", imagePath='" + imagePath + '\'' +

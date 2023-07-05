@@ -59,7 +59,8 @@
                       <textarea type="text" name="writerMotivation" maxlength="500" rows="4" cols="55">Enter your motivation on why you want to become a writer. You cannot go over 500 letters or spaces</textarea>
               </div>
                   <div class="button input-box" style="top:10px">
-                 <input type="submit" name="submit" value="Confirm Writer">
+                 <input type="submit" name="submit" value="CONFIRM WRITER">
+                      <input type="submit" name="submit" value="BACK TO LOGIN PAGE">        
               </div>    
               </div>
           </form>

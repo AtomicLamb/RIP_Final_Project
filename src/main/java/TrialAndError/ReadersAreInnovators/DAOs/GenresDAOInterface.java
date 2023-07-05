@@ -25,7 +25,7 @@ public interface GenresDAOInterface {
     
     String selectGenre(User user, Genre genre);
     
-    String deselectGenre(User user, Genre genre);
+    String deselectGenre(User user);
     
     List<Genre> getGenres();
     

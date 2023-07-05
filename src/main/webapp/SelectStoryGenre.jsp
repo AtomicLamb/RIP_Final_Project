@@ -45,7 +45,7 @@
                             </ul>
                         </div>
                         <div class="button input-box">
-                            <input style="color: white; background-color: black;" type="submit" name="submit" value="Submit Story Genres">
+                            <input style="color: white; background-color: black;" type="submit" name="submit" value="SUBMIT STORY GENRES">
                         </div>
                     </form>
                 </div>

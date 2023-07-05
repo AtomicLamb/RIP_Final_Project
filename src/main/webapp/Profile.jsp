@@ -77,7 +77,7 @@
 	<!-- banner section start-->
         <div class="banner_section layout_padding">
             <div class="container">
-                    <h1 class="best_taital" style="color:#007791">REVIEW PENDING STORIES</h1>
+                    <h1 class="best_taital" style="color:#007791">Profile Page</h1>
                 <%
                     String message = (String) request.getAttribute("message");
                     if(message!=null){
@@ -136,10 +136,10 @@
             <div class="scrollmenu" style="margin: auto; width: 90%">
             <%if(!genres.isEmpty()){%>
             <% for(Genre genre:genres){%>
-                <a href="StoryServlet?submit=storyDetails&genreId=<%=genre.getGenreID()%>"> 
+                  
                 <h1 style="color: white;"><%=genre.getGenre()%></h1>
                 <img src="images/Default%20Genre%20Image.png" alt="<%=genre.getGenre()%>" style="width:300px;height:400px;" >
-                </a>
+                 
             <%}%>
             <%}%>
             <%if(genres.isEmpty()){%>

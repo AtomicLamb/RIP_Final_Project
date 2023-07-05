@@ -61,24 +61,17 @@
                     </li>
                 </ul>
             </div>
-            <%if((Integer) session.getAttribute("UserTypeID") == 0) {%>
-            <li class="nav-item">
-                <a style="color: #007791" class="nav-link" href="index.jsp">LOGIN HERE</a>
-            </li>
-            <%}%>
-            <%if((Integer) session.getAttribute("UserTypeID") != 0) {%>
             <form action="controllerServlet" method="get">
                 <div class="login_text">
                     <input style="border: none;background-color: #343a40; color: #007791" class="nav-link" type="submit" name="submit" value="SIGN OUT" formnovalidate>
                 </div>
-                <%}%>
             </form>
         </nav>
         <!-- header section start-->
         <!-- banner section start-->
         <div class="banner_section layout_padding">
             <div class="container">
-                <h1 class="best_taital" style="color:#007791">WELCOME TO YOUR PERSONAL PAGE</h1>
+                <h1 class="best_taital" style="color:#007791">PENDING STORY PAGE</h1>
                 <%
                     String message = (String) request.getAttribute("message");
                     if(message!=null){

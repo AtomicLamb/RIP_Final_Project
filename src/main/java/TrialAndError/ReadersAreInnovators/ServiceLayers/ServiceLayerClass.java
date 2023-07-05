@@ -67,6 +67,8 @@ public class ServiceLayerClass implements ServiceLayer_Interface {
     
     //AdminEditor:
     
+  
+    
     @Override
     public List<Editor> viewEditors() {
         
@@ -233,7 +235,7 @@ public class ServiceLayerClass implements ServiceLayer_Interface {
         
     }
     
-    @Override       //TODO: Add reasons for Denying User.
+    @Override
     public String denyWriter(WriterApplication writer) {
         
         subject = "Writer Application Status.";
@@ -252,7 +254,7 @@ public class ServiceLayerClass implements ServiceLayer_Interface {
         
     }
     
-    @Override       //TODO: Email to SMS.
+    @Override
     public String approvePendingStory(StoryApplicationEditorREST storyApplicationEditorREST) {
         
         StoryApplication story = storyApplicationEditorREST.getStoryApplication();
@@ -264,11 +266,13 @@ public class ServiceLayerClass implements ServiceLayer_Interface {
         
     }
     
-    @Override       //TODO: Email to SMS.
+    @Override
     public String removePendingStory(StoryApplication pendingStory) {
         
         subject = "Submitted Story Progress.";
-        text = "Unfortunately your story does not adhere to the company policy and was rejected. Thank you for taking the time to use our platform.";
+        text = "Unfortunately your story does not adhere to the company policy and was rejected for the following reason/s. \n" +
+                pendingStory.getReasonsForDenial() + " \n\n" +
+                "Thank you for taking the time to use our platform.";
         
         email.sendEmail(pendingStory.getAuthorEmail(), subject, text);
         
@@ -335,9 +339,17 @@ public class ServiceLayerClass implements ServiceLayer_Interface {
     }
     
     @Override
-    public String deselectGenre(User user, Genre genre) {
+    public String editUserGenres(UserGenreListREST userGenreListREST) {
         
-        return genresImp.deselectGenre(user, genre);
+        String message = genresImp.deselectGenre(userGenreListREST.getUser());
+        
+        for (Genre g: userGenreListREST.getGenres()) {
+            
+            genresImp.selectGenre(userGenreListREST.getUser(), g);
+            
+        }
+        
+        return message;
         
     }
     
@@ -363,30 +375,16 @@ public class ServiceLayerClass implements ServiceLayer_Interface {
     }
     
     @Override
-    public String removeGenreFromStory(Story story, Genre genre) {
+    public String addGenreToPendingStory(StoryApplicationGenreREST storyApplicationGenreREST) {
         
-        return null;
-        
-    }
-    
-    @Override
-    public String addGenreToPendingStory(StoryApplication storyApplication, Genre genre) {
-        
-        return genresImp.addGenreToPendingStory(storyApplication,genre);
+        return genresImp.addGenreToPendingStory(storyApplicationGenreREST.getStoryApplication(),storyApplicationGenreREST.getGenre());
         
     }
     
     @Override
-    public String removeGenreFromPendingStory(StoryApplication storyApplication, Genre genre) {
+    public List<Genre> getStoryGenres(Story story) {
         
-        return null;
-        
-    }
-    
-    @Override
-    public ArrayList<Genre> getStoryGenres(Story story) {
-        
-        return null;
+        return genresImp.getStoryGenres(story);
         
     }
     
@@ -571,6 +569,8 @@ public class ServiceLayerClass implements ServiceLayer_Interface {
         
         storyToDisplay.setRatingAverage(ratingImp.getStoryRating(story));
         
+        storyToDisplay.setGenres(genresImp.getStoryGenres(story));
+        
         return storyToDisplay;
         
     }
@@ -702,15 +702,15 @@ public class ServiceLayerClass implements ServiceLayer_Interface {
         } else {
             
             message = "Friend successfully referred.";
-            
+        
+            subject = "Readers Are Innovators referral from: " + name + ".";
+            text = "You have been referred to the Readers Are Innovators Program by: " + name + ". \n " +
+                    "Please click the link below to view the Story of the Day. \n\n" +
+                    "http://192.168.0.105:8080/Trial_and_Error_Readers_are_Innovators-1.0-SNAPSHOT/StoryServlet?submit=storyOfTheDay";
+        
+            email.sendEmail(userEmail, subject, text);
+        
         }
-        
-        subject = "Readers Are Innovators referral from: " + name + ".";
-        text = "You have been referred to the Readers Are Innovators Program by: " + name + ". \n " +
-                "Please click the link below to view the Story of the Day. \n\n" +
-                "http://localhost:8080/Trial_and_Error_Readers_are_Innovators-1.0-SNAPSHOT/StoryServlet?submit=storyOfTheDay";
-        
-        email.sendEmail(userEmail, subject, text);
         
         return message;
         

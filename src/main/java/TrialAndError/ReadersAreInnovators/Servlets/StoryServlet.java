@@ -45,7 +45,8 @@ public class StoryServlet extends HttpServlet {
     private ImpService imp;
     private final ServiceLayer_Interface service =new ServiceLayerClass();
     private Boolean follow;
-    
+    private  Writer writer;
+    private Story story;
     public StoryServlet()
     {
         imp = new ImpService();
@@ -192,7 +193,7 @@ public class StoryServlet extends HttpServlet {
         return imp.followAuthor(new UserWriterREST(getUserSessionJustId(request),new Writer(Integer.valueOf(request.getParameter("authorId")))));
       }
      public void authorDetails(HttpServletRequest request, HttpServletResponse response){
-         Writer writer=new Writer();
+         writer=new Writer();
          writer.setUserID(Integer.valueOf(request.getParameter("authorId")));
          request.setAttribute("authorStories", imp.getPublishedStories(writer));
          request.setAttribute("chosenWriter",imp.getAuthor(writer));
@@ -217,20 +218,14 @@ public class StoryServlet extends HttpServlet {
                 break;
            
             case "AuthorDetails":
-                Writer writer=new Writer();
-                writer.setUserID(Integer.valueOf(request.getParameter("authorId")));
-                  request.setAttribute("authorStories", imp.getPublishedStories(writer));
-                request.setAttribute("chosenWriter",imp.getAuthor(writer));
-                request.setAttribute("followed",followed(request));
-               var dispatcher=request.getRequestDispatcher("AuthorDetails.jsp");
-                dispatcher.forward(request,response);
+                authorDetails(request,response);
                  break;
             
             case "read":
-                   Story story=new Story();
+                   story=new Story();
                      story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
                 request.setAttribute("chosenStory", getChosenStory(request));
-                dispatcher=request.getRequestDispatcher("StoryBody.jsp");
+                var dispatcher=request.getRequestDispatcher("StoryBody.jsp");
                 
                 imp.readStory(new StoryUserREST(story,getUserSessionJustId(request)));
                 dispatcher.forward(request, response);
@@ -257,14 +252,14 @@ public class StoryServlet extends HttpServlet {
         
     }
    public String likeStory(HttpServletRequest request){
-        Story story=new Story();
+        story=new Story();
         story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
         session= request.getSession(false);
         User user=new User((Integer)session.getAttribute("UserID"));
        return imp.likeStory(new StoryUserREST(story,user));
    }
    public String likeOrUnlike(HttpServletRequest request){
-       Story story=new Story();
+       story=new Story();
        story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
         if (imp.checkIfLiked(new StoryUserREST(story,getUserSessionJustId(request)))){
             return unLikeStory(request);
@@ -275,7 +270,7 @@ public class StoryServlet extends HttpServlet {
    
    }
     public String unLikeStory(HttpServletRequest request){
-        Story story=new Story();
+        story=new Story();
         story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
         return imp.unlikeStory(new StoryUserREST(story,getUserSessionJustId(request)));
     }

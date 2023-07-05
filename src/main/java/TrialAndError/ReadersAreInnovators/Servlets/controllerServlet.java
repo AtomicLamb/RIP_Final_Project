@@ -11,6 +11,8 @@ import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.RESTService.ImpService;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Reader;
+import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
+import TrialAndError.ReadersAreInnovators.ServiceLayers.Functions_Interface;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -18,11 +20,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.apache.commons.lang3.Functions;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,7 +41,7 @@ public class controllerServlet extends HttpServlet {
     private HttpSession session;
     private ServiceLayerClass service;
     private String email;
-    
+    private final Functions_Interface functions=new FunctionsClass();
     public controllerServlet()
     {
         e = new Email();
@@ -51,11 +55,11 @@ public class controllerServlet extends HttpServlet {
     {
        switch(request.getParameter("submit"))
        {
-           case"Writer":
+           case"WRITER":
                var dispatcher =  request.getRequestDispatcher("WriterSign-Up.jsp");
                         dispatcher.forward(request, response);
                 break;
-               case"Continue to Homepage":
+               case"CONTINUE TO HOMEPAGE":
                    Integer num = 0;
                    request.setAttribute("message", num);
                    session= request.getSession(false);
@@ -78,7 +82,10 @@ public class controllerServlet extends HttpServlet {
                
                dispatcher =  request.getRequestDispatcher("index.jsp");
                dispatcher.forward(request, response);
-               break;    
+               break;
+           case"BACK TO LOGIN PAGE":
+               dispatcher =  request.getRequestDispatcher("index.jsp");
+               dispatcher.forward(request, response);
        }
     }
 
@@ -88,16 +95,16 @@ public class controllerServlet extends HttpServlet {
     {
        switch(request.getParameter("submit"))
        {
-           case"Login":
+           case"LOGIN":
                login(request,response);
                break;
-           case"Confirm Reader":
+           case"CONFIRM READER":
                registerReader(request, response);
                break;
-           case"Confirm Writer":
+           case"CONFIRM WRITER":
                addWriter(request,response);
                break;
-           case"Submit Genres":
+           case"SUBMIT GENRES":
                selectGenre(request,response);
                break;
            
@@ -112,7 +119,7 @@ public class controllerServlet extends HttpServlet {
             String phoneNum = request.getParameter("readerPhoneNum");
             String password = request.getParameter("readerPassword");
             
-            Reader reader = new Reader(firstName,surname,email,phoneNum,password);
+            Reader reader = new Reader(firstName,surname,email,phoneNum,functions.passwordEncryption(password));
             String message = imp.registerReader(reader);
             request.setAttribute("genreList",imp.getGenres());
             
@@ -147,7 +154,7 @@ public class controllerServlet extends HttpServlet {
             String password = request.getParameter("writerPassword");
             String motivation = request.getParameter("writerMotivation");
             
-       WriterApplication writer = (new WriterApplication(firstName,surname,email,phoneNum,password,motivation));    
+       WriterApplication writer = (new WriterApplication(firstName,surname,email,phoneNum, functions.passwordEncryption(password),motivation));    
        String message = imp.registerWriter(writer);
        request.setAttribute("genreList",imp.getGenres());
        
@@ -176,7 +183,10 @@ public class controllerServlet extends HttpServlet {
     public void login(HttpServletRequest request, HttpServletResponse response) {
         String email = request.getParameter("loginEmail");
         String password = request.getParameter("loginPassword");
-        User user = imp.login(new User(email,password));
+        
+           
+        User user = imp.login(new User(email,functions.passwordEncryption(password)));
+       
         
         var dispatcher = request.getRequestDispatcher("HomePage.jsp");
             try {
@@ -208,6 +218,7 @@ public class controllerServlet extends HttpServlet {
                {
                    request.setAttribute("message", "Incorrect email or password. Please try login again or register if you do not have an account");
                    dispatcher =  request.getRequestDispatcher("index.jsp");
+                   
                    
                    dispatcher.forward(request, response);
                    

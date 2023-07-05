@@ -109,7 +109,7 @@ public interface ServiceLayer_Interface {
     
     String selectGenre(UserGenreREST userGenreREST);
     
-    String deselectGenre(User user, Genre genre);
+    String editUserGenres(UserGenreListREST userGenreListREST);
     
     List<Genre> getGenres();
     
@@ -117,13 +117,9 @@ public interface ServiceLayer_Interface {
     
     String addGenreToStory(StoryGenreREST storyGenreREST);
     
-    String removeGenreFromStory(Story story, Genre genre);
+    String addGenreToPendingStory(StoryApplicationGenreREST storyApplicationGenreREST);
     
-    String addGenreToPendingStory(StoryApplication storyApplication, Genre genre);
-    
-    String removeGenreFromPendingStory(StoryApplication storyApplication, Genre genre);
-    
-    ArrayList<Genre> getStoryGenres(Story story);
+    List<Genre> getStoryGenres(Story story);
     
     List<Genre> getPendingStoryGenres(StoryApplication storyApplication);
     

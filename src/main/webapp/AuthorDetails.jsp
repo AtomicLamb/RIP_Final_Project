@@ -47,8 +47,6 @@
                 <li class="nav-item">
                    <a class="nav-link" href="HomePageServlet?submit=HomePage">HOME</a>
                 </li>
-                
-  
             </ul>
         </div>
          <div class="login_text"><a href="index.jsp">LOGIN HERE</a></div>
@@ -69,8 +67,6 @@
          <%if(message!=null){%>
     <h2><%=message%></h2>
          <%}%>
-    
-    
 		<div class="container-fluid" style="background-color:whitesmoke;width: 70%;margin: auto;box-shadow: 10px 10px black;padding:40px;position: relative;bottom: 20px;margin-top:40px  ">
                     <div class="row"style="margin-left: 20px;margin-right: 20px; margin-top: 40px;">
 				      <%if(writer!=null){%>

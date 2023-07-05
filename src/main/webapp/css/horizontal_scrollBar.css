@@ -13,7 +13,13 @@
   padding: 30px;
   text-decoration: none;
 }
-
+ .scrollmenu2 {
+     display: inline-block;
+     color: white;
+     text-align: center;
+     padding: 30px;
+     text-decoration: none;
+ }
  .scrollmenu a:hover { 
       
   background-color: #777;

@@ -525,7 +525,7 @@ public class UserImplementation implements UserDAOInterface {
             
         } catch (SQLException e) {
             
-            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error logging into user account.", e);
+            Logger.getLogger(UserImplementation.class.getName()).log(Level.FINE, "Error logging into user account.", e);
             
         } finally {
             
@@ -601,7 +601,7 @@ public class UserImplementation implements UserDAOInterface {
         } catch (SQLException e) {
             
             message = "Error editing personal information.";
-            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error editing personal information.", e);
+            Logger.getLogger(UserImplementation.class.getName()).log(Level.FINE, "Error editing personal information.", e);
             
         } finally {
             
@@ -677,7 +677,7 @@ public class UserImplementation implements UserDAOInterface {
         } catch (SQLException e) {
             
             message = "Error getting users information.";
-            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error getting users information.", e);
+            Logger.getLogger(UserImplementation.class.getName()).log(Level.FINE, "Error getting users information.", e);
             
         } finally {
             
@@ -748,7 +748,7 @@ public class UserImplementation implements UserDAOInterface {
         } catch (SQLException e) {
             
             message = "Error verifying email.";
-            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error verifying email.", e);
+            Logger.getLogger(UserImplementation.class.getName()).log(Level.FINE, "Error verifying email.", e);
             
         } finally {
             
@@ -828,7 +828,7 @@ public class UserImplementation implements UserDAOInterface {
         } catch (SQLException e) {
             
             message = "Error checking if user exists.";
-            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error checking if user exists.", e);
+            Logger.getLogger(UserImplementation.class.getName()).log(Level.FINE, "Error checking if user exists.", e);
             
         } finally {
             
@@ -923,7 +923,7 @@ public class UserImplementation implements UserDAOInterface {
             
         } catch (SQLException e) {
             
-            Logger.getLogger(ReaderImplementation.class.getName()).log(Level.FINE, "Error getting all Favorites.", e);
+            Logger.getLogger(UserImplementation.class.getName()).log(Level.FINE, "Error getting all Favorites.", e);
             
         } catch (IOException e) {
             
@@ -1018,7 +1018,7 @@ public class UserImplementation implements UserDAOInterface {
             query = "update users u set u.Password = ? where u.Email = ? and u.PhoneNumber = ?";
             
             ps = conn.prepareStatement(query);
-            ps.setString(1, OTP);
+            ps.setString(1, functionsClass.passwordEncryption(OTP));
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPhoneNumber());
             ps.executeUpdate();

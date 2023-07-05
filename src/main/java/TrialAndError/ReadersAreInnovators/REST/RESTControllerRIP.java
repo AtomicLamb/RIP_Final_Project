@@ -29,6 +29,7 @@ public class RESTControllerRIP {
         service = new ServiceLayerClass();
     }
     
+    
     @Path("/login")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -407,7 +408,7 @@ public class RESTControllerRIP {
     }
     @Path("/searchByTitle")
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
     public Response searchByTitle(String topic)
     {
@@ -415,13 +416,15 @@ public class RESTControllerRIP {
     }
     @Path("/searchByAuthor")
     @POST
+    @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response   searchByAuthor(String topic)
+    public Response searchByAuthor(String topic)
     {
         return Response.ok().entity(service.searchByAuthor(topic)).build();
     }
    @Path("/searchByGenre")
    @POST
+   @Consumes(MediaType.TEXT_PLAIN)
    @Produces(MediaType.APPLICATION_JSON)
    public Response searchByGenre(String topic)
    {
@@ -429,6 +432,7 @@ public class RESTControllerRIP {
    }
    @Path("/searchByName")
    @POST
+   @Consumes(MediaType.TEXT_PLAIN)
    @Produces(MediaType.APPLICATION_JSON)
    public Response searchByName(String topic)
    {
@@ -436,6 +440,7 @@ public class RESTControllerRIP {
    }
    @Path("/searchByStories")
    @POST
+   @Consumes(MediaType.TEXT_PLAIN)
    @Produces(MediaType.APPLICATION_JSON)
    public Response searchByStories(String topic)
    {
@@ -482,5 +487,62 @@ public class RESTControllerRIP {
     public Response getTopEditors(Analytics analytics)
     {
         return Response.ok().entity(service.getTopWriters(analytics)).build();
+    }
+    @Path("/updateDraft")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateDraft(Story story)
+    {
+        return Response.ok().entity(service.updateDraft(story)).build();
+    }
+    @Path("/deleteDraft")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteDraft(Story story)
+    {
+        return Response.ok().entity(service.deleteDraft(story)).build();
+    }
+    //Test
+    @Path("/saveAsDraft")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response saveAsDraft(Story story)
+    {
+        return Response.ok().entity(service.saveAsDraft(story)).build();
+    }
+    @Path("/addGenreToPendingStory")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addGenreToPendingStory(StoryApplicationGenreREST storyApplicationGenreREST)
+    {
+        return Response.ok().entity(service.addGenreToPendingStory(storyApplicationGenreREST)).build();
+    }
+    @Path("/submitStory")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response submitStory(Story story)
+    {
+        return Response.ok().entity(service.submitStory(story)).build();
+    }
+    @Path("/publiciseStory")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response publiciseStory(Story story)
+    {
+        return Response.ok().entity(service.publiciseStory(story)).build();
+    }
+    @Path("/privatizeStory")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response privatizeStory(Story story)
+    {
+        return Response.ok().entity(service.privatizeStory(story)).build();
+    }
+    @Path("/editUserGenres")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response editUserGenres(UserGenreListREST userGenreListREST)
+    {
+        return Response.ok().entity(service.editUserGenres(userGenreListREST)).build();
     }
 }

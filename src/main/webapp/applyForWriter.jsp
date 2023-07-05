@@ -34,7 +34,6 @@
               <div class="input-box">
                  <textarea type="text" name="motivation" rows="4" cols="55">Enter your motivation on why you want to become a writer.</textarea>
               </div>
-                
              <div class="button input-box">
                  <input type="submit" name="submit" value="CONFIRM WRITER APPLICATION">
               </div>

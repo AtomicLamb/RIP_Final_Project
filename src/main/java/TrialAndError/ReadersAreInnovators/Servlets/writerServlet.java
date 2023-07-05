@@ -8,6 +8,7 @@ import TrialAndError.ReadersAreInnovators.DAOs.StoryImplementation;
 import TrialAndError.ReadersAreInnovators.DAOs.WriterDAOInterface;
 import TrialAndError.ReadersAreInnovators.DAOs.WriterImplementation;
 import TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication;
+import TrialAndError.ReadersAreInnovators.Models.RESTModels.StoryApplicationGenreREST;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
@@ -104,6 +105,10 @@ public class writerServlet extends HttpServlet
                dispacther =  request.getRequestDispatcher("EditDraft.jsp");
                dispacther.forward(request, response);
                break;
+           
+           case"BACK TO WRITER PAGE":
+               dispacther =  request.getRequestDispatcher("Writers.jsp");
+               dispacther.forward(request, response);    
           
        }
     }
@@ -132,7 +137,7 @@ public class writerServlet extends HttpServlet
                 }
                 
                 request.setAttribute("genreList",imp.getGenres());
-                request.setAttribute("message",slc.submitStory(new Story(title,(Integer)session.getAttribute("UserID")
+                request.setAttribute("message",imp.submitStory(new Story(title,(Integer)session.getAttribute("UserID")
                         ,request.getParameter("storySynopsis"), request.getParameter("storyBody"), newCoverImage, commentsEnabled)));
                 var dispatcher=request.getRequestDispatcher("SelectStoryGenre.jsp");
                 dispatcher.forward(request,response);
@@ -154,7 +159,7 @@ public class writerServlet extends HttpServlet
                     commentsEnabled = false;
                 }
                 
-                request.setAttribute("message",slc.saveAsDraft(new Story(request.getParameter("storyTitle"),(Integer)session.getAttribute("UserID")
+                request.setAttribute("message",imp.saveAsDraft(new Story(request.getParameter("storyTitle"),(Integer)session.getAttribute("UserID")
                         ,request.getParameter("storySynopsis"), request.getParameter("storyBody"), newCoverImage, commentsEnabled)));
                 dispatcher=request.getRequestDispatcher("Writers.jsp");
                 dispatcher.forward(request,response);
@@ -181,8 +186,8 @@ public class writerServlet extends HttpServlet
                     commentsEnabled = false;
                 }
                 
-                request.setAttribute("genreList",slc.getGenres());
-                request.setAttribute("message",slc.submitStory(new Story(request.getParameter("storyTitle"),(Integer)session.getAttribute("UserID")
+                request.setAttribute("genreList",imp.getGenres());
+                request.setAttribute("message",imp.submitStory(new Story(request.getParameter("storyTitle"),(Integer)session.getAttribute("UserID")
                         ,request.getParameter("storySynopsis"), request.getParameter("storyBody"), newCoverImage, commentsEnabled)));
                 dispatcher=request.getRequestDispatcher("SelectStoryGenre.jsp");
                 dispatcher.forward(request,response);
@@ -209,7 +214,7 @@ public class writerServlet extends HttpServlet
                     commentsEnabled = false;
                 }
                 
-                request.setAttribute("message",slc.updateDraft(new Story(storyId,title,(Integer)session.getAttribute("UserID")
+                request.setAttribute("message",imp.updateDraft(new Story(storyId,title,(Integer)session.getAttribute("UserID")
                         ,request.getParameter("storySynopsis"), request.getParameter("storyBody"), newCoverImage, commentsEnabled)));
                 dispatcher=request.getRequestDispatcher("Writers.jsp");
                 dispatcher.forward(request,response);
@@ -217,7 +222,7 @@ public class writerServlet extends HttpServlet
             case"Make Story Private":
                 story=new Story();
                 story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
-                request.setAttribute("message",slc.privatizeStory(story));
+                request.setAttribute("message",imp.privatizeStory(story));
                 session= request.getSession(false);
                 writer=new Writer((Integer) session.getAttribute("UserID"));
                 List<Story> publishedStories=imp.getPublishedStories(writer);
@@ -228,7 +233,7 @@ public class writerServlet extends HttpServlet
             case "Make Story Public":
                 story=new Story();
                 story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
-                request.setAttribute("message",slc.publiciseStory(story));
+                request.setAttribute("message",imp.publiciseStory(story));
                 session= request.getSession(false);
                 writer=new Writer((Integer) session.getAttribute("UserID"));
                 List<Story>publishedStories2=imp.getPublishedStories(writer);
@@ -236,79 +241,18 @@ public class writerServlet extends HttpServlet
                 var dispacther2 =  request.getRequestDispatcher("ViewStories.jsp");
                 dispacther2.forward(request, response);
                 break;
-            case"Submit Story Genres":
+            case"SUBMIT STORY GENRES":
                 selectStoryGenre(request,response);
                 break;
             case"Delete Draft":
-                request.setAttribute("message",slc.deleteDraft(new Story(storyId)));
+                request.setAttribute("message",imp.deleteDraft(new Story(storyId)));
                 dispatcher=request.getRequestDispatcher("Writers.jsp");
                 dispatcher.forward(request,response);
-                break;    
-            //
-        }
-    }
-    public void saveAsDraft(String coverImage,HttpServletRequest request,HttpServletResponse response){
-        session= request.getSession(false);
-         
-        request.setAttribute("message",slc.saveAsDraft(new Story(request.getParameter("storyTitle"),(Integer)session.getAttribute("UserID"),coverImage, "", Boolean.parseBoolean(request.getParameter("draftCommentsEnabled")),
-                request.getParameter("storySynopsis"),request.getParameter("storyBody"))));
-        var dispatcher=request.getRequestDispatcher("ViewDrafts.jsp");
-        try {
-            dispatcher.forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+                break;
         }
     }
     
-    public String getCoverImage(String CoverImage){
-          return CoverImage;
-    }
-    public void submitStory(String coverImage,HttpServletRequest request,HttpServletResponse response){
-        //Title, AuthorID, StoryBody, Synopsis, CoverImage 
-        
-        session= request.getSession(false);
-        request.setAttribute("message",slc.submitStory(new Story(request.getParameter("draftTitle"),(Integer)session.getAttribute("UserID"),coverImage, "",Boolean.parseBoolean(request.getParameter("draftCommentsEnabled")),
-                request.getParameter("draftSynopsis"),request.getParameter("draftStoryBody"))));
-        var dispatcher=request.getRequestDispatcher("ViewDrafts.jsp");
-        try {
-            dispatcher.forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public void saveDraft2Database(String coverImage,HttpServletRequest request,HttpServletResponse response){
-        request.setAttribute("message",slc.editDraft(new Story(request.getParameter("draftTitle"),Integer.valueOf(request.getParameter("draftId")),coverImage, "", Boolean.parseBoolean(request.getParameter("draftCommentsEnabled")),
-                                                                request.getParameter("draftSynopsis"),request.getParameter("draftStoryBody"))));
-        var dispatcher=request.getRequestDispatcher("ViewDrafts.jsp");
-        try {
-            dispatcher.forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public void saveDraft(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
-    {
-        String title = request.getParameter("storyTitle");
-            Part filePart = request.getPart("fileImage");
-            File file = (File) filePart;
-            String synopsis = request.getParameter("storySynopsis");
-            String storyBody = request.getParameter("storyBody");
-            
-            request.setAttribute("message", "");
-                        var dispacther =  request.getRequestDispatcher("Writers.jsp");
-                       try {
-                           dispacther.forward(request, response);
-                       } catch (ServletException | IOException ex) {
-                           Logger.getLogger(controllerServlet.class.getName()).log(Level.SEVERE, null, ex);
-                       }
-    }
-    
+   
     public void selectStoryGenre(HttpServletRequest request, HttpServletResponse response)
     {
         String[] genres = request.getParameterValues("choice");
@@ -317,7 +261,7 @@ public class writerServlet extends HttpServlet
         {
             if (genres.length >= 1 && genres.length <= 3) {
                 for (int i = 0; i < genres.length; i++) {
-                    request.setAttribute("message", slc.addGenreToPendingStory(new StoryApplication(title, (Integer) session.getAttribute("UserID")), new Genre(genres[i])));
+                    request.setAttribute("message", imp.addGenreToPendingStory(new StoryApplicationGenreREST(new StoryApplication(title, (Integer) session.getAttribute("UserID")), new Genre(genres[i]))));
                 }
                 var dispacther = request.getRequestDispatcher("Writers.jsp");
                 try {
@@ -329,7 +273,7 @@ public class writerServlet extends HttpServlet
             else 
             {
                 request.setAttribute("message", "You must select 1 to 3 genres");
-                request.setAttribute("genreList", slc.getGenres());
+                request.setAttribute("genreList", imp.getGenres());
                 var dispacther = request.getRequestDispatcher("SelectStoryGenre.jsp");
                 try {
                     dispacther.forward(request, response);
@@ -341,7 +285,7 @@ public class writerServlet extends HttpServlet
         else 
         {
             request.setAttribute("message", "You must select 1 to 3 genres");
-            request.setAttribute("genreList", slc.getGenres());
+            request.setAttribute("genreList", imp.getGenres());
             var dispacther = request.getRequestDispatcher("SelectStoryGenre.jsp");
             try {
                 dispacther.forward(request, response);

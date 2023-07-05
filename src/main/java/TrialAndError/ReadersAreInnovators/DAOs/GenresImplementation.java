@@ -279,7 +279,7 @@ public class GenresImplementation implements GenresDAOInterface{
     
     
     @Override       //Completed: Allows a user to deselect a genre.
-    public String deselectGenre(User user, Genre genre) {
+    public String deselectGenre(User user) {
         
         conn = DatabaseConnectionManager.getConnection();
         
@@ -294,23 +294,13 @@ public class GenresImplementation implements GenresDAOInterface{
             rs.next();
             Integer userID = rs.getInt(1);
             
-            query = "select g.GenreID from genres g where g.Genre = ?";
-            
-            ps = conn.prepareStatement(query);
-            ps.setString(1, genre.getGenre());
-            rs = ps.executeQuery();
-            
-            rs.next();
-            Integer genreID = rs.getInt(1);
-            
-            query = "delete from usergenreintersect i where i.UserID = ? and i.GenreID = ?";
+            query = "delete from usergenreintersect i where i.UserID = ?";
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, userID);
-            ps.setInt(2, genreID);
             ps.executeUpdate();
             
-            message = "Genre removed from your list of Genres.";
+            message = "All Genres removed from your list of Genres.";
             
         } catch (SQLException e) {
             

@@ -9,6 +9,7 @@ import TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
+import TrialAndError.ReadersAreInnovators.RESTService.ImpService;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayer_Interface;
 import jakarta.servlet.ServletException;
@@ -30,8 +31,8 @@ import java.util.List;
 @WebServlet(name = "postResultServlet", urlPatterns = {"/postResultServlet"})
 public class postResultServlet extends HttpServlet {
     StoryApplication story;
-    private final ServiceLayer_Interface slc=new ServiceLayerClass(); 
-    private final List<StoryApplication> pendingStories=slc.viewPendingStories();
+    private final ImpService imp=new ImpService();
+    private final List<StoryApplication> pendingStories=imp.viewPendingStories();
     private final StoryServlet storyServlet=new StoryServlet();
     HttpSession session;
     /**
@@ -76,11 +77,7 @@ public class postResultServlet extends HttpServlet {
                  
                 storyServlet.fillStoryDetailsPage(request,response,"message",request.getParameter("likeMessage"));
                 break;
-            case"unlike":
-                session= request.getSession(false);
-                
-                storyServlet.fillStoryDetailsPage(request,response,"message",request.getParameter("unlikeMessage"));
-                break;
+           
             case"Accept":
                 story=new StoryApplication();
                 story.setTitle(request.getParameter("storyTitle"));
@@ -101,7 +98,7 @@ public class postResultServlet extends HttpServlet {
             case "Deny":
                 story=new StoryApplication();
                 story.setPendingStoryID(Integer.valueOf(request.getParameter("storyId")));
-                request.setAttribute("message",slc.removePendingStory(story));
+                request.setAttribute("message",imp.removePendingStory(story));
                 request.setAttribute("pendingStories",pendingStories);
                 dispatcher=request.getRequestDispatcher("ReviewPendingStories.jsp");
                 dispatcher.forward(request,response);

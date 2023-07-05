@@ -262,7 +262,7 @@ public class StoryImplementation implements StoryDAOInterface {
         
         try {
             
-            query = "insert into PendingStories (Title, AuthorID, StoryBody, Synopsis, CoverImage, CommentsEnabled) values (?, ?, ?, ?, ?, ?) ";
+            query = "insert into PendingStories (Title, AuthorID, StoryBody, Synopsis, CoverImage, CommentsEnabled) values (?, ?, ?, ?, ?, ?)";
             
             ps = conn.prepareStatement(query);
             ps.setString(1, story.getTitle());
@@ -1025,7 +1025,7 @@ public class StoryImplementation implements StoryDAOInterface {
         } catch (SQLException e) {
             
             message = "Error getting existing like.";
-            Logger.getLogger(RatingImplementation.class.getName()).log(Level.FINE, "Error getting existing like.", e);
+            Logger.getLogger(StoryImplementation.class.getName()).log(Level.FINE, "Error getting existing like.", e);
             
         } finally {
             

@@ -132,7 +132,13 @@
 					<input type="text" class="email_bt" placeholder="Search" name="search">
 					<button style="background-color:#007791; color: black" type="submit" name="submit" value="Search" class="subscribe_bt">SEARCH</button>
 				</form>
-		    </div>
+		    </div><br><br>
+			<%
+				String message = (String) request.getAttribute("message2");
+				if(message!=null){
+			%>
+			<p class="best_taital" style ="color:#007791; font-size: medium"><%=message %></p><br>
+			<%}%>
 		</div>
 	</div><br><br>
 	<!-- banner section end-->

@@ -96,7 +96,7 @@ private final FunctionsClass functionsClass = new FunctionsClass();
                request.setAttribute("pendingStory",imp.reviewPendingStory(storyApplication));
                
                dispacther= request.getRequestDispatcher("reviewPendingStory.jsp");
-               dispacther.forward(request,response);
+               dispacther.forward(request,response);                                                                    //TODO fix
                 break;
             case"REVIEW PENDING WRITERS":
                 viewWriterApplications(request,response);
@@ -169,7 +169,7 @@ private final FunctionsClass functionsClass = new FunctionsClass();
              case"DENY WRITER":
                  denyWriter(request,response);
                  break;
-             case"Submit Genres":
+             case"SUBMIT GENRES":
                  selectPendingStoryGenre(request,response);
                  break;
              case"BACK TO REVIEW PENDING STORIES ":
