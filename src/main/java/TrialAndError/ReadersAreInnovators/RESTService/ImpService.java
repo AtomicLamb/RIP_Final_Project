@@ -274,19 +274,6 @@ public class ImpService
         }
         return null;
     }
-    public List<Analytics> getMostViewedStories(Analytics analytics)
-    {
-        String personURI = uri + "/getMostViewedStories";
-        
-        webTarget = client.target(personURI);
-        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(analytics)));
-        
-        try {
-            return Arrays.asList(mapper.readValue(webTarget.request().accept(MediaType.APPLICATION_JSON).get(String.class), Analytics[].class));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
     public String selectGenre(UserGenreREST userGenreREST)
     {
         String personURI = uri + "/selectGenre";
@@ -597,5 +584,59 @@ public class ImpService
         response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(topic)));
         
         return List.of(response.readEntity(Writer[].class));
+    }
+    public List<Story> getMostViewedStories(Analytics analytics)
+    {
+        String personURI = uri + "/getMostViewedStories";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(analytics)));
+        
+        return List.of(response.readEntity(Story[].class));
+    }
+    public List<Story> getHighestRatedStories(Analytics analytics)
+    {
+        String personURI = uri + "/getHighestRatedStories";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(analytics)));
+        
+        return List.of(response.readEntity(Story[].class));
+    }
+    public List<Story> getMostLikedStories(Analytics analytics)
+    {
+        String personURI = uri + "/getMostLikedStories";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(analytics)));
+        
+        return List.of(response.readEntity(Story[].class));
+    }
+    public List<Genre> getTopGenres(Analytics analytics)
+    {
+        String personURI = uri + "/getTopGenres";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(analytics)));
+        
+        return List.of(response.readEntity(Genre[].class));
+    }
+    public List<Writer> getTopWriters(Analytics analytics)
+    {
+        String personURI = uri + "/getTopWriters";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(analytics)));
+        
+        return List.of(response.readEntity(Writer[].class));
+    }
+    public List<Editor> getTopEditors(Analytics analytics)
+    {
+        String personURI = uri + "/getTopEditors";
+        
+        webTarget = client.target(personURI);
+        response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(toJsonString(analytics)));
+        
+        return List.of(response.readEntity(Editor[].class));
     }
 }

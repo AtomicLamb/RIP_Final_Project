@@ -50,7 +50,7 @@ public class editPersonalInformationServlet extends HttpServlet {
             case"EDIT PERSONAL INFORMATION":
                 getUser(request,response);
                 break;
-            case"Apply for writer":
+            case"APPLY FOR WRITER":
                 var dispacther =  request.getRequestDispatcher("applyForWriter.jsp");
                         dispacther.forward(request, response);
                 break;
@@ -110,7 +110,7 @@ public class editPersonalInformationServlet extends HttpServlet {
     {
        switch(request.getParameter("submit"))
        {
-           case"Edit Personal Information":
+           case"EDIT PERSONAL INFORMATION":
                session = request.getSession(false);
                
                Integer userID = (Integer) session.getAttribute("UserID");
@@ -129,7 +129,7 @@ public class editPersonalInformationServlet extends HttpServlet {
                editPersonalInfo(request,response);
                
                break;
-           case"Confirm Writer Application":
+           case"CONFIRM WRITER APPLICATION":
                applyForWriter(request,response);    
                break;
            

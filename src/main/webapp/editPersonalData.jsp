@@ -60,7 +60,7 @@
                 <input id="confirm_password" type="password" placeholder="Confirm Password" required>
               </div>
              <div class="button input-box">
-                 <input type="submit" name="submit" value="Edit Personal Information">
+                 <input type="submit" name="submit" value="EDIT PERSONAL INFORMATION">
               </div>    
               </div>
           </form>
@@ -70,7 +70,7 @@
             
           <form action="editPersonalInformationServlet" method="get">
               <div class="button input-box">
-                 <input type="submit" name="submit" value="Apply for writer">
+                 <input type="submit" name="submit" value="APPLY FOR WRITER">
               </div>
            <%}%>
               <div class="button input-box">

@@ -36,7 +36,7 @@
               </div>
                 
              <div class="button input-box">
-                 <input type="submit" name="submit" value="Confirm Writer Application">
+                 <input type="submit" name="submit" value="CONFIRM WRITER APPLICATION">
               </div>
               </div>
           </form>

@@ -241,7 +241,7 @@ public interface ServiceLayer_Interface {
     
     String applyForWriter(WriterApplication writerApplication);
     
-    String forgotPassword(String email,String number);
+    String forgotPassword(User user);
     
     
 }

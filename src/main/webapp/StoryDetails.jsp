@@ -13,8 +13,9 @@
 <!-- mobile metas -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <%Story story=(Story)request.getAttribute("storyDetails");%>
 <!-- site metas -->
-<title>Findnaukri</title>
+<title><%=story.getTitle()%></title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">	
@@ -59,21 +60,23 @@
             </ul>
         </div>
          <div class="login_text"><a href="index.jsp">LOGIN HERE</a></div>
-            
     </nav>
 	<!-- header section start-->
 	<!-- banner section start-->
-	
+    <div class="banner_section layout_padding">
+        <div class="container">
+            <h1 class="best_taital" style="color:#007791">REVIEW PENDING STORIES</h1>
+        </div>
+    </div>
 	<!-- banner section end-->
 	<!-- marketing section start-->
 	
 	<!-- marketing section end-->
 	<!-- Industrial section start-->
 	 
-		<div class="container-fluid" style="background-color:whitesmoke;width: 70%;margin: auto;box-shadow: 10px 10px black;padding:10px;position: relative;bottom: 20px;margin-top:40px  ">
-                    <div class="row" style="margin-left: 200px;">
+    
                         <%Writer writer=(Writer)request.getAttribute("chosenWriter");%>
-                        <%Story story=(Story)request.getAttribute("storyDetails");%>
+                        
                        
 
                       
@@ -111,6 +114,7 @@
 					      <p class="dummy_text"><%=story.getSynopsis()%></p>
                                    <div style="position: relative;bottom: 10px">
                                              <div class="apply_bt" style="position: relative;bottom: 10px"><a href="StoryServlet?submit=read&storyId=<%=story.getStoryID()%>">Read</a></div>
+                                                    <%if(story.getCommentsEnabled()){%>
                                                  <form action="StoryServlet" method="post">
                                                                       <label for="commentArea" style="margin-right: 100px">Type your comment</label>
                                                                    <textarea type="text" id="commentArea" name="commentArea" rows="4" cols="50" maxlength="500"></textarea>><br>
@@ -120,20 +124,21 @@
                                                                    <input type="submit" name="submit"  value="comment">
                                                                </form>
                                                                     
-                                       
+                                                           
                                                                <h2>Comments</h2>
+                                                          
                                                                <%if(!comments.isEmpty()){%>
                                                                <%for(Comment comment:comments){%> 
                                                                    <p>Posted by : <%=comment.getName()%> on <%=comment.getDateAdded()%><br><%=comment.getComment()%></p>
                                                                   <span id="reportButton" ><a href="StoryServlet?submit=reportComment">Report comment</a></span>
                                                                           <%}%>
                                                                  <%}%>
+                                                        <%}%>
+                                       <%if(!story.getCommentsEnabled()){%>
+                                           <h2>Comments Disabled</h2>
+                                       <%}%>
                                    </div>
-                    </div> 
-                        
-					</div>
-                                                                 
-				</div>
+                    </div>
                    
 			</div>
     <!-- Industrial section end-->

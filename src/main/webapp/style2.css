@@ -1077,6 +1077,13 @@ input.btn_main_3::placeholder {
     padding-bottom: 90px;
     background-size: cover;
 }
+.story_box {
+    margin: auto;
+    width: 200px;
+    height: 200px;
+    padding: 10px;
+    border: 5px solid crimson;
+}
 
 .dropdown-content a:hover {background-color: #ddd;}
 

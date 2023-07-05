@@ -145,7 +145,7 @@ public class UserImplementation implements UserDAOInterface {
     }
     
     
-    @Override       //Completed: Allows users to search for stories by Title.
+    @Override       //Completed: Allows users to search for stories by Author.
     public List<Story> searchByAuthor(String topic) {
         
         conn = DatabaseConnectionManager.getConnection();
@@ -245,7 +245,7 @@ public class UserImplementation implements UserDAOInterface {
     }
     
     
-    @Override       //Completed: Allows users to search for stories by Title.
+    @Override       //Completed: Allows users to search for stories by Genres.
     public List<Story> searchByGenre(String topic) {
         
         conn = DatabaseConnectionManager.getConnection();
@@ -345,7 +345,7 @@ public class UserImplementation implements UserDAOInterface {
     }
     
     
-    @Override       //Completed: Allows users to search for stories by Title.
+    @Override       //Completed: Allows users to search for Writers by Name.
     public List<Writer> searchByName(String topic) {
         
         conn = DatabaseConnectionManager.getConnection();
@@ -421,7 +421,7 @@ public class UserImplementation implements UserDAOInterface {
     }
     
     
-    @Override
+    @Override       //Completed: Allows users to search for stories by Title.
     public List<Writer> searchByStories(String topic){
         
         conn = DatabaseConnectionManager.getConnection();
@@ -802,17 +802,17 @@ public class UserImplementation implements UserDAOInterface {
     
     
     @Override       //Completed: Checks if the friend being referred is already on the system.
-    public Boolean referFriend(String phoneNumber) {
+    public Boolean referFriend(String email) {
         
         conn = DatabaseConnectionManager.getConnection();
         Boolean exists = null;
         
         try {
             
-            query = "select u.Name from users u where u.PhoneNumber = ?";
+            query = "select u.Name from users u where u.Email = ?";
             
             ps = conn.prepareStatement(query);
-            ps.setString(1, phoneNumber);
+            ps.setString(1, email);
             rs = ps.executeQuery();
             
             if (rs.next()){
@@ -896,7 +896,8 @@ public class UserImplementation implements UserDAOInterface {
             String date1 = String.valueOf(startDate);
             String date2 = String.valueOf(endDate);
             
-            query = "select DISTINCT s.StoryID, s.Title, s.CoverImage, s.AuthorID, s.Likes from stories s where s.DatePublished between ? and ? order by s.Likes desc limit 10";
+            query = "select s.*, concat_ws(\" \", u.Name, u.Surname) from stories s, users u where u.UserID = s.AuthorID and " +
+                    "s.DatePublished between ? and ? order by s.Likes desc limit 10";
             
             ps = conn.prepareStatement(query);
             ps.setDate(1, functionsClass.stringToDate(date1));
@@ -906,25 +907,17 @@ public class UserImplementation implements UserDAOInterface {
             
             while (rs.next()){
                 
-                String imagePath = rs.getString(3);
+                input = new FileInputStream(new File(rs.getString(8)));
                 
-                input = new FileInputStream(new File(imagePath));
-                output = new ByteArrayOutputStream();
-                byte[] buffer = new byte[4096];
-                int bytesRead = -1;
+                String coverImage = functionsClass.encodeBase64(input);
                 
-                while ((bytesRead = input.read(buffer)) != -1) {
-                    
-                    output.write(buffer, 0, bytesRead);
-                    
-                }
+                Story stories = new Story(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(13) , rs.getInt(4),
+                        rs.getInt(5) ,rs.getString(6), rs.getString(7), coverImage, functionsClass.integerToBoolean(rs.getInt(9)),
+                        functionsClass.integerToBoolean(rs.getInt(10)), functionsClass.dateToString(rs.getDate(11)), rs.getInt(12));
                 
-                byte[] imageBytes = output.toByteArray();
-                String image = Base64.getEncoder().encodeToString(imageBytes);
+                weeksTopPicks.add(stories);
                 
-                weeksTopPicks.add(new Story(rs.getInt(1), rs.getString(2), rs.getInt(4), image));
-                
-                bookOfDay = weeksTopPicks.get((int) Math.random()*10);
+                bookOfDay = weeksTopPicks.get((int) Math.random()*weeksTopPicks.size());
                 
             }
             
@@ -1011,6 +1004,79 @@ public class UserImplementation implements UserDAOInterface {
         }
         
         return bookOfDay;
+        
+    }
+    
+    
+    @Override       //Allows a user to reset their password if they've forgotten it.
+    public String forgotPassword(User user, String OTP) {
+        
+        conn = DatabaseConnectionManager.getConnection();
+        
+        try {
+            
+            query = "update users u set u.Password = ? where u.Email = ? and u.PhoneNumber = ?";
+            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, OTP);
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPhoneNumber());
+            ps.executeUpdate();
+            
+            message = "Your password has been set to the OTP, please check your Emails for the OTP.";
+            
+        } catch (SQLException e) {
+            
+            message = "Error sending the OTP, please try again.";
+            Logger.getLogger(UserImplementation.class.getName()).log(Level.FINE, "Error editing personal information.", e);
+            
+        } finally {
+            
+            if (rs!=null){
+                
+                try {
+                    
+                    rs.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (ps!=null){
+                
+                try {
+                    
+                    ps.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (conn!=null){
+                
+                try {
+                    
+                    conn.close();
+                    
+                } catch (SQLException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+        }
+        
+        return message;
         
     }
     

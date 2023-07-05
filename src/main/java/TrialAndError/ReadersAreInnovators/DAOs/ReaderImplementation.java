@@ -818,7 +818,7 @@ public class ReaderImplementation implements ReaderDAOInterface {
         
         try {
             
-            query = "select s.Title, s.CoverImage, concat_ws(\" \", u.Name, u.Surname) as Name from stories s, users u, readandfavorites f where f.StoryID = s.StoryID " +
+            query = "select s.StoryID, s.Title, s.AuthorID, s.CoverImage from stories s, users u, readandfavorites f where f.StoryID = s.StoryID " +
                     "and s.AuthorID = u.UserID and f.IsRead = 1 and f.IsFavorite = 1 and f.UserID = ?";
             
             ps = conn.prepareStatement(query);
@@ -828,7 +828,7 @@ public class ReaderImplementation implements ReaderDAOInterface {
             
             while (rs.next()){
                 
-                String imagePath = rs.getString(2);
+                String imagePath = rs.getString(4);
                 
                 input = new FileInputStream(new File(imagePath));
                 output = new ByteArrayOutputStream();
@@ -844,7 +844,7 @@ public class ReaderImplementation implements ReaderDAOInterface {
                 byte[] imageBytes = output.toByteArray();
                 String image = Base64.getEncoder().encodeToString(imageBytes);
                 
-                readFavoriteStories.add(new Story(rs.getString(1), rs.getString(3), image, imagePath));
+                readFavoriteStories.add(new Story(rs.getInt(1), rs.getString(2), rs.getInt(3), image));
                 
             }
             
@@ -943,7 +943,7 @@ public class ReaderImplementation implements ReaderDAOInterface {
         
         try {
             
-            query = "select s.Title, s.CoverImage, concat_ws(\" \", u.Name, u.Surname) as Name from stories s, users u, readandfavorites f where f.StoryID = s.StoryID " +
+            query = "select s.StoryID, s.Title, s.AuthorID, s.CoverImage from stories s, users u, readandfavorites f where f.StoryID = s.StoryID " +
                     "and s.AuthorID = u.UserID and f.IsRead = 0 and f.IsFavorite = 1 and f.UserID = ?";
             
             ps = conn.prepareStatement(query);
@@ -953,7 +953,7 @@ public class ReaderImplementation implements ReaderDAOInterface {
             
             while (rs.next()){
                 
-                String imagePath = rs.getString(2);
+                String imagePath = rs.getString(4);
                 
                 InputStream input = new FileInputStream(new File(imagePath));
                 ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -969,7 +969,7 @@ public class ReaderImplementation implements ReaderDAOInterface {
                 byte[] imageBytes = output.toByteArray();
                 String image = Base64.getEncoder().encodeToString(imageBytes);
                 
-                readFavoriteStories.add(new Story(rs.getString(1), rs.getString(3), image, imagePath));
+                readFavoriteStories.add(new Story(rs.getInt(1), rs.getString(2), rs.getInt(3), image));
                 
             }
             

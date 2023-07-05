@@ -42,5 +42,7 @@ public interface UserDAOInterface{
     
     Story getBookOfTheDay();
     
+    String forgotPassword(User user, String OTP);
+    
     
 }

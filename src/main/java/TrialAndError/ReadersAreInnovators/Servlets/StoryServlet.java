@@ -246,8 +246,9 @@ public class StoryServlet extends HttpServlet {
                 story=service.getBookOfTheDay();
                 writer=new Writer(story.getAuthorID());
                 
-                  request.setAttribute("storyDetails",story);
-                request.setAttribute("chosenWriter", service.getAuthor(writer));
+                request.setAttribute("storyDetails",story);
+                request.setAttribute("chosenWriter", imp.getAuthor(writer));
+                request.setAttribute("comments",imp.getComments(story));
                 dispatcher= request.getRequestDispatcher("StoryDetails.jsp");
                 dispatcher.forward(request,response);
                 break;

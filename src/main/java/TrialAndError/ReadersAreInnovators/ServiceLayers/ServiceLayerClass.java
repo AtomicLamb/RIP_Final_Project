@@ -18,6 +18,7 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 /**
@@ -390,7 +391,7 @@ public class ServiceLayerClass implements ServiceLayer_Interface {
     }
     
     @Override
-    public List<Genre> getPendingStoryGenres(StoryApplication storyApplication){
+    public List<Genre> getPendingStoryGenres(StoryApplication storyApplication) {
         
         return genresImp.getPendingStoryGenres(storyApplication);
         
@@ -707,7 +708,7 @@ public class ServiceLayerClass implements ServiceLayer_Interface {
         subject = "Readers Are Innovators referral from: " + name + ".";
         text = "You have been referred to the Readers Are Innovators Program by: " + name + ". \n " +
                 "Please click the link below to view the Story of the Day. \n\n" +
-                "TODO Link...";
+                "http://localhost:8080/Trial_and_Error_Readers_are_Innovators-1.0-SNAPSHOT/StoryServlet?submit=storyOfTheDay";
         
         email.sendEmail(userEmail, subject, text);
         
@@ -723,9 +724,30 @@ public class ServiceLayerClass implements ServiceLayer_Interface {
     }
     
     @Override
-    public String forgotPassword(String email,String number) {
+    public String forgotPassword(User user) {
         
-        return null;
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+        String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        
+        for (int i = 0; i < 12; i++) {
+            
+            int randomIndex = random.nextInt(chars.length());
+            char randomChar = chars.charAt(randomIndex);
+            sb.append(randomChar);
+            
+        }
+        
+        String OTP = sb.toString();
+        
+        subject = "Readers are Innovators OTP.";
+        text = "You have requested a password reset. \n " +
+                "Please log into your account using your Email and the OTP below as your password, then proceed to your Profile page to update your password. \n\n" +
+                "Your OTP is: " + OTP;
+        
+        email.sendEmail(user.getEmail(), subject, text);
+        
+        return userImp.forgotPassword(user, OTP);
         
     }
     

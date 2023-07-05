@@ -60,8 +60,9 @@
                 <%} else{%>
                 <input type="hidden" name="genre3" value="null">
                 <%}%>
-                <button class="block" type="submit" name="submit" value="Accept">Accept Story</button><br><br>
-                <button class="block" type="submit" name="submit" value="Deny">Deny Story</button><br><br>
+                <button class="block" type="submit" name="submit" value="ACCEPT">ACCEPT STORY</button><br><br>
+                <button class="block" type="submit" name="submit" value="DENY">DENY STORY</button><br><br>
+                <button class="block" type="submit" name="submit" value="BACK TO REVIEW PENDING STORIES">BACK TO REVIEW PENDING STORIES</button><br><br>
             </form>
         </div>
     </body>

@@ -7,6 +7,7 @@ package TrialAndError.ReadersAreInnovators.Servlets;
 
 
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
+import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 import TrialAndError.ReadersAreInnovators.RESTService.ImpService;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.ServiceLayerClass;
@@ -86,8 +87,11 @@ public class HomePageServlet extends HttpServlet {
                 dispatcher.forward(request,response);
                 break;
             case "send":
-                request.setAttribute("message",service.forgotPassword(request.getParameter("email"),request.getParameter("number")));
-                dispatcher=request.getRequestDispatcher("OneTimeLogin.jsp");
+                User user=new User();
+                user.setEmail(request.getParameter("email"));
+                user.setPhoneNumber(request.getParameter("number"));
+                request.setAttribute("message",service.forgotPassword(user));
+                dispatcher=request.getRequestDispatcher("index.jsp");
                 dispatcher.forward(request,response);
                 break;
                 

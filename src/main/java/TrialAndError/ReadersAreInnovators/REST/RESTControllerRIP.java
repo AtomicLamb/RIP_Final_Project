@@ -193,14 +193,6 @@ public class RESTControllerRIP {
     {
         return Response.ok().entity(service.emailVerification(email)).build();
     }
-    @Path("/getMostViewedStories")
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getMostViewedStories(Analytics analytics)
-    {
-        return Response.ok().entity(service.getMostViewedStories(analytics)).build();
-    }
     @Path("/selectGenre")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -413,9 +405,9 @@ public class RESTControllerRIP {
     {
         return Response.ok().entity(service.getAllDrafts(writer)).build();
     }
-    //searchByTitle
     @Path("/searchByTitle")
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response searchByTitle(String topic)
     {
@@ -449,4 +441,46 @@ public class RESTControllerRIP {
    {
        return Response.ok().entity(service.searchByStories(topic)).build();
    }
+    @Path("/getMostViewedStories")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMostViewedStories(Analytics analytics)
+    {
+        return Response.ok().entity(service.getMostViewedStories(analytics)).build();
+    }
+    @Path("/getHighestRatedStories")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getHighestRatedStories(Analytics analytics)
+    {
+        return Response.ok().entity(service.getHighestRatedStories(analytics)).build();
+    }
+    @Path("/getMostLikedStories")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMostLikedStories(Analytics analytics)
+    {
+        return Response.ok().entity(service.getMostLikedStories(analytics)).build();
+    }
+    @Path("/getTopGenres")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getTopGenres(Analytics analytics)
+    {
+        return Response.ok().entity(service.getTopGenres(analytics)).build();
+    }
+    @Path("/getTopWriters")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getTopWriters(Analytics analytics)
+    {
+        return Response.ok().entity(service.getTopWriters(analytics)).build();
+    }
+    @Path("/getTopEditors")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getTopEditors(Analytics analytics)
+    {
+        return Response.ok().entity(service.getTopWriters(analytics)).build();
+    }
 }

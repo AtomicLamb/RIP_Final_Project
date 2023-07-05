@@ -119,32 +119,32 @@ public class analyticalServlet extends HttpServlet {
                      switch (analyticChoice)
                      {
                          case"MOST VIEWED BOOKS":
-                            request.setAttribute("message", service.getMostViewedStories(new Analytics(dataChoice,startDateString,endDateString)));
+                            request.setAttribute("message", imp.getMostViewedStories(new Analytics(dataChoice,startDateString,endDateString)));
                             var dispatcher = request.getRequestDispatcher("MostViewedBooks.jsp");
                             dispatcher.forward(request, response);
                             break;
                          case"MOST RATED BOOKS":
-                             request.setAttribute("message", service.getHighestRatedStories(new Analytics(dataChoice,startDateString,endDateString)));
+                             request.setAttribute("message", imp.getHighestRatedStories(new Analytics(dataChoice,startDateString,endDateString)));
                              dispatcher = request.getRequestDispatcher("MostRatedBooks.jsp");
                              dispatcher.forward(request, response);
                              break;
                          case"MOST LIKED BOOKS":
-                             request.setAttribute("message", service.getMostLikedStories(new Analytics(dataChoice,startDateString,endDateString)));
+                             request.setAttribute("message", imp.getMostLikedStories(new Analytics(dataChoice,startDateString,endDateString)));
                              dispatcher = request.getRequestDispatcher("MostLikedBooks.jsp");
                              dispatcher.forward(request, response);
                              break;
                          case"TOP CATEGORIES":
-                             request.setAttribute("message", service.getTopGenres(new Analytics(dataChoice,startDateString,endDateString)));
+                             request.setAttribute("message", imp.getTopGenres(new Analytics(dataChoice,startDateString,endDateString)));
                              dispatcher = request.getRequestDispatcher("TopCategories.jsp");
                              dispatcher.forward(request, response);
                              break;
                          case"TOP WRITERS":
-                             request.setAttribute("message", service.getTopWriters(new Analytics(dataChoice,startDateString,endDateString)));
+                             request.setAttribute("message", imp.getTopWriters(new Analytics(dataChoice,startDateString,endDateString)));
                              dispatcher = request.getRequestDispatcher("TopWriters.jsp");
                              dispatcher.forward(request, response);
                              break;
                          case"TOP EDITORS":
-                             request.setAttribute("message", service.getTopEditors(new Analytics(dataChoice,startDateString,endDateString)));
+                             request.setAttribute("message", imp.getTopEditors(new Analytics(dataChoice,startDateString,endDateString)));
                              dispatcher = request.getRequestDispatcher("TopEditors.jsp");
                              dispatcher.forward(request, response);
                              break;    

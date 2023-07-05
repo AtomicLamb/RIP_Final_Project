@@ -10,66 +10,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="178285d8-becc-4c7f-b082-ee11f211687c" name="Changes" comment="Wednesday @ Home Analytics Complete....">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/swiper.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Default Genre Image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/image59.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/image60.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/image61.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/Default Genre Image.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/ReaderImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/ReaderImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/StoryImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/StoryImplementation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/UserDAOInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/UserDAOInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/UserImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/DAOs/UserImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/REST/RESTControllerRIP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/REST/RESTControllerRIP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/DatabaseConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/DatabaseConnectionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayerClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayerClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayer_Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayer_Interface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Testing/JUnitTesting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Testing/JUnitTesting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/AuthorDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/AuthorDetails.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/HomePage.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/HomePage.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Profile.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Profile.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/ReviewPendingWriters.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/ReviewPendingWriters.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Search.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Search.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/StoryBody.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/StoryBody.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/StoryDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/StoryDetails.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style2.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/images/banner.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/images/homePageBanner.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/StoryServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/StoryServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/OneTimeLogin.jsp" beforeDir="false" />
     </list>
     <list id="b92f9f83-2c41-4579-87a7-908e91cffa2c" name="Changes by matth" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/changeGenres.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/REST/RESTControllerRIP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/REST/RESTControllerRIP.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/RESTService/ImpService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/RESTService/ImpService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/HomePageServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/HomePageServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/StoryServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/StoryServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/adminEditorServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/adminEditorServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/analyticalServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/analyticalServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/editPersonalInformationServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/editPersonalInformationServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/editorServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/editorServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/writerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/writerServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/AddEditor.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/AddEditor.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/AddGenre.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/AddGenre.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/AnalyticChoice.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/AnalyticChoice.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Editors.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Editors.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/HomePage.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/HomePage.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/RemoveEditor.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/RemoveEditor.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/RemoveGenre.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/RemoveGenre.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/ReviewPendingWriters.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/ReviewPendingWriters.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-grid.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-grid.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style2.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style.css" afterDir="false" />
-    </list>
-    <list id="6bdd2f95-d83b-403b-9a57-8821f455817f" name="Changes by Rhulani" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/OneTimeLogin.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/StoryOfTheDayDetailsPage.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/Default User Icon.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayerClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayerClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayer_Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayer_Interface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/HomePageServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/HomePageServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/StoryServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/StoryServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/controllerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/controllerServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/ForgotPassword.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/ForgotPassword.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/HomePage.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/HomePage.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/Profile.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Profile.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/ReferFriend.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/ReferFriend.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Search.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Search.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/ReviewPendingStories.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/ReviewPendingStories.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/StoryBody.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/StoryBody.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/StoryDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/StoryDetails.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/applyForWriter.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/applyForWriter.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/editPersonalData.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/editPersonalData.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/reviewPendingStory.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/reviewPendingStory.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style2.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style2.css" afterDir="false" />
+    </list>
+    <list id="6bdd2f95-d83b-403b-9a57-8821f455817f" name="Changes by Rhulani" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/HomePageServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/HomePageServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/controllerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/controllerServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/StoryDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/StoryDetails.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/StoryOfTheDayDetailsPage.jsp" beforeDir="false" />
     </list>
     <list id="95788257-61ca-4acb-bf11-afb3c55b7e29" name="Changes by user" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -92,235 +67,19 @@
     <setting file="jar://$MAVEN_REPOSITORY$/jakarta/servlet/jakarta.servlet-api/5.0.0/jakarta.servlet-api-5.0.0-sources.jar!/jakarta/servlet/http/HttpServlet.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/main/webapp/Search.jsp">
-      <ranges>
-        <range start1="0" end1="1" start2="0" end2="0" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="28" end1="29" start2="27" end2="28" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="41" end1="41" start2="40" end2="41" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="50" end1="50" start2="50" end2="51" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="70" end1="71" start2="71" end2="72" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="123" end1="123" start2="124" end2="128" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="124" end1="128" start2="129" end2="131" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="132" end1="132" start2="135" end2="136" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="133" end1="134" start2="137" end2="141" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="135" end1="139" start2="142" end2="164" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/main/webapp/StoryBody.jsp">
-      <ranges>
-        <range start1="20" end1="21" start2="20" end2="21" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="47" end1="48" start2="47" end2="50" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/main/webapp/style2.css">
-      <ranges>
-        <range start1="0" end1="1" start2="0" end2="1" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="15" end1="26" start2="15" end2="27" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="212" end1="217" start2="213" end2="213" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="255" end1="264" start2="251" end2="251" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="273" end1="275" start2="260" end2="261" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="287" end1="288" start2="273" end2="274" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="303" end1="304" start2="289" end2="290" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="495" end1="496" start2="481" end2="482" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="1081" end1="1081" start2="1067" end2="1079" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/REST/RESTControllerRIP.java">
-      <ranges>
-        <range start1="19" end1="19" start2="19" end2="21" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="323" end1="325" start2="325" end2="327" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="326" end1="326" start2="328" end2="329" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="327" end1="327" start2="330" end2="331" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="355" end1="355" start2="359" end2="451" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/main/webapp/ReviewPendingWriters.jsp">
-      <ranges>
-        <range start1="0" end1="0" start2="0" end2="5" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="1" end1="10" start2="6" end2="7" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="12" end1="12" start2="9" end2="10" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="18" end1="18" start2="16" end2="17" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="20" end1="22" start2="19" end2="20" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="23" end1="25" start2="21" end2="23" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="27" end1="28" start2="25" end2="35" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="30" end1="31" start2="37" end2="38" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="35" end1="36" start2="42" end2="43" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="38" end1="39" start2="45" end2="46" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="41" end1="42" start2="48" end2="49" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/HomePageServlet.java">
-      <ranges>
-        <range start1="10" end1="10" start2="10" end2="11" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="41" end1="42" start2="42" end2="42" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="43" end1="52" start2="43" end2="45" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="53" end1="53" start2="46" end2="51" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="54" end1="64" start2="52" end2="52" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="68" end1="70" start2="56" end2="56" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="71" end1="81" start2="57" end2="58" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="88" end1="93" start2="65" end2="75" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="98" end1="98" start2="80" end2="96" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="100" end1="111" start2="98" end2="98" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/main/webapp/Profile.jsp">
-      <ranges>
-        <range start1="28" end1="29" start2="28" end2="29" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="34" end1="34" start2="34" end2="35" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="79" end1="80" start2="80" end2="81" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="83" end1="83" start2="84" end2="85" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="84" end1="85" start2="86" end2="90" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="86" end1="90" start2="91" end2="98" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="92" end1="93" start2="100" end2="102" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="94" end1="101" start2="103" end2="116" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="103" end1="104" start2="118" end2="120" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="105" end1="108" start2="121" end2="130" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="109" end1="124" start2="131" end2="146" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/main/webapp/HomePage.jsp">
-      <ranges>
-        <range start1="27" end1="28" start2="27" end2="28" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="84" end1="84" start2="84" end2="87" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="89" end1="90" start2="92" end2="93" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="94" end1="95" start2="97" end2="98" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="97" end1="98" start2="100" end2="103" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="118" end1="119" start2="123" end2="124" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="122" end1="123" start2="127" end2="128" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="125" end1="127" start2="130" end2="134" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="129" end1="130" start2="136" end2="137" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="137" end1="139" start2="144" end2="144" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="141" end1="143" start2="146" end2="148" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="147" end1="148" start2="152" end2="153" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="152" end1="153" start2="157" end2="158" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="156" end1="157" start2="161" end2="162" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="163" end1="164" start2="168" end2="169" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="166" end1="167" start2="171" end2="172" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="172" end1="173" start2="177" end2="178" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="177" end1="178" start2="182" end2="183" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="181" end1="183" start2="186" end2="187" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="190" end1="191" start2="194" end2="195" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="193" end1="194" start2="197" end2="198" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="198" end1="199" start2="202" end2="203" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="203" end1="204" start2="207" end2="208" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="208" end1="209" start2="212" end2="213" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="221" end1="222" start2="225" end2="226" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="224" end1="225" start2="228" end2="229" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayerClass.java">
-      <ranges>
-        <range start1="24" end1="25" start2="24" end2="25" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="32" end1="32" start2="32" end2="33" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="47" end1="47" start2="48" end2="49" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="62" end1="63" start2="64" end2="466" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="64" end1="64" start2="467" end2="468" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="66" end1="68" start2="470" end2="473" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="69" end1="69" start2="474" end2="475" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="70" end1="70" start2="476" end2="497" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="72" end1="73" start2="499" end2="501" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="74" end1="74" start2="502" end2="503" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="77" end1="79" start2="506" end2="542" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="82" end1="84" start2="545" end2="549" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="85" end1="86" start2="550" end2="550" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="88" end1="89" start2="552" end2="553" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="90" end1="91" start2="554" end2="555" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="93" end1="94" start2="557" end2="557" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="96" end1="97" start2="559" end2="560" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="98" end1="103" start2="561" end2="563" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="104" end1="105" start2="564" end2="564" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="107" end1="110" start2="566" end2="573" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="112" end1="113" start2="575" end2="575" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="115" end1="116" start2="577" end2="578" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="117" end1="118" start2="579" end2="580" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="120" end1="121" start2="582" end2="582" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="123" end1="124" start2="584" end2="585" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="125" end1="126" start2="586" end2="587" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="128" end1="129" start2="589" end2="589" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="131" end1="132" start2="591" end2="592" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="133" end1="134" start2="593" end2="594" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="136" end1="137" start2="596" end2="596" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="139" end1="140" start2="598" end2="605" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="141" end1="142" start2="606" end2="607" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="145" end1="145" start2="610" end2="613" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="147" end1="148" start2="615" end2="616" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="149" end1="150" start2="617" end2="618" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="152" end1="153" start2="620" end2="620" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="155" end1="156" start2="622" end2="623" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="157" end1="158" start2="624" end2="625" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="160" end1="161" start2="627" end2="627" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="163" end1="164" start2="629" end2="630" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="165" end1="166" start2="631" end2="632" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="168" end1="169" start2="634" end2="634" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="171" end1="172" start2="636" end2="637" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="173" end1="174" start2="638" end2="639" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="176" end1="177" start2="641" end2="641" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="178" end1="180" start2="642" end2="644" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="181" end1="182" start2="645" end2="646" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="184" end1="185" start2="648" end2="648" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="187" end1="188" start2="650" end2="651" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="189" end1="190" start2="652" end2="653" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="192" end1="400" start2="655" end2="655" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="413" end1="414" start2="668" end2="669" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="415" end1="416" start2="670" end2="671" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="417" end1="418" start2="672" end2="673" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="422" end1="423" start2="677" end2="677" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="430" end1="488" start2="684" end2="684" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="489" end1="490" start2="685" end2="686" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="491" end1="492" start2="687" end2="688" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="494" end1="515" start2="690" end2="690" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="517" end1="518" start2="692" end2="695" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="519" end1="529" start2="696" end2="716" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="531" end1="532" start2="718" end2="719" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="533" end1="534" start2="720" end2="721" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="537" end1="538" start2="724" end2="724" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="539" end1="548" start2="725" end2="726" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="549" end1="550" start2="727" end2="728" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="554" end1="561" start2="732" end2="734" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="577" end1="578" start2="750" end2="751" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="579" end1="579" start2="752" end2="753" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="585" end1="586" start2="759" end2="759" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="593" end1="593" start2="766" end2="779" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="601" end1="609" start2="787" end2="787" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="617" end1="639" start2="795" end2="797" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="651" end1="729" start2="809" end2="809" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/ServiceLayers/ServiceLayer_Interface.java">
-      <ranges>
-        <range start1="30" end1="30" start2="30" end2="31" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="39" end1="39" start2="40" end2="41" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="60" end1="60" start2="62" end2="63" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="76" end1="76" start2="79" end2="80" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="98" end1="98" start2="102" end2="103" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="125" end1="125" start2="130" end2="131" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="137" end1="137" start2="143" end2="144" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="160" end1="160" start2="167" end2="168" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="188" end1="188" start2="196" end2="197" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="190" end1="191" start2="199" end2="208" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="200" end1="201" start2="217" end2="218" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="204" end1="204" start2="221" end2="222" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="220" end1="220" start2="238" end2="239" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="224" end1="224" start2="243" end2="245" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-      </ranges>
-    </file>
     <file path="$PROJECT_DIR$/src/main/webapp/StoryDetails.jsp">
       <ranges>
-        <range start1="23" end1="24" start2="23" end2="24" changelist="178285d8-becc-4c7f-b082-ee11f211687c" />
-        <range start1="55" end1="56" start2="55" end2="58" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-        <range start1="74" end1="75" start2="76" end2="77" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/main/java/TrialAndError/ReadersAreInnovators/Servlets/StoryServlet.java">
-      <ranges>
-        <range start1="79" end1="80" start2="79" end2="80" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="92" end1="93" start2="92" end2="93" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="94" end1="95" start2="94" end2="95" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="124" end1="125" start2="124" end2="125" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="168" end1="169" start2="168" end2="169" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="196" end1="197" start2="196" end2="197" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="221" end1="222" start2="221" end2="222" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
-        <range start1="244" end1="244" start2="244" end2="253" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
+        <range start1="15" end1="15" start2="15" end2="16" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
+        <range start1="16" end1="17" start2="17" end2="18" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
+        <range start1="61" end1="62" start2="62" end2="62" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
+        <range start1="65" end1="66" start2="65" end2="70" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
+        <range start1="72" end1="74" start2="76" end2="77" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
+        <range start1="75" end1="76" start2="78" end2="79" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
+        <range start1="113" end1="113" start2="116" end2="117" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
+        <range start1="122" end1="123" start2="126" end2="127" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
+        <range start1="124" end1="124" start2="128" end2="129" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
+        <range start1="130" end1="130" start2="135" end2="139" changelist="6bdd2f95-d83b-403b-9a57-8821f455817f" />
+        <range start1="131" end1="136" start2="140" end2="141" changelist="b92f9f83-2c41-4579-87a7-908e91cffa2c" />
       </ranges>
     </file>
   </component>
@@ -352,7 +111,7 @@
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "deletionFromPopupRequiresConfirmation": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/TKS/IdeaProjects/Trial and Error - Readers are Innovators/src/main/webapp",
+    "last_opened_file_path": "C:/Users/TKS/IdeaProjects/Trial and Error - Readers are Innovators/src/main/resources/images",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -367,15 +126,15 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\resources\images" />
       <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\webapp" />
       <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\webapp\images" />
       <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\java\TrialAndError\ReadersAreInnovators\ServiceLayers" />
       <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\java\TrialAndError\ReadersAreInnovators\Servlets" />
-      <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\webapp" />
       <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\webapp\images" />
+      <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\webapp" />
       <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\webapp\WEB-INF" />
       <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\resources\images" />
       <recent name="C:\Users\TKS\IdeaProjects\Trial and Error - Readers are Innovators\src\main\java\TrialAndError\ReadersAreInnovators\Servlets" />
@@ -592,7 +351,8 @@
       <workItem from="1688364663059" duration="2069000" />
       <workItem from="1688367089118" duration="20261000" />
       <workItem from="1688393558939" duration="29723000" />
-      <workItem from="1688451869384" duration="26057000" />
+      <workItem from="1688451869384" duration="26132000" />
+      <workItem from="1688491664701" duration="12941000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit: No Error mostly ok.">
       <created>1687765315546</created>

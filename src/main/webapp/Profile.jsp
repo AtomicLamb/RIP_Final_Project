@@ -43,13 +43,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Personal Data Page</title>
     </head>
-    <body>
+    <body style="background-color: #007791">
         <!-- header section start-->
         <%List<Story> unreads=(List<Story>) request.getAttribute("unreadFavourites");%>
         <%List<Story>reads=(List<Story>) request.getAttribute("readFavourites");%>
         <%List<Genre> genres=(List<Genre>) request.getAttribute("userGenres");%>
         <%List<Writer> followedAuthors=(List<Writer>) request.getAttribute("followedAuthors");%>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -57,93 +57,95 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <form action="editPersonalInformationServlet" method="get">
-                        <input class="nav-link" type="submit" name="submit" value="HOME">
-                        <input class="nav-link" type="submit" name="submit" value="EDIT PERSONAL INFORMATION">
+                        <input style="border: none;background-color: #343a40; color: #007791" class="nav-link" type="submit" name="submit" value="HOME">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="editPersonalInformationServlet" method="get">
+                        <input style="border: none;background-color: #343a40; color: #007791" class="nav-link" type="submit" name="submit" value="EDIT PERSONAL INFORMATION">
                     </form>
                 </li>
             </ul>
         </div>
-         <div class="login_text"><a href="index.jsp">LOGIN HERE</a></div>
+        <form action="controllerServlet" method="get">
+            <div class="login_text">
+                <input style="border: none;background-color: #343a40; color: #007791" class="nav-link" type="submit" name="submit" value="SIGN OUT" formnovalidate>
+            </div>
+        </form>
     </nav>
 	<!-- header section start-->
 	<!-- banner section start-->
         <div class="banner_section layout_padding">
             <div class="container">
-                    <h1 class="best_taital" style="color:black">WELCOME TO YOUR PERSONAL PAGE</h1>
+                    <h1 class="best_taital" style="color:#007791">REVIEW PENDING STORIES</h1>
                 <%
                     String message = (String) request.getAttribute("message");
                     if(message!=null){
                 %>
                 <p><strong style ="color:red;"><%=message %></strong></p>
                 <%}%>
-                      
-                
 		</div>  
 	</div>
-        <div>              <h1>Followed Authors</h1>
+        <div><br><br>             
+                        <h1 class="jobs_text"  style="text-align: center">Followed Authors:</h1> 
+                         <div class="scrollmenu" style="margin: auto; width: 90%">
                              <%if(!followedAuthors.isEmpty()){%>
-                            <div class="scrollmenu" style="margin: auto; width: 800px">
-                             <% for(Writer writer:followedAuthors){%>
+                              <% for(Writer writer:followedAuthors){%>
                            <a href="StoryServlet?submit=AuthorDetails&authorId=<%=writer.getUserID()%>">
                          <h1 style="color: white;"><%=writer.getName()%> <%=writer.getSurname()%></h1>
-                        <img src="images/Default%20User%20Icon.jpg" alt="<%=writer.getName()%> <%=writer.getSurname()%>" style="width:400px;height:400px;" >
+                        <img src="images/Default%20User%20Icon.jpg" alt="<%=writer.getName()%> <%=writer.getSurname()%>" style="width:300px;height:300px;" >
                              </a>
                              <%}%>
                                 <%}%>
                                 <%if(followedAuthors.isEmpty()){%>
-                                <p style="color: white">No Authors Currently Being Followed</p>
+                                <p style="text-align: center">No Authors Currently Being Followed</p>
                                 <%}%>
-                             </div>
-                             
-                             
-                             
-                             
-                                 <h1>Favourite unread books</h1> 
-                      <div class="scrollmenu" style="margin: auto; width: 800px">
+                             </div><br><br>
+            
+                                 <h1 class="jobs_text"  style="text-align: center">Favourite Unread Stories:</h1> 
+                      <div class="scrollmenu" style="margin: auto; width: 90%">
                             <% if(!unreads.isEmpty()){%>
                               <% for(Story story:unreads){%>
                              <a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>&authorId=<%=story.getAuthorID()%>">
                            <h1 style="color: white;"><%=story.getTitle()%></h1>
-                              <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" >
+                              <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:300px;height:400px;" >
                                </a>
                              <%}%>
                                 <%}%>  
                                    <%if(unreads.isEmpty()){%>
-                                   <p style="color: white">No unread favourite books</p>
+                                   <p style="text-align: center">No unread favourite stories</p>
                                    <%}%>   
-                             </div>
-                             
-                             
-                            
-                             
-                             <h1>Favourite read books</h1>  
-                      <div class="scrollmenu" style="margin: auto; width: 800px">
+                             </div><br><br>
+            
+                             <h1 class="jobs_text"  style="text-align: center">Favourite Read Stories:</h1>  
+                      <div class="scrollmenu" style="margin: auto; width: 90%">
                              <%if(!reads.isEmpty()){%>
                              <% for(Story story:reads){%>
                            <a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>&authorId=<%=story.getAuthorID()%>">
-                            <h1 style="color: white;"><%=story.getTitle()%></h1>
-                               <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" >
+                            <h1 style="color: white;"><%=story.getTitle()%> </h1>
+                               <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:300px;height:400px;" >
                                  </a>
                                 <%}%>
                                 <%}%>
                                 <%if(reads.isEmpty()){%>
-                                <p style="color: white">No read favourite books</p>
+                                <p style="text-align: center">No read favourite stories</p>
                                 <%}%>
-                              </div>
-                                
-                                
-                                                     <h1>Selected genres</h1> 
-                                                          <%if(!genres.isEmpty()){%>
-                                                            <% for(Genre genre:genres){%>
-                                                             <p><%=genre.getGenre()%></p>
-                                                          <%}%>
-                                                          <%}%>
-                                                          <%if(genres.isEmpty()){%>
-                                                         <div class="scrollmenu" style="margin: auto; width: 800px">
-                                                          <p>No selected genres</p>
-                                                          </div>
-                                                          <%}%> 
-                                                          </div>
-                   
+                              </div><br><br>
+            
+            <h1 class="jobs_text"  style="text-align: center">Selected Genres:</h1> 
+            <div class="scrollmenu" style="margin: auto; width: 90%">
+            <%if(!genres.isEmpty()){%>
+            <% for(Genre genre:genres){%>
+                <a href="StoryServlet?submit=storyDetails&genreId=<%=genre.getGenreID()%>"> 
+                <h1 style="color: white;"><%=genre.getGenre()%></h1>
+                <img src="images/Default%20Genre%20Image.png" alt="<%=genre.getGenre()%>" style="width:300px;height:400px;" >
+                </a>
+            <%}%>
+            <%}%>
+            <%if(genres.isEmpty()){%>
+              <p style="text-align: center">No selected genres</p>
+             <%}%> 
+            </div>
+        </div><br><br>
     </body>
 </html>

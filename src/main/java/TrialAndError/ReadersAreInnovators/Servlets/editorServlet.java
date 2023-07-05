@@ -126,7 +126,7 @@ private final FunctionsClass functionsClass = new FunctionsClass();
              case"REVOKE WRITER PRIVILEGE":
                  revokeWriterPrivileges(request,response);
                  break;
-             case"Accept":
+             case"ACCEPT":
                  title = request.getParameter("storyTitle");
                  authorId = Integer.valueOf(request.getParameter("authorId"));
                  
@@ -158,7 +158,7 @@ private final FunctionsClass functionsClass = new FunctionsClass();
                  dispacther.forward(request,response);
                  
                  break;
-             case"Deny":
+             case"DENY":
                  request.setAttribute("message",imp.removePendingStory(new StoryApplication(Integer.valueOf(request.getParameter("pendingstoryId")))));
                  dispacther= request.getRequestDispatcher("Editors.jsp");
                  dispacther.forward(request,response);
@@ -172,6 +172,13 @@ private final FunctionsClass functionsClass = new FunctionsClass();
              case"Submit Genres":
                  selectPendingStoryGenre(request,response);
                  break;
+             case"BACK TO REVIEW PENDING STORIES ":
+                 List<StoryApplication>pendingStories=imp.viewPendingStories();
+                 request.setAttribute("pendingStories",pendingStories);
+                 dispacther =  request.getRequestDispatcher("ReviewPendingStories.jsp");
+                 dispacther.forward(request, response);
+                 break;    
+                
          }
     }
      public void viewWriters(HttpServletRequest request, HttpServletResponse response)
