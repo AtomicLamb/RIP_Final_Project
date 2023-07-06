@@ -145,12 +145,16 @@ public class StoryServlet extends HttpServlet {
         return user;
     }
     public String rateStory(HttpServletRequest request){
-        
-        if(imp.checkRatingExists(new Rating(getUserSessionJustId(request).getUserID(),Integer.valueOf(request.getParameter("storyId")),Integer.valueOf(request.getParameter("rating"))))){
-             return imp.changeRating(new Rating(getUserSessionJustId(request).getUserID(),Integer.valueOf(request.getParameter("storyId")),Integer.valueOf(request.getParameter("rating"))));
+        if (request.getParameter("rating") != null) {
+            
+            if (imp.checkRatingExists(new Rating(getUserSessionJustId(request).getUserID(), Integer.valueOf(request.getParameter("storyId")), Integer.valueOf(request.getParameter("rating"))))) {
+                return imp.changeRating(new Rating(getUserSessionJustId(request).getUserID(), Integer.valueOf(request.getParameter("storyId")), Integer.valueOf(request.getParameter("rating"))));
+            } else {
+                return imp.rateStory(new Rating(getUserSessionJustId(request).getUserID(), Integer.valueOf(request.getParameter("storyId")), Integer.valueOf(request.getParameter("rating"))));
+            }
         }
-       else {
-          return imp.rateStory(new Rating(getUserSessionJustId(request).getUserID(),Integer.valueOf(request.getParameter("storyId")),Integer.valueOf(request.getParameter("rating"))));
+        else {
+            return "Please click a rating";
         }
             
     }
@@ -234,9 +238,7 @@ public class StoryServlet extends HttpServlet {
             case"like":
                 response.sendRedirect("postResultServlet?submit=like&storyId="+request.getParameter("storyId")+"&likeMessage="+likeOrUnlike(request));
                 break;
-            case"unlike":
-                response.sendRedirect("postResultServlet?submit=unlike&storyId="+request.getParameter("storyId")+"&unlikeMessage="+unLikeStory(request));
-                break;
+            
             case "storyOfTheDay":
                 story=service.getBookOfTheDay();
                 writer=new Writer(story.getAuthorID());
@@ -304,9 +306,7 @@ public class StoryServlet extends HttpServlet {
             case"like":
                 response.sendRedirect("postResultServlet?submit=like&storyId="+request.getParameter("storyId")+"&like="+followAuthor(request));
                 break;
-            case"unlike":
-                response.sendRedirect("postResultServlet?submit=unlike&storyId="+request.getParameter("storyId")+"&unlikeMessage="+unLikeStory(request));
-                break;
+            
         }
     }
     

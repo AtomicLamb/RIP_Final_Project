@@ -33,7 +33,8 @@ public class WriterImplementation implements WriterDAOInterface{
     private String query;
     private String message;
     private byte[] buffer;
-    private InputStream inputStream;
+    private InputStream input = null;
+    private ByteArrayOutputStream output = null;
     FunctionsClass functionsClass = new FunctionsClass();
     
     
@@ -60,8 +61,8 @@ public class WriterImplementation implements WriterDAOInterface{
             
             String imagePath = rs.getString(6);
             
-            InputStream input = new FileInputStream(new File(imagePath));
-            ByteArrayOutputStream output = new ByteArrayOutputStream();
+            input = new FileInputStream(new File(imagePath));
+            output = new ByteArrayOutputStream();
             byte[] buffer = new byte[4096];
             int bytesRead = -1;
             
@@ -86,6 +87,34 @@ public class WriterImplementation implements WriterDAOInterface{
             throw new RuntimeException(e);
             
         } finally {
+            
+            if (input!=null){
+                
+                try {
+                    
+                    input.close();
+                    
+                } catch (IOException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (output!=null){
+                
+                try {
+                    
+                    output.close();
+                    
+                } catch (IOException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
             
             if (rs!=null){
                 
@@ -152,18 +181,20 @@ public class WriterImplementation implements WriterDAOInterface{
             
             while (rs.next()) {
                 
-                inputStream = rs.getBinaryStream(6);
-                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                buffer = new byte[4096];
+                String imagePath = rs.getString(6);
+                
+                input = new FileInputStream(new File(imagePath));
+                output = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
                 int bytesRead = -1;
                 
-                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                while ((bytesRead = input.read(buffer)) != -1) {
                     
-                    outputStream.write(buffer, 0, bytesRead);
+                    output.write(buffer, 0, bytesRead);
                     
                 }
                 
-                byte[] imageBytes = outputStream.toByteArray();
+                byte[] imageBytes = output.toByteArray();
                 String image = Base64.getEncoder().encodeToString(imageBytes);
                 
                 userDrafts.add(new Story(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5),
@@ -181,11 +212,25 @@ public class WriterImplementation implements WriterDAOInterface{
             
         } finally {
             
-            if (inputStream!=null){
+            if (input!=null){
                 
                 try {
                     
-                    inputStream.close();
+                    input.close();
+                    
+                } catch (IOException e) {
+                    
+                    throw new RuntimeException(e);
+                    
+                }
+                
+            }
+            
+            if (output!=null){
+                
+                try {
+                    
+                    output.close();
                     
                 } catch (IOException e) {
                     

@@ -61,8 +61,16 @@ public class controllerServlet extends HttpServlet {
                 break;
                case"CONTINUE TO HOMEPAGE":
                    Integer num = 0;
+                   
+                   session = request.getSession(true);
+                   
+                   
+                   session.setAttribute("UserID", 0);
+                   session.setAttribute("Name", "Guest");
+                   session.setAttribute("Surname", "User");
+                   session.setAttribute("UserTypeID", 0);
+                   
                    request.setAttribute("message", num);
-                   session= request.getSession(false);
                     List<Story>topWeekPicksStories=imp.getWeeksTopPicks();
                    List<Story>recommendedBooks=imp.getRecommendedBooks();
                    request.setAttribute("recommendedBooks",recommendedBooks);

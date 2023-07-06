@@ -651,6 +651,10 @@ public class JUnitTesting {
     public void likeStoryTest(){
 
         //TODO
+        User user = new User(3);
+        Story story = new Story(8304);
+        
+        System.out.println(storyImp.likeStory(story,user));
 
     }
 

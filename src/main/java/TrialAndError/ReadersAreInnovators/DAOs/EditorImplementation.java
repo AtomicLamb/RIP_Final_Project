@@ -521,13 +521,35 @@ public class EditorImplementation implements EditorDAOInterface{
             
             String imagePath = rs.getString(6);
             
+            input = new FileInputStream(new File(imagePath));
+            output = new ByteArrayOutputStream();
+            byte[] buffer = new byte[4096];
+            int bytesRead = -1;
+            
+            while ((bytesRead = input.read(buffer)) != -1) {
+                
+                output.write(buffer, 0, bytesRead);
+                
+            }
+            
+            byte[] imageBytes = output.toByteArray();
+            String image = Base64.getEncoder().encodeToString(imageBytes);
+            
             storyApplication = new StoryApplication(rs.getInt(1), rs.getString(2), rs.getInt(3), 
-                    rs.getString(9), rs.getString(10), rs.getString(4), rs.getString(5) , imagePath, 
+                    rs.getString(9), rs.getString(10), rs.getString(4), rs.getString(5) , image, 
                     functionsClass.integerToBoolean(rs.getInt(7)), functionsClass.dateToString(rs.getDate(8)));
             
         } catch (SQLException e) {
             
             Logger.getLogger(EditorImplementation.class.getName()).log(Level.FINE, "Error reviewing the pending Story.", e);
+            
+        } catch (FileNotFoundException e) {
+            
+            throw new RuntimeException(e);
+            
+        } catch (IOException e) {
+            
+            throw new RuntimeException(e);
             
         } finally {
             

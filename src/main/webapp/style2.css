@@ -1213,6 +1213,12 @@ textarea:focus {
         border: 1px solid #DDD;
     }
 }
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
 
 .dropdown-content a:hover {background-color: #ddd;}
 

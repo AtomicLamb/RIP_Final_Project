@@ -69,7 +69,7 @@
                 <%String message=(String)request.getAttribute("message");
                     if(message!=null){
                 %>
-                <p><strong style ="color:red;"><%=message %></strong></p>
+                <p><strong style ="color:black; text-align: center"><%=message %></strong></p>
                 <%}%>
             </div>
         </div>

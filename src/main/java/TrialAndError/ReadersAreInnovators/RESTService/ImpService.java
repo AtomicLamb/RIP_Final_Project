@@ -56,7 +56,7 @@ public class ImpService
     }
     
     public String sms(){
-         String smsURI = uri + "/sms";
+         //String smsURI = uri + "/sms";
          smsreq smsreq=new smsreq(new smsreq().currentDate(),"Rath","password","84000000","hi");
          webTarget = client.target((smsUri));
         StringWriter sw = new StringWriter();

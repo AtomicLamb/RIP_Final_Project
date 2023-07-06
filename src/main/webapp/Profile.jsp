@@ -136,10 +136,10 @@
             <div class="scrollmenu" style="margin: auto; width: 90%">
             <%if(!genres.isEmpty()){%>
             <% for(Genre genre:genres){%>
-                  
-                <h1 style="color: white;"><%=genre.getGenre()%></h1>
+                <div style="display: inline-block;padding: 20px">
+                <h1 style="color: white;text-align: center"><%=genre.getGenre()%></h1>
                 <img src="images/Default%20Genre%20Image.png" alt="<%=genre.getGenre()%>" style="width:300px;height:400px;" >
-                 
+                </div>
             <%}%>
             <%}%>
             <%if(genres.isEmpty()){%>

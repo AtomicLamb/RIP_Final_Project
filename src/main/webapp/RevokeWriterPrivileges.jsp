@@ -26,8 +26,10 @@
            List<Writer> writers = (List<Writer>) request.getAttribute("writerList");
                 for (Writer w: writers) 
                 {        
-            %>
-            <li> <strong style= "color:black; width: 1000px"><%=w.getName()%> <%=w.getSurname()%> [<%=w.getEmail()%>]</strong></li>
+            %>  <strong style= "color:black; width: 1000px"><li><form action="editorServlet?submit=REVOKE WRITER PRIVILEGE" method="post"><strong style= "color:black;">
+                    <input type="hidden" name="email" value="<%=w.getEmail()%>">
+                  <input style="color:#f00;border:0px #000 solid;background-color:#fff;" type="submit" name="submit" value="<%=w.getName()%> <%=w.getSurname()%> [<%=w.getEmail()%>]"> </strong></form></li><br><br>
+            
          <%}%>
         </ul>
             </div>

@@ -104,9 +104,13 @@ private final FunctionsClass functionsClass = new FunctionsClass();
             case"BACK TO EDITORS PAGE":
                 dispacther =  request.getRequestDispatcher("Editors.jsp");
                 dispacther.forward(request, response);
-            case"BACK TO Analyse Data PAGE":
-                dispacther =  request.getRequestDispatcher("Editors.jsp");
-                dispacther.forward(request, response);
+                break;
+            case"DENY":
+                request.setAttribute("message",request.getParameter("pendingstoryId"));
+                dispacther= request.getRequestDispatcher("ReasonsForDenial.jsp");
+                dispacther.forward(request,response);
+                break;    
+                
         }
     }
 
@@ -158,11 +162,6 @@ private final FunctionsClass functionsClass = new FunctionsClass();
                  dispacther.forward(request,response);
                  
                  break;
-             case"DENY":
-                 request.setAttribute("message",imp.removePendingStory(new StoryApplication(Integer.valueOf(request.getParameter("pendingstoryId")))));
-                 dispacther= request.getRequestDispatcher("Editors.jsp");
-                 dispacther.forward(request,response);
-                 break;
              case"APPROVE WRITER":
                  approveWriter(request,response);
                  break;
@@ -177,8 +176,15 @@ private final FunctionsClass functionsClass = new FunctionsClass();
                  request.setAttribute("pendingStories",pendingStories);
                  dispacther =  request.getRequestDispatcher("ReviewPendingStories.jsp");
                  dispacther.forward(request, response);
-                 break;    
-                
+                 break;
+             case"DENY STORY":
+                 StoryApplication storyApplication = new StoryApplication(Integer.valueOf(request.getParameter("pendingstoryId")));
+                 storyApplication.setReasonsForDenial(request.getParameter("denial"));
+                 request.setAttribute("message",imp.removePendingStory(storyApplication));
+                 
+                 dispacther =  request.getRequestDispatcher("Editors.jsp");
+                 dispacther.forward(request, response);
+                 break;
          }
     }
      public void viewWriters(HttpServletRequest request, HttpServletResponse response)

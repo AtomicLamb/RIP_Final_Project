@@ -3,6 +3,7 @@ package TrialAndError.ReadersAreInnovators.DAOs;
 import TrialAndError.ReadersAreInnovators.Models.StoryElements.Story;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
+import TrialAndError.ReadersAreInnovators.RESTService.ImpService;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.DatabaseConnectionManager;
 import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
 
@@ -806,7 +807,8 @@ public class UserImplementation implements UserDAOInterface {
         
         conn = DatabaseConnectionManager.getConnection();
         Boolean exists = null;
-        
+        //ImpService i = new ImpService();
+        //i.sms();
         try {
             
             query = "select u.Name from users u where u.Email = ?";

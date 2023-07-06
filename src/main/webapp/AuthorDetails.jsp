@@ -37,30 +37,47 @@
 </head>
 <body style="background-color:rgb(0,119,145);">
 	<!-- header section start-->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-        
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <%List<Story>stories=(List<Story>)request.getAttribute("authorStories");%>
+        <%Writer writer=(Writer)request.getAttribute("chosenWriter");%>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                   <a class="nav-link" href="HomePageServlet?submit=HomePage">HOME</a>
+                    <form action="editPersonalInformationServlet" method="get">
+                        <input style="border: none;background-color: #343a40; color: #007791" class="nav-link" type="submit" name="submit" value="HOME">
+                    </form>
                 </li>
             </ul>
         </div>
-         <div class="login_text"><a href="index.jsp">LOGIN HERE</a></div>
+        <%if((Integer) session.getAttribute("UserTypeID") == 0) {%>
+        <li class="nav-item">
+            <a style="color: #007791" class="nav-link" href="index.jsp">LOGIN HERE</a>
+        </li>
+        <%}%>
+        <%if((Integer) session.getAttribute("UserTypeID") != 0) {%>
+        <form action="controllerServlet" method="get">
+            <div class="login_text">
+                <input style="border: none;background-color: #343a40; color: #007791" class="nav-link" type="submit" name="submit" value="SIGN OUT" formnovalidate>
+            </div>
+            <%}%>
+        </form>
     </nav>
 	<!-- header section start-->
 	<!-- banner section start-->
-	 
+    <div class="banner_section layout_padding">
+        <div class="container">
+            <h1 class="best_taital" style="color:#007791"><%=writer.getName()%> <%=writer.getSurname()%></h1>
+        </div>
+    </div><br><br>
 	<!-- banner section end-->
 	<!-- marketing section start-->
 	
 	<!-- marketing section end-->
 	<!-- Industrial section start-->
-	  <%List<Story>stories=(List<Story>)request.getAttribute("authorStories");%>
-           <%Writer writer=(Writer)request.getAttribute("chosenWriter");%>
+	  
     <%String message=(String)request.getAttribute("message");%>
     <%Boolean follow=(Boolean)request.getAttribute("followed");%>
     <h1 style="font-size:50px;text-align:center;">Authors Details</h1><br><br>
@@ -73,19 +90,21 @@
                         <h1 class="jobs_text" style="text-align: left;border-bottom-style: solid; border-width:0.5px;border-color: black;">Author <%=writer.getName()%> <%=writer.getSurname()%> <%if(follow.equals(false)){%>
                             <br><form action="StoryServlet?submit=followAuthor" method="post">
                                 <input type="hidden" name="authorId" value="<%=writer.getUserID()%>">
+                                <%if((Integer) session.getAttribute("UserTypeID") != 0) {%>
                             <input type="submit" name="submit" value="Follow Author" class="button buttonTextColor" style=" font-size: 15px; border: 2px solid black; border-radius: 12px"></form><%}%>
                             <%if(follow.equals(true)){%>
                             <br><form action="StoryServlet?submit=followAuthor" method="post">
                                 <input type="hidden" name="authorId" value="<%=writer.getUserID()%>">
                                 <input type="submit" name="submit" value="Unfollow Author" class="button buttonTextColor" style=" font-size: 15px; border: 2px solid black; border-radius: 12px"></form><%}%>
                         </h1>
+                        <%}%>
                                  <h1 class="jobs_text"style="text-align: left;">Authors Books</h1>
                                              
 					      <div class="scrollmenu" style="  width: 800px; background-color: black;height: 550px">
               <%for(Story story:stories){%> 
                 <a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>">
                   <h1 style="color: white;"><%=story.getTitle()%></h1>
-             <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" > 
+             <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:300px;height:400px;" > 
             </a>  
             <%}%>
             

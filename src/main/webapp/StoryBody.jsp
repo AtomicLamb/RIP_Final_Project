@@ -61,7 +61,8 @@
         <!-- banner section start-->
         <div class="banner_section layout_padding">
             <div class="container">
-                <h1 class="best_taital" style="color:#007791">REVIEW PENDING STORIES</h1>
+                <h1 class="best_taital" style="color:#007791"><%=story.getTitle()%></h1><br>
+                <h1 class="best_taital" style="color:#007791;font-size: medium">By: <%=story.getAuthorName()%></h1>
                 <%
                    String message = (String) request.getAttribute("message");
                     if(message!=null){
@@ -71,8 +72,7 @@
             </div>
         </div><br><br>
             <%if(story!=null){%>
-            <h1 class="jobs_text" style="text-align: center"><%=story.getTitle()%></h1>
-            <p style="color: black; font-size: medium"><%=story.getStoryBody()%></p>
+            <p style="color: black; font-size: medium; text-align: center; margin: 20%"><%=story.getStoryBody()%></p>
             <%}%>
             <%if(story==null){%>
             <p>NO STORY WAS SELECTED</p>

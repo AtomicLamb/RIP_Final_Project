@@ -42,14 +42,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Personal Data Page</title>
     </head>
-    <body>
+    <body style="background-color: #007791">
         <!-- header section start-->
         <%List<Story> storiesByTitle=(List<Story>) request.getAttribute("searchByTitle");%>
         <%List<Story>storiesByAuthor=(List<Story>) request.getAttribute("searchByAuthor");%>
         <%List<Story> storiesByGenres=(List<Story>) request.getAttribute("searchByGenres");%>
         <%List<Writer> authorsByName=(List<Writer>) request.getAttribute("searchAuthors");%>
         <%List<Writer>authorsByTitle=(List<Writer>) request.getAttribute("searchAuthorByTitle");%>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -57,19 +57,30 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <form action="editPersonalInformationServlet" method="get">
-                            <input class="nav-link" type="submit" name="submit" value="HOME">
-                            <input class="nav-link" type="submit" name="submit" value="EDIT PERSONAL INFORMATION">
+                            <input style="border: none;background-color: #343a40; color: #007791" class="nav-link" type="submit" name="submit" value="HOME">
                         </form>
                     </li>
                 </ul>
             </div>
-            <div class="login_text"><a href="index.jsp">LOGIN HERE</a></div>
+            <%session= request.getSession(false);%>
+            <%if((Integer) session.getAttribute("UserTypeID") == 0) {%>
+            <li class="nav-item">
+                <a style="color: #007791" class="nav-link" href="index.jsp">LOGIN HERE</a>
+            </li>
+            <%}%>
+            <%if((Integer) session.getAttribute("UserTypeID") != 0) {%>
+            <form action="controllerServlet" method="get">
+                <div class="login_text">
+                    <input style="border: none;background-color: #343a40; color: #007791" class="nav-link" type="submit" name="submit" value="SIGN OUT" formnovalidate>
+                </div>
+                <%}%>
+            </form>
         </nav>
         <!-- header section start-->
         <!-- banner section start-->
         <div class="banner_section layout_padding">
             <div class="container">
-                <h1 class="best_taital" style="color:black">Search Results</h1>
+                <h1 class="best_taital" style="color:black;text-align: center">Search Results</h1>
                 <%
                     String message = (String) request.getAttribute("message");
                     if(message!=null){
@@ -80,88 +91,96 @@
 
             </div>
         </div>
-        <div>              <h1>Stories By Title</h1>
-            <%if(!storiesByTitle.isEmpty()){%>
-              <div class="scrollmenu" style="margin: auto; width: 800px">
+        <div>           
+               <h1 style="text-align: center;color: white">Stories By Title</h1>
+              <div class="scrollmenu" style="margin: auto; width: 90%;">
+                  <%if(!storiesByTitle.isEmpty()){%>
                 <% for(Story story:storiesByTitle){%>
                 <a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>&authorId=<%=story.getAuthorID()%>">
                     <h1 style="color: white;"><%=story.getTitle()%></h1>
-                    <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" >
+                    <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:300px;height:400px;" >
                 </a>
-               <%}%>
-            </div>
-              <%}%>
-            <%if(storiesByTitle.isEmpty()){%>
-            <p>No stories found by the story title</p>
-            <%}%>
+               <%}%> 
+                  <%}%>
+                  <%if(storiesByTitle.isEmpty()){%>
+                                <p style="color: white;text-align: center">No stories found by the story title</p>
+                   <%}%>             
+            </div><br><br>
+              
+           
 
 
-            <h1>Stories By Author</h1>
-            <% if(!storiesByAuthor.isEmpty()){%>
-             <div class="scrollmenu" style="margin: auto; width: 800px">
+           
+            <h1 style="text-align: center;color: white">Stories By Author</h1>
+             <div class="scrollmenu" style="margin: auto; width: 90%;"> 
+                 <% if(!storiesByAuthor.isEmpty()){%>
                 <% for(Story story:storiesByAuthor){%>
                 <a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>&authorId=<%=story.getAuthorID()%>">
                     <h1 style="color: white;"><%=story.getTitle()%></h1>
-                    <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" >
+                    <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:300px;height:400px;" >
                 </a>
                 <%}%>
-            </div>
-            <%}%>
             
-            <%if(storiesByAuthor.isEmpty()){%>
-            <p>No stories found by the author</p>
             <%}%>
+                 <%if(storiesByAuthor.isEmpty()){%>
+                             <p style="color: white;text-align: center">No stories found by the author</p>
+                             <%}%>
+            </div><br><br>
+            
 
 
-            <h1>Stories By Genre</h1>
-            <%if(!storiesByGenres.isEmpty()){%>
-             <div class="scrollmenu" style="margin: auto; width: 800px">
+            <h1 style="text-align: center;color: white">Stories By Genre</h1>
+          
+             <div class="scrollmenu" style="margin: auto; width: 90%;">  
+                 <%if(!storiesByGenres.isEmpty()){%>
                  <% for(Story story:storiesByGenres){%>
                 <a href="StoryServlet?submit=storyDetails&storyTitle=<%=story.getTitle()%>&storyId=<%=story.getStoryID()%>&authorId=<%=story.getAuthorID()%>">
                     <h1 style="color: white;"><%=story.getTitle()%></h1>
-                    <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" >
+                    <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:300px;height:400px;" >
                 </a>
                  <%}%>
                  <%}%>
                  <%if(storiesByGenres.isEmpty()){%>
-                                  <p style="color: white">No stories found by the genre</p>
+                                  <p style="color: white;text-align: center">No stories found by the genre</p>
                                   <%}%>
-            </div>
+            </div><br><br>
              
             
 
 
-            <h1>Authors By Name</h1>
-            <%if(!authorsByName.isEmpty()){%>
-            <div class="scrollmenu" style="margin: auto; width: 800px">
+            <h1 style="text-align: center;color: white">Authors By Name</h1>
+           
+            <div class="scrollmenu" style="margin: auto; width: 90%;"> 
+                <%if(!authorsByName.isEmpty()){%>
             <% for(Writer writer:authorsByName){%>
             <a href="StoryServlet?submit=AuthorDetails&authorId=<%=writer.getUserID()%>">
                 <h1 style="color: white;"><%=writer.getName()%> <%=writer.getSurname()%></h1>
-                <img src="images/Default%20User%20Icon.jpg" alt="<%=writer.getName()%> <%=writer.getSurname()%>" style="width:400px;height:400px;" >
+                <img src="images/Default%20User%20Icon.jpg" alt="<%=writer.getName()%> <%=writer.getSurname()%>" style="width:300px;height:300px;" >
             </a>
             <%}%>
                 <%}%>
                 <%if(authorsByName.isEmpty()){%>
-                            <p style="color: white">No authors found</p>
+                            <p style="color: white;text-align: center">No authors found</p>
                             <%}%>
-            </div>
+            </div><br><br>
             
             
 
-            <h1>Authors By Story Title</h1>
-            <%if(!authorsByTitle.isEmpty()){%>
-            <div class="scrollmenu" style="margin: auto; width: 800px">
+            <h1 style="text-align: center;color: white">Authors By Story Title</h1>
+           
+            <div class="scrollmenu" style="margin: auto; width: 90%;"> 
+                <%if(!authorsByTitle.isEmpty()){%>
                 <% for(Writer writer:authorsByTitle){%>
                 <a href="StoryServlet?submit=AuthorDetails&authorId=<%=writer.getUserID()%>">
                     <h1 style="color: white;"><%=writer.getName()%> <%=writer.getSurname()%></h1>
-                    <img src="images/Default%20User%20Icon.jpg" alt="<%=writer.getName()%> <%=writer.getSurname()%>" style="width:400px;height:400px;" >
+                    <img src="images/Default%20User%20Icon.jpg" alt="<%=writer.getName()%> <%=writer.getSurname()%>" style="width:300px;height:300px;" >
                 </a>
                 <%}%>
                 <%}%>
-                <%if(authorsByName.isEmpty()){%>
-                <p style="color: white">No authors found by story title</p>
+                <%if(authorsByTitle.isEmpty()){%>
+                <p style="color: white;text-align: center">No authors found by story title</p>
                 <%}%>
-            </div>
+            </div><br><br>
         </div>
 
     </body>

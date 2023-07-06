@@ -20,9 +20,9 @@
             <form action="writerServlet" method="post" enctype="multipart/form-data">
               <div class="input-box" style="font-size:20px;text-align:center;">
                 <h2>Enter the book title here</h2>
-                <input style="width: 50%; font-size: 32px ;background-color: #C2E0FF;" type="text" placeholder="Enter the book title" name="storyTitle" required><br><br><br>
+                <input style="width: 30%; font-size: 32px ;background-color: #C2E0FF;" type="text" placeholder="Enter the book title" name="storyTitle" required><br><br><br>
               </div>
-              <div class="input-box" style="font-size:20px;text-align:center; width: 70%">
+              <div class="input-box" style="font-size:20px;text-align:center">
                 <h2>Select the story cover image</h2>
                 <input style="width: 20%" type="file" name="fileImage" accept="image/*" required><br><br><br>
               </div>
@@ -33,10 +33,10 @@
                       <input type="radio" id="no" name="commentsEnabled" value="no" required>
                       <label for="no">No</label><br><br>
                 </div>
-                <div class="input-box" style="font-size:20px;text-align:center; width: 80%">
+                <div class="input-box" style="font-size:20px;text-align:center;">
                 <h2>Enter the synopsis</h2>
                     <label>
-                        <textarea id="synopsis" style="background-color: #C2E0FF" type="text" name="storySynopsis" maxlength="995" rows="4" cols="55" required>Enter your synopsis here. You have a maximum of 1000 characters.</textarea>
+                        <textarea id="synopsis" style="background-color: #C2E0FF; width: 70%" type="text" name="storySynopsis" maxlength="995" rows="4" cols="55" required>Enter your synopsis here. You have a maximum of 1000 characters.</textarea>
                         <div class="output row">
                             <div>Characters: <span id="charCount">0</span></div>
                             <div>Words: <span id="wrdCount">0</span></div>
@@ -50,7 +50,7 @@
                 <div class="input-box" style="font-size:20px;text-align:center;">
                     <h2>Type your story</h2>
                     <label>
-                        <textarea id="storyBody" style="background-color: #C2E0FF" type="text" name="storyBody" rows="4" cols="55" required>Type your story here. You have a maximum of 1000 words.</textarea>
+                        <textarea id="storyBody" style="background-color: #C2E0FF; width: 70%; height: 300px" type="text" name="storyBody" rows="4" cols="55" required>Type your story here. You have a maximum of 1000 words.</textarea>
                     </label>
                     <div class="output row">
                         <div>Characters: <span id="characterCount">0</span></div>

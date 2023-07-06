@@ -1,7 +1,6 @@
-<%@ page import = "TrialAndError.ReadersAreInnovators.Models.StoryElements.Story" %>
+ 
 <%@ page import = "TrialAndError.ReadersAreInnovators.Models.Administration.StoryApplication" %>
-<%@ page import = "java.util.List" %>
-<%@ page import = "TrialAndError.ReadersAreInnovators.Models.StoryElements.Genre" %><%--
+ <%--
   Created by IntelliJ IDEA.
   User: TKS
   Date: 28/06/2023
@@ -70,7 +69,9 @@
                 <input type="hidden"  name="coverImagePath" value="<%=story.getImagePath()%>">
                 <input type="hidden" name="email" value="<%=story.getAuthorEmail()%>">
                 <input type="hidden" name="number" value="<%=story.getAuthorPhoneNumber()%>">
+                <%if(!story.getGenres().isEmpty()){%>
                 <input type="hidden" name="genre1" value="<%=story.getGenres().get(0).getGenre()%>">
+                <%}%>
                  <%if(story.getGenres().size()>=2){%>
                 <input type="hidden" name="genre2" value="<%=story.getGenres().get(1).getGenre()%>">
                 <%} else{%>
@@ -82,6 +83,9 @@
                 <input type="hidden" name="genre3" value="null">
                 <%}%>
                 <button class="block" type="submit" name="submit" value="ACCEPT">ACCEPT STORY</button><br><br>
+            </form>
+            <form action="editorServlet" method="get">
+                <input type="hidden" name="pendingstoryId" value="<%=story.getPendingStoryID()%>">
                 <button class="block" type="submit" name="submit" value="DENY">DENY STORY</button><br><br>
                 <button class="block" type="submit" name="submit" value="BACK TO REVIEW PENDING STORIES">BACK TO REVIEW PENDING STORIES</button><br><br>
             </form>

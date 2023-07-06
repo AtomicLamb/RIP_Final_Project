@@ -125,7 +125,7 @@ public class CommentImplementation implements CommentDAOInterface{
         try {
             
             query = "select c.CommentID, c.StoryID, c.UserID, c.Comment, concat_ws(\" \", u.Name, u.Surname) " +
-                    "as FullName, c.DateAdded from comments c, users u where c.StoryID = ? and c.UserID = u.UserID and IsFlagged = 0";
+                    "as FullName, c.DateAdded from comments c, users u where c.StoryID = ? and c.UserID = u.UserID";
             
             ps = conn.prepareStatement(query);
             ps.setInt(1, story.getStoryID());

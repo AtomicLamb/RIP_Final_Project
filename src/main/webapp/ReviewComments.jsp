@@ -27,23 +27,15 @@
                             for (Comment c: comments) 
                             {        
                         %>
-                        <li> <strong style= "color:black;">[<%=c.getCommentID()%>] <%=c.getName()%>, "<%=c.getComment()%>"</strong></li><br>
+                    <li> <form action="editorServlet?submit=REMOVE COMMENT" method="post"><strong style= "color:black;">
+                        <input type="hidden" name="reviewCommentID" value="<%=c.getCommentID()%>">
+                        <%=c.getName()%> posted: <input style="color:#f00;border:0px #000 solid;background-color:#fff;" type="submit" name="submit" value="<%=c.getComment()%>"> </strong></form></li><br><br>
                      <%}%>
         </ul>
             </div>
             <div class="forms">
                 <div class="form-content">
-                    <form action="editorServlet" method="post">
-                        <div class="button input-box">
-                            <input style="color: white; background-color: black;" type="number" placeholder="Enter the id num of the comment you would like to remove or ignore." name="reviewCommentID" min="1" required>
-                        </div>
-                        <div class="button input-box">
-                            <input style="color: white; background-color: black;" type="submit" name="submit" value="UNFLAG COMMENT">
-                        </div> 
-                        <div class="button input-box">
-                            <input style="color: white; background-color: black;" type="submit" name="submit" value="REMOVE COMMENT">
-                        </div>
-                    </form>
+                   
                     <form action="editorServlet" method="get">
                         <div class="button input-box">
                             <input style="color: white; background-color: black;" type="submit" name="submit" value="BACK TO EDITORS PAGE" formnovalidate>

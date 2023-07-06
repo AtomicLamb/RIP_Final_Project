@@ -270,7 +270,7 @@ public class ServiceLayerClass implements ServiceLayer_Interface {
     public String removePendingStory(StoryApplication pendingStory) {
         
         subject = "Submitted Story Progress.";
-        text = "Unfortunately your story does not adhere to the company policy and was rejected for the following reason/s. \n" +
+        text = "Unfortunately your story does not adhere to the company policy and was rejected for the following reason/s. \n\n" +
                 pendingStory.getReasonsForDenial() + " \n\n" +
                 "Thank you for taking the time to use our platform.";
         

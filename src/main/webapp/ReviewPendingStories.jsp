@@ -42,7 +42,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body style="background-color: #007791">
-        <%List<StoryApplication> pendingStories=(List<StoryApplication>)request.getAttribute("pendingStories");%>
+        
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -52,11 +52,6 @@
                     <li class="nav-item">
                         <form action="editPersonalInformationServlet" method="get">
                             <input style="border: none;background-color: #343a40; color: #007791" class="nav-link" type="submit" name="submit" value="HOME">
-                        </form>
-                    </li>
-                    <li class="nav-item">
-                        <form action="editPersonalInformationServlet" method="get">
-                            <input style="border: none;background-color: #343a40; color: #007791" class="nav-link" type="submit" name="submit" value="EDIT PERSONAL INFORMATION">
                         </form>
                     </li>
                 </ul>
@@ -81,14 +76,14 @@
             </div>
         </div>
         <div><br><br>
-
+            <%List<StoryApplication> pendingStories=(List<StoryApplication>)request.getAttribute("pendingStories");%>
             <h1 class="jobs_text"  style="text-align: center">Pending Stories:</h1>
             <div class="scrollmenu" style="margin: auto; width: 90%">
                 <%if(!pendingStories.isEmpty()){%>
                 <%for(StoryApplication story:pendingStories){%>
                 <a href="editorServlet?submit=reviewPendingStory&storyId=<%=story.getPendingStoryID()%>&authorId=<%=story.getAuthorID()%>">
                     <h1 style="color: white;"><%=story.getTitle()%></h1>
-                    <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:400px;height:400px;" >
+                    <img src="data:image/png;base64,<%=story.getCoverImage()%>" alt="<%=story.getTitle()%>" style="width:300px;height:400px;" >
                 </a>
                 <%}%>
                 <%}%>
