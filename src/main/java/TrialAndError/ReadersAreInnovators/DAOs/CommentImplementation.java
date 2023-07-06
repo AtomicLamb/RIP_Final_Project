@@ -133,8 +133,8 @@ public class CommentImplementation implements CommentDAOInterface{
             
             while(rs.next()) {
                 
-                allComments.add(new Comment(rs.getInt(2), rs.getInt(3), rs.getString(5), 
-                        rs.getString(4), functionsClass.dateToString(rs.getDate(6))));
+                allComments.add(new Comment(rs.getInt(1), rs.getInt(2), rs.getInt(3), 
+                        rs.getString(5), rs.getString(4), functionsClass.dateToString(rs.getDate(6))));
                 
             }
             

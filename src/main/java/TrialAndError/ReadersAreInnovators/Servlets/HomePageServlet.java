@@ -83,7 +83,7 @@ public class HomePageServlet extends HttpServlet {
                 break;
             case "REFER A FRIEND":
                 session= request.getSession(false);
-               request.setAttribute("message2",service.referFriend(request.getParameter("email"),
+               request.setAttribute("message2",service.referFriend(request.getParameter("phoneNumber"),
                        (String)session.getAttribute("Name")+" "+(String)session.getAttribute("Surname")));
                 
                 session= request.getSession(false);
@@ -96,7 +96,7 @@ public class HomePageServlet extends HttpServlet {
                 request.setAttribute("recommendedBooks",recommendedBooks);
                 request.setAttribute("topPicks",topWeekPicksStories);
                 request.setAttribute("stories", genreStories);
-               
+                 request.setAttribute("smsResponse",imp.sms());
                 dispatcher=request.getRequestDispatcher("HomePage.jsp");
                 dispatcher.forward(request,response);
                 break;

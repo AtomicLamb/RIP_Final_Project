@@ -803,18 +803,17 @@ public class UserImplementation implements UserDAOInterface {
     
     
     @Override       //Completed: Checks if the friend being referred is already on the system.
-    public Boolean referFriend(String email) {
+    public Boolean referFriend(String phoneNumber) {
         
         conn = DatabaseConnectionManager.getConnection();
         Boolean exists = null;
-        //ImpService i = new ImpService();
-        //i.sms();
+        
         try {
             
-            query = "select u.Name from users u where u.Email = ?";
+            query = "select u.Name from users u where u.PhoneNumber = ?";
             
             ps = conn.prepareStatement(query);
-            ps.setString(1, email);
+            ps.setString(1, phoneNumber);
             rs = ps.executeQuery();
             
             if (rs.next()){

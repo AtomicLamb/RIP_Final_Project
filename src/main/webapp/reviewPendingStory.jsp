@@ -87,7 +87,7 @@
             <form action="editorServlet" method="get">
                 <input type="hidden" name="pendingstoryId" value="<%=story.getPendingStoryID()%>">
                 <button class="block" type="submit" name="submit" value="DENY">DENY STORY</button><br><br>
-                <button class="block" type="submit" name="submit" value="BACK TO REVIEW PENDING STORIES">BACK TO REVIEW PENDING STORIES</button><br><br>
+                <button class="block" type="submit" name="submit" value="BACK TO EDITORS PAGE">BACK TO EDITORS PAGE</button><br><br>
             </form>
         </div>
         <script src="js/word_count_story.js"></script>

@@ -24,9 +24,9 @@
                         {
                     %>
                             <div class="block">
-                                <div class="w-full text-lg font-semibold">Name: <%= wa.getName()%></div>
-                                <div class="w-full text-lg font-semibold">Email: <%= wa.getEmail()%> </div>
-                                <div class="w-full text-sm">Motivation: <%= wa.getMotivation()%></div>
+                                <div style="color: black" class="w-full text-lg font-semibold">Name: <%= wa.getName()%></div>
+                                <div style="color: black" class="w-full text-lg font-semibold">Email: <%= wa.getEmail()%> </div>
+                                <div style="color: black" class="w-full text-sm">Motivation: <%= wa.getMotivation()%></div>
                             </div><br><br>
                     <%}%>
             

@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     </head>
     <body>
+        
         <%Story draft=(Story)request.getAttribute("draft");%>
+       
         <div class="myContainer">
             <h1 style="font-size:50px;text-align:center;">EDIT DRAFT</h1><br><br>
             <%if(draft!=null){%>
@@ -66,11 +68,12 @@
                         <div>Sentences: <span id="sentenceCount">0</span></div>
                         <div>Paragraphs: <span id="paragraphCount">0</span></div>
                     </div>
-              </div><br><br><br>               
+              </div><br><br><br>  
+                <input type="hidden" name="cover" value="<%=draft.getCoverImage()%>">
                 <button class="block" type="submit" name="submit" value="Submit Draft">SUBMIT DRAFT</button><br><br>
                 <button class="block" type="submit" name="submit" value="Save Draft" >SAVE DRAFT</button><br><br>
                 <button class="block" type="submit" name="submit" value="Delete Draft" formnovalidate>DELETE DRAFT</button><br><br>
-                <button class="block" type="submit" name="submit" value="BACK TO WRITER PAGE" >BACK TO WRITER PAGE</button><br><br>
+                <button class="block" type="submit" name="submit" value="BACK TO WRITER PAGE" formnovalidate>BACK TO WRITER PAGE</button><br><br>
             </form>
             <%}%>
             <%if(draft==null){%>

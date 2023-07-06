@@ -341,26 +341,29 @@ public class StoryImplementation implements StoryDAOInterface {
         
         try {
             
-            query = "select * from readandfavorites f where f.UserID = ? and f.StoryID ?";
+            query = "select * from readandfavorites f where f.UserID = ? and f.StoryID = ?";
             ps = conn.prepareStatement(query);
             ps.setInt(1, user.getUserID());
             ps.setInt(2, story.getStoryID());
-            ps.executeUpdate();
+            rs = ps.executeQuery();
             
             if (rs.next()){
                 
                 query = "UPDATE readandfavorites f SET f.IsRead = 1 WHERE UserID = ? and StoryID = ?";
+                ps = conn.prepareStatement(query);
+                ps.setInt(1, user.getUserID());
+                ps.setInt(2, story.getStoryID());
+                ps.executeUpdate();
                 
             } else {
                 
                 query = "INSERT INTO readandfavorites (UserID, StoryID, IsRead, IsFavorite) VALUES (?, ?, 1, 0)";
+                ps = conn.prepareStatement(query);
+                ps.setInt(1, user.getUserID());
+                ps.setInt(2, story.getStoryID());
+                ps.executeUpdate();
                 
             }
-            
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, user.getUserID());
-            ps.setInt(2, story.getStoryID());
-            ps.executeUpdate();
             
             query = "update stories s SET s.Views = s.Views + 1 where s.StoryID = ?";
             ps = conn.prepareStatement(query);
@@ -826,7 +829,7 @@ public class StoryImplementation implements StoryDAOInterface {
             ps = conn.prepareStatement(query);
             ps.setInt(1, user.getUserID());
             ps.setInt(2, story.getStoryID());
-            ps.executeUpdate();
+            rs = ps.executeQuery();
             
             if (rs.next()){
                 
@@ -916,15 +919,19 @@ public class StoryImplementation implements StoryDAOInterface {
         
         try {
             
-            query = "select * from readandfavorites f where f.UserID = ? and f.StoryID ?";
+            query = "select * from readandfavorites f where f.UserID = ? and f.StoryID = ?";
             ps = conn.prepareStatement(query);
             ps.setInt(1, user.getUserID());
             ps.setInt(2, story.getStoryID());
-            ps.executeUpdate();
+            rs = ps.executeQuery();
             
             if (rs.next()){
                 
                 query = "UPDATE readandfavorites f SET f.IsFavorite = 0 WHERE UserID = ? and StoryID = ?";
+                ps = conn.prepareStatement(query);
+                ps.setInt(1, user.getUserID());
+                ps.setInt(2, story.getStoryID());
+                ps.executeUpdate();
                 
             } else {
                 
@@ -932,12 +939,7 @@ public class StoryImplementation implements StoryDAOInterface {
                 
             }
             
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, user.getUserID());
-            ps.setInt(2, story.getStoryID());
-            ps.executeUpdate();
-            
-            query = "update stories s SET s.Likes = s.Likes + 1 where s.StoryID = ?";
+            query = "update stories s SET s.Likes = s.Likes - 1 where s.StoryID = ?";
             ps = conn.prepareStatement(query);
             ps.setInt(1, story.getStoryID());
             ps.executeUpdate();

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<smsreq>
+    <datetime>2022/05/20,10:00:00</datetime>
+    <user>user</user>
+    <pass>password</pass>
+    <msisdn>8400000000</msisdn>
+    <message>This is a test</message>
+</smsreq>

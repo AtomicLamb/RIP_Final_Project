@@ -649,8 +649,7 @@ public class JUnitTesting {
 
     @Test
     public void likeStoryTest(){
-
-        //TODO
+        
         User user = new User(3);
         Story story = new Story(8304);
         

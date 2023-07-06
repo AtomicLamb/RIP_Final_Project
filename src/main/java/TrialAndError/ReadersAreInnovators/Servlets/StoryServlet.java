@@ -86,36 +86,12 @@ public class StoryServlet extends HttpServlet {
         users.add(new User(3,"The Wild","One"));
        return users;
     }
-    public Comment getComment(HttpServletRequest request){
-        
-       
-        Story story=new Story();
-        story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
-        imp.getComments(imp.displayStoryDetails(story));
-         
-        List<Comment>comments=imp.getComments(imp.displayStoryDetails(story));
-        for(Comment comment:comments){
-            if(comment.getCommentID()==(Integer.valueOf(request.getParameter("commentId")))) {
-                
-                return comment;
-            }
-            
-        }
-        
-        return null;
-    }
+  
     
     public String flagComment(HttpServletRequest request){
-        Comment comment=getComment(request);
-        if(comment!=null){
-            comment.setFlagged(true);
-            return "Comment reported";
+        Comment comment=new Comment(Integer.valueOf(request.getParameter("commentId")));
+            return service.reportComment(comment);
         }
-        else{
-            return "Comment not reported an error occurred";
-        }
-        
-    }
      
     public void fillStoryDetailsPage(HttpServletRequest request, HttpServletResponse response,String attributeName,Object value){
          
@@ -229,9 +205,9 @@ public class StoryServlet extends HttpServlet {
                    story=new Story();
                      story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
                 request.setAttribute("chosenStory", getChosenStory(request));
-                var dispatcher=request.getRequestDispatcher("StoryBody.jsp");
-                
                 imp.readStory(new StoryUserREST(story,getUserSessionJustId(request)));
+                
+                var dispatcher=request.getRequestDispatcher("StoryBody.jsp");
                 dispatcher.forward(request, response);
                 
                 break;

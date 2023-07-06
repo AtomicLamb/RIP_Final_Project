@@ -27,6 +27,10 @@
                 String message = (String) request.getAttribute("message");
                 if(message!=null){
             %>
+            <%String smsMessage=(String)request.getAttribute(message);%>
+            <%if(smsMessage!=null){%>
+            <h1><%=smsMessage%></h1>
+            <%}%>
             <p><strong style ="color:red;"><%=message %></strong></p><br>
             <%}%>
             <h2 style= "color:black;">The list of genres the writer selected</h2>

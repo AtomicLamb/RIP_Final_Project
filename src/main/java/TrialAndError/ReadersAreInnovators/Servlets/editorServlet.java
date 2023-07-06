@@ -106,10 +106,11 @@ private final FunctionsClass functionsClass = new FunctionsClass();
                 dispacther.forward(request, response);
                 break;
             case"DENY":
+                request.setAttribute("smsMessage",imp.sms());
                 request.setAttribute("message",request.getParameter("pendingstoryId"));
                 dispacther= request.getRequestDispatcher("ReasonsForDenial.jsp");
                 dispacther.forward(request,response);
-                break;    
+                break;
                 
         }
     }
@@ -140,7 +141,7 @@ private final FunctionsClass functionsClass = new FunctionsClass();
                                  request.getParameter("email"),request.getParameter("number") ,request.getParameter("storyBody"), request.getParameter("storySynopsis"),
                                  request.getParameter("coverImagePath") , Boolean.parseBoolean(request.getParameter("storyCommentsEnabled"))),
                          new Editor((Integer)session.getAttribute("UserID")))));
-                 
+                 request.setAttribute("smsMessage",imp.sms());
                  request.setAttribute("genreList", imp.getGenres());
                  List<String> genres = new ArrayList<>();
                  genres.add(request.getParameter("genre1"));
@@ -153,9 +154,9 @@ private final FunctionsClass functionsClass = new FunctionsClass();
                  }
                      
                  
-                 
+                
                  request.setAttribute("checkedGenreList", genres);
-                 
+                 request.setAttribute("smsMessage",imp.sms());
                 
                  
                  var dispacther= request.getRequestDispatcher("StoryGenre.jsp");
@@ -181,7 +182,7 @@ private final FunctionsClass functionsClass = new FunctionsClass();
                  StoryApplication storyApplication = new StoryApplication(Integer.valueOf(request.getParameter("pendingstoryId")));
                  storyApplication.setReasonsForDenial(request.getParameter("denial"));
                  request.setAttribute("message",imp.removePendingStory(storyApplication));
-                 
+                  
                  dispacther =  request.getRequestDispatcher("Editors.jsp");
                  dispacther.forward(request, response);
                  break;

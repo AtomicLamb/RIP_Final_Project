@@ -241,14 +241,26 @@ public class editPersonalInformationServlet extends HttpServlet {
     {
         session = request.getSession(false);
         
+        Integer userID = (Integer) session.getAttribute("UserID");
+        User user = new User(userID);
+        List<Story> readFavorites=imp.getReadFavorites(user);
+        List<Story>unreadFavourites=imp.getUnreadFavorites(user);
+        List<Genre>userGenres=imp.getUserGenres(user);
+        List<Writer>followedAuthors=imp.getFollowedAuthors(user);
+        request.setAttribute("readFavourites",readFavorites);
+        request.setAttribute("unreadFavourites",unreadFavourites);
+        request.setAttribute("userGenres",userGenres);
+        request.setAttribute("followedAuthors",followedAuthors);
+        
         String firstName = (String) session.getAttribute("Name");
         String surname = (String) session.getAttribute("Surname");
         String email = (String) session.getAttribute("Email");
         String phoneNum = (String) session.getAttribute("PhoneNumber");
         String motivation = request.getParameter("motivation");
+        user = (User) session.getAttribute("User");
         
-        request.setAttribute("message", imp.applyForWriter(new WriterApplication(firstName,surname,email,phoneNum,motivation)));
-        var dispatcher =  request.getRequestDispatcher("editPersonalData.jsp");
+        request.setAttribute("message", imp.applyForWriter(new WriterApplication(firstName,surname,email,phoneNum,user.getPassword(),motivation)));
+        var dispatcher =  request.getRequestDispatcher("Profile.jsp");
         try
         {
             dispatcher.forward(request, response);

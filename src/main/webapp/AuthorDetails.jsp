@@ -82,22 +82,22 @@
     <%Boolean follow=(Boolean)request.getAttribute("followed");%>
     <h1 style="font-size:50px;text-align:center;">Authors Details</h1><br><br>
          <%if(message!=null){%>
-    <h2><%=message%></h2>
+    <h2 style="text-align: center"><%=message%></h2>
          <%}%>
 		<div class="container-fluid" style="background-color:whitesmoke;width: 70%;margin: auto;box-shadow: 10px 10px black;padding:40px;position: relative;bottom: 20px;margin-top:40px  ">
-                    <div class="row"style="margin-left: 20px;margin-right: 20px; margin-top: 40px;">
-				      <%if(writer!=null){%>
+                    <div class="row" style="margin-left: 20px;margin-right: 20px; margin-top: 40px;">
+				       
                         <h1 class="jobs_text" style="text-align: left;border-bottom-style: solid; border-width:0.5px;border-color: black;">Author <%=writer.getName()%> <%=writer.getSurname()%> <%if(follow.equals(false)){%>
                             <br><form action="StoryServlet?submit=followAuthor" method="post">
                                 <input type="hidden" name="authorId" value="<%=writer.getUserID()%>">
                                 <%if((Integer) session.getAttribute("UserTypeID") != 0) {%>
-                            <input type="submit" name="submit" value="Follow Author" class="button buttonTextColor" style=" font-size: 15px; border: 2px solid black; border-radius: 12px"></form><%}%>
+                            <input type="submit" name="submit" value="Follow Author" class="button buttonTextColor" style=" font-size: 15px; border: 2px solid black; border-radius: 12px"></form><%}%> <%}%>
                             <%if(follow.equals(true)){%>
                             <br><form action="StoryServlet?submit=followAuthor" method="post">
                                 <input type="hidden" name="authorId" value="<%=writer.getUserID()%>">
                                 <input type="submit" name="submit" value="Unfollow Author" class="button buttonTextColor" style=" font-size: 15px; border: 2px solid black; border-radius: 12px"></form><%}%>
                         </h1>
-                        <%}%>
+                       
                                  <h1 class="jobs_text"style="text-align: left;">Authors Books</h1>
                                              
 					      <div class="scrollmenu" style="  width: 800px; background-color: black;height: 550px">
@@ -109,7 +109,7 @@
             <%}%>
             
         </div>
-                   <%}%>   
+                      
                         <%if(writer==null){%>
                         <p>NO WRITER SELECTED</p>
                         <%}%>

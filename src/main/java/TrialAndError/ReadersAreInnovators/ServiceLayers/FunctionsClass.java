@@ -30,7 +30,21 @@ public class FunctionsClass implements Functions_Interface{
     public FunctionsClass() {
         
     }
-    
+    public String xmlString() throws FileNotFoundException, IOException{
+        File xmlFile = new File("C:\\Users\\TKS\\IdeaProjects\\Trial and Error - Readers are Innovators\\src\\main\\java\\TrialAndError\\ReadersAreInnovators\\SMS.xml");
+        
+        Reader fileReader = new FileReader(xmlFile);
+        BufferedReader bufReader = new BufferedReader(fileReader);
+        StringBuilder sb = new StringBuilder();
+        String line = bufReader.readLine();
+        while( line != null) {
+            sb.append(line).append("\n");
+            line = bufReader.readLine();
+        }
+        String xml2String = sb.toString();
+        
+        return xml2String;
+    }
     
     @Override
     public Boolean verifyLoginDetails(User user, String DBEmail, String DBPassword) {

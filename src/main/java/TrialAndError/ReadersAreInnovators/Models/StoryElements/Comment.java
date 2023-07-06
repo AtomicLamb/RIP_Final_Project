@@ -50,8 +50,9 @@ public class Comment {
         
     }
     
-    public Comment(Integer storyID, Integer userID, String name, String comment, String dateAdded) {
+    public Comment(Integer commentID, Integer storyID, Integer userID, String name, String comment, String dateAdded) {
         
+        this.commentID = commentID;
         this.storyID = storyID;
         this.userID = userID;
         this.name = name;
@@ -59,7 +60,6 @@ public class Comment {
         this.dateAdded = dateAdded;
         
     }
-    
     
     public Integer getCommentID() {
         return commentID;

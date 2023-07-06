@@ -60,8 +60,11 @@
               </div>
                   <div class="button input-box" style="top:10px">
                  <input type="submit" name="submit" value="CONFIRM WRITER">
-                      <input type="submit" name="submit" value="BACK TO LOGIN PAGE">        
-              </div>    
+                      
+              </div>
+                  <div class="button input-box" style="top:10px">
+                  <input type="submit" name="submit" value="BACK TO LOGIN PAGE" formnovalidate>
+                  </div>
               </div>
           </form>
     </div>

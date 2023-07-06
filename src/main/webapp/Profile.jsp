@@ -82,7 +82,7 @@
                     String message = (String) request.getAttribute("message");
                     if(message!=null){
                 %>
-                <p><strong style ="color:red;"><%=message %></strong></p>
+                <p style="text-align: center;color:black;"><%=message %></p>
                 <%}%>
 		</div>  
 	</div>

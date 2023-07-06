@@ -67,7 +67,7 @@
         <!-- banner section start-->
         <div class="banner_section layout_padding">
             <div class="container">
-                <h1 class="best_taital" style="color:#007791">VIEW DRAFTS</h1>
+                <h1 class="best_taital" style="color:#007791">VIEW STORIES</h1>
                 <%String message=(String)request.getAttribute("message");
                     if(message!=null){
                 %>
@@ -76,7 +76,7 @@
             </div>
         </div>
         <div><br><br>
-            <h1 class="jobs_text"  style="text-align: center">Drafts:</h1>
+            <h1 class="jobs_text"  style="text-align: center">Stories:</h1>
             <div class="scrollmenu" style="margin: auto; width: 90%">
                 <%if(!stories.isEmpty()){%>
                 <%for(Story story:stories){%>

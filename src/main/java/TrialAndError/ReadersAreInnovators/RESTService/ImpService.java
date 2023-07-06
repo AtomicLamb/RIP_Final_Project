@@ -14,6 +14,7 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.Reader;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
 
+import TrialAndError.ReadersAreInnovators.ServiceLayers.FunctionsClass;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.ws.rs.client.Client;
@@ -56,19 +57,21 @@ public class ImpService
     }
     
     public String sms(){
-         //String smsURI = uri + "/sms";
-         smsreq smsreq=new smsreq(new smsreq().currentDate(),"Rath","password","84000000","hi");
-         webTarget = client.target((smsUri));
-        StringWriter sw = new StringWriter();
-         JAXB.marshal(smsreq, sw);
-         String xmlString = sw.toString();
-         response = webTarget.request(MediaType.APPLICATION_XML).post(Entity.xml(xmlString));
+          webTarget = client.target((smsUri));
+        String xmlString = null;
+        try {
+            xmlString = new FunctionsClass().xmlString();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        response = webTarget.request(MediaType.APPLICATION_XML).post(Entity.xml(xmlString));
          return response.readEntity(String.class);
     }
     
     
     public User login(User user)
     {
+        
         
         String personURI = uri + "/login";
         

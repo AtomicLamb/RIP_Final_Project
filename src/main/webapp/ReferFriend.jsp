@@ -32,7 +32,7 @@
                         <form action="HomePageServlet?submit=REFER A FRIEND" method="post">
                             <div class="input-boxes">
                                 <div class="input-box">
-                                    Enter the email: <input type="email"  placeholder="Enter your email" name="email" required>
+                                    Enter Friend's Phone Number: <input type="tel" pattern="[0-9]{10}"  placeholder="Enter Yor Friends Phone Number" name="phoneNumber" required>
                                 </div>
                                 <div class="button input-box">
                                     <input type="submit" name="submit" value="REFER A FRIEND">

@@ -15,8 +15,10 @@ import TrialAndError.ReadersAreInnovators.Models.UserTypes.Editor;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Reader;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.User;
 import TrialAndError.ReadersAreInnovators.Models.UserTypes.Writer;
+import TrialAndError.ReadersAreInnovators.DAOs.AdminEditorImplementation;
+import TrialAndError.ReadersAreInnovators.DAOs.EditorImplementation;
+import TrialAndError.ReadersAreInnovators.DAOs.ReaderImplementation;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -691,25 +693,24 @@ public class ServiceLayerClass implements ServiceLayer_Interface {
     }
     
     @Override
-    public String referFriend(String userEmail, String name) {
+    public String referFriend(String phoneNumber, String name) {
         
         String message = null;
         
-        if (userImp.referFriend(userEmail)){
+        if (userImp.referFriend(phoneNumber)){
             
             message = "The Phone Number already exists in the Database. Please make sure the friend you're referring isn't already using our system.";
             
         } else {
             
             message = "Friend successfully referred.";
-        
-            subject = "Readers Are Innovators referral from: " + name + ".";
+            
             text = "You have been referred to the Readers Are Innovators Program by: " + name + ". \n " +
                     "Please click the link below to view the Story of the Day. \n\n" +
                     "http://192.168.0.105:8080/Trial_and_Error_Readers_are_Innovators-1.0-SNAPSHOT/StoryServlet?submit=storyOfTheDay";
-        
-            email.sendEmail(userEmail, subject, text);
-        
+            
+            String fullNumber = phoneNumber.replaceFirst("0", "27");
+            
         }
         
         return message;

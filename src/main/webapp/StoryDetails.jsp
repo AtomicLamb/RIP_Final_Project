@@ -151,7 +151,11 @@
                     <%if(!comments.isEmpty()){%>
                     <%for(Comment comment:comments){%>
                     <p style="color: black">Posted by : <%=comment.getName()%> on <%=comment.getDateAdded()%><br><%=comment.getComment()%></p>
-                    <span id="reportButton" ><a href="StoryServlet?submit=reportComment">Report comment</a></span>
+                    <form action="StoryServlet?submit=reportComment" method="post"> 
+                        <input type="hidden" name="storyId" value="<%=story.getStoryID()%>">
+                        <input type="hidden" name="commentId" value="<%=comment.getCommentID()%>">
+                        <input type="submit" name="submit" value="Report Comment"> 
+                    </form> 
                     <%}%>
                     <%}%>
                     <%}%>

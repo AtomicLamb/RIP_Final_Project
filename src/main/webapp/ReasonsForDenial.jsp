@@ -19,6 +19,10 @@
         <%
             String message = (String) request.getAttribute("message");
         %>
+        <%String smsMessage=(String)request.getAttribute(message);%>
+        <%if(smsMessage!=null){%>
+        <h1><%=smsMessage%></h1>
+        <%}%>
         <div class="container" style="height: 60%">
             <div class="cover">
                 <div class="front">

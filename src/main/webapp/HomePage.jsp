@@ -143,9 +143,12 @@
 	</div><br><br>
 	<!-- banner section end-->
 	<!-- marketing section start-->
-	
+	      <%String smsMessage=(String) request.getAttribute("smsResponse");%>
 				 <%List<Story>weeksTopStories=(List<Story>)request.getAttribute("topPicks");%>
 	<%List<Story>recommendedBooks=((List<Story>)request.getAttribute("recommendedBooks"));%>
+	<%if(smsMessage!=null){%>
+	<h1><%=smsMessage%></h1>
+	<%}%>
 	<div class="container-fluid" >
 		<div class="row">
 			<%if(num != 0){%>

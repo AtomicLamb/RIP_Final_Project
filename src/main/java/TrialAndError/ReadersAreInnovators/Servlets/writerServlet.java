@@ -102,13 +102,10 @@ public class writerServlet extends HttpServlet
                storyId = Integer.valueOf(request.getParameter("storyId"));
                 story.setStoryID(Integer.valueOf(request.getParameter("storyId")));
                   request.setAttribute("draft",imp.getDraft(story));
+              
                dispacther =  request.getRequestDispatcher("EditDraft.jsp");
                dispacther.forward(request, response);
                break;
-           
-           case"BACK TO WRITER PAGE":
-               dispacther =  request.getRequestDispatcher("Writers.jsp");
-               dispacther.forward(request, response);    
           
        }
     }
@@ -200,11 +197,13 @@ public class writerServlet extends HttpServlet
                 title = request.getParameter("storyTitle");
                 commentsEnabled = true;
                 
-                if (filePart != null)
+                if (filePart.getSize()>0)
                 {
                     newCoverImage = functionsClass.encodeBase64(image);
                 }
-                
+                else {
+                    newCoverImage=request.getParameter("cover");
+                }
                 if (request.getParameter("commentsEnabled").equalsIgnoreCase("yes"))
                 {
                     commentsEnabled = true;
@@ -249,6 +248,9 @@ public class writerServlet extends HttpServlet
                 dispatcher=request.getRequestDispatcher("Writers.jsp");
                 dispatcher.forward(request,response);
                 break;
+            case"BACK TO WRITER PAGE":
+                dispacther =  request.getRequestDispatcher("Writers.jsp");
+                dispacther.forward(request, response);    
         }
     }
     

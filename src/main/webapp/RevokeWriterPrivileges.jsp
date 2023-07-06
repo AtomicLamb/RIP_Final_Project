@@ -27,7 +27,7 @@
                 for (Writer w: writers) 
                 {        
             %>  <strong style= "color:black; width: 1000px"><li><form action="editorServlet?submit=REVOKE WRITER PRIVILEGE" method="post"><strong style= "color:black;">
-                    <input type="hidden" name="email" value="<%=w.getEmail()%>">
+                    <input type="hidden" name="removeWriterPrivileges" value="<%=w.getEmail()%>">
                   <input style="color:#f00;border:0px #000 solid;background-color:#fff;" type="submit" name="submit" value="<%=w.getName()%> <%=w.getSurname()%> [<%=w.getEmail()%>]"> </strong></form></li><br><br>
             
          <%}%>
@@ -35,15 +35,7 @@
             </div>
             <div class="forms">
                 <div class="form-content">
-                    <form action="editorServlet" method="post">
-                        <div class="button input-box">
-                             <input style="color: white; background-color: black;" type="email" placeholder="Enter the email of the person you want to remove" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" name="removeWriterPrivileges" required>                                        
-                        </div>
-                        <div class="button input-box">
-                        <input style="color: white; background-color: black;" type="submit" name="submit" value="REVOKE WRITER PRIVILEGE">
-                        </div>
-                    </form>
-                    <form action="editorServlet" method="get">
+                     <form action="editorServlet" method="get">
                         <div class="button input-box">
                             <input style="color: white; background-color: black;" type="submit" name="submit" value="BACK TO EDITORS PAGE" formnovalidate>
                         </div>
